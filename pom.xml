@@ -27,6 +27,7 @@
         <swagger.version>2.7.0</swagger.version>
         <pagehelper.boot.version>1.2.5</pagehelper.boot.version>
         <oshi.version>3.9.1</oshi.version>
+        <mybatisplus.spring.boot.version>1.0.5</mybatisplus.spring.boot.version>
     </properties>
 
     <dependencyManagement>
@@ -62,6 +63,11 @@
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>${mybatis.boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatisplus-spring-boot-starter</artifactId>
+            <version>${mybatisplus.spring.boot.version}</version>
         </dependency>
 
         <!-- Mysql驱动包 -->

@@ -1,6 +1,5 @@
 package com.sy.mobileback.web.controller;
 
-import com.sy.mobileback.accessdb.dao.NoticeDao;
 import com.sy.mobileback.accessdb.domain.NewsContent;
 import com.sy.mobileback.accessdb.domain.NewsPage;
 import com.sy.mobileback.accessdb.service.NoticeService;

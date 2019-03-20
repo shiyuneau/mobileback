@@ -1,7 +1,7 @@
-package com.sy.mobileback.accessdb.dao;
+package com.sy.mobileback.accessdb.mapper;
 
-import com.sy.mobileback.accessdb.domain.NewsContent;
 import com.sy.mobileback.accessdb.domain.News;
+import com.sy.mobileback.accessdb.domain.NewsContent;
 import com.sy.mobileback.accessdb.domain.NewsPage;
 import com.sy.mobileback.common.accessdb.AccessDBOperateUtils;
 import com.sy.mobileback.common.constant.AccessConstants;
@@ -21,12 +21,12 @@ import java.util.Map;
  * @create 2019-02-26 22:07
  */
 @Repository
-public class NewsDao {
+public class NoticeDao {
 
     @Autowired
     private Connection accessConn;
 
-    public List<News> selectAllNews() {
+    public List<News> selectAllNotice() {
         List<News> linkList = new ArrayList<>();
         try {
             String sql = "select * from News";
@@ -50,14 +50,14 @@ public class NewsDao {
      * @param pageNum
      * @return
      */
-    public List<NewsPage> selectNewsPageByPage(int pageNum) {
+    public List<NewsPage> selectNoticePageByPage(int pageNum) {
         // 已经读取的数据 如果为0 ， 则代表 第一页
         int readedCount = AccessConstants.PAGE_SIZE*(pageNum-1);
         String sql;
         if (readedCount ==0) {
-            sql = "SELECT  top " + AccessConstants.PAGE_SIZE + " N_Id , N_Title , N_Date from News where N_Comstye = 107 order by N_Id";
+            sql = "SELECT  top " + AccessConstants.PAGE_SIZE + " N_Id , N_Title , N_Date from News where N_Comstye = 126 order by N_Id";
         } else {
-            sql ="SELECT  top " + AccessConstants.PAGE_SIZE + " N_Id , N_Title , N_Date from News where N_Comstye = 107 and  (N_Id > (select MAX(N_Id) from ( select top "+ readedCount +" N_Id from News where N_Comstye = 107 order by N_Id) as T)) order by N_Id ";
+            sql ="SELECT  top " + AccessConstants.PAGE_SIZE + " N_Id , N_Title , N_Date from News where N_Comstye = 126 and  (N_Id > (select MAX(N_Id) from ( select top "+ readedCount +" N_Id from News where N_Comstye = 126  order by N_Id) as T)) order by N_Id ";
         }
         List<NewsPage> linkList = new ArrayList<>();
         try {
@@ -81,14 +81,14 @@ public class NewsDao {
         return linkList;
     }
 
-    public List<News> selectNewsByPage(int pageNum) {
+    public List<News> selectNoticeByPage(int pageNum) {
         // 已经读取的数据 如果为0 ， 则代表 第一页
         int readedCount = AccessConstants.PAGE_SIZE*(pageNum-1);
         String sql;
         if (readedCount ==0) {
-            sql = "SELECT  top " + AccessConstants.PAGE_SIZE + " * from where N_Comstye = 107 News order by N_Id";
+            sql = "SELECT  top " + AccessConstants.PAGE_SIZE + " * from where N_Comstye = 126 News order by N_Id";
         } else {
-            sql ="SELECT  top " + AccessConstants.PAGE_SIZE + " * from News where (N_Id > (select MAX(N_Id) from ( select top "+ readedCount +" N_Id from News order by N_Id) as T)) order by N_Id ";
+            sql ="SELECT  top " + AccessConstants.PAGE_SIZE + " * from News where N_Comstye = 126 and (N_Id > (select MAX(N_Id) from ( select top "+ readedCount +" N_Id from News order by N_Id) as T)) order by N_Id ";
         }
         List<News> linkList = new ArrayList<>();
         try {
@@ -115,10 +115,10 @@ public class NewsDao {
      * @param id
      * @return
      */
-    public NewsContent selectNewsById(String id) {
+    public NewsContent selectNoticeById(String id) {
         NewsContent newsContent = new NewsContent();
         try {
-            String sql = "select N_Id , N_Content from News where N_Id = ? and N_Comstye = 107";
+            String sql = "select N_Id , N_Content from News where N_Id = ? and N_Comstye = 126";
             List<Object> paramList = new ArrayList<>();
             paramList.add(id);
             List<Map<String, Object>> list = AccessDBOperateUtils.select(accessConn, sql, paramList);

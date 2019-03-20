@@ -8,11 +8,11 @@ import com.sy.mobileback.common.base.BaseEntity;
  * @create 2019-02-26 10:48
  */
 public class Comstye  extends BaseEntity {
-    private String Com_Id;
+    private Integer Com_Id;
     /**
      * 父级ID
      */
-    private String Com_Fid;
+    private Integer Com_Fid;
     /**
      * 分类名称
      */
@@ -50,19 +50,19 @@ public class Comstye  extends BaseEntity {
      */
     private String Com_FColor;
 
-    public String getCom_Id() {
+    public Integer getCom_Id() {
         return Com_Id;
     }
 
-    public void setCom_Id(String com_Id) {
+    public void setCom_Id(Integer com_Id) {
         Com_Id = com_Id;
     }
 
-    public String getCom_Fid() {
+    public Integer getCom_Fid() {
         return Com_Fid;
     }
 
-    public void setCom_Fid(String com_Fid) {
+    public void setCom_Fid(Integer com_Fid) {
         Com_Fid = com_Fid;
     }
 

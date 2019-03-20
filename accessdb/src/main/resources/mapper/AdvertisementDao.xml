@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.AdvertisementDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.AdvertisementEntity" id="advertisementMap">
+        <result property="guid" column="GUID"/>
+        <result property="title" column="Title"/>
+        <result property="site" column="Site"/>
+        <result property="image" column="Image"/>
+        <result property="link" column="Link"/>
+        <result property="createdtime" column="CreatedTime"/>
+        <result property="updatedtime" column="UpdatedTime"/>
+        <result property="deleted" column="Deleted"/>
+    </resultMap>
+
+    <select id="advertisemengEntityList" resultMap="advertisementMap">
+        select * from advertisement
+    </select>
+
+</mapper>

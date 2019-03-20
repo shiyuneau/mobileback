@@ -1,11 +1,8 @@
 package com.sy.mobileback.accessdb.service.impl;
 
-import com.sy.mobileback.accessdb.dao.NewsDao;
-import com.sy.mobileback.accessdb.dao.NoticeDao;
-import com.sy.mobileback.accessdb.domain.News;
+import com.sy.mobileback.accessdb.mapper.NoticeDao;
 import com.sy.mobileback.accessdb.domain.NewsContent;
 import com.sy.mobileback.accessdb.domain.NewsPage;
-import com.sy.mobileback.accessdb.service.NewsService;
 import com.sy.mobileback.accessdb.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

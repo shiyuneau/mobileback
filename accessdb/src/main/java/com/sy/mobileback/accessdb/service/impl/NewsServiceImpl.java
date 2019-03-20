@@ -1,7 +1,7 @@
 package com.sy.mobileback.accessdb.service.impl;
 
 import com.sy.mobileback.accessdb.domain.News;
-import com.sy.mobileback.accessdb.dao.NewsDao;
+import com.sy.mobileback.accessdb.mapper.NewsDao;
 import com.sy.mobileback.accessdb.domain.NewsContent;
 import com.sy.mobileback.accessdb.domain.NewsPage;
 import com.sy.mobileback.accessdb.service.NewsService;
