@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.CollegeDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.CollegeEntity" id="collegeMap">
+        <result property="guid" column="GUID"/>
+        <result property="managerguid" column="ManagerGUID"/>
+        <result property="schoolguid" column="SchoolGUID"/>
+        <result property="languageguid" column="LanguageGUID"/>
+        <result property="name" column="Name"/>
+        <result property="order" column="Order"/>
+        <result property="introduction" column="Introduction"/>
+        <result property="createdtime" column="CreatedTime"/>
+        <result property="updatedtime" column="UpdatedTime"/>
+        <result property="deleted" column="Deleted"/>
+    </resultMap>
+
+    <select id="collegeList" resultMap="collegeMap">
+        SELECT GUID,SchoolGUID,Name FROM `college`
+    </select>
+
+    <select id="collegeDetail" resultType="com.sy.mobileback.accessdb.domain.CollegeEntity">
+        SELECT GUID,SchoolGUID,Introduction FROM `college` where GUID = #{collegeGuid}
+    </select>
+
+</mapper>

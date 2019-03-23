@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.SchoolDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.SchoolEntity" id="schoolMap">
+        <result property="guid" column="GUID"/>
+        <result property="managerguid" column="ManagerGUID"/>
+        <result property="languageguid" column="LanguageGUID"/>
+        <result property="name" column="Name"/>
+        <result property="orders" column="Orders"/>
+        <result property="introduction" column="Introduction"/>
+        <result property="address" column="Address"/>
+        <result property="createdtime" column="CreatedTime"/>
+        <result property="updatedtime" column="UpdatedTime"/>
+        <result property="deleted" column="Deleted"/>
+        <result property="icon" column="Icon"/>
+    </resultMap>
+
+    <select id="schoolList" resultType="com.sy.mobileback.accessdb.domain.SchoolEntity">
+        SELECT sch.GUID , sch.Name , sch.Introduction FROM `school` sch order by sch.orders asc;
+    </select>
+
+    <select id="schoolDetail" resultType="com.sy.mobileback.accessdb.domain.SchoolEntity">
+        select * from school where GUID = #{schoolGuid}
+    </select>
+
+</mapper>

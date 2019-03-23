@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.ArticleDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.ArticleEntity" id="articleMap">
+        <result property="guid" column="GUID"/>
+        <result property="managerguid" column="ManagerGUID"/>
+        <result property="categoryguid" column="CategoryGUID"/>
+        <result property="schoolguid" column="SchoolGUID"/>
+        <result property="order" column="Order"/>
+        <result property="title" column="Title"/>
+        <result property="brief" column="Brief"/>
+        <result property="content" column="Content"/>
+        <result property="hits" column="Hits"/>
+        <result property="createdtime" column="CreatedTime"/>
+        <result property="updatedtime" column="UpdatedTime"/>
+        <result property="deleted" column="Deleted"/>
+        <result property="languageguid" column="LanguageGUID"/>
+        <result property="icon" column="Icon"/>
+    </resultMap>
+    
+    <select id="aluminNewsList" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
+        SELECT art.GUID , art.Title, art.CreatedTime  FROM `articlecategory` category , article art where category.Type = 3 and art.CategoryGUID = category.GUID;
+    </select>
+
+    <select id="aluminEventsList" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
+        SELECT art.GUID , art.Title, art.CreatedTime  FROM `articlecategory` category , article art where category.Type = 7 and art.CategoryGUID = category.GUID;
+    </select>
+
+    <select id="lifeAssistantNewsList" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
+        SELECT art.GUID , art.Title, art.CreatedTime , art.Brief  FROM `articlecategory` category , article art where category.Type = 5 and art.CategoryGUID = category.GUID;
+    </select>
+
+    <select id="overseasNewsList" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
+        SELECT art.GUID , art.Title, art.CreatedTime , art.Brief  FROM `articlecategory` category , article art where category.Type = 3 and art.CategoryGUID = category.GUID;
+    </select>
+
+    <select id="studytianjinNewsList" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
+        SELECT art.GUID , art.Title, art.CreatedTime , art.Brief  FROM `articlecategory` category , article art where category.Type = 0 and category.Tag = 0 and art.CategoryGUID = category.GUID;
+    </select>
+
+    <select id="newsDetails" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
+      SELECT art.GUID , art.Content  FROM  article art where art.GUID = #{id};
+    </select>
+
+
+
+
+</mapper>
