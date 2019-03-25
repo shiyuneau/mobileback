@@ -3,6 +3,7 @@ package com.sy.mobileback.framework.jwt.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
@@ -21,6 +22,17 @@ public class MyWebConfigurer extends WebMvcConfigurerAdapter {
     // 自定义过滤规则
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(jwtInterceptor()).addPathPatterns("/**");
+    	//此部分原则上只对留学申请，用户信息等需要用户信息地方进行登陆验证
+        registry.addInterceptor(jwtInterceptor()).addPathPatterns("/news");
+    }
+    
+    /**
+     * 配置静态访问资源
+     * @param registry
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        super.addResourceHandlers(registry);
     }
 }

@@ -4,6 +4,8 @@ package com.sy.mobileback.accessdb.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * 
  * 
@@ -53,6 +55,7 @@ public class ArticleEntity implements Serializable {
 	/**
 	 * 
 	 */
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date createdtime;
 	/**
 	 * 
