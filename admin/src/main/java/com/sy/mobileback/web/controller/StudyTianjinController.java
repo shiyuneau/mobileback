@@ -2,6 +2,7 @@ package com.sy.mobileback.web.controller;
 
 import com.sy.mobileback.accessdb.domain.ArticleEntity;
 import com.sy.mobileback.accessdb.service.ArticleService;
+import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ public class StudyTianjinController {
      * 获取为什么留学天津 新闻列表
      * @return
      */
+    @JwtIgnore
     @ResponseBody
     @RequestMapping("/news")
     public List<ArticleEntity> studytianjinNewsList() {
@@ -36,6 +38,7 @@ public class StudyTianjinController {
      * 根据ID 获取 新闻详细信息
      * @param id , 栏目得ID
      */
+    @JwtIgnore
     @ResponseBody
     @RequestMapping("/details")
     public ArticleEntity overseaslifeDetails(@RequestParam("id") String id) {

@@ -7,6 +7,7 @@ import com.sy.mobileback.accessdb.service.NewsService;
 import com.sy.mobileback.common.annotation.DataSource;
 import com.sy.mobileback.common.enums.DataSourceType;
 import com.sy.mobileback.common.page.TableDataInfo;
+import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
 import com.sy.mobileback.framework.web.base.BaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +32,7 @@ public class AccessNewsController extends BaseController {
 
     @Autowired
     private NewsService newsService;
-
+    @JwtIgnore
     @GetMapping(value = "/all")
     @ResponseBody
     @DataSource(value = DataSourceType.SLAVE)
@@ -39,21 +40,21 @@ public class AccessNewsController extends BaseController {
         List<News> newsList = newsService.selectAllNews();
         return getDataTable(newsList);
     }
-
+    @JwtIgnore
     @GetMapping(value = "/list")
     @ResponseBody
     public TableDataInfo newsByParams(@RequestParam("pageNum") int pageNum) {
         List<News> newsList = newsService.selectNewsByPage(pageNum);
         return getDataTable(newsList);
     }
-
+    @JwtIgnore
     @GetMapping(value = "/listPage")
     @ResponseBody
     public TableDataInfo newspageByParams(@RequestParam("pageNum") int pageNum) {
         List<NewsPage> newsList = newsService.selectNewsPageByPage(pageNum);
         return getDataTable(newsList);
     }
-
+    @JwtIgnore
     @GetMapping(value = "/searchId/{id}")
     @ResponseBody
     public NewsContent selectNewsById(@PathVariable("id") String id) {

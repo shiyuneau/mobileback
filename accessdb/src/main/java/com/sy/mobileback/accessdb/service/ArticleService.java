@@ -47,5 +47,10 @@ public interface ArticleService  {
      * @return
      */
     List<ArticleEntity> studytianjinNewsList();
+
+    /**
+     * 获取 热点新闻数据
+     */
+    List<ArticleEntity> hotNewsList();
 }
 

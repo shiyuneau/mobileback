@@ -17,32 +17,42 @@ import java.util.List;
  * @create 2019-03-23 17:04
  */
 @Controller
-@RequestMapping("/article/lifeassistant")
-public class LifeAssistantController {
+@RequestMapping("/article/hotnews")
+public class HotNewsController {
 
     @Autowired
     private ArticleService articleService;
 
     /**
-     * 获取生活助手子栏目
+     * 获取 热点新闻数据
      * @return
      */
     @JwtIgnore
     @ResponseBody
-    @RequestMapping("/news")
-    public List<ArticleEntity> lifeAssistantNewsList() {
-        return articleService.lifeAssistantNewsList();
+    @RequestMapping("/list")
+    public List<ArticleEntity> hotNewsList() {
+        return articleService.hotNewsList();
     }
 
     /**
-     * 根据ID栏目详细
-     * @param id , 栏目得ID
+     * 根据 热点新闻的详细 数据
+     * @param id , 热点新闻ID
      */
     @JwtIgnore
     @ResponseBody
     @RequestMapping("/details")
-    public ArticleEntity aluminDetails(@RequestParam("id") String id) {
+    public ArticleEntity hotnewsDetails(@RequestParam("id") String id) {
         return articleService.newsDetails(id);
+    }
+
+    /**
+     * 新闻热点文章搜索（搜索类型 校友或文章）
+     * @param type 搜索类型 1 校友 ，2 文章
+     * @param content 搜索内容
+     * @return
+     */
+    public ArticleEntity hotnewsSearch(@RequestParam("type") String type , @RequestParam("content") String content) {
+        return null;
     }
 
 }

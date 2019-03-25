@@ -2,6 +2,7 @@ package com.sy.mobileback.web.controller;
 
 import com.sy.mobileback.accessdb.domain.AdvertisementEntity;
 import com.sy.mobileback.accessdb.service.AdvertisementService;
+import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,7 @@ public class AdvertismentController {
 
     @Autowired
     private AdvertisementService advertisementService;
-
+    @JwtIgnore
     @RequestMapping("/list")
     @ResponseBody
     public List<AdvertisementEntity> advertisementEntityList(){

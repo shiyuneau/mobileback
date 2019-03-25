@@ -3,6 +3,7 @@ package com.sy.mobileback.web.controller;
 import com.sy.mobileback.accessdb.domain.AluminNews;
 import com.sy.mobileback.accessdb.domain.ArticleEntity;
 import com.sy.mobileback.accessdb.service.ArticleService;
+import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,16 +29,19 @@ public class AluminController {
      * // TODO 考虑分页实现方式
      * @return
      */
+    @JwtIgnore
     @ResponseBody
     @RequestMapping("/news")
     public List<ArticleEntity> aluminNewsList() {
         return articleService.aluminNewsList();
     }
 
+
     /**
      * 根据ID 获取新闻 得详细信息
      * @param id , 新闻得ID
      */
+    @JwtIgnore
     @ResponseBody
     @RequestMapping("/details")
     public ArticleEntity aluminDetails(@RequestParam("id") String id) {
@@ -47,6 +51,7 @@ public class AluminController {
     /**
      *  获取 校友新闻 中校友活动 得数据
      */
+    @JwtIgnore
     @ResponseBody
     @RequestMapping("/events")
     public List<ArticleEntity> aluminEventsList() {

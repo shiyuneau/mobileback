@@ -4,6 +4,7 @@ import com.sy.mobileback.accessdb.domain.CollegeEntity;
 import com.sy.mobileback.accessdb.domain.SchoolEntity;
 import com.sy.mobileback.accessdb.service.CollegeService;
 import com.sy.mobileback.accessdb.service.SchoolService;
+import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ public class TianjinEducationController {
      * 获取所有得大学及大学得 专业信息
      * @return
      */
+    @JwtIgnore
     @ResponseBody
     @RequestMapping("/colleges")
     public List<SchoolEntity> collegesEntityList() {
@@ -40,6 +42,7 @@ public class TianjinEducationController {
      * 获取 指定 大学 或者 专业的 详细信息
      * 传递的参数 用 逗号 隔开
      */
+    @JwtIgnore
     @ResponseBody
     @RequestMapping("/details")
     public String schoolOrCollegeDetails(@RequestParam("schoolGuid") String schoolGuid , @RequestParam("collegeGuid") String collegeGuid) {

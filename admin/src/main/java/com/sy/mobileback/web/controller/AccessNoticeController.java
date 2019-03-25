@@ -4,6 +4,7 @@ import com.sy.mobileback.accessdb.domain.NewsContent;
 import com.sy.mobileback.accessdb.domain.NewsPage;
 import com.sy.mobileback.accessdb.service.NoticeService;
 import com.sy.mobileback.common.page.TableDataInfo;
+import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
 import com.sy.mobileback.framework.web.base.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,14 +22,14 @@ public class AccessNoticeController extends BaseController {
 
     @Autowired
     private NoticeService noticeService;
-
+    @JwtIgnore
     @GetMapping(value = "/listPage")
     @ResponseBody
     public TableDataInfo newspageByParams(@RequestParam("pageNum") int pageNum) {
         List<NewsPage> newsList = noticeService.selectNoticePageByPage(pageNum);
         return getDataTable(newsList);
     }
-
+    @JwtIgnore
     @GetMapping(value = "/searchId/{id}")
     @ResponseBody
     public NewsContent selectNewsById(@PathVariable("id") String id) {
