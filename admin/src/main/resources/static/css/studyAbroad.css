@@ -1,0 +1,104 @@
+@charset "utf-8";
+/**
+ *Filename:    index.css
+ *Description: global css
+ *Version:     0.0.0(2019-03-25)
+ *Author:      frank
+ */
+
+#studyAbroad{
+	background-color: #f2f2f2;
+}
+#studyAbroad .mpanel{
+	position: relative;
+    background-color: #fff;
+    padding-bottom: 10px;
+}
+#studyAbroad .distance20{
+	margin-top: 10px;
+    padding-top: 20px;
+}
+#studyAbroad .tag{
+	position: absolute;
+	top: -10px;
+	width: 100%;
+	height: 50px;
+	padding: 10px 0 0 10px;
+	font-size: 18px;
+	text-align: left;
+	font-family: PingFangSC-regular;
+	color: rgba(255, 255, 255, 1);
+    background-image: url(../images/studyAbroad/sa_tag1.png);
+	background-repeat: no-repeat;
+}
+#studyAbroad .tag1{
+    background-image: url(../images/studyAbroad/sa_tag1.png);
+}
+#studyAbroad .tag2{
+    background-image: url(../images/studyAbroad/sa_tag2.png);
+}
+#studyAbroad .tag3{
+    background-image: url(../images/studyAbroad/sa_tag3.png);
+}
+#studyAbroad .tag4{
+    background-image: url(../images/studyAbroad/sa_tag4.png);
+}
+#studyAbroad .tag5{
+    background-image: url(../images/studyAbroad/sa_tag5.png);
+}
+#studyAbroad .img{
+	width: 100%;
+    height: 120px;
+	border-radius: 8px 8px 0 0;
+    background-image: url(../images/studyAbroad/sa_2.jpg);
+    background-size: 100% 240px;
+}
+#studyAbroad .img1{
+    background-image: url(../images/studyAbroad/sa_2.jpg);
+}
+#studyAbroad .img2{
+    background-image: url(../images/studyAbroad/sa_3.jpg);
+}
+#studyAbroad .img3{
+    background-image: url(../images/studyAbroad/sa_4.jpg);
+}
+#studyAbroad .img4{
+    background-image: url(../images/studyAbroad/sa_5.png);
+}
+#studyAbroad .img5{
+    background-image: url(../images/studyAbroad/sa_6.jpg);
+}
+#studyAbroad .mbox{
+	padding-bottom: 1px;
+	border-radius: 8px;
+	box-shadow: 1px 1px 4px 0px rgba(170, 170, 170, 1);
+}
+#studyAbroad .mylist{
+	padding-left: 0;
+}
+#studyAbroad .mylist li{
+	margin: 4px 0 2px 0;
+	list-style: none;
+	color: rgba(51, 51, 51, 1);
+	font-size: 14px;
+	font-family: PingFangSC-regular;
+}
+#studyAbroad .mylist li:after{
+	content: '';
+	display: block;
+	width: 0;
+	clear: both;
+}
+#studyAbroad .mylist .mylist-title{
+	float: left;
+    max-width: 240px;
+	padding-left: 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#studyAbroad .mylist .mylist-date{
+	float: right;
+    padding-right: 12px;
+}
+
