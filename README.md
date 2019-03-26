@@ -42,7 +42,7 @@
    >b.用户注册 <br>
    >>POST <br>
    >>传递参数： username（用户名） <br>
-   >>>email（邮箱 <br>
+   >>>email   （邮箱) <br>
    >>>password（密码）<br>
    
    >>返回结果： <br>
