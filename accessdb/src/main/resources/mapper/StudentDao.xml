@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.StudentDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.StudentEntity" id="studentMap">
+        <result property="guid" column="GUID"/>
+        <result property="username" column="UserName"/>
+        <result property="password" column="Password"/>
+        <result property="name" column="Name"/>
+        <result property="gender" column="Gender"/>
+        <result property="status" column="Status"/>
+        <result property="avatar" column="Avatar"/>
+        <result property="countryguid" column="CountryGUID"/>
+        <result property="educationguid" column="EducationGUID"/>
+        <result property="mobile" column="Mobile"/>
+        <result property="mail" column="Mail"/>
+        <result property="introduction" column="Introduction"/>
+        <result property="passportnumber" column="PassportNumber"/>
+        <result property="educationalexperience" column="EducationalExperience"/>
+        <result property="createdtime" column="CreatedTime"/>
+        <result property="updatedtime" column="UpdatedTime"/>
+        <result property="deleted" column="Deleted"/>
+        <result property="schoolguid" column="SchoolGUID"/>
+        <result property="isstar" column="IsStar"/>
+    </resultMap>
+
+    <select id="userHasRegistry" resultType="java.lang.String">
+        select GUID from student where UserName = #{username}
+    </select>
+    
+    <select id="usernamePasswordMatch" resultType="java.lang.String">
+        select GUID from student where UserName = #{username} and Password = #{password}
+    </select>
+
+    <insert id="newUserInsert" parameterType="com.sy.mobileback.accessdb.domain.StudentEntity">
+		insert into student
+		(
+			`GUID`,
+			`UserName`,
+			`Password`,
+			`Mail`
+		)
+		values
+		(
+			#{guid},
+			#{username},
+			#{password},
+			#{mail}
+		)
+	</insert>
+
+</mapper>

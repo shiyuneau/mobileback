@@ -127,5 +127,28 @@
 
 # 3.26日更新
 ## 1.增加留学风采 接口
-   a.添加 获取 体验天津新闻接口 /article/exeperienceTJ/news
+   a.添加 获取 体验天津新闻接口 /article/exeperienceTJ/news <br>
    b.添加 体验天津 新闻详细接口 /article/exeperienceTJ/details?id=
+## 2.用户注册接口
+   a.用户注册: /registry  post请求   指定 Content-Type 为 application/json  <br>
+        传入得数据如下: <br>
+        ``	
+        {
+            "username":"shiyu", 
+          	"password":"111", 
+          	"email":"shiyuneau@163.com"
+         }
+          ``
+          返回 token : 如下 <br>
+          eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiYjQ3ZTg0Ny04NWVkLTQ3NzgtYmJhNC03YjQ5Y2E5MTU0NjkiLCJpc3MiOiJtb2JpbGViYWNrIiwiaWF0IjoxNTUzNjAxNzIzLCJleHAiOjE1NTM2MDE3ODMsIm5iZiI6MTU1MzYwMTcyM30.RX-33PBpo75Wy2uSwOv-Qmc8IHb3XGP3W4ZBlxmpZIg
+## 3.用户登录接口
+   a.用户登录: /login  post请求  指定 Content-Type 为 application/json  <br>
+        传入得数据如下: <br>
+           ``	
+           {
+               "username":"shiyu", 
+             	"password":"111"
+           }
+             ``
+        返回 token : 如下 <br>
+           eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiYjQ3ZTg0Ny04NWVkLTQ3NzgtYmJhNC03YjQ5Y2E5MTU0NjkiLCJpc3MiOiJtb2JpbGViYWNrIiwiaWF0IjoxNTUzNjAxNzIzLCJleHAiOjE1NTM2MDE3ODMsIm5iZiI6MTU1MzYwMTcyM30.RX-33PBpo75Wy2uSwOv-Qmc8IHb3XGP3W4ZBlxmpZIg
