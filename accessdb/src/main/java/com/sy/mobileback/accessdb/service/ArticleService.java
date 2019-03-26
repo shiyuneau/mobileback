@@ -52,5 +52,10 @@ public interface ArticleService  {
      * 获取 热点新闻数据
      */
     List<ArticleEntity> hotNewsList();
+
+    /**
+     * 获取 体验天津 数据
+     */
+    List<ArticleEntity> experienceTJNewsList();
 }
 

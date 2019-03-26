@@ -26,5 +26,7 @@ public interface ArticleDao {
     List<ArticleEntity> studytianjinNewsList();
 
     List<ArticleEntity> hotNewsList();
-	
+
+    List<ArticleEntity> experienceTJNewsList();
+
 }
