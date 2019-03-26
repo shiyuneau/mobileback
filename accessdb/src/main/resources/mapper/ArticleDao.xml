@@ -41,6 +41,10 @@
         SELECT art.GUID , art.Title, art.CreatedTime , art.Brief  FROM `articlecategory` category , article art where category.Type = 0 and category.Tag = 0 and art.CategoryGUID = category.GUID;
     </select>
 
+    <select id="experienceTJNewsList" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
+        SELECT art.GUID , art.Title, art.CreatedTime , art.Brief  FROM `articlecategory` category , article art where category.Type = 4 and art.CategoryGUID = category.GUID;
+    </select>
+
     <select id="hotNewsList" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
         SELECT art.GUID , art.Title, art.CreatedTime,art.Brief  FROM `articlecategory` category , article art where category.Type = 7 and art.CategoryGUID = category.GUID;
     </select>

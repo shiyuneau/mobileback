@@ -42,7 +42,7 @@
    >b.用户注册 <br>
    >>POST <br>
    >>传递参数： username（用户名） <br>
-   >>>email（邮箱 <br>
+   >>>email   （邮箱) <br>
    >>>password（密码）<br>
    
    >>返回结果： <br>
@@ -117,10 +117,15 @@
 # 3.25日更新:
 ## 1.获取新闻热点数据
    `问题: 与校友活动列表 的数据相同?` <br>
-   a.获取新闻热点数据 /article/hotnews/list
-   b.获取新闻热点数据内容 /article/hotnews/details 
+   a.获取新闻热点数据 /article/hotnews/list <br>
+   b.获取新闻热点数据内容 /article/hotnews/details <br> 
    c.新闻热点文章搜索 /article/hotnew/search `未完成，未确定接口`
 ## 2.增加JWT相关
    a.添加jwt认证，增加@JwtIgnore接口，方法上带有此接口的不会通过jwt验证  <br>
    b.jwt相关拦截 <br>
    c.登录的异常控制 UserException , 但完成情况不好，后续更改 <br>
+
+# 3.26日更新
+## 1.增加留学风采 接口
+   a.添加 获取 体验天津新闻接口 /article/exeperienceTJ/news
+   b.添加 体验天津 新闻详细接口 /article/exeperienceTJ/details?id=
