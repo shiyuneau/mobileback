@@ -31,6 +31,11 @@ public class LoginController {
     @Autowired
     private JwtParam jwtParam;
 
+    /**
+     * 登录接口，需要传递 username password 两个参数
+     * @param person
+     * @return
+     */
     @JwtIgnore
     @PostMapping("/login")
     @ResponseBody
@@ -56,6 +61,11 @@ public class LoginController {
         return token;
     }
 
+    /**
+     * 用户注册 ， 需要 username，password，email三个字段
+     * @param person
+     * @return
+     */
     @JwtIgnore
     @PostMapping("/registry")
     @ResponseBody
@@ -92,6 +102,15 @@ public class LoginController {
         }
         return token;
     }
+
+    /**
+     * 修改密码，修改密码的前提是传过来有效的 token
+     * @return
+     */
+    public String resetPassword(Map<String,String> person){
+        return null;
+    }
+
 
 //    @JwtIgnore
     @GetMapping("/test")

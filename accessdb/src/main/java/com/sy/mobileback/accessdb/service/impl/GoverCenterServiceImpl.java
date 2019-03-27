@@ -1,5 +1,7 @@
 package com.sy.mobileback.accessdb.service.impl;
 
+import com.sy.mobileback.accessdb.domain.NewsContent;
+import com.sy.mobileback.accessdb.domain.NewsPage;
 import com.sy.mobileback.accessdb.mapper.GovernCenterDao;
 import com.sy.mobileback.accessdb.domain.GoverCenterEntity;
 import com.sy.mobileback.accessdb.service.GoverCenterService;
@@ -41,6 +43,27 @@ public class GoverCenterServiceImpl implements GoverCenterService {
         return rootEntity;
     }
 
+    /**
+     * 获取指定栏目ID 下得所有得新闻
+     * @param governId
+     * @return
+     */
+    @Override
+    public List<NewsPage>  governNewsList(String governId) {
+        return governCenterDao.governNewsList(governId);
+    }
+
+    @Override
+    public NewsContent governNewsDetail(String newsId) {
+        return governCenterDao.governNewsDetails(newsId);
+    }
+
+    /**
+     * 根据 父ID 和 所有得 栏目，构建出父ID下得所有孩子节点
+     * @param id 父ID
+     * @param entityList 要遍历 得 栏目 列表
+     * @return
+     */
     public List<GoverCenterEntity> getChild(Integer id , List<GoverCenterEntity> entityList) {
         // 子菜单
         List<GoverCenterEntity> childList = new ArrayList<>();

@@ -8,10 +8,10 @@
 ## 2.通知公告相关接口
    a.通知公告列表 /notice/listPage?pageNum=1 <br>
    b.通知公告详情接口 /notice/searchId/88 <br>
-## 3.政务公开相关接口 `部分完成`
+## 3.政务公开相关接口 `3.27日已完成`
    a.政务公开栏目列表 /govern/list <br>
-   b.获取栏目对应的文章列表 `未完成，未明确参数如何传递` <br>
-   c.获取文章内容 `未完成，未明确参数如何传递` <br>
+   b.获取栏目对应的文章列表 /govern/news?governId=  <br>
+   c.获取文章内容 /govern/details?newsId= <br>
 ## 4.获取教育交流世界(期刊)数据 `未完成，`
    `问题描述：教育交流世界 下 目前只有子栏目 天津教育国际交流与合作 ,年报， 会刊 ， 没有其他的新闻数据，要去那里找期刊数据` <br>
    a.搜索 <br>
@@ -152,3 +152,10 @@
              ``
         返回 token : 如下 <br>
            eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiYjQ3ZTg0Ny04NWVkLTQ3NzgtYmJhNC03YjQ5Y2E5MTU0NjkiLCJpc3MiOiJtb2JpbGViYWNrIiwiaWF0IjoxNTUzNjAxNzIzLCJleHAiOjE1NTM2MDE3ODMsIm5iZiI6MTU1MzYwMTcyM30.RX-33PBpo75Wy2uSwOv-Qmc8IHb3XGP3W4ZBlxmpZIg
+<br>
+# 3.27日更新
+## 1.政务公开相关
+   a.获取栏目对应的文章列表 /govern/news?governId= (governId取最后一级得栏目ID)<br>
+   b.获取栏目下新闻得详细信息 /govern/details?newsId= <br>
+## 2.获取天津各高校链接
+   a.获取天津各高校链接 /tjschools/links <br>
