@@ -23,7 +23,7 @@ public class MyWebConfigurer extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
     	//此部分原则上只对留学申请，用户信息等需要用户信息地方进行登陆验证
-        registry.addInterceptor(jwtInterceptor()).addPathPatterns("/news");
+        registry.addInterceptor(jwtInterceptor()).addPathPatterns("/**");
     }
     
     /**

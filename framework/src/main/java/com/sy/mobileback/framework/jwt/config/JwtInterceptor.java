@@ -52,7 +52,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 
         if (StringUtils.isEmpty(authHeader)) {
             // TODO 这里自行抛出异常
-            printJson(response,10001,"===== 用户未登录, 请先登录 =====");
+            JwtUtils.printJson(response,10001,"===== 用户未登录, 请先登录 =====");
             log.info("===== 用户未登录, 请先登录 =====");
             return false;
         }
@@ -66,7 +66,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 
         // token解析
         final String authToken = JwtUtils.getRawToken(authHeader);
-        Claims claims = JwtUtils.parseToken(authToken, jwtParam.getBase64Secret());
+        Claims claims = JwtUtils.parseToken(response,authToken, jwtParam.getBase64Secret());
         if (claims == null) {
             log.info("===== token解析异常 =====");
             return false;
@@ -74,6 +74,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 
         // 传递所需信息
          request.setAttribute("CLAIMS", claims);
+        request.setAttribute("token",authToken);
         return true;
     }
 
@@ -88,26 +89,5 @@ public class JwtInterceptor implements HandlerInterceptor {
     }
 
 
-    private static void printJson(HttpServletResponse response, int code , String msg) {
-        ResponseResult responseResult = new ResponseResult(code,msg);
-        String content = JSONObject.toJSONString(responseResult.toString());
-        printContent(response, content);
-    }
 
-
-    private static void printContent(HttpServletResponse response, String content) {
-        try {
-            response.reset();
-            response.setContentType("application/json");
-            response.setHeader("Cache-Control", "no-store");
-            response.setCharacterEncoding("UTF-8");
-            PrintWriter pw = response.getWriter();
-            pw.write(content);
-            pw.flush();
-            // 不需要close么?
-//            pw.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

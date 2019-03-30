@@ -1,13 +1,17 @@
 package com.sy.mobileback.framework.jwt.utils;
 
+import com.alibaba.fastjson.JSONObject;
 import com.sy.mobileback.framework.jwt.config.JwtParam;
 import com.sy.mobileback.framework.jwt.constants.JwtConstants;
+import com.sy.mobileback.framework.web.domain.ResponseResult;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 
 import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.DatatypeConverter;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Map;
 
@@ -18,7 +22,7 @@ import java.util.Map;
 @Slf4j
 public class JwtUtils {
 
-    private static final String AUTHORIZATION_HEADER_PREFIX = "Bearer ";
+    private static final String AUTHORIZATION_HEADER_PREFIX = "TJEDU ";
 
     // 构造私有
     private JwtUtils() {}
@@ -109,7 +113,7 @@ public class JwtUtils {
      * @param base64Secret base64加密密钥
      * @return
      */
-    public static Claims parseToken(String authToken, String base64Secret) {
+    public static Claims parseToken(HttpServletResponse response,String authToken, String base64Secret) {
         try{
             Claims claims = Jwts.parser()
                     .setSigningKey(DatatypeConverter.parseBase64Binary(base64Secret))
@@ -117,14 +121,40 @@ public class JwtUtils {
             return claims;
         } catch (SignatureException se) {
             // TODO 这里自行抛出异常
+            printJson(response,500,"===== 密钥不匹配 =====");
             log.error("===== 密钥不匹配 =====", se);
         } catch (ExpiredJwtException ejw) {
             // TODO 这里自行抛出异常
+            printJson(response,500,"===== token过期，请重新登陆 =====");
             log.error("===== token过期 =====", ejw);
         } catch (Exception e){
             // TODO 这里自行抛出异常
+            printJson(response,500,"===== token解析异常 =====");
             log.error("===== token解析异常 =====", e);
         }
         return null;
+    }
+
+    public static void printJson(HttpServletResponse response, int code , String msg) {
+        ResponseResult responseResult = new ResponseResult(code,msg);
+        String content = JSONObject.toJSONString(responseResult.toString());
+        printContent(response, content);
+    }
+
+
+    public static void printContent(HttpServletResponse response, String content) {
+        try {
+            response.reset();
+            response.setContentType("application/json");
+            response.setHeader("Cache-Control", "no-store");
+            response.setCharacterEncoding("UTF-8");
+            PrintWriter pw = response.getWriter();
+            pw.write(content);
+            pw.flush();
+            // 不需要close么?
+//            pw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

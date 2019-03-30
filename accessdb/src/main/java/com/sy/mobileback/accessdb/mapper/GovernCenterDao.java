@@ -86,7 +86,7 @@ public class GovernCenterDao {
     public NewsContent governNewsDetails(String newsId) {
         NewsContent newsContent = new NewsContent();
         try {
-            String sql = "select N_Id , N_Content from News where N_Id = ?";
+            String sql = "select N_Id , N_Title, N_Content from News where N_Id = ?";
             List<Object> paramList = new ArrayList<>();
             paramList.add(newsId);
             List<Map<String, Object>> list = AccessDBOperateUtils.select(accessConn, sql, paramList);

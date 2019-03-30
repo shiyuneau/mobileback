@@ -20,4 +20,8 @@ public interface StudentDao {
     String usernamePasswordMatch(@Param("username") String username , @Param("password") String password);
 
     void newUserInsert(StudentEntity entity);
+
+    String usernameGet(String userId);
+
+    boolean updateUser(Map<String,Object> person);
 }

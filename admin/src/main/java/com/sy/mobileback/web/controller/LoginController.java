@@ -7,13 +7,13 @@ import com.sy.mobileback.common.utils.StringUtils;
 import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
 import com.sy.mobileback.framework.jwt.config.JwtParam;
 import com.sy.mobileback.framework.jwt.utils.JwtUtils;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.UUID;
 
@@ -104,16 +104,60 @@ public class LoginController {
     }
 
     /**
-     * 修改密码，修改密码的前提是传过来有效的 token
+
+     *  oldusername
+     *  newusername
      * @return
      */
-    public String resetPassword(Map<String,String> person){
-        return null;
+    /**
+     * 修改密码，修改密码的前提是传过来有效的 token
+     *  需要前端传递过来的参数:
+     * @param person 前端
+     *               head Authorization 中传递 登录 后传递的token
+     *               body 传 过来的参数 ,包含:
+     *               oldusername
+     *               newusername
+     *               email
+     *               password
+     *  需要根据 token中存储的userID 获得原名称  和 参数中传递的 oldusername ,如果相同，修改，如果不同，则返回 用户信息不匹配
+     * @param request
+     * @return
+     */
+    @PostMapping("/userinforeset")
+    @ResponseBody
+    public String resetPassword(@RequestBody Map<String,Object> person, HttpServletRequest request){
+        if (!(person.containsKey("oldusername")) || !(person.containsKey("newusername")) || !(person.containsKey("email")) || !(person.containsKey("password"))) {
+//            return "信息不全，重新输入";
+            return "-1";
+        }
+        String oldusername = (String)person.get("oldusername");
+        String newusername = (String)person.get("newusername");
+        String email = (String)person.get("email");
+        String password = (String)person.get("password");
+        if (StringUtils.isEmpty(oldusername) || StringUtils.isEmpty(newusername) || StringUtils.isEmpty(email) || StringUtils.isEmpty(password)) {
+            return "-1";
+//            return "数据字段为空，重新输入";
+        }
+        // 获取 传过来的 token中的 用户ID
+        Claims claims = (Claims)request.getAttribute("CLAIMS");
+        String userId = (String)claims.get("userId");
+        String orginUsername = studentService.usernameGet(userId);
+        // 判断 orginUsername 和 oldusername 是否相同， 如果相同，则进行修改的语句
+        if (!(orginUsername.equals(oldusername))) {
+            return "-1";
+        }
+        String authToken = (String)request.getAttribute("token");
+        Boolean updateFlag = studentService.updateUser(userId,person);
+        if (updateFlag) {
+            return authToken;
+        } else {
+            return "-1";
+        }
     }
 
 
 //    @JwtIgnore
-    @GetMapping("/test")
+    @PostMapping("/test")
     @ResponseBody
     public String test() {
         return "测试 jwt";

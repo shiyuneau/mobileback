@@ -51,4 +51,12 @@
 		)
 	</insert>
 
+    <select id="usernameGet" resultType="java.lang.String">
+        select UserName from student where GUID = #{userId}
+    </select>
+
+    <update id="updateUser" parameterType="java.util.Map">
+        update student set UserName = #{newusername} , Password = #{password} , Mail = #{email} ,UpdatedTime = #{updateTime} where GUID = #{userID}
+    </update>
+
 </mapper>

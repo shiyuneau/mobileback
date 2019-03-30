@@ -2,10 +2,14 @@ package com.sy.mobileback.accessdb.service.impl;
 
 import com.sy.mobileback.accessdb.domain.StudentEntity;
 import com.sy.mobileback.accessdb.mapper.StudentDao;
+import com.sy.mobileback.common.utils.DateUtils;
 import com.sy.mobileback.common.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sy.mobileback.accessdb.service.StudentService;
+
+import java.sql.Timestamp;
+import java.util.Map;
 
 
 @Service("studentService")
@@ -30,6 +34,22 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void newUserInsert(StudentEntity entity) {
         studentDao.newUserInsert(entity);
+    }
+
+    @Override
+    public String usernameGet(String userId) {
+        return studentDao.usernameGet(userId);
+    }
+
+    @Override
+    public boolean updateUser(String userId, Map<String, Object> person) {
+        person.put("userID",userId);
+        String password = (String)person.get("password");
+        password =  MD5Util.getMD5(password);
+        person.put("password",password);
+        Timestamp updateTime = DateUtils.getDBTime();
+        person.put("updateTime",updateTime);
+        return studentDao.updateUser(person);
     }
 
 }

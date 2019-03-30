@@ -3,6 +3,8 @@ package com.sy.mobileback.accessdb.service;
 
 import com.sy.mobileback.accessdb.domain.StudentEntity;
 
+import java.util.Map;
+
 /**
  * 
  *
@@ -31,6 +33,22 @@ public interface StudentService {
      * @param entity
      */
     void newUserInsert(StudentEntity entity);
+
+    /**
+     * 根据 userId 获取用户名称
+     * @param userId
+     * @return
+     */
+    String usernameGet(String userId);
+
+    /**
+     * 根据 userID 和 person map 对 指定的userId 进行属性的更新
+     * @param userId
+     * @param person
+     * @return
+     */
+    boolean updateUser(String userId , Map<String,Object> person);
+
 
 }
 

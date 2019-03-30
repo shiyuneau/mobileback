@@ -118,7 +118,7 @@ public class NoticeDao {
     public NewsContent selectNoticeById(String id) {
         NewsContent newsContent = new NewsContent();
         try {
-            String sql = "select N_Id , N_Content from News where N_Id = ? and N_Comstye = 126";
+            String sql = "select N_Id , N_Title , N_Content from News where N_Id = ? and N_Comstye = 126";
             List<Object> paramList = new ArrayList<>();
             paramList.add(id);
             List<Map<String, Object>> list = AccessDBOperateUtils.select(accessConn, sql, paramList);

@@ -12,7 +12,7 @@
    a.政务公开栏目列表 /govern/list <br>
    b.获取栏目对应的文章列表 /govern/news?governId=  <br>
    c.获取文章内容 /govern/details?newsId= <br>
-## 4.获取教育交流世界(期刊)数据 `未完成，`
+## 4.获取教育交流世界(期刊)数据 `不做，`
    `问题描述：教育交流世界 下 目前只有子栏目 天津教育国际交流与合作 ,年报， 会刊 ， 没有其他的新闻数据，要去那里找期刊数据` <br>
    a.搜索 <br>
    b.期刊订阅 <br>
@@ -159,3 +159,24 @@
    b.获取栏目下新闻得详细信息 /govern/details?newsId= <br>
 ## 2.获取天津各高校链接
    a.获取天津各高校链接 /tjschools/links <br>
+ 
+# 3.30日更新
+   a.增加新闻详情页标题显示 <br>
+   b.用户登录、注册接口完善 <br>
+   c.更改用户信息接口开发完成，地址: /userinforeset , post请求 ，
+     具体的参数如下:
+     header参数:
+        Content-Type:application/json, <br>
+        Authorization:TJEDU eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiYjQ3ZTg0Ny04NWVkLTQ3NzgtYmJhNC03YjQ5Y2E5MTU0NjkiLCJpc3MiOiJtb2JpbGViYWNrIiwiaWF0IjoxNTUzOTU3NzUwLCJleHAiOjE1NTM5NjM3NTAsIm5iZiI6MTU1Mzk1Nzc1MH0.1wxmqNB_i6b05TVfXM38CnxHYdaLT3Gyy2c-XIuCUPA <br>
+        (用户的认证主要主要通过 Authorization:参数判定， 格式 为 TJEDU token) <br>
+     body参数: <br>
+        ``
+        {
+        	"oldusername":"shi",
+        	"newusername":"shiyu",
+        	"password":"111111",
+        	"email":"shiyuneau@123.com"
+        }
+        `` <br>
+     返回参数: <br>
+        token
