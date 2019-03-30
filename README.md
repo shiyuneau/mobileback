@@ -163,19 +163,19 @@
 # 3.30日更新
    a.增加新闻详情页标题显示 <br>
    b.用户登录、注册接口完善 <br>
-   c.更改用户信息接口开发完成，地址: /userinforeset , post请求 ，
-     具体的参数如下:
-     header参数:
+   c.更改用户信息接口开发完成，地址: /userinforeset , post请求 ，<br>
+     具体的参数如下: <br>
+     header参数: <br>
         Content-Type:application/json, <br>
         Authorization:TJEDU eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiYjQ3ZTg0Ny04NWVkLTQ3NzgtYmJhNC03YjQ5Y2E5MTU0NjkiLCJpc3MiOiJtb2JpbGViYWNrIiwiaWF0IjoxNTUzOTU3NzUwLCJleHAiOjE1NTM5NjM3NTAsIm5iZiI6MTU1Mzk1Nzc1MH0.1wxmqNB_i6b05TVfXM38CnxHYdaLT3Gyy2c-XIuCUPA <br>
         (用户的认证主要主要通过 Authorization:参数判定， 格式 为 TJEDU token) <br>
      body参数: <br>
         ``
-        {
-        	"oldusername":"shi",
-        	"newusername":"shiyu",
-        	"password":"111111",
-        	"email":"shiyuneau@123.com"
+        { 
+        	"oldusername":"shi", 原用户名称 
+        	"newusername":"shiyu", 新用户名称
+        	"password":"111111", 新密码
+        	"email":"shiyuneau@123.com" 新邮箱
         }
         `` <br>
      返回参数: <br>
