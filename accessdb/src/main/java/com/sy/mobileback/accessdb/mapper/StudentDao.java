@@ -24,4 +24,6 @@ public interface StudentDao {
     String usernameGet(String userId);
 
     boolean updateUser(Map<String,Object> person);
+
+    String usernameExists(String username);
 }

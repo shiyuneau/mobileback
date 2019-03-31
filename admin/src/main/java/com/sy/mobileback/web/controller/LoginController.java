@@ -126,25 +126,34 @@ public class LoginController {
     @PostMapping("/userinforeset")
     @ResponseBody
     public String resetPassword(@RequestBody Map<String,Object> person, HttpServletRequest request){
-        if (!(person.containsKey("oldusername")) || !(person.containsKey("newusername")) || !(person.containsKey("email")) || !(person.containsKey("password"))) {
+        if (!(person.containsKey("oldusername"))) {
 //            return "信息不全，重新输入";
             return "-1";
         }
-        String oldusername = (String)person.get("oldusername");
-        String newusername = (String)person.get("newusername");
-        String email = (String)person.get("email");
-        String password = (String)person.get("password");
-        if (StringUtils.isEmpty(oldusername) || StringUtils.isEmpty(newusername) || StringUtils.isEmpty(email) || StringUtils.isEmpty(password)) {
+        // 参数都为空，直接返回
+        if (!(person.containsKey("newusername")) && !(person.containsKey("password")) &&!(person.containsKey("email"))) {
             return "-1";
-//            return "数据字段为空，重新输入";
         }
-        // 获取 传过来的 token中的 用户ID
+        String oldusername = (String)person.get("oldusername");
         Claims claims = (Claims)request.getAttribute("CLAIMS");
         String userId = (String)claims.get("userId");
+        // 先判断 oldusername和 token对应的用户名是否一直
         String orginUsername = studentService.usernameGet(userId);
         // 判断 orginUsername 和 oldusername 是否相同， 如果相同，则进行修改的语句
         if (!(orginUsername.equals(oldusername))) {
             return "-1";
+        }
+        if (person.containsKey("newusername")) {
+            //如果要修改用户名称，先要判断当前的用户名称和原用户名称是否相同，如果相同返回-1
+            String newusername = (String)person.get("newusername");
+            if (newusername.equals(oldusername)) {
+                return "-1";
+            }
+            // 判断 数据库中是否又要修改的newusername
+            boolean userExists = studentService.usernameExists(newusername);
+            if (userExists) {
+                return "-1";
+            }
         }
         String authToken = (String)request.getAttribute("token");
         Boolean updateFlag = studentService.updateUser(userId,person);

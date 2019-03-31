@@ -62,4 +62,9 @@ public class SchoolServiceImpl implements SchoolService {
     public SchoolEntity schoolDetail(String schoolGuid) {
         return schoolDao.schoolDetail(schoolGuid);
     }
+
+    @Override
+    public List<SchoolEntity> schools() {
+        return schoolDao.schoolList();
+    }
 }

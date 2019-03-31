@@ -23,5 +23,11 @@ public interface SchoolService  {
      * @return
      */
     SchoolEntity schoolDetail(String schoolGuid);
+
+    /**
+     * 返货 所有的大学信息，只有 学校的ID 和名称
+     * @return
+     */
+    List<SchoolEntity> schools();
 }
 

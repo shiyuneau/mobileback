@@ -56,7 +56,21 @@
     </select>
 
     <update id="updateUser" parameterType="java.util.Map">
-        update student set UserName = #{newusername} , Password = #{password} , Mail = #{email} ,UpdatedTime = #{updateTime} where GUID = #{userID}
+        update student set UpdatedTime = #{updateTime}
+        <if test="newusername != null and newusername != ''" >
+            , UserName = #{newusername}
+        </if>
+        <if test="password != null and password != ''" >
+            , Password = #{password}
+        </if>
+        <if test="email != null and email != ''" >
+            , Mail = #{email}
+        </if>
+         where GUID = #{userID}
     </update>
+
+    <select id="usernameExists" resultType="java.lang.String">
+        select Guid from student where UserName = #{username}
+    </select>
 
 </mapper>

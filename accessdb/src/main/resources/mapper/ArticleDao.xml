@@ -50,7 +50,7 @@
     </select>
 
     <select id="newsDetails" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
-      SELECT art.GUID ,art.Title， art.Content  FROM  article art where art.GUID = #{id};
+      SELECT art.GUID ,art.Title, art.Content  FROM  article art where art.GUID = #{id};
     </select>
 
 

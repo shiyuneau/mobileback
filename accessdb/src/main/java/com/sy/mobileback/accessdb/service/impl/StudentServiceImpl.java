@@ -21,7 +21,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public String userLogin(String username, String password) {
 
-        String guid = studentDao.usernamePasswordMatch(username,password);
+        String guid = studentDao.usernamePasswordMatch(username, password);
 
         return guid;
     }
@@ -43,13 +43,25 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public boolean updateUser(String userId, Map<String, Object> person) {
-        person.put("userID",userId);
-        String password = (String)person.get("password");
-        password =  MD5Util.getMD5(password);
-        person.put("password",password);
+        person.put("userID", userId);
+        if (person.containsKey("password")) {
+            String password = (String) person.get("password");
+            password = MD5Util.getMD5(password);
+            person.put("password", password);
+        }
         Timestamp updateTime = DateUtils.getDBTime();
-        person.put("updateTime",updateTime);
+        person.put("updateTime", updateTime);
         return studentDao.updateUser(person);
+    }
+
+    @Override
+    public boolean usernameExists(String username) {
+        String guid = studentDao.usernameExists(username);
+        if (null == guid) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

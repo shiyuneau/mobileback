@@ -49,6 +49,13 @@ public interface StudentService {
      */
     boolean updateUser(String userId , Map<String,Object> person);
 
+    /**
+     * 判断当前的username在数据库中是否存在
+     * @param username
+     * @return
+     */
+    boolean usernameExists(String username);
+
 
 }
 

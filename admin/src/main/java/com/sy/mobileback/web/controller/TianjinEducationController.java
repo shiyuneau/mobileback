@@ -8,6 +8,7 @@ import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -62,6 +63,18 @@ public class TianjinEducationController {
             }
         }
         return result;
+    }
+
+
+    /**
+     * 获取所有的大学 名称和ID
+     * @return
+     */
+    @JwtIgnore
+    @ResponseBody
+    @RequestMapping("/schools")
+    public List<SchoolEntity> schoolList() {
+        return schoolService.schools();
     }
 
 }
