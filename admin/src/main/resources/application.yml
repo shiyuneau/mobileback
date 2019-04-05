@@ -30,7 +30,7 @@ logging:
   level:
     com.sy.mobileback: debug
     org.springframework: warn
-    org.spring.springboot.dao: debug
+    org.spring.springboot.com.sy.mobileback.accessdb.mapper: debug
 
 # 用户配置
 user:

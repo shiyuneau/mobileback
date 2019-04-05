@@ -9,7 +9,7 @@
         <result property="username" column="UserName"/>
         <result property="password" column="Password"/>
         <result property="name" column="Name"/>
-        <result property="gender" column="Gender"/>
+        <result property="sex" column="Sex"/>
         <result property="status" column="Status"/>
         <result property="avatar" column="Avatar"/>
         <result property="countryguid" column="CountryGUID"/>
@@ -17,7 +17,19 @@
         <result property="mobile" column="Mobile"/>
         <result property="mail" column="Mail"/>
         <result property="introduction" column="Introduction"/>
-        <result property="passportnumber" column="PassportNumber"/>
+        <result property="passportno" column="PassportNo"/>
+        <result property="passportname" column="PassportName"/>
+        <result property="expireat" column="ExpireAt"/>
+        <result property="familyname" column="FamilyName"/>
+        <result property="givenname" column="GivenName"/>
+        <result property="highestdegree" column="HighestDegree"/>
+        <result property="religion" column="Religion"/>
+        <result property="nationality" column="Nationality"/>
+        <result property="mothertongue" column="Mothertongue"/>
+        <result property="emigrantflag" column="EmigrantFlag"/>
+        <result property="birthdate" column="BirthDate"/>
+        <result property="birthplace" column="BirthPlace"/>
+        <result property="maritalstatus" column="MaritalStatus"/>
         <result property="educationalexperience" column="EducationalExperience"/>
         <result property="createdtime" column="CreatedTime"/>
         <result property="updatedtime" column="UpdatedTime"/>
@@ -26,10 +38,83 @@
         <result property="isstar" column="IsStar"/>
     </resultMap>
 
+    <!--<insert id="studentBatchInsert" parameterType="java.util.List">-->
+        <!--insert into student  (-->
+                   <!--GUID,-->
+                   <!--UserName,-->
+                   <!--Password,-->
+                   <!--Name,-->
+                   <!--Sex,-->
+                   <!--Status,-->
+                   <!--Avatar,-->
+                   <!--CountryGUID,-->
+                   <!--EducationGUID,-->
+                   <!--Mobile,-->
+                   <!--Mail,-->
+                   <!--Introduction,-->
+                   <!--PassportNo,-->
+                   <!--PassportName,-->
+                   <!--ExpireAt,-->
+                   <!--FamilyName,-->
+                   <!--GivenName,-->
+                   <!--HighestDegree,-->
+                   <!--Religion,-->
+                   <!--Nationality,-->
+                   <!--Mothertongue,-->
+                   <!--EmigrantFlag,-->
+                   <!--BirthDate,-->
+                   <!--BirthPlace,-->
+                   <!--MaritalStatus,-->
+                   <!--EducationalExperience,-->
+                   <!--CreatedTime,-->
+                   <!--UpdatedTime,-->
+                   <!--Deleted,-->
+                   <!--SchoolGUID,-->
+                   <!--IsStar-->
+                <!--)-->
+        <!--values-->
+        <!--<foreach collection="list" item="item" separator=",">-->
+            <!--(-->
+                            <!--#{item.guid},-->
+                            <!--#{item.username},-->
+                            <!--#{item.password},-->
+                            <!--#{item.name},-->
+                            <!--#{item.sex},-->
+                            <!--#{item.status},-->
+                            <!--#{item.avatar},-->
+                            <!--#{item.countryguid},-->
+                            <!--#{item.educationguid},-->
+                            <!--#{item.mobile},-->
+                            <!--#{item.mail},-->
+                            <!--#{item.introduction},-->
+                            <!--#{item.passportno},-->
+                            <!--#{item.passportname},-->
+                            <!--#{item.expireat},-->
+                            <!--#{item.familyname},-->
+                            <!--#{item.givenname},-->
+                            <!--#{item.highestdegree},-->
+                            <!--#{item.religion},-->
+                            <!--#{item.nationality},-->
+                            <!--#{item.mothertongue},-->
+                            <!--#{item.emigrantflag},-->
+                            <!--#{item.birthdate},-->
+                            <!--#{item.birthplace},-->
+                            <!--#{item.maritalstatus},-->
+                            <!--#{item.educationalexperience},-->
+                            <!--#{item.createdtime},-->
+                            <!--#{item.updatedtime},-->
+                            <!--#{item.deleted},-->
+                            <!--#{item.schoolguid},-->
+                            <!--#{item.isstar}-->
+                        <!--)-->
+        <!--</foreach>-->
+    <!--</insert>-->
+
+
     <select id="userHasRegistry" resultType="java.lang.String">
         select GUID from student where UserName = #{username}
     </select>
-    
+
     <select id="usernamePasswordMatch" resultType="java.lang.String">
         select GUID from student where UserName = #{username} and Password = #{password}
     </select>
@@ -57,8 +142,8 @@
 
     <update id="updateUser" parameterType="java.util.Map">
         update student set UpdatedTime = #{updateTime}
-        <if test="newusername != null and newusername != ''" >
-            , UserName = #{newusername}
+        <if test="username != null and username != ''" >
+            , UserName = #{username}
         </if>
         <if test="password != null and password != ''" >
             , Password = #{password}
@@ -66,11 +151,12 @@
         <if test="email != null and email != ''" >
             , Mail = #{email}
         </if>
-         where GUID = #{userID}
+        where GUID = #{userID}
     </update>
 
     <select id="usernameExists" resultType="java.lang.String">
         select Guid from student where UserName = #{username}
     </select>
+
 
 </mapper>

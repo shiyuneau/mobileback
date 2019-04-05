@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.ScholarshipapplicationDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity" id="scholarshipapplicationMap">
+        <result property="guid" column="GUID"/>
+        <result property="studentguid" column="StudentGUID"/>
+        <result property="scholarshipguid" column="ScholarshipGUID"/>
+        <result property="title" column="Title"/>
+        <result property="content" column="Content"/>
+        <result property="status" column="Status"/>
+        <result property="createdtime" column="CreatedTime"/>
+        <result property="updatedtime" column="UpdatedTime"/>
+        <result property="deleted" column="Deleted"/>
+        <result property="familyname" column="FamilyName"/>
+        <result property="givenname" column="GivenName"/>
+        <result property="nationalityguid" column="NationalityGUID"/>
+        <result property="birth" column="Birth"/>
+        <result property="birthcountryguid" column="BirthCountryGUID"/>
+        <result property="city" column="City"/>
+        <result property="maritalstatus" column="MaritalStatus"/>
+        <result property="nativelanguage" column="NativeLanguage"/>
+        <result property="religion" column="Religion"/>
+        <result property="addresscountryguid" column="AddressCountryGUID"/>
+        <result property="address" column="Address"/>
+        <result property="tel" column="Tel"/>
+        <result property="passport" column="Passport"/>
+        <result property="educationschool" column="EducationSchool"/>
+        <result property="educationprofessional" column="EducationProfessional"/>
+        <result property="certificates" column="Certificates"/>
+        <result property="employmentrecord" column="EmploymentRecord"/>
+        <result property="chineselv" column="ChineseLv"/>
+        <result property="englishlv" column="EnglishLv"/>
+        <result property="chinesescore" column="ChineseScore"/>
+        <result property="otherlanguages" column="OtherLanguages"/>
+        <result property="workedinchina" column="WorkedInChina"/>
+        <result property="studenttype" column="StudentType"/>
+        <result property="apllyschool" column="ApllySchool"/>
+        <result property="apllyprofessional" column="ApllyProfessional"/>
+        <result property="studyplan" column="StudyPlan"/>
+        <result property="graduationplan" column="GraduationPlan"/>
+        <result property="production" column="Production"/>
+        <result property="scholarshipapplied" column="ScholarshipApplied"/>
+        <result property="organization" column="Organization"/>
+        <result property="contactname" column="ContactName"/>
+        <result property="contacttel" column="ContactTel"/>
+        <result property="contactfax" column="ContactFax"/>
+        <result property="contactaddress" column="ContactAddress"/>
+        <result property="contactemail" column="ContactEmail"/>
+        <result property="spousename" column="SpouseName"/>
+        <result property="spouseage" column="SpouseAge"/>
+        <result property="spousecountry" column="SpouseCountry"/>
+        <result property="spouseoccupation" column="SpouseOccupation"/>
+        <result property="spouseeducation" column="SpouseEducation"/>
+        <result property="fathername" column="FatherName"/>
+        <result property="fatherage" column="FatherAge"/>
+        <result property="fathercountry" column="FatherCountry"/>
+        <result property="fatheroccupation" column="FatherOccupation"/>
+        <result property="fathereducation" column="FatherEducation"/>
+        <result property="mothername" column="MotherName"/>
+        <result property="motherage" column="MotherAge"/>
+        <result property="mothercountry" column="MotherCountry"/>
+        <result property="motheroccupation" column="MotherOccupation"/>
+        <result property="mothereducation" column="MotherEducation"/>
+        <result property="recominstitutions" column="recominstitutions"/>
+        <result property="scholarshipphone" column="scholarshipPhone"/>
+        <result property="scholarshipproject" column="scholarshipProject"/>
+        <result property="scholarshiptype" column="scholarshipType"/>
+        <result property="scholarshiplevel" column="scholarshipLevel"/>
+        <result property="decprofession" column="decprofession"/>
+        <result property="scholarshipphotoguid" column="scholarshipPhotoGUID"/>
+        <result property="fax" column="fax"/>
+        <result property="premanentaddres" column="premanentaddres"/>
+        <result property="educationexpireguid" column="educationexpireGUID"/>
+        <result property="workexpireguid" column="workexpireGUID"/>
+        <result property="hsk" column="hsk"/>
+        <result property="canstudy" column="canstudy"/>
+        <result property="subject" column="subject"/>
+        <result property="educationchina" column="educationchina"/>
+        <result property="studystart" column="studystart"/>
+        <result property="studyend" column="studyend"/>
+        <result property="needstudychinese" column="needstudyChinese"/>
+        <result property="needstudychinesetime" column="needstudyChinesetime"/>
+        <result property="needstudychineseother" column="needstudyChineseother"/>
+        <result property="otherplan" column="otherplan"/>
+        <result property="otherpublished" column="otherpublished"/>
+        <result property="scholarshiprecommend" column="scholarshiprecommend"/>
+        <result property="studiedorwork" column="studiedorwork"/>
+        <result property="institutionoremployer" column="institutionoremployer"/>
+        <result property="starttimechina" column="starttimechina"/>
+        <result property="endtimechina" column="endtimechina"/>
+        <result property="recom1" column="recom1"/>
+        <result property="recom2" column="recom2"/>
+        <result property="notice" column="notice"/>
+        <result property="schoolreport" column="schoolreport"/>
+        <result property="diploma" column="diploma"/>
+        <result property="diplomatype" column="diplomatype"/>
+        <result property="examination" column="examination"/>
+        <result property="planchina" column="planchina"/>
+        <result property="article" column="article"/>
+        <result property="otherannex" column="Otherannex"/>
+        <result property="type" column="Type"/>
+        <result property="auditresult" column="AuditResult"/>
+    </resultMap>
+
+    <insert id="scholarshipapplicationBatchInsert" parameterType="java.util.List">
+        insert into scholarshipapplication  (
+                   GUID,
+                   StudentGUID,
+                   ScholarshipGUID,
+                   Title,
+                   Content,
+                   Status,
+                   CreatedTime,
+                   UpdatedTime,
+                   Deleted,
+                   FamilyName,
+                   GivenName,
+                   NationalityGUID,
+                   Birth,
+                   BirthCountryGUID,
+                   City,
+                   MaritalStatus,
+                   NativeLanguage,
+                   Religion,
+                   AddressCountryGUID,
+                   Address,
+                   Tel,
+                   Passport,
+                   EducationSchool,
+                   EducationProfessional,
+                   Certificates,
+                   EmploymentRecord,
+                   ChineseLv,
+                   EnglishLv,
+                   ChineseScore,
+                   OtherLanguages,
+                   WorkedInChina,
+                   StudentType,
+                   ApllySchool,
+                   ApllyProfessional,
+                   StudyPlan,
+                   GraduationPlan,
+                   Production,
+                   ScholarshipApplied,
+                   Organization,
+                   ContactName,
+                   ContactTel,
+                   ContactFax,
+                   ContactAddress,
+                   ContactEmail,
+                   SpouseName,
+                   SpouseAge,
+                   SpouseCountry,
+                   SpouseOccupation,
+                   SpouseEducation,
+                   FatherName,
+                   FatherAge,
+                   FatherCountry,
+                   FatherOccupation,
+                   FatherEducation,
+                   MotherName,
+                   MotherAge,
+                   MotherCountry,
+                   MotherOccupation,
+                   MotherEducation,
+                   recominstitutions,
+                   scholarshipPhone,
+                   scholarshipProject,
+                   scholarshipType,
+                   scholarshipLevel,
+                   decprofession,
+                   scholarshipPhotoGUID,
+                   fax,
+                   premanentaddres,
+                   educationexpireGUID,
+                   workexpireGUID,
+                   hsk,
+                   canstudy,
+                   subject,
+                   educationchina,
+                   studystart,
+                   studyend,
+                   needstudyChinese,
+                   needstudyChinesetime,
+                   needstudyChineseother,
+                   otherplan,
+                   otherpublished,
+                   scholarshiprecommend,
+                   studiedorwork,
+                   institutionoremployer,
+                   starttimechina,
+                   endtimechina,
+                   recom1,
+                   recom2,
+                   notice,
+                   schoolreport,
+                   diploma,
+                   diplomatype,
+                   examination,
+                   planchina,
+                   article,
+                   Otherannex,
+                   Type,
+                   AuditResult,
+                )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+                            #{item.guid},
+                            #{item.studentguid},
+                            #{item.scholarshipguid},
+                            #{item.title},
+                            #{item.content},
+                            #{item.status},
+                            #{item.createdtime},
+                            #{item.updatedtime},
+                            #{item.deleted},
+                            #{item.familyname},
+                            #{item.givenname},
+                            #{item.nationalityguid},
+                            #{item.birth},
+                            #{item.birthcountryguid},
+                            #{item.city},
+                            #{item.maritalstatus},
+                            #{item.nativelanguage},
+                            #{item.religion},
+                            #{item.addresscountryguid},
+                            #{item.address},
+                            #{item.tel},
+                            #{item.passport},
+                            #{item.educationschool},
+                            #{item.educationprofessional},
+                            #{item.certificates},
+                            #{item.employmentrecord},
+                            #{item.chineselv},
+                            #{item.englishlv},
+                            #{item.chinesescore},
+                            #{item.otherlanguages},
+                            #{item.workedinchina},
+                            #{item.studenttype},
+                            #{item.apllyschool},
+                            #{item.apllyprofessional},
+                            #{item.studyplan},
+                            #{item.graduationplan},
+                            #{item.production},
+                            #{item.scholarshipapplied},
+                            #{item.organization},
+                            #{item.contactname},
+                            #{item.contacttel},
+                            #{item.contactfax},
+                            #{item.contactaddress},
+                            #{item.contactemail},
+                            #{item.spousename},
+                            #{item.spouseage},
+                            #{item.spousecountry},
+                            #{item.spouseoccupation},
+                            #{item.spouseeducation},
+                            #{item.fathername},
+                            #{item.fatherage},
+                            #{item.fathercountry},
+                            #{item.fatheroccupation},
+                            #{item.fathereducation},
+                            #{item.mothername},
+                            #{item.motherage},
+                            #{item.mothercountry},
+                            #{item.motheroccupation},
+                            #{item.mothereducation},
+                            #{item.recominstitutions},
+                            #{item.scholarshipphone},
+                            #{item.scholarshipproject},
+                            #{item.scholarshiptype},
+                            #{item.scholarshiplevel},
+                            #{item.decprofession},
+                            #{item.scholarshipphotoguid},
+                            #{item.fax},
+                            #{item.premanentaddres},
+                            #{item.educationexpireguid},
+                            #{item.workexpireguid},
+                            #{item.hsk},
+                            #{item.canstudy},
+                            #{item.subject},
+                            #{item.educationchina},
+                            #{item.studystart},
+                            #{item.studyend},
+                            #{item.needstudychinese},
+                            #{item.needstudychinesetime},
+                            #{item.needstudychineseother},
+                            #{item.otherplan},
+                            #{item.otherpublished},
+                            #{item.scholarshiprecommend},
+                            #{item.studiedorwork},
+                            #{item.institutionoremployer},
+                            #{item.starttimechina},
+                            #{item.endtimechina},
+                            #{item.recom1},
+                            #{item.recom2},
+                            #{item.notice},
+                            #{item.schoolreport},
+                            #{item.diploma},
+                            #{item.diplomatype},
+                            #{item.examination},
+                            #{item.planchina},
+                            #{item.article},
+                            #{item.otherannex},
+                            #{item.type},
+                            #{item.auditresult},
+                        )
+        </foreach>
+    </insert>
+
+
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.WorkexpireDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.WorkexpireEntity" id="workexpireMap">
+        <result property="guid" column="GUID"/>
+        <result property="studentguid" column="StudentGUID"/>
+        <result property="studyabroadguid" column="StudyabroadGUID"/>
+        <result property="scholarshipguid" column="ScholarshipGUID"/>
+        <result property="workfrom" column="WorkFrom"/>
+        <result property="workto" column="WorkTo"/>
+        <result property="workcompany" column="WorkCompany"/>
+        <result property="workposition" column="WorkPosition"/>
+    </resultMap>
+
+    <insert id="workexpireBatchInsert" parameterType="java.util.List">
+        insert into workexpire  (
+                   GUID,
+                   StudentGUID,
+                   StudyabroadGUID,
+                   ScholarshipGUID,
+                   WorkFrom,
+                   WorkTo,
+                   WorkCompany,
+                   WorkPosition,
+                )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+                            #{item.guid},
+                            #{item.studentguid},
+                            #{item.studyabroadguid},
+                            #{item.scholarshipguid},
+                            #{item.workfrom},
+                            #{item.workto},
+                            #{item.workcompany},
+                            #{item.workposition},
+                        )
+        </foreach>
+    </insert>
+
+
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.FamilyinfoDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.FamilyinfoEntity" id="familyinfoMap">
+        <result property="guid" column="GUID"/>
+        <result property="studentguid" column="StudentGUID"/>
+        <result property="studyabroadguid" column="StudyabroadGUID"/>
+        <result property="scholarshipguid" column="ScholarshipGUID"/>
+        <result property="familyname" column="FamilyName"/>
+        <result property="familyage" column="FamilyAge"/>
+        <result property="familyposition" column="FamilyPosition"/>
+        <result property="familyphone" column="FamilyPhone"/>
+        <result property="familyemail" column="FamilyEmail"/>
+        <result property="familyworkplace" column="FamilyWorkplace"/>
+        <result property="familycontace" column="FamilyContace"/>
+    </resultMap>
+
+    <insert id="familyinfoBatchInsert" parameterType="java.util.List">
+        insert into familyinfo  (
+                   GUID,
+                   StudentGUID,
+                   StudyabroadGUID,
+                   ScholarshipGUID,
+                   FamilyName,
+                   FamilyAge,
+                   FamilyPosition,
+                   FamilyPhone,
+                   FamilyEmail,
+                   FamilyWorkplace,
+                   FamilyContace,
+                )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+                            #{item.guid},
+                            #{item.studentguid},
+                            #{item.studyabroadguid},
+                            #{item.scholarshipguid},
+                            #{item.familyname},
+                            #{item.familyage},
+                            #{item.familyposition},
+                            #{item.familyphone},
+                            #{item.familyemail},
+                            #{item.familyworkplace},
+                            #{item.familycontace},
+                        )
+        </foreach>
+    </insert>
+
+
+</mapper>

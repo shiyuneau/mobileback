@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.StudyabroadapplicationDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity" id="studyabroadapplicationMap">
+        <result property="guid" column="GUID"/>
+        <result property="studentguid" column="StudentGUID"/>
+        <result property="schoolguid" column="SchoolGUID"/>
+        <result property="collegeguid" column="CollegeGUID"/>
+        <result property="professionguid" column="ProfessionGUID"/>
+        <result property="taughtby" column="TaughtBy"/>
+        <result property="startyear" column="StartYear"/>
+        <result property="fundingsource" column="FundingSource"/>
+        <result property="degree" column="Degree"/>
+        <result property="admissionseason" column="AdmissionSeason"/>
+        <result property="english" column="English"/>
+        <result property="hsk" column="Hsk"/>
+        <result property="ielts" column="Ielts"/>
+        <result property="toefl" column="Toefl"/>
+        <result property="referenceby" column="ReferenceBy"/>
+        <result property="referencetel" column="ReferenceTel"/>
+        <result property="finacial" column="Finacial"/>
+        <result property="guarantorin" column="Guarantorin"/>
+        <result property="guarantorintel" column="GuarantorinTel"/>
+        <result property="guardian" column="Guardian"/>
+        <result property="validpassport" column="ValidPassport"/>
+        <result property="graduatecertificate" column="GraduateCertificate"/>
+        <result property="highestacademic" column="HighestAcademic"/>
+        <result property="collegetranscript" column="CollegeTranscript"/>
+        <result property="juniorcollegediploma" column="JuniorCollegeDiploma"/>
+        <result property="chineselanguagecertificate" column="ChineseLanguageCertificate"/>
+        <result property="medicalreport" column="MedicalReport"/>
+        <result property="studyplan" column="StudyPlan"/>
+        <result property="streetaddress" column="StreetAddress"/>
+        <result property="cityprovince" column="CityProvince"/>
+        <result property="country" column="Country"/>
+        <result property="countryemail" column="CountryEmail"/>
+        <result property="countryphone" column="CountryPhone"/>
+        <result property="countryzipcode" column="CountryZipcode"/>
+        <result property="applyemail" column="ApplyEmail"/>
+        <result property="applyphone" column="ApplyPhone"/>
+        <result property="applyaddress" column="ApplyAddress"/>
+        <result property="applyzipcode" column="ApplyZipcode"/>
+        <result property="receivename" column="ReceiveName"/>
+        <result property="receivecity" column="ReceiveCity"/>
+        <result property="receiveaddress" column="ReceiveAddress"/>
+        <result property="receivephone" column="ReceivePhone"/>
+        <result property="receivecountry" column="ReceiveCountry"/>
+        <result property="receiverzipcode" column="ReceiverZipcode"/>
+        <result property="applicationnode" column="ApplicationNode"/>
+        <result property="type" column="Type"/>
+        <result property="status" column="Status"/>
+        <result property="auditresult" column="AuditResult"/>
+        <result property="createdtime" column="CreatedTime"/>
+        <result property="updatedtime" column="UpdatedTime"/>
+        <result property="deleted" column="Deleted"/>
+    </resultMap>
+
+    <insert id="studyabroadapplicationBatchInsert" parameterType="java.util.List">
+        insert into studyabroadapplication  (
+                   GUID,
+                   StudentGUID,
+                   SchoolGUID,
+                   CollegeGUID,
+                   ProfessionGUID,
+                   TaughtBy,
+                   StartYear,
+                   FundingSource,
+                   Degree,
+                   AdmissionSeason,
+                   English,
+                   Hsk,
+                   Ielts,
+                   Toefl,
+                   ReferenceBy,
+                   ReferenceTel,
+                   Finacial,
+                   Guarantorin,
+                   GuarantorinTel,
+                   Guardian,
+                   ValidPassport,
+                   GraduateCertificate,
+                   HighestAcademic,
+                   CollegeTranscript,
+                   JuniorCollegeDiploma,
+                   ChineseLanguageCertificate,
+                   MedicalReport,
+                   StudyPlan,
+                   StreetAddress,
+                   CityProvince,
+                   Country,
+                   CountryEmail,
+                   CountryPhone,
+                   CountryZipcode,
+                   ApplyEmail,
+                   ApplyPhone,
+                   ApplyAddress,
+                   ApplyZipcode,
+                   ReceiveName,
+                   ReceiveCity,
+                   ReceiveAddress,
+                   ReceivePhone,
+                   ReceiveCountry,
+                   ReceiverZipcode,
+                   ApplicationNode,
+                   Type,
+                   Status,
+                   AuditResult,
+                   CreatedTime,
+                   UpdatedTime,
+                   Deleted,
+                )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+                            #{item.guid},
+                            #{item.studentguid},
+                            #{item.schoolguid},
+                            #{item.collegeguid},
+                            #{item.professionguid},
+                            #{item.taughtby},
+                            #{item.startyear},
+                            #{item.fundingsource},
+                            #{item.degree},
+                            #{item.admissionseason},
+                            #{item.english},
+                            #{item.hsk},
+                            #{item.ielts},
+                            #{item.toefl},
+                            #{item.referenceby},
+                            #{item.referencetel},
+                            #{item.finacial},
+                            #{item.guarantorin},
+                            #{item.guarantorintel},
+                            #{item.guardian},
+                            #{item.validpassport},
+                            #{item.graduatecertificate},
+                            #{item.highestacademic},
+                            #{item.collegetranscript},
+                            #{item.juniorcollegediploma},
+                            #{item.chineselanguagecertificate},
+                            #{item.medicalreport},
+                            #{item.studyplan},
+                            #{item.streetaddress},
+                            #{item.cityprovince},
+                            #{item.country},
+                            #{item.countryemail},
+                            #{item.countryphone},
+                            #{item.countryzipcode},
+                            #{item.applyemail},
+                            #{item.applyphone},
+                            #{item.applyaddress},
+                            #{item.applyzipcode},
+                            #{item.receivename},
+                            #{item.receivecity},
+                            #{item.receiveaddress},
+                            #{item.receivephone},
+                            #{item.receivecountry},
+                            #{item.receiverzipcode},
+                            #{item.applicationnode},
+                            #{item.type},
+                            #{item.status},
+                            #{item.auditresult},
+                            #{item.createdtime},
+                            #{item.updatedtime},
+                            #{item.deleted},
+                        )
+        </foreach>
+    </insert>
+
+
+</mapper>
