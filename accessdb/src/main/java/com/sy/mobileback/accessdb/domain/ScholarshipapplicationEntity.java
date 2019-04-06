@@ -93,7 +93,7 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 */
 	private String addresscountryguid;
 	/**
-	 * 当前所在地址
+	 * 当前所在地址 原 Address
 	 */
 	private String presentaddress;
 	/**
@@ -121,11 +121,11 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 */
 	private String employmentrecord;
 	/**
-	 * 汉语等级 原chinesely
+	 * 汉语等级 原 chinesely
 	 */
 	private String chinese;
 	/**
-	 * 英语等级 原englishly
+	 * 英语等级 原 englishly
 	 */
 	private String english;
 	/**
@@ -133,7 +133,7 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 */
 	private String chinesescore;
 	/**
-	 * 其他语言 原otherlanguages
+	 * 其他语言 原 otherlanguages
 	 */
 	private String otherlanguage;
 	/**
@@ -189,7 +189,7 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 */
 	private String contactaddress;
 	/**
-	 * email
+	 * email 原ContactEmail
 	 */
 	private String email;
 	/**
@@ -252,6 +252,7 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 * 母亲受教育程度
 	 */
 	private String mothereducation;
+
 	/**
 	 * 推荐院校
 	 */
