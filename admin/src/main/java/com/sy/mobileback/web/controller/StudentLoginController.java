@@ -2,6 +2,7 @@ package com.sy.mobileback.web.controller;
 
 import com.sy.mobileback.accessdb.domain.StudentEntity;
 import com.sy.mobileback.accessdb.service.StudentService;
+import com.sy.mobileback.common.utils.JsonResult;
 import com.sy.mobileback.common.utils.MD5Util;
 import com.sy.mobileback.common.utils.StringUtils;
 import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
@@ -40,9 +41,9 @@ public class StudentLoginController {
     @JwtIgnore
     @PostMapping("/login")
     @ResponseBody
-    public String userLogin(@RequestBody Map<String, String> person) {
+    public JsonResult userLogin(@RequestBody Map<String, String> person) {
         if (!(person.containsKey("username")) || !(person.containsKey("password"))) {
-            return "-1";
+            return JsonResult.error("信息输入有误");
         }
         String username = person.get("username");
         String password = person.get("password");
@@ -52,14 +53,18 @@ public class StudentLoginController {
         String guid = studentService.userLogin(username,password);
         if (null==guid) {
             // 没有对应用户
-            return "-1";
+            JsonResult result = JsonResult.error("用户不存在");
+            return result;
         }
         String token = JwtUtils.createToken(guid + "", jwtParam);
         if (null==token) {
             // 生成token存在问题
-            return "-1";
+            return JsonResult.error("token生成出错");
         }
-        return token;
+        JsonResult result = JsonResult.ok();
+        result.put("token",token);
+        result.put("certificate","student");
+        return result;
     }
 
     /**

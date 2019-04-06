@@ -159,4 +159,11 @@
 # 4.6日更新
    a.文件的上传与下载分别为 /file/upload 和 /file/download ，详情建接口文档 <br>
       备注: 测试前 请创建目录 D:/data/mobileback/
-   b.更新新的sql文件 文件位置 sql目录下
+   b.更新新的sql文件 文件位置 sql目录下 <br>
+   c.学校搜索接口 /tjeducation/schoolsearch 搜索学校 <br>
+   d.留学相关 <br>
+    1.留学申请 <br>
+    2.取消留学申请 <br>
+    3.留学申请列表 <br>
+   e.管理员登录接口
+   

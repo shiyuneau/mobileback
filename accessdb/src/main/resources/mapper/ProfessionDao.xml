@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.ProfessionDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.ProfessionEntity" id="professionMap">
+        <result property="guid" column="GUID"/>
+        <result property="managerguid" column="ManagerGUID"/>
+        <result property="collegeguid" column="CollegeGUID"/>
+        <result property="languageguid" column="LanguageGUID"/>
+        <result property="name" column="Name"/>
+        <result property="sid" column="Sid"/>
+        <result property="academicsystem" column="AcademicSystem"/>
+        <result property="introduction" column="Introduction"/>
+        <result property="createdtime" column="CreatedTime"/>
+        <result property="updatedtime" column="UpdatedTime"/>
+        <result property="deleted" column="Deleted"/>
+        <result property="amount" column="Amount"/>
+        <result property="isdegree" column="IsDegree"/>
+    </resultMap>
+
+    <insert id="professionBatchInsert" parameterType="java.util.List">
+        insert into profession  (
+                    GUID,
+                    ManagerGUID,
+                    CollegeGUID,
+                    LanguageGUID,
+                    Name,
+                    Sid,
+                    AcademicSystem,
+                    Introduction,
+                    CreatedTime,
+                    UpdatedTime,
+                    Deleted,
+                    Amount,
+                    IsDegree
+                )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+                            #{item.guid},
+                            #{item.managerguid},
+                            #{item.collegeguid},
+                            #{item.languageguid},
+                            #{item.name},
+                            #{item.sid},
+                            #{item.academicsystem},
+                            #{item.introduction},
+                            #{item.createdtime},
+                            #{item.updatedtime},
+                            #{item.deleted},
+                            #{item.amount},
+                            #{item.isdegree}
+                        )
+        </foreach>
+    </insert>
+</mapper>

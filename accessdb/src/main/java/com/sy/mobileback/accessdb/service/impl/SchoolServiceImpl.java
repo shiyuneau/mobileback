@@ -1,12 +1,14 @@
 package com.sy.mobileback.accessdb.service.impl;
 
 import com.sy.mobileback.accessdb.domain.CollegeEntity;
+import com.sy.mobileback.accessdb.domain.SchoolSearchResultEntity;
 import com.sy.mobileback.accessdb.mapper.CollegeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sy.mobileback.accessdb.mapper.SchoolDao;
 import com.sy.mobileback.accessdb.domain.SchoolEntity;
@@ -66,5 +68,12 @@ public class SchoolServiceImpl implements SchoolService {
     @Override
     public List<SchoolEntity> schools() {
         return schoolDao.schoolList();
+    }
+
+    @Override
+    public List<SchoolSearchResultEntity> schoolSearch(Map<String, Object> map) {
+        List<SchoolSearchResultEntity> list = schoolDao.schoolSearch(map);
+        list.forEach(entity -> entity.setScholarship(-1));
+        return list;
     }
 }

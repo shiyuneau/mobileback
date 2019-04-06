@@ -1,6 +1,7 @@
 package com.sy.mobileback.accessdb.service;
 
 import com.sy.mobileback.accessdb.domain.SchoolEntity;
+import com.sy.mobileback.accessdb.domain.SchoolSearchResultEntity;
 
 import java.util.List;
 import java.util.Map;
@@ -29,5 +30,7 @@ public interface SchoolService  {
      * @return
      */
     List<SchoolEntity> schools();
+
+    List<SchoolSearchResultEntity> schoolSearch(Map<String,Object> map);
 }
 

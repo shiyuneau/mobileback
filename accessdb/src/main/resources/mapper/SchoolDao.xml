@@ -26,4 +26,16 @@
         select * from school where GUID = #{schoolGuid}
     </select>
 
+    <select id="schoolSearch" resultType="com.sy.mobileback.accessdb.domain.SchoolSearchResultEntity" parameterType="map">
+        SELECT
+        sch.`Name` as schoolName ,
+        sch.GUID as shoolGuid ,
+        pro.`Name` as professionName ,
+        pro.GUID as professionGuid ,
+        pro.AcademicSystem as academicSystem
+        FROM `school` sch left JOIN  college coll on sch.GUID = coll.SchoolGUID LEFT JOIN profession pro on pro.CollegeGUID = coll.GUID
+        where sch.GUID = #{schoolGuid}
+        <if test="#{academicSystem}!=null"> and pro.AcademicSystem = #{academicSystem}</if>
+        <if test="#{professionName}!=null"> and pro.`Name` like CONCAT(CONCAT('%', #{professionName}), '%') </if>
+    </select>
 </mapper>
