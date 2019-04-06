@@ -24,17 +24,17 @@
         <result property="nativelanguage" column="NativeLanguage"/>
         <result property="religion" column="Religion"/>
         <result property="addresscountryguid" column="AddressCountryGUID"/>
-        <result property="presentaddress" column="Address"/>
+        <result property="presentaddress" column="Presentaddress"/>
         <result property="tel" column="Tel"/>
         <result property="passport" column="Passport"/>
         <result property="educationschool" column="EducationSchool"/>
         <result property="educationprofessional" column="EducationProfessional"/>
         <result property="certificates" column="Certificates"/>
         <result property="employmentrecord" column="EmploymentRecord"/>
-        <result property="chinese" column="ChineseLv"/>
-        <result property="english" column="EnglishLv"/>
+        <result property="chinese" column="Chinese"/>
+        <result property="english" column="English"/>
         <result property="chinesescore" column="ChineseScore"/>
-        <result property="otherlanguage" column="OtherLanguages"/>
+        <result property="otherlanguage" column="OtherLanguage"/>
         <result property="workedinchina" column="WorkedInChina"/>
         <result property="studenttype" column="StudentType"/>
         <result property="apllyschool" column="ApllySchool"/>
@@ -52,25 +52,25 @@
         <result property="spousename" column="SpouseName"/>
         <result property="spouseage" column="SpouseAge"/>
         <result property="spousecountry" column="SpouseCountry"/>
-        <result property="spouseemployment" column="SpouseOccupation"/>
+        <result property="spouseemployment" column="SpouseEmployment"/>
         <result property="spouseeducation" column="SpouseEducation"/>
         <result property="fathername" column="FatherName"/>
         <result property="fatherage" column="FatherAge"/>
         <result property="fathercountry" column="FatherCountry"/>
-        <result property="fatheremploymnet" column="FatherOccupation"/>
+        <result property="fatheremploymnet" column="FatherEmploymnet"/>
         <result property="fathereducation" column="FatherEducation"/>
         <result property="mothername" column="MotherName"/>
         <result property="motherage" column="MotherAge"/>
         <result property="mothercountry" column="MotherCountry"/>
-        <result property="motheremployment" column="MotherOccupation"/>
+        <result property="motheremployment" column="MotherEmployment"/>
         <result property="mothereducation" column="MotherEducation"/>
         <result property="recominstitutions" column="recominstitutions"/>
-        <result property="phone" column="scholarshipPhone"/>
-        <result property="project" column="scholarshipProject"/>
+        <result property="phone" column="phone"/>
+        <result property="project" column="project"/>
         <result property="scholarshiptype" column="scholarshipType"/>
-        <result property="level" column="scholarshipLevel"/>
+        <result property="level" column="level"/>
         <result property="decprofession" column="decprofession"/>
-        <result property="photoid" column="scholarshipPhotoGUID"/>
+        <result property="photoid" column="photoid"/>
         <result property="fax" column="fax"/>
         <result property="premanentaddres" column="premanentaddres"/>
         <result property="hsk" column="hsk"/>
@@ -81,10 +81,10 @@
         <result property="studyend" column="studyend"/>
         <result property="needstudychinese" column="needstudyChinese"/>
         <result property="needstudychinesetime" column="needstudyChinesetime"/>
-        <result property="other" column="needstudyChineseother"/>
+        <result property="other" column="other"/>
         <result property="otherplan" column="otherplan"/>
         <result property="otherpublished" column="otherpublished"/>
-        <result property="scholarship" column="scholarshiprecommend"/>
+        <result property="scholarship" column="scholarship"/>
         <result property="studiedorwork" column="studiedorwork"/>
         <result property="institutionoremployer" column="institutionoremployer"/>
         <result property="starttimechina" column="starttimechina"/>
@@ -369,10 +369,10 @@
                     EducationProfessional,
                     Certificates,
                     EmploymentRecord,
-                    ChineseLv,
-                    EnglishLv,
+                    Chinese,
+                    English,
                     ChineseScore,
-                    OtherLanguages,
+                    OtherLanguage,
                     WorkedInChina,
                     StudentType,
                     ApllySchool,
@@ -386,29 +386,29 @@
                     ContactTel,
                     ContactFax,
                     ContactAddress,
-                    ContactEmail,
+                    Email,
                     SpouseName,
                     SpouseAge,
                     SpouseCountry,
-                    SpouseOccupation,
+                    SpouseEmployment,
                     SpouseEducation,
                     FatherName,
                     FatherAge,
                     FatherCountry,
-                    FatherOccupation,
+                    FatherEmployment,
                     FatherEducation,
                     MotherName,
                     MotherAge,
                     MotherCountry,
-                    MotherOccupation,
+                    MotherEmployment,
                     MotherEducation,
                     recominstitutions,
-                    scholarshipPhone,
-                    scholarshipProject,
+                    photo,
+                    project,
                     scholarshipType,
-                    scholarshipLevel,
+                    level,
                     decprofession,
-                    scholarshipPhotoGUID,
+                    photoid,
                     fax,
                     premanentaddres,
                     hsk,

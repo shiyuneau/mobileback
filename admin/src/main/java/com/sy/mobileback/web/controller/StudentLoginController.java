@@ -23,7 +23,8 @@ import java.util.UUID;
  * @create 2019-03-24 14:58
  */
 @Controller
-public class LoginController {
+@RequestMapping("/student")
+public class StudentLoginController {
 
     @Autowired
     private StudentService studentService;
