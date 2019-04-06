@@ -159,3 +159,4 @@
 # 4.6日更新
    a.文件的上传与下载分别为 /file/upload 和 /file/download ，详情建接口文档 <br>
       备注: 测试前 请创建目录 D:/data/mobileback/
+   b.更新新的sql文件 文件位置 sql目录下
