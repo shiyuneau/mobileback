@@ -24,7 +24,7 @@
                    EducationFrom,
                    EducationTo,
                    EducationSchool,
-                   EducationStudy,
+                   EducationStudy
                 )
         values
         <foreach collection="list" item="item" separator=",">
@@ -36,7 +36,7 @@
                             #{item.educationfrom},
                             #{item.educationto},
                             #{item.educationschool},
-                            #{item.educationstudy},
+                            #{item.educationstudy}
                         )
         </foreach>
     </insert>

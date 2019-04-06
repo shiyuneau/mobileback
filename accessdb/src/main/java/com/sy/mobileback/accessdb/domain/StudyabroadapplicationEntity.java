@@ -3,6 +3,7 @@ package com.sy.mobileback.accessdb.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 
@@ -117,7 +118,7 @@ public class StudyabroadapplicationEntity implements Serializable {
 	/**
 	 * 专科毕业证证/大学在学证明书
 	 */
-	private String juniorcollegediploma;
+	private String juniorcollegedipint;
 	/**
 	 * 中文语言证书
 	 */
@@ -173,23 +174,23 @@ public class StudyabroadapplicationEntity implements Serializable {
 	/**
 	 * 收件人姓名
 	 */
-	private String receivename;
+	private String receivername;
 	/**
 	 * 收件人省市
 	 */
-	private String receivecity;
+	private String receivercity;
 	/**
 	 * 收件人地址
 	 */
-	private String receiveaddress;
+	private String receiveraddress;
 	/**
 	 * 收件人手机
 	 */
-	private String receivephone;
+	private String receiverphone;
 	/**
 	 * 收件人国家
 	 */
-	private String receivecountry;
+	private String receivercountry;
 	/**
 	 * 收件人邮编
 	 */
@@ -225,7 +226,7 @@ public class StudyabroadapplicationEntity implements Serializable {
 	/**
 	 * 护照号(为了与前端对应，将PassportNumber改为PasswordNumber)
 	 */
-	private String passportno;
+	private String passportcode;
 	/**
 	 * 护照姓名
 	 */
@@ -261,11 +262,11 @@ public class StudyabroadapplicationEntity implements Serializable {
 	/**
 	 * 是否从中国大陆或港澳台地区移民：0否，1是
 	 */
-	private Integer emigrantflag;
+	private Integer emigrantfrom;
 	/**
 	 * 出生日期
 	 */
-	private Date birthdate;
+	private String birth;
 	/**
 	 * 出生地点
 	 */
@@ -278,6 +279,42 @@ public class StudyabroadapplicationEntity implements Serializable {
 	 * 教育程度
 	 */
 	private String educationalexperience;
+
+	private List<FamilyinfoEntity> familyList;
+	private List<EducationexpireEntity> educationList;
+	private List<WorkexpireEntity> workList;
+
+	public String getBirthplace() {
+		return birthplace;
+	}
+
+	public void setBirthplace(String birthplace) {
+		this.birthplace = birthplace;
+	}
+
+	public List<FamilyinfoEntity> getFamilyList() {
+		return familyList;
+	}
+
+	public void setFamilyList(List<FamilyinfoEntity> familyList) {
+		this.familyList = familyList;
+	}
+
+	public List<EducationexpireEntity> getEducationList() {
+		return educationList;
+	}
+
+	public void setEducationList(List<EducationexpireEntity> educationList) {
+		this.educationList = educationList;
+	}
+
+	public List<WorkexpireEntity> getWorkList() {
+		return workList;
+	}
+
+	public void setWorkList(List<WorkexpireEntity> workList) {
+		this.workList = workList;
+	}
 
 	/**
 	 * 设置：
@@ -580,18 +617,6 @@ public class StudyabroadapplicationEntity implements Serializable {
 		return collegetranscript;
 	}
 	/**
-	 * 设置：专科毕业证证/大学在学证明书
-	 */
-	public void setJuniorcollegediploma(String juniorcollegediploma) {
-		this.juniorcollegediploma = juniorcollegediploma;
-	}
-	/**
-	 * 获取：专科毕业证证/大学在学证明书
-	 */
-	public String getJuniorcollegediploma() {
-		return juniorcollegediploma;
-	}
-	/**
 	 * 设置：中文语言证书
 	 */
 	public void setChineselanguagecertificate(String chineselanguagecertificate) {
@@ -747,66 +772,55 @@ public class StudyabroadapplicationEntity implements Serializable {
 	public String getApplyzipcode() {
 		return applyzipcode;
 	}
-	/**
-	 * 设置：收件人姓名
-	 */
-	public void setReceivename(String receivename) {
-		this.receivename = receivename;
+
+	public String getJuniorcollegedipint() {
+		return juniorcollegedipint;
 	}
-	/**
-	 * 获取：收件人姓名
-	 */
-	public String getReceivename() {
-		return receivename;
+
+	public void setJuniorcollegedipint(String juniorcollegedipint) {
+		this.juniorcollegedipint = juniorcollegedipint;
 	}
-	/**
-	 * 设置：收件人省市
-	 */
-	public void setReceivecity(String receivecity) {
-		this.receivecity = receivecity;
+
+	public String getReceivername() {
+		return receivername;
 	}
-	/**
-	 * 获取：收件人省市
-	 */
-	public String getReceivecity() {
-		return receivecity;
+
+	public void setReceivername(String receivername) {
+		this.receivername = receivername;
 	}
-	/**
-	 * 设置：收件人地址
-	 */
-	public void setReceiveaddress(String receiveaddress) {
-		this.receiveaddress = receiveaddress;
+
+	public String getReceivercity() {
+		return receivercity;
 	}
-	/**
-	 * 获取：收件人地址
-	 */
-	public String getReceiveaddress() {
-		return receiveaddress;
+
+	public void setReceivercity(String receivercity) {
+		this.receivercity = receivercity;
 	}
-	/**
-	 * 设置：收件人手机
-	 */
-	public void setReceivephone(String receivephone) {
-		this.receivephone = receivephone;
+
+	public String getReceiveraddress() {
+		return receiveraddress;
 	}
-	/**
-	 * 获取：收件人手机
-	 */
-	public String getReceivephone() {
-		return receivephone;
+
+	public void setReceiveraddress(String receiveraddress) {
+		this.receiveraddress = receiveraddress;
 	}
-	/**
-	 * 设置：收件人国家
-	 */
-	public void setReceivecountry(String receivecountry) {
-		this.receivecountry = receivecountry;
+
+	public String getReceiverphone() {
+		return receiverphone;
 	}
-	/**
-	 * 获取：收件人国家
-	 */
-	public String getReceivecountry() {
-		return receivecountry;
+
+	public void setReceiverphone(String receiverphone) {
+		this.receiverphone = receiverphone;
 	}
+
+	public String getReceivercountry() {
+		return receivercountry;
+	}
+
+	public void setReceivercountry(String receivercountry) {
+		this.receivercountry = receivercountry;
+	}
+
 	/**
 	 * 设置：收件人邮编
 	 */
@@ -902,18 +916,6 @@ public class StudyabroadapplicationEntity implements Serializable {
 	 */
 	public Integer getDeleted() {
 		return deleted;
-	}
-	/**
-	 * 设置：护照号(为了与前端对应，将PassportNumber改为PasswordNumber)
-	 */
-	public void setPassportno(String passportno) {
-		this.passportno = passportno;
-	}
-	/**
-	 * 获取：护照号(为了与前端对应，将PassportNumber改为PasswordNumber)
-	 */
-	public String getPassportno() {
-		return passportno;
 	}
 	/**
 	 * 设置：护照姓名
@@ -1012,40 +1014,16 @@ public class StudyabroadapplicationEntity implements Serializable {
 		return mothertongue;
 	}
 	/**
-	 * 设置：是否从中国大陆或港澳台地区移民：0否，1是
-	 */
-	public void setEmigrantflag(Integer emigrantflag) {
-		this.emigrantflag = emigrantflag;
-	}
-	/**
-	 * 获取：是否从中国大陆或港澳台地区移民：0否，1是
-	 */
-	public Integer getEmigrantflag() {
-		return emigrantflag;
-	}
-	/**
 	 * 设置：出生日期
 	 */
-	public void setBirthdate(Date birthdate) {
-		this.birthdate = birthdate;
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
 	/**
 	 * 获取：出生日期
 	 */
-	public Date getBirthdate() {
-		return birthdate;
-	}
-	/**
-	 * 设置：出生地点
-	 */
-	public void setBirthplace(String birthplace) {
-		this.birthplace = birthplace;
-	}
-	/**
-	 * 获取：出生地点
-	 */
-	public String getBirthplace() {
-		return birthplace;
+	public String getBirthe() {
+		return birth;
 	}
 	/**
 	 * 设置：婚姻状态 0未婚，1已婚，2离异，3其他
@@ -1059,6 +1037,28 @@ public class StudyabroadapplicationEntity implements Serializable {
 	public Integer getMaritalstatus() {
 		return maritalstatus;
 	}
+
+	public String getPassportcode() {
+		return passportcode;
+	}
+
+	public void setPassportcode(String passportcode) {
+		this.passportcode = passportcode;
+	}
+
+	public Integer getEmigrantfrom() {
+		return emigrantfrom;
+	}
+
+	public void setEmigrantfrom(Integer emigrantfrom) {
+		this.emigrantfrom = emigrantfrom;
+	}
+
+	public String getBirth() {
+		return birth;
+	}
+
+
 	/**
 	 * 设置：教育程度
 	 */

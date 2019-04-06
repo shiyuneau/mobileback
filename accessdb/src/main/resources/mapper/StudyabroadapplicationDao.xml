@@ -30,7 +30,7 @@
         <result property="graduatecertificate" column="GraduateCertificate"/>
         <result property="highestacademic" column="HighestAcademic"/>
         <result property="collegetranscript" column="CollegeTranscript"/>
-        <result property="juniorcollegediploma" column="JuniorCollegeDiploma"/>
+        <result property="juniorcollegedipint" column="JuniorCollegeDiploma"/>
         <result property="chineselanguagecertificate" column="ChineseLanguageCertificate"/>
         <result property="medicalreport" column="MedicalReport"/>
         <result property="studyplan" column="StudyPlan"/>
@@ -44,11 +44,11 @@
         <result property="applyphone" column="ApplyPhone"/>
         <result property="applyaddress" column="ApplyAddress"/>
         <result property="applyzipcode" column="ApplyZipcode"/>
-        <result property="receivename" column="ReceiveName"/>
-        <result property="receivecity" column="ReceiveCity"/>
-        <result property="receiveaddress" column="ReceiveAddress"/>
-        <result property="receivephone" column="ReceivePhone"/>
-        <result property="receivecountry" column="ReceiveCountry"/>
+        <result property="receivername" column="ReceiveName"/>
+        <result property="receivercity" column="ReceiveCity"/>
+        <result property="receiveraddress" column="ReceiveAddress"/>
+        <result property="receiverphone" column="ReceivePhone"/>
+        <result property="receivercountry" column="ReceiveCountry"/>
         <result property="receiverzipcode" column="ReceiverZipcode"/>
         <result property="applicationnode" column="ApplicationNode"/>
         <result property="type" column="Type"/>
@@ -57,7 +57,7 @@
         <result property="createdtime" column="CreatedTime"/>
         <result property="updatedtime" column="UpdatedTime"/>
         <result property="deleted" column="Deleted"/>
-        <result property="passportno" column="PassportNo"/>
+        <result property="passportcode" column="PassportNo"/>
         <result property="passportname" column="PassportName"/>
         <result property="expireat" column="ExpireAt"/>
         <result property="familyname" column="FamilyName"/>
@@ -66,8 +66,8 @@
         <result property="religion" column="Religion"/>
         <result property="nationality" column="Nationality"/>
         <result property="mothertongue" column="Mothertongue"/>
-        <result property="emigrantflag" column="EmigrantFlag"/>
-        <result property="birthdate" column="BirthDate"/>
+        <result property="emigrantfrom" column="EmigrantFlag"/>
+        <result property="birth" column="BirthDate"/>
         <result property="birthplace" column="BirthPlace"/>
         <result property="maritalstatus" column="MaritalStatus"/>
         <result property="educationalexperience" column="EducationalExperience"/>
@@ -145,73 +145,215 @@
         values
         <foreach collection="list" item="item" separator=",">
             (
-                            #{item.guid},
-                            #{item.studentguid},
-                            #{item.schoolguid},
-                            #{item.collegeguid},
-                            #{item.professionguid},
-                            #{item.photoid},
-                            #{item.taughtby},
-                            #{item.startyear},
-                            #{item.fundingsource},
-                            #{item.degree},
-                            #{item.admissionseason},
-                            #{item.english},
-                            #{item.hsk},
-                            #{item.ielts},
-                            #{item.toefl},
-                            #{item.referenceby},
-                            #{item.referencetel},
-                            #{item.finacial},
-                            #{item.guarantorin},
-                            #{item.guarantorintel},
-                            #{item.guardian},
-                            #{item.validpassport},
-                            #{item.graduatecertificate},
-                            #{item.highestacademic},
-                            #{item.collegetranscript},
-                            #{item.juniorcollegediploma},
-                            #{item.chineselanguagecertificate},
-                            #{item.medicalreport},
-                            #{item.studyplan},
-                            #{item.streetaddress},
-                            #{item.cityprovince},
-                            #{item.country},
-                            #{item.countryemail},
-                            #{item.countryphone},
-                            #{item.countryzipcode},
-                            #{item.applyemail},
-                            #{item.applyphone},
-                            #{item.applyaddress},
-                            #{item.applyzipcode},
-                            #{item.receivename},
-                            #{item.receivecity},
-                            #{item.receiveaddress},
-                            #{item.receivephone},
-                            #{item.receivecountry},
-                            #{item.receiverzipcode},
-                            #{item.applicationnode},
-                            #{item.type},
-                            #{item.status},
-                            #{item.auditresult},
-                            #{item.createdtime},
-                            #{item.updatedtime},
-                            #{item.deleted},
-                            #{item.passportno},
-                            #{item.passportname},
-                            #{item.expireat},
-                            #{item.familyname},
-                            #{item.givenname},
-                            #{item.highestdegree},
-                            #{item.religion},
-                            #{item.nationality},
-                            #{item.mothertongue},
-                            #{item.emigrantflag},
-                            #{item.birthdate},
-                            #{item.birthplace},
-                            #{item.maritalstatus},
-                            #{item.educationalexperience}
-                        )
+            #{item.guid},
+            #{item.studentguid},
+            #{item.schoolguid},
+            #{item.collegeguid},
+            #{item.professionguid},
+            #{item.photoid},
+            #{item.taughtby},
+            #{item.startyear},
+            #{item.fundingsource},
+            #{item.degree},
+            #{item.admissionseason},
+            #{item.english},
+            #{item.hsk},
+            #{item.ielts},
+            #{item.toefl},
+            #{item.referenceby},
+            #{item.referencetel},
+            #{item.finacial},
+            #{item.guarantorin},
+            #{item.guarantorintel},
+            #{item.guardian},
+            #{item.validpassport},
+            #{item.graduatecertificate},
+            #{item.highestacademic},
+            #{item.collegetranscript},
+            #{item.juniorcollegedipint},
+            #{item.chineselanguagecertificate},
+            #{item.medicalreport},
+            #{item.studyplan},
+            #{item.streetaddress},
+            #{item.cityprovince},
+            #{item.country},
+            #{item.countryemail},
+            #{item.countryphone},
+            #{item.countryzipcode},
+            #{item.applyemail},
+            #{item.applyphone},
+            #{item.applyaddress},
+            #{item.applyzipcode},
+            #{item.receivename},
+            #{item.receivercity},
+            #{item.receiveraddress},
+            #{item.receiverphone},
+            #{item.receivercountry},
+            #{item.receiverzipcode},
+            #{item.applicationnode},
+            #{item.type},
+            #{item.status},
+            #{item.auditresult},
+            #{item.createdtime},
+            #{item.updatedtime},
+            #{item.deleted},
+            #{item.passportcode},
+            #{item.passportname},
+            #{item.expireat},
+            #{item.familyname},
+            #{item.givenname},
+            #{item.highestdegree},
+            #{item.religion},
+            #{item.nationality},
+            #{item.mothertongue},
+            #{item.emigrantfrom},
+            #{item.birth},
+            #{item.birthplace},
+            #{item.maritalstatus},
+            #{item.educationalexperience}
+            )
         </foreach>
     </insert>
+
+    <insert id="studyabroadapplicationInsert" parameterType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity">
+        insert into studyabroadapplication  (
+        GUID,
+        StudentGUID,
+        SchoolGUID,
+        CollegeGUID,
+        ProfessionGUID,
+        PhotoID,
+        TaughtBy,
+        StartYear,
+        FundingSource,
+        Degree,
+        AdmissionSeason,
+        English,
+        Hsk,
+        Ielts,
+        Toefl,
+        ReferenceBy,
+        ReferenceTel,
+        Finacial,
+        Guarantorin,
+        GuarantorinTel,
+        Guardian,
+        ValidPassport,
+        GraduateCertificate,
+        HighestAcademic,
+        CollegeTranscript,
+        JuniorCollegeDiploma,
+        ChineseLanguageCertificate,
+        MedicalReport,
+        StudyPlan,
+        StreetAddress,
+        CityProvince,
+        Country,
+        CountryEmail,
+        CountryPhone,
+        CountryZipcode,
+        ApplyEmail,
+        ApplyPhone,
+        ApplyAddress,
+        ApplyZipcode,
+        ReceiveName,
+        ReceiveCity,
+        ReceiveAddress,
+        ReceivePhone,
+        ReceiveCountry,
+        ReceiverZipcode,
+        ApplicationNode,
+        Type,
+        Status,
+        AuditResult,
+        CreatedTime,
+        UpdatedTime,
+        Deleted,
+        PassportNo,
+        PassportName,
+        ExpireAt,
+        FamilyName,
+        GivenName,
+        HighestDegree,
+        Religion,
+        Nationality,
+        Mothertongue,
+        EmigrantFlag,
+        BirthDate,
+        BirthPlace,
+        MaritalStatus,
+        EducationalExperience
+        )
+        values
+            (
+            #{guid},
+            #{studentguid},
+            #{schoolguid},
+            #{collegeguid},
+            #{professionguid},
+            #{photoid},
+            #{taughtby},
+            #{startyear},
+            #{fundingsource},
+            #{degree},
+            #{admissionseason},
+            #{english},
+            #{hsk},
+            #{ielts},
+            #{toefl},
+            #{referenceby},
+            #{referencetel},
+            #{finacial},
+            #{guarantorin},
+            #{guarantorintel},
+            #{guardian},
+            #{validpassport},
+            #{graduatecertificate},
+            #{highestacademic},
+            #{collegetranscript},
+            #{juniorcollegedipint},
+            #{chineselanguagecertificate},
+            #{medicalreport},
+            #{studyplan},
+            #{streetaddress},
+            #{cityprovince},
+            #{country},
+            #{countryemail},
+            #{countryphone},
+            #{countryzipcode},
+            #{applyemail},
+            #{applyphone},
+            #{applyaddress},
+            #{applyzipcode},
+            #{receivername},
+            #{receivercity},
+            #{receiveraddress},
+            #{receiverphone},
+            #{receivercountry},
+            #{receiverzipcode},
+            #{applicationnode},
+            #{type},
+            #{status},
+            #{auditresult},
+            #{createdtime},
+            #{updatedtime},
+            #{deleted},
+            #{passportcode},
+            #{passportname},
+            #{expireat},
+            #{familyname},
+            #{givenname},
+            #{highestdegree},
+            #{religion},
+            #{nationality},
+            #{mothertongue},
+            #{emigrantfrom},
+            #{birth},
+            #{birthplace},
+            #{maritalstatus},
+            #{educationalexperience}
+            )
+    </insert>
+
+
 </mapper>

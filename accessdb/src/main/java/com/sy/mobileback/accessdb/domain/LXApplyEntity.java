@@ -38,9 +38,11 @@ public class LXApplyEntity {
     private String ielts;
     private String hsk;
     private String toefl;
+    private String referenceby;
     private String referencetel;
     private String finacial;
     private String guarantorin;
+    private String guarantorintel;
     private String guardian;
     private List<EducationexpireEntity> educationList;
     private List<WorkexpireEntity> workList;
@@ -280,7 +282,27 @@ public class LXApplyEntity {
          return guardian;
      }
 
-//    public void setEducationList(List<EducationList> educationList) {
+    public boolean isEmigrantfrom() {
+        return emigrantfrom;
+    }
+
+    public String getReferenceby() {
+        return referenceby;
+    }
+
+    public void setReferenceby(String referenceby) {
+        this.referenceby = referenceby;
+    }
+
+    public String getGuarantorintel() {
+        return guarantorintel;
+    }
+
+    public void setGuarantorintel(String guarantorintel) {
+        this.guarantorintel = guarantorintel;
+    }
+
+    //    public void setEducationList(List<EducationList> educationList) {
 //         this.educationList = educationList;
 //     }
 //     public List<EducationList> getEducationList() {

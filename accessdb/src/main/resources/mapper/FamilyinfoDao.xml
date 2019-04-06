@@ -30,7 +30,7 @@
                    FamilyPhone,
                    FamilyEmail,
                    FamilyWorkplace,
-                   FamilyContace,
+                   FamilyContace
                 )
         values
         <foreach collection="list" item="item" separator=",">
@@ -45,7 +45,7 @@
                             #{item.familyphone},
                             #{item.familyemail},
                             #{item.familyworkplace},
-                            #{item.familycontace},
+                            #{item.familycontace}
                         )
         </foreach>
     </insert>

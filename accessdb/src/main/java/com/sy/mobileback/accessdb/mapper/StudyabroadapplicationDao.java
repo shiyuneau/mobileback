@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface StudyabroadapplicationDao {
     void studyabroadapplicationBatchInsert(List<StudyabroadapplicationEntity> list);
+    void studyabroadapplicationInsert(StudyabroadapplicationEntity entity);
 }
