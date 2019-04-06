@@ -70,10 +70,11 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 * 出生国ID
 	 */
 	private String birthcountryguid;
+
 	/**
-	 * 所在城市
+	 * 城市 原city
 	 */
-	private String city;
+	private String birthcity;
 	/**
 	 * 婚姻状况
 	 */
@@ -91,9 +92,9 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 */
 	private String addresscountryguid;
 	/**
-	 * 地址
+	 * 当前所在地址
 	 */
-	private String address;
+	private String presentaddress;
 	/**
 	 * 电话
 	 */
@@ -119,21 +120,21 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 */
 	private String employmentrecord;
 	/**
-	 * 汉语等级
+	 * 汉语等级 原chinesely
 	 */
-	private String chineselv;
+	private String chinese;
 	/**
-	 * 英语等级
+	 * 英语等级 原englishly
 	 */
-	private String englishlv;
+	private String english;
 	/**
 	 * 汉语分数
 	 */
 	private String chinesescore;
 	/**
-	 * 其他语言
+	 * 其他语言 原otherlanguages
 	 */
-	private String otherlanguages;
+	private String otherlanguage;
 	/**
 	 * 是否在中国工作
 	 */
@@ -187,9 +188,9 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 */
 	private String contactaddress;
 	/**
-	 * 申请人在华事务联系人或机构邮箱
+	 * email
 	 */
-	private String contactemail;
+	private String Email;
 	/**
 	 * 配偶姓名
 	 */
@@ -203,9 +204,9 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 */
 	private String spousecountry;
 	/**
-	 * 配偶职业
+	 * 配偶职业 原spouseoccupation
 	 */
-	private String spouseoccupation;
+	private String spouseemployment;
 	/**
 	 * 配偶受教育程度
 	 */
@@ -223,9 +224,9 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 */
 	private String fathercountry;
 	/**
-	 * 父亲职业
+	 * 父亲职业 fatheroccupation
 	 */
-	private String fatheroccupation;
+	private String fatheremploymnet;
 	/**
 	 * 父亲受教育程度
 	 */
@@ -243,9 +244,9 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 */
 	private String mothercountry;
 	/**
-	 * 母亲职业
+	 * 母亲职业 原motheroccupation
 	 */
-	private String motheroccupation;
+	private String motheremployment;
 	/**
 	 * 母亲受教育程度
 	 */
@@ -257,19 +258,19 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 联系人电话
 	 */
-	private String scholarshipphone;
+	private String phone;
 	/**
 	 * 奖学金项目
 	 */
-	private String scholarshipproject;
+	private String project;
 	/**
 	 * 奖学金类型
 	 */
-	private String scholarshiptype;
+	private String type;
 	/**
 	 * 学生层次
 	 */
-	private String scholarshiplevel;
+	private String level;
 	/**
 	 * 申报专业
 	 */
@@ -277,7 +278,7 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 奖学金申请照片id
 	 */
-	private String scholarshipphotoguid;
+	private String photoid;
 	/**
 	 * 申请人传真
 	 */
@@ -289,11 +290,11 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 教育经历id
 	 */
-	private String educationexpireguid;
+	private String educationalList;
 	/**
 	 * 工作经历id
 	 */
-	private String workexpireguid;
+	private String employmentList;
 	/**
 	 * hsk考试登记或其他类型汉语考试成绩
 	 */
@@ -329,7 +330,7 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 其他的(否的答案)
 	 */
-	private String needstudychineseother;
+	private String other;
 	/**
 	 * 拟在华学习或研究的详细内容
 	 */
@@ -341,7 +342,7 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 推荐您申请天津市政府奖学金的机构或个人
 	 */
-	private String scholarshiprecommend;
+	private String scholarship;
 	/**
 	 * 申请人是否曾在华学习和任职
 	 */
@@ -401,7 +402,7 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 类型
 	 */
-	private Integer type;
+	private Integer scholarshiptype;
 	/**
 	 * 审计结果
 	 */
@@ -446,6 +447,18 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 * 教育程度
 	 */
 	private String educationalexperience;
+    /**
+     * 性别
+     */
+    private String sex;
+    /**
+     * 婚姻
+     */
+    private String marriage;
+    /**
+     * 出生国
+     */
+    private String birthcountry;
 
 	/**
 	 * 设置：
@@ -618,14 +631,14 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：所在城市
 	 */
-	public void setCity(String city) {
-		this.city = city;
+	public void setBirthcity(String birthcity) {
+		this.birthcity = birthcity;
 	}
 	/**
 	 * 获取：所在城市
 	 */
-	public String getCity() {
-		return city;
+	public String getBirthcity() {
+		return birthcity;
 	}
 	/**
 	 * 设置：婚姻状况
@@ -678,14 +691,14 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：地址
 	 */
-	public void setAddress(String address) {
-		this.address = address;
+	public void setPresentaddress(String presentaddress) {
+		this.presentaddress = presentaddress;
 	}
 	/**
 	 * 获取：地址
 	 */
-	public String getAddress() {
-		return address;
+	public String getPresentaddress() {
+		return presentaddress;
 	}
 	/**
 	 * 设置：电话
@@ -762,26 +775,26 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：汉语等级
 	 */
-	public void setChineselv(String chineselv) {
-		this.chineselv = chineselv;
+	public void setChinese(String chinese) {
+		this.chinese = chinese;
 	}
 	/**
 	 * 获取：汉语等级
 	 */
-	public String getChineselv() {
-		return chineselv;
+	public String getChinese() {
+		return chinese;
 	}
 	/**
 	 * 设置：英语等级
 	 */
-	public void setEnglishlv(String englishlv) {
-		this.englishlv = englishlv;
+	public void setEnglish(String english) {
+		this.english = english;
 	}
 	/**
 	 * 获取：英语等级
 	 */
-	public String getEnglishlv() {
-		return englishlv;
+	public String getEnglish() {
+		return english;
 	}
 	/**
 	 * 设置：汉语分数
@@ -798,14 +811,14 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：其他语言
 	 */
-	public void setOtherlanguages(String otherlanguages) {
-		this.otherlanguages = otherlanguages;
+	public void setOtherlanguage(String otherlanguage) {
+		this.otherlanguage = otherlanguage;
 	}
 	/**
 	 * 获取：其他语言
 	 */
-	public String getOtherlanguages() {
-		return otherlanguages;
+	public String getOtherlanguage() {
+		return otherlanguage;
 	}
 	/**
 	 * 设置：是否在中国工作
@@ -966,14 +979,14 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：申请人在华事务联系人或机构邮箱
 	 */
-	public void setContactemail(String contactemail) {
-		this.contactemail = contactemail;
+	public void setEmail(String Email) {
+		this.Email = Email;
 	}
 	/**
 	 * 获取：申请人在华事务联系人或机构邮箱
 	 */
-	public String getContactemail() {
-		return contactemail;
+	public String getEmail() {
+		return Email;
 	}
 	/**
 	 * 设置：配偶姓名
@@ -1014,14 +1027,14 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：配偶职业
 	 */
-	public void setSpouseoccupation(String spouseoccupation) {
-		this.spouseoccupation = spouseoccupation;
+	public void setSpouseemployment(String spouseemployment) {
+		this.spouseemployment = spouseemployment;
 	}
 	/**
 	 * 获取：配偶职业
 	 */
-	public String getSpouseoccupation() {
-		return spouseoccupation;
+	public String getSpouseemployment() {
+		return spouseemployment;
 	}
 	/**
 	 * 设置：配偶受教育程度
@@ -1074,14 +1087,14 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：父亲职业
 	 */
-	public void setFatheroccupation(String fatheroccupation) {
-		this.fatheroccupation = fatheroccupation;
+	public void setFatheremploymnet(String fatheremploymnet) {
+		this.fatheremploymnet = fatheremploymnet;
 	}
 	/**
 	 * 获取：父亲职业
 	 */
-	public String getFatheroccupation() {
-		return fatheroccupation;
+	public String getFatheremploymnet() {
+		return fatheremploymnet;
 	}
 	/**
 	 * 设置：父亲受教育程度
@@ -1134,14 +1147,14 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：母亲职业
 	 */
-	public void setMotheroccupation(String motheroccupation) {
-		this.motheroccupation = motheroccupation;
+	public void setMotheremployment(String motheremployment) {
+		this.motheremployment = motheremployment;
 	}
 	/**
 	 * 获取：母亲职业
 	 */
-	public String getMotheroccupation() {
-		return motheroccupation;
+	public String getMotheremployment() {
+		return motheremployment;
 	}
 	/**
 	 * 设置：母亲受教育程度
@@ -1170,50 +1183,50 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：联系人电话
 	 */
-	public void setScholarshipphone(String scholarshipphone) {
-		this.scholarshipphone = scholarshipphone;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	/**
 	 * 获取：联系人电话
 	 */
-	public String getScholarshipphone() {
-		return scholarshipphone;
+	public String getPhone() {
+		return phone;
 	}
 	/**
 	 * 设置：奖学金项目
 	 */
-	public void setScholarshipproject(String scholarshipproject) {
-		this.scholarshipproject = scholarshipproject;
+	public void setProject(String project) {
+		this.project = project;
 	}
 	/**
 	 * 获取：奖学金项目
 	 */
-	public String getScholarshipproject() {
-		return scholarshipproject;
+	public String getProject() {
+		return project;
 	}
 	/**
 	 * 设置：奖学金类型
 	 */
-	public void setScholarshiptype(String scholarshiptype) {
-		this.scholarshiptype = scholarshiptype;
+	public void setType(String type) {
+		this.type = type;
 	}
 	/**
 	 * 获取：奖学金类型
 	 */
-	public String getScholarshiptype() {
-		return scholarshiptype;
+	public String getType() {
+		return type;
 	}
 	/**
 	 * 设置：学生层次
 	 */
-	public void setScholarshiplevel(String scholarshiplevel) {
-		this.scholarshiplevel = scholarshiplevel;
+	public void setLevel(String level) {
+		this.level = level;
 	}
 	/**
 	 * 获取：学生层次
 	 */
-	public String getScholarshiplevel() {
-		return scholarshiplevel;
+	public String getLevel() {
+		return level;
 	}
 	/**
 	 * 设置：申报专业
@@ -1230,14 +1243,14 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：奖学金申请照片id
 	 */
-	public void setScholarshipphotoguid(String scholarshipphotoguid) {
-		this.scholarshipphotoguid = scholarshipphotoguid;
+	public void setPhotoid(String photoid) {
+		this.photoid = photoid;
 	}
 	/**
 	 * 获取：奖学金申请照片id
 	 */
-	public String getScholarshipphotoguid() {
-		return scholarshipphotoguid;
+	public String getPhotoid() {
+		return photoid;
 	}
 	/**
 	 * 设置：申请人传真
@@ -1266,26 +1279,26 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：教育经历id
 	 */
-	public void setEducationexpireguid(String educationexpireguid) {
-		this.educationexpireguid = educationexpireguid;
+	public void setEducationalList(String educationalList) {
+		this.educationalList = educationalList;
 	}
 	/**
 	 * 获取：教育经历id
 	 */
-	public String getEducationexpireguid() {
-		return educationexpireguid;
+	public String getEducationalList() {
+		return educationalList;
 	}
 	/**
 	 * 设置：工作经历id
 	 */
-	public void setWorkexpireguid(String workexpireguid) {
-		this.workexpireguid = workexpireguid;
+	public void setEmploymentList(String employmentList) {
+		this.employmentList = employmentList;
 	}
 	/**
 	 * 获取：工作经历id
 	 */
-	public String getWorkexpireguid() {
-		return workexpireguid;
+	public String getEmploymentList() {
+		return employmentList;
 	}
 	/**
 	 * 设置：hsk考试登记或其他类型汉语考试成绩
@@ -1386,14 +1399,14 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：其他的(否的答案)
 	 */
-	public void setNeedstudychineseother(String needstudychineseother) {
-		this.needstudychineseother = needstudychineseother;
+	public void setOther(String other) {
+		this.other = other;
 	}
 	/**
 	 * 获取：其他的(否的答案)
 	 */
-	public String getNeedstudychineseother() {
-		return needstudychineseother;
+	public String getOther() {
+		return other;
 	}
 	/**
 	 * 设置：拟在华学习或研究的详细内容
@@ -1422,14 +1435,14 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：推荐您申请天津市政府奖学金的机构或个人
 	 */
-	public void setScholarshiprecommend(String scholarshiprecommend) {
-		this.scholarshiprecommend = scholarshiprecommend;
+	public void setScholarship(String scholarship) {
+		this.scholarship = scholarship;
 	}
 	/**
 	 * 获取：推荐您申请天津市政府奖学金的机构或个人
 	 */
-	public String getScholarshiprecommend() {
-		return scholarshiprecommend;
+	public String getScholarship() {
+		return scholarship;
 	}
 	/**
 	 * 设置：申请人是否曾在华学习和任职
@@ -1602,14 +1615,14 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：类型
 	 */
-	public void setType(Integer type) {
-		this.type = type;
+	public void setScholarshiptype(Integer scholarshiptype) {
+		this.scholarshiptype = scholarshiptype;
 	}
 	/**
 	 * 获取：类型
 	 */
-	public Integer getType() {
-		return type;
+	public Integer getScholarshiptype() {
+		return scholarshiptype;
 	}
 	/**
 	 * 设置：审计结果
@@ -1743,4 +1756,41 @@ public class ScholarshipapplicationEntity implements Serializable {
 	public String getEducationalexperience() {
 		return educationalexperience;
 	}
+
+    /**
+     * 获取：性别
+     */
+    public String getSex() {
+        return sex;
+    }
+    /**
+     * 设置：性别
+     */
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+    /**
+     * 获取：婚姻
+     */
+    public String getMarriage() {
+        return marriage;
+    }
+    /**
+     * 设置：婚姻
+     */
+    public void setMarriage(String marriage) {
+        this.marriage = marriage;
+    }
+    /**
+     * 获取：出生国
+     */
+    public String getBirthcountry() {
+        return birthcountry;
+    }
+    /**
+     * 设置：出生国
+     */
+    public void setBirthcountry(String birthcountry) {
+        this.birthcountry = birthcountry;
+    }
 }
