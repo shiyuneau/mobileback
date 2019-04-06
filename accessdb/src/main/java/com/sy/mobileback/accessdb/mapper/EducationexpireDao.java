@@ -15,4 +15,6 @@ public interface EducationexpireDao {
     void educationexpireBatchInsert(List<EducationexpireEntity> list);
 
     List<EducationexpireEntity> educationExpireList(String studyabroadGUID);
+
+    List<EducationexpireEntity> eduListByScholarshipId(String applyGUID);
 }

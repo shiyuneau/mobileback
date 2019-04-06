@@ -7,12 +7,15 @@ import com.sy.mobileback.accessdb.mapper.EducationexpireDao;
 import com.sy.mobileback.accessdb.mapper.ScholarshipapplicationDao;
 import com.sy.mobileback.accessdb.mapper.WorkexpireDao;
 import com.sy.mobileback.accessdb.service.ScholarshipApplicationService;
+import com.sy.mobileback.common.enums.ApplicationStatusType;
 import com.sy.mobileback.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -60,6 +63,42 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
             return null;
         }
         return applyUUID;
+    }
+
+    /**
+     * 根据用户id和申请id 取消申请 更改申请单状态,1待审批，2审批成功，3审批失败，4用户取消当前审批',
+     * @param userId
+     * @param applyrecordid
+     * @return
+     */
+    @Override
+    public boolean applyCancel(String userId, String applyrecordid) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userid",userId);
+        map.put("applyrecordid",applyrecordid);
+        map.put("status", ApplicationStatusType.UserCancelApply.getType());
+        return scholarshipapplicationDao.applyCancel(map);
+    }
+
+    @Override
+    public List<ScholarshipapplicationEntity> scholarcshipApplyList(String userId) {
+        //查询用户id下所有申请表
+        List<ScholarshipapplicationEntity> entityList = scholarshipapplicationDao.applyList(userId);
+        //根据申请id  查询申请表中 教育/工作经历
+        entityList.forEach(entity ->{
+            String applyGUID = entity.getGuid();
+            //教育经历
+            List<EducationexpireEntity> educationexpireEntities = educationexpireDao.eduListByScholarshipId(applyGUID);
+            //工作经历
+            List<WorkexpireEntity> workexpireEntities = workexpireDao.workexpireByScholarshipId(applyGUID);
+            if(educationexpireEntities != null){
+                entity.setEducationList(educationexpireEntities);
+            }
+            if(workexpireEntities != null){
+                entity.setWorkList(workexpireEntities);
+            }
+        });
+        return entityList;
     }
 
 }

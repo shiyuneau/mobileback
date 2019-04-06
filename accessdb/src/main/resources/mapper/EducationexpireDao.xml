@@ -44,6 +44,8 @@
     <select id="educationExpireList" resultType="com.sy.mobileback.accessdb.domain.EducationexpireEntity">
         select * from educationexpire where StudyabroadGUID = #{studyabroadGUID}
     </select>
-
+    <select id="eduListByScholarshipId" resultType="com.sy.mobileback.accessdb.domain.EducationexpireEntity">
+        select * from educationexpire where ScholarshipGUID = #{applyGUID}
+    </select>
 
 </mapper>
