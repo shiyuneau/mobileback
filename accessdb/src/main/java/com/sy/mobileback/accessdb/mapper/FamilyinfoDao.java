@@ -14,4 +14,6 @@ import java.util.List;
  */
 public interface FamilyinfoDao {
     void familyinfoBatchInsert(List<FamilyinfoEntity> list);
+
+    List<FamilyinfoEntity> familyList(String studyabroadGUID);
 }

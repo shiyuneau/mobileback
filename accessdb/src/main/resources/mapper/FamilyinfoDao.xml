@@ -50,5 +50,9 @@
         </foreach>
     </insert>
 
+    <select id="familyList" resultType="com.sy.mobileback.accessdb.domain.FamilyinfoEntity">
+        select * from familyinfo where StudyabroadGUID = #{studyabroadGUID}
+    </select>
+
 
 </mapper>

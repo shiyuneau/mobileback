@@ -2,6 +2,8 @@ package com.sy.mobileback.accessdb.service;
 
 import com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity;
 
+import java.util.List;
+
 /**
  * @author shiyu
  * @Description 留学申请 service
@@ -22,4 +24,11 @@ public interface StudyabroadService {
      * @return
      */
     boolean applyCancel(String userid , String applyid);
+
+    /**
+     * 根据学生ID，　查询学生的　待审核的　申请列表
+     * @param userid
+     * @return
+     */
+    List<StudyabroadapplicationEntity> studentApplyList(String userid);
 }

@@ -26,15 +26,15 @@ public class StudyabroadapplicationEntity implements Serializable {
 	/**
 	 * 学校ID(原表中有，留存)
 	 */
-	private String schoolguid;
+	private String school;
 	/**
 	 * 大学ID（原表数据，残留存）
 	 */
-	private String collegeguid;
+	private String college;
 	/**
 	 * 专业ID
 	 */
-	private String professionguid;
+	private String profession;
 	/**
 	 * 照片
 	 */
@@ -343,38 +343,38 @@ public class StudyabroadapplicationEntity implements Serializable {
 	/**
 	 * 设置：学校ID(原表中有，留存)
 	 */
-	public void setSchoolguid(String schoolguid) {
-		this.schoolguid = schoolguid;
+	public void setSchool(String school) {
+		this.school = school;
 	}
 	/**
 	 * 获取：学校ID(原表中有，留存)
 	 */
-	public String getSchoolguid() {
-		return schoolguid;
+	public String getSchool() {
+		return school;
 	}
 	/**
 	 * 设置：大学ID（原表数据，残留存）
 	 */
-	public void setCollegeguid(String collegeguid) {
-		this.collegeguid = collegeguid;
+	public void setCollege(String college) {
+		this.college = college;
 	}
 	/**
 	 * 获取：大学ID（原表数据，残留存）
 	 */
-	public String getCollegeguid() {
-		return collegeguid;
+	public String getCollege() {
+		return college;
 	}
 	/**
 	 * 设置：专业ID
 	 */
-	public void setProfessionguid(String professionguid) {
-		this.professionguid = professionguid;
+	public void setProfession(String profession) {
+		this.profession = profession;
 	}
 	/**
 	 * 获取：专业ID
 	 */
-	public String getProfessionguid() {
-		return professionguid;
+	public String getProfession() {
+		return profession;
 	}
 	/**
 	 * 设置：照片
@@ -1015,12 +1015,6 @@ public class StudyabroadapplicationEntity implements Serializable {
 	 */
 	public void setBirth(String birth) {
 		this.birth = birth;
-	}
-	/**
-	 * 获取：出生日期
-	 */
-	public String getBirthe() {
-		return birth;
 	}
 	/**
 	 * 设置：婚姻状态 0未婚，1已婚，2离异，3其他

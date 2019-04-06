@@ -14,4 +14,6 @@ import java.util.List;
  */
 public interface EducationexpireDao {
     void educationexpireBatchInsert(List<EducationexpireEntity> list);
+
+    List<EducationexpireEntity> educationExpireList(String studyabroadGUID);
 }

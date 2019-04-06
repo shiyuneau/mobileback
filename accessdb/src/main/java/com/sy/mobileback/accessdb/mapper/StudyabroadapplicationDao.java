@@ -26,4 +26,11 @@ public interface StudyabroadapplicationDao {
      * @return
      */
     boolean applyCancel(Map<String,Object> map);
+
+    /**
+     * 根据用户ID查询申请表列表
+     * @param userid
+     * @return
+     */
+    List<StudyabroadapplicationEntity> applyList(String userid);
 }

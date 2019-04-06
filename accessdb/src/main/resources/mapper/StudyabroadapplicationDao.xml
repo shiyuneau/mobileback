@@ -7,9 +7,9 @@
     <resultMap type="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity" id="studyabroadapplicationMap">
         <result property="guid" column="GUID"/>
         <result property="studentguid" column="StudentGUID"/>
-        <result property="schoolguid" column="SchoolGUID"/>
-        <result property="collegeguid" column="CollegeGUID"/>
-        <result property="professionguid" column="ProfessionGUID"/>
+        <result property="school" column="School"/>
+        <result property="college" column="College"/>
+        <result property="profession" column="Profession"/>
         <result property="photoid" column="PhotoID"/>
         <result property="taughtby" column="TaughtBy"/>
         <result property="startyear" column="StartYear"/>
@@ -30,7 +30,7 @@
         <result property="graduatecertificate" column="GraduateCertificate"/>
         <result property="highestacademic" column="HighestAcademic"/>
         <result property="collegetranscript" column="CollegeTranscript"/>
-        <result property="juniorcollegedipint" column="JuniorCollegeDiploma"/>
+        <result property="juniorcollegedipint" column="Juniorcollegedipint"/>
         <result property="chineselanguagecertificate" column="ChineseLanguageCertificate"/>
         <result property="medicalreport" column="MedicalReport"/>
         <result property="studyplan" column="StudyPlan"/>
@@ -44,11 +44,11 @@
         <result property="applyphone" column="ApplyPhone"/>
         <result property="applyaddress" column="ApplyAddress"/>
         <result property="applyzipcode" column="ApplyZipcode"/>
-        <result property="receivername" column="ReceiveName"/>
-        <result property="receivercity" column="ReceiveCity"/>
-        <result property="receiveraddress" column="ReceiveAddress"/>
-        <result property="receiverphone" column="ReceivePhone"/>
-        <result property="receivercountry" column="ReceiveCountry"/>
+        <result property="receivername" column="ReceiverName"/>
+        <result property="receivercity" column="ReceiverCity"/>
+        <result property="receiveraddress" column="ReceiverAddress"/>
+        <result property="receiverphone" column="ReceiverPhone"/>
+        <result property="receivercountry" column="ReceiverCountry"/>
         <result property="receiverzipcode" column="ReceiverZipcode"/>
         <result property="applicationnode" column="ApplicationNode"/>
         <result property="type" column="Type"/>
@@ -57,17 +57,17 @@
         <result property="createdtime" column="CreatedTime"/>
         <result property="updatedtime" column="UpdatedTime"/>
         <result property="deleted" column="Deleted"/>
-        <result property="passportcode" column="PassportNo"/>
+        <result property="passportcode" column="PassportCode"/>
         <result property="passportname" column="PassportName"/>
-        <result property="expireat" column="ExpireAt"/>
+        <result property="passportexpire" column="PassportExpire"/>
         <result property="familyname" column="FamilyName"/>
         <result property="givenname" column="GivenName"/>
         <result property="highestdegree" column="HighestDegree"/>
         <result property="religion" column="Religion"/>
         <result property="nationality" column="Nationality"/>
         <result property="mothertongue" column="Mothertongue"/>
-        <result property="emigrantfrom" column="EmigrantFlag"/>
-        <result property="birth" column="BirthDate"/>
+        <result property="emigrantfrom" column="EmigrantFrom"/>
+        <result property="birth" column="Birth"/>
         <result property="birthplace" column="BirthPlace"/>
         <result property="maritalstatus" column="MaritalStatus"/>
         <result property="educationalexperience" column="EducationalExperience"/>
@@ -77,9 +77,9 @@
         insert into studyabroadapplication  (
                     GUID,
                     StudentGUID,
-                    SchoolGUID,
-                    CollegeGUID,
-                    ProfessionGUID,
+                    School,
+                    College,
+                    Profession,
                     PhotoID,
                     TaughtBy,
                     StartYear,
@@ -147,9 +147,9 @@
             (
             #{item.guid},
             #{item.studentguid},
-            #{item.schoolguid},
-            #{item.collegeguid},
-            #{item.professionguid},
+            #{item.school},
+            #{item.college},
+            #{item.profession},
             #{item.photoid},
             #{item.taughtby},
             #{item.startyear},
@@ -199,7 +199,7 @@
             #{item.deleted},
             #{item.passportcode},
             #{item.passportname},
-            #{item.expireat},
+            #{item.passportexpire},
             #{item.familyname},
             #{item.givenname},
             #{item.highestdegree},
@@ -219,9 +219,9 @@
         insert into studyabroadapplication  (
         GUID,
         StudentGUID,
-        SchoolGUID,
-        CollegeGUID,
-        ProfessionGUID,
+        School,
+        College,
+        Profession,
         PhotoID,
         TaughtBy,
         StartYear,
@@ -256,11 +256,11 @@
         ApplyPhone,
         ApplyAddress,
         ApplyZipcode,
-        ReceiveName,
-        ReceiveCity,
-        ReceiveAddress,
-        ReceivePhone,
-        ReceiveCountry,
+        ReceiverName,
+        ReceiverCity,
+        ReceiverAddress,
+        ReceiverPhone,
+        ReceiverCountry,
         ReceiverZipcode,
         ApplicationNode,
         Type,
@@ -268,17 +268,17 @@
         CreatedTime,
         UpdatedTime,
         Deleted,
-        PassportNo,
+        PassportCode,
         PassportName,
-        ExpireAt,
+        PassportExpire,
         FamilyName,
         GivenName,
         HighestDegree,
         Religion,
         Nationality,
         Mothertongue,
-        EmigrantFlag,
-        BirthDate,
+        EmigrantFrom,
+        Birth,
         BirthPlace,
         MaritalStatus,
         EducationalExperience
@@ -287,9 +287,9 @@
             (
             #{guid},
             #{studentguid},
-            #{schoolguid},
-            #{collegeguid},
-            #{professionguid},
+            #{school},
+            #{college},
+            #{profession},
             #{photoid},
             #{taughtby},
             #{startyear},
@@ -338,7 +338,7 @@
             #{deleted},
             #{passportcode},
             #{passportname},
-            #{expireat},
+            #{passportexpire},
             #{familyname},
             #{givenname},
             #{highestdegree},
@@ -353,5 +353,82 @@
             )
     </insert>
 
+    <update id="applyCancel" parameterType="map">
+        update studyabroadapplication set Status = #{status} where GUID = #{applyid} and StudentGUID = #{userid}
+    </update>
+
+    <!--<select id="applyListBefore" resultType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity">-->
+        <!--select * from studyabroadapplication where StudentGUID = #{userid}-->
+    <!--</select>-->
+
+    <select id="applyList" resultType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity" >
+        select
+        GUID,
+        StudentGUID,
+        School,
+        (SELECT Name FROM `college` where GUID = College ) as College,
+        (SELECT Name FROM `profession` where GUID = Profession ) as Profession,
+        PhotoID,
+        TaughtBy,
+        StartYear,
+        FundingSource,
+        Degree,
+        AdmissionSeason,
+        English,
+        Hsk,
+        Ielts,
+        Toefl,
+        ReferenceBy,
+        ReferenceTel,
+        Finacial,
+        Guarantorin,
+        GuarantorinTel,
+        Guardian,
+        ValidPassport,
+        GraduateCertificate,
+        HighestAcademic,
+        CollegeTranscript,
+        Juniorcollegedipint,
+        ChineseLanguageCertificate,
+        MedicalReport,
+        StudyPlan,
+        StreetAddress,
+        CityProvince,
+        Country,
+        CountryEmail,
+        CountryPhone,
+        CountryZipcode,
+        ApplyEmail,
+        ApplyPhone,
+        ApplyAddress,
+        ApplyZipcode,
+        ReceiverName,
+        ReceiverCity,
+        ReceiverAddress,
+        ReceiverPhone,
+        ReceiverCountry,
+        ReceiverZipcode,
+        ApplicationNode,
+        Type,
+        AuditResult,
+        CreatedTime,
+        UpdatedTime,
+        Deleted,
+        PassportCode,
+        PassportName,
+        PassportExpire,
+        FamilyName,
+        GivenName,
+        HighestDegree,
+        Religion,
+        Nationality,
+        Mothertongue,
+        EmigrantFrom,
+        Birth,
+        BirthPlace,
+        MaritalStatus,
+        EducationalExperience
+        from studyabroadapplication where StudentGUID = #{userid}
+    </select>
 
 </mapper>

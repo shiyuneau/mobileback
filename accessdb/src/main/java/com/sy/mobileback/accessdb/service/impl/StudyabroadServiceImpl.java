@@ -103,4 +103,33 @@ public class StudyabroadServiceImpl implements StudyabroadService {
 
         return studyabroadapplicationDao.applyCancel(map);
     }
+
+    /**
+     * 首先根据用户的 userid 查询所有的申请表的ID，　根据申请表中的每个申请ID，去其他两张表找其他的信息
+     * @param userid
+     * @return
+     */
+    @Override
+    public List<StudyabroadapplicationEntity> studentApplyList(String userid) {
+        // 此处的方式是 遍历每一个apply，再根据 guid去数据库查找，
+        // 另外一种实现 减少数据库查询，直接根据用户的id把所有的 信息取出来，直接在for循环去比较
+        List<StudyabroadapplicationEntity> entityList = studyabroadapplicationDao.applyList(userid);
+        entityList.forEach(entity -> {
+            String studyabroadGUID = entity.getGuid();
+//            String collegeID = entity.getCo
+            List<EducationexpireEntity> educationList = educationexpireDao.educationExpireList(studyabroadGUID);
+            List<WorkexpireEntity> workList = workexpireDao.workExpireList(studyabroadGUID);
+            List<FamilyinfoEntity> familyList = familyinfoDao.familyList(studyabroadGUID);
+            if (null != educationList) {
+                entity.setEducationList(educationList);
+            }
+            if (null != workList) {
+                entity.setWorkList(workList);
+            }
+            if (null != familyList) {
+                entity.setFamilyList(familyList);
+            }
+        });
+        return entityList;
+    }
 }

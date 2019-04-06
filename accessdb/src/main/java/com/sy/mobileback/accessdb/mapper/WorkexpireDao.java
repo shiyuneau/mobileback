@@ -14,4 +14,6 @@ import java.util.List;
  */
 public interface WorkexpireDao {
     void workexpireBatchInsert(List<WorkexpireEntity> list);
+
+    List<WorkexpireEntity> workExpireList(String studyabroadGUID);
 }

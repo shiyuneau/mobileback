@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,7 +32,6 @@ public class StudyabroadController {
      * @param request
      * @return
      */
-//    @JwtIgnore
     @PostMapping("/apply")
     @ResponseBody
     public JsonResult studyabroadApply(@RequestBody StudyabroadapplicationEntity entity , HttpServletRequest request) {
@@ -49,7 +49,12 @@ public class StudyabroadController {
     }
 
 
-    @JwtIgnore
+    /**
+     * 学生取消申请留学
+     * @param applyid
+     * @param request
+     * @return
+     */
     @GetMapping("/applycancel")
     @ResponseBody
     public JsonResult studyabroadApplyCancel(@RequestParam("applyid") String applyid , HttpServletRequest request) {
@@ -57,10 +62,26 @@ public class StudyabroadController {
             return JsonResult.error();
         }
         Claims claims = (Claims)request.getAttribute("CLAIMS");
-//        String userId = (String)claims.get("userId");
-        String userId = "a470adfa-b643-40a7-a0ed-82d40813e029";
+        String userId = (String)claims.get("userId");
+//        String userId = "a470adfa-b643-40a7-a0ed-82d40813e029";
         boolean cancelFlag = studyabroadService.applyCancel(userId,applyid);
+        if (cancelFlag) {
+            return JsonResult.ok();
+        }
         return JsonResult.error();
+    }
+
+    /**
+     * 学生的申请列表，暂时都是 status 为1 的，未审核的
+     */
+//    @JwtIgnore
+    @GetMapping("/applylist")
+    @ResponseBody
+    public List<StudyabroadapplicationEntity> studentApplyList(HttpServletRequest request) {
+        Claims claims = (Claims)request.getAttribute("CLAIMS");
+        String userId = (String)claims.get("userId");
+//        String userId = "a470adfa-b643-40a7-a0ed-82d40813e029";
+        return studyabroadService.studentApplyList(userId);
     }
 
 }
