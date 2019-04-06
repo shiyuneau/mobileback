@@ -3,6 +3,7 @@ package com.sy.mobileback.accessdb.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 
@@ -190,7 +191,7 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * email
 	 */
-	private String Email;
+	private String email;
 	/**
 	 * 配偶姓名
 	 */
@@ -290,11 +291,12 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 教育经历id
 	 */
-	private String educationalList;
+	private List<EducationexpireEntity> educationList;
 	/**
 	 * 工作经历id
 	 */
-	private String employmentList;
+	private List<WorkexpireEntity> workList;
+
 	/**
 	 * hsk考试登记或其他类型汉语考试成绩
 	 */
@@ -979,14 +981,14 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：申请人在华事务联系人或机构邮箱
 	 */
-	public void setEmail(String Email) {
-		this.Email = Email;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	/**
 	 * 获取：申请人在华事务联系人或机构邮箱
 	 */
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	/**
 	 * 设置：配偶姓名
@@ -1276,30 +1278,23 @@ public class ScholarshipapplicationEntity implements Serializable {
 	public String getPremanentaddres() {
 		return premanentaddres;
 	}
-	/**
-	 * 设置：教育经历id
-	 */
-	public void setEducationalList(String educationalList) {
-		this.educationalList = educationalList;
+
+	public List<EducationexpireEntity> getEducationList() {
+		return educationList;
 	}
-	/**
-	 * 获取：教育经历id
-	 */
-	public String getEducationalList() {
-		return educationalList;
+
+	public void setEducationList(List<EducationexpireEntity> educationList) {
+		this.educationList = educationList;
 	}
-	/**
-	 * 设置：工作经历id
-	 */
-	public void setEmploymentList(String employmentList) {
-		this.employmentList = employmentList;
+
+	public List<WorkexpireEntity> getWorkList() {
+		return workList;
 	}
-	/**
-	 * 获取：工作经历id
-	 */
-	public String getEmploymentList() {
-		return employmentList;
+
+	public void setWorkList(List<WorkexpireEntity> workList) {
+		this.workList = workList;
 	}
+
 	/**
 	 * 设置：hsk考试登记或其他类型汉语考试成绩
 	 */

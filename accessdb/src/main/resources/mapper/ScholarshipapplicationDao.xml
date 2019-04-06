@@ -19,22 +19,22 @@
         <result property="nationalityguid" column="NationalityGUID"/>
         <result property="birth" column="Birth"/>
         <result property="birthcountryguid" column="BirthCountryGUID"/>
-        <result property="city" column="City"/>
+        <result property="birthcity" column="City"/>
         <result property="maritalstatus" column="MaritalStatus"/>
         <result property="nativelanguage" column="NativeLanguage"/>
         <result property="religion" column="Religion"/>
         <result property="addresscountryguid" column="AddressCountryGUID"/>
-        <result property="address" column="Address"/>
+        <result property="presentaddress" column="Address"/>
         <result property="tel" column="Tel"/>
         <result property="passport" column="Passport"/>
         <result property="educationschool" column="EducationSchool"/>
         <result property="educationprofessional" column="EducationProfessional"/>
         <result property="certificates" column="Certificates"/>
         <result property="employmentrecord" column="EmploymentRecord"/>
-        <result property="chineselv" column="ChineseLv"/>
-        <result property="englishlv" column="EnglishLv"/>
+        <result property="chinese" column="ChineseLv"/>
+        <result property="english" column="EnglishLv"/>
         <result property="chinesescore" column="ChineseScore"/>
-        <result property="otherlanguages" column="OtherLanguages"/>
+        <result property="otherlanguage" column="OtherLanguages"/>
         <result property="workedinchina" column="WorkedInChina"/>
         <result property="studenttype" column="StudentType"/>
         <result property="apllyschool" column="ApllySchool"/>
@@ -48,33 +48,31 @@
         <result property="contacttel" column="ContactTel"/>
         <result property="contactfax" column="ContactFax"/>
         <result property="contactaddress" column="ContactAddress"/>
-        <result property="contactemail" column="ContactEmail"/>
+        <result property="email" column="ContactEmail"/>
         <result property="spousename" column="SpouseName"/>
         <result property="spouseage" column="SpouseAge"/>
         <result property="spousecountry" column="SpouseCountry"/>
-        <result property="spouseoccupation" column="SpouseOccupation"/>
+        <result property="spouseemployment" column="SpouseOccupation"/>
         <result property="spouseeducation" column="SpouseEducation"/>
         <result property="fathername" column="FatherName"/>
         <result property="fatherage" column="FatherAge"/>
         <result property="fathercountry" column="FatherCountry"/>
-        <result property="fatheroccupation" column="FatherOccupation"/>
+        <result property="fathercountry" column="FatherOccupation"/>
         <result property="fathereducation" column="FatherEducation"/>
         <result property="mothername" column="MotherName"/>
         <result property="motherage" column="MotherAge"/>
         <result property="mothercountry" column="MotherCountry"/>
-        <result property="motheroccupation" column="MotherOccupation"/>
+        <result property="motheremployment" column="MotherOccupation"/>
         <result property="mothereducation" column="MotherEducation"/>
         <result property="recominstitutions" column="recominstitutions"/>
-        <result property="scholarshipphone" column="scholarshipPhone"/>
-        <result property="scholarshipproject" column="scholarshipProject"/>
+        <result property="phone" column="scholarshipPhone"/>
+        <result property="project" column="scholarshipProject"/>
         <result property="scholarshiptype" column="scholarshipType"/>
-        <result property="scholarshiplevel" column="scholarshipLevel"/>
+        <result property="level" column="scholarshipLevel"/>
         <result property="decprofession" column="decprofession"/>
-        <result property="scholarshipphotoguid" column="scholarshipPhotoGUID"/>
+        <result property="photoid" column="scholarshipPhotoGUID"/>
         <result property="fax" column="fax"/>
         <result property="premanentaddres" column="premanentaddres"/>
-        <result property="educationexpireguid" column="educationexpireGUID"/>
-        <result property="workexpireguid" column="workexpireGUID"/>
         <result property="hsk" column="hsk"/>
         <result property="canstudy" column="canstudy"/>
         <result property="subject" column="subject"/>
@@ -83,10 +81,10 @@
         <result property="studyend" column="studyend"/>
         <result property="needstudychinese" column="needstudyChinese"/>
         <result property="needstudychinesetime" column="needstudyChinesetime"/>
-        <result property="needstudychineseother" column="needstudyChineseother"/>
+        <result property="needstudychinese" column="needstudyChineseother"/>
         <result property="otherplan" column="otherplan"/>
         <result property="otherpublished" column="otherpublished"/>
-        <result property="scholarshiprecommend" column="scholarshiprecommend"/>
+        <result property="scholarship" column="scholarshiprecommend"/>
         <result property="studiedorwork" column="studiedorwork"/>
         <result property="institutionoremployer" column="institutionoremployer"/>
         <result property="starttimechina" column="starttimechina"/>
@@ -113,6 +111,9 @@
         <result property="birthdate" column="BirthDate"/>
         <result property="birthplace" column="BirthPlace"/>
         <result property="educationalexperience" column="EducationalExperience"/>
+        <result property="sex" column="Sec"/>
+        <result property="marriage" column="Marriage"/>
+        <result property="birthcountry" column="Birthcountry"/>
     </resultMap>
 
     <insert id="scholarshipapplicationBatchInsert" parameterType="java.util.List">

@@ -1,7 +1,7 @@
 package com.sy.mobileback.web.controller;
 
 import com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity;
-import com.sy.mobileback.accessdb.service.ScholarshipApplicationService;
+//import com.sy.mobileback.accessdb.service.ScholarshipApplicationService;
 import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,8 +21,8 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/scholarship")
 public class ScholarshipApplicationController {
-    @Autowired
-    private ScholarshipApplicationService scholarshipApplicationService;
+//    @Autowired
+//    private ScholarshipApplicationService scholarshipApplicationService;
 
     /**
      * 奖学金申请
