@@ -1,6 +1,5 @@
 package com.sy.mobileback.accessdb.mapper;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.sy.mobileback.accessdb.domain.EducationexpireEntity;
 
 import java.util.List;

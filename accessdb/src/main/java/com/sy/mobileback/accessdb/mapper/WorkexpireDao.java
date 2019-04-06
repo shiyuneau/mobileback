@@ -1,7 +1,6 @@
 package com.sy.mobileback.accessdb.mapper;
 
 import com.sy.mobileback.accessdb.domain.WorkexpireEntity;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 import java.util.List;
 

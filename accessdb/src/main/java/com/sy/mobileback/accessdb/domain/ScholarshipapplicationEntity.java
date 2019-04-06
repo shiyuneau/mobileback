@@ -66,7 +66,7 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 出生日期
 	 */
-	private Date birth;
+	private String birth;
 	/**
 	 * 出生国ID
 	 */
@@ -356,11 +356,11 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 在华起止时间
 	 */
-	private Date starttimechina;
+	private String starttimechina;
 	/**
 	 * 在华终止时间
 	 */
-	private Date endtimechina;
+	private String endtimechina;
 	/**
 	 * 推荐信1
 	 */
@@ -437,10 +437,6 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 * 是否从中国大陆或港澳台地区移民：0否，1是
 	 */
 	private Integer emigrantflag;
-	/**
-	 * 出生日期
-	 */
-	private Date birthdate;
 	/**
 	 * 出生地点
 	 */
@@ -609,13 +605,13 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：出生日期
 	 */
-	public void setBirth(Date birth) {
+	public void setBirth(String birth) {
 		this.birth = birth;
 	}
 	/**
 	 * 获取：出生日期
 	 */
-	public Date getBirth() {
+	public String getBirth() {
 		return birth;
 	}
 	/**
@@ -1466,25 +1462,25 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 设置：在华起止时间
 	 */
-	public void setStarttimechina(Date starttimechina) {
+	public void setStarttimechina(String starttimechina) {
 		this.starttimechina = starttimechina;
 	}
 	/**
 	 * 获取：在华起止时间
 	 */
-	public Date getStarttimechina() {
+	public String getStarttimechina() {
 		return starttimechina;
 	}
 	/**
 	 * 设置：在华终止时间
 	 */
-	public void setEndtimechina(Date endtimechina) {
+	public void setEndtimechina(String endtimechina) {
 		this.endtimechina = endtimechina;
 	}
 	/**
 	 * 获取：在华终止时间
 	 */
-	public Date getEndtimechina() {
+	public String getEndtimechina() {
 		return endtimechina;
 	}
 	/**
@@ -1714,18 +1710,6 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 */
 	public Integer getEmigrantflag() {
 		return emigrantflag;
-	}
-	/**
-	 * 设置：出生日期
-	 */
-	public void setBirthdate(Date birthdate) {
-		this.birthdate = birthdate;
-	}
-	/**
-	 * 获取：出生日期
-	 */
-	public Date getBirthdate() {
-		return birthdate;
 	}
 	/**
 	 * 设置：出生地点
