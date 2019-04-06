@@ -42,8 +42,8 @@ public class LXApplyEntity {
     private String finacial;
     private String guarantorin;
     private String guardian;
-    private List<EducationList> educationList;
-    private List<WorkList> workList;
+    private List<EducationexpireEntity> educationList;
+    private List<WorkexpireEntity> workList;
     private long validpassport;
     private long graduatecertificate;
     private long highestacademic;
@@ -68,7 +68,7 @@ public class LXApplyEntity {
     private String receiverphone;
     private String receivercounty;
     private String receiverzipcode;
-    private List<FamilyList> familyList;
+    private List<FamilyinfoEntity> familyList;
     private String applicationnode;
     public void setUserid(String userid) {
          this.userid = userid;
@@ -280,17 +280,37 @@ public class LXApplyEntity {
          return guardian;
      }
 
-    public void setEducationList(List<EducationList> educationList) {
+//    public void setEducationList(List<EducationList> educationList) {
+//         this.educationList = educationList;
+//     }
+//     public List<EducationList> getEducationList() {
+//         return educationList;
+//     }
+//
+//    public void setWorkList(List<WorkList> workList) {
+//         this.workList = workList;
+//     }
+//     public List<WorkList> getWorkList() {
+//         return workList;
+//     }
+public void setEducationList(List<EducationexpireEntity> educationList) {
          this.educationList = educationList;
      }
-     public List<EducationList> getEducationList() {
+     public List<EducationexpireEntity> getEducationList() {
          return educationList;
      }
 
-    public void setWorkList(List<WorkList> workList) {
+//    public void setWorkList(List<WorkList> workList) {
+//         this.workList = workList;
+//     }
+//     public List<WorkList> getWorkList() {
+//         return workList;
+//     }
+
+     public void setWorkList(List<WorkexpireEntity> workList) {
          this.workList = workList;
      }
-     public List<WorkList> getWorkList() {
+     public List<WorkexpireEntity> getWorkList() {
          return workList;
      }
 
@@ -462,10 +482,16 @@ public class LXApplyEntity {
          return receiverzipcode;
      }
 
-    public void setFamilyList(List<FamilyList> familyList) {
+//    public void setFamilyList(List<FamilyList> familyList) {
+//         this.familyList = familyList;
+//     }
+//     public List<FamilyList> getFamilyList() {
+//         return familyList;
+//     }
+public void setFamilyList(List<FamilyinfoEntity> familyList) {
          this.familyList = familyList;
      }
-     public List<FamilyList> getFamilyList() {
+     public List<FamilyinfoEntity> getFamilyList() {
          return familyList;
      }
 

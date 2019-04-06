@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.UploadfileDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.UploadfileEntity" id="uploadfileMap">
+        <result property="guid" column="GUID"/>
+        <result property="studentguid" column="StudentGUID"/>
+        <result property="filepath" column="FilePath"/>
+        <result property="originfilename" column="OriginFileName"/>
+        <result property="type" column="Type"/>
+        <result property="inserttime" column="InsertTime"/>
+        <result property="deleted" column="Deleted"/>
+    </resultMap>
+    
+    <insert id="fileUpload" parameterType="com.sy.mobileback.accessdb.domain.UploadfileEntity">
+        insert into uploadfile (GUID,StudentGUID ,FilePath,OriginFileName,Type,InsertTime) values (#{guid},#{studentguid},#{filepath},#{originfilename},#{type},#{inserttime})
+    </insert>
+
+    <select id="getFilePath" resultType="java.lang.String">
+        select FilePath from uploadfile where GUID = #{fileid}
+    </select>
+
+</mapper>

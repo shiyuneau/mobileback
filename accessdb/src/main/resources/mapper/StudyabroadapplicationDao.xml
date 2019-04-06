@@ -10,6 +10,7 @@
         <result property="schoolguid" column="SchoolGUID"/>
         <result property="collegeguid" column="CollegeGUID"/>
         <result property="professionguid" column="ProfessionGUID"/>
+        <result property="photoid" column="PhotoID"/>
         <result property="taughtby" column="TaughtBy"/>
         <result property="startyear" column="StartYear"/>
         <result property="fundingsource" column="FundingSource"/>
@@ -56,61 +57,90 @@
         <result property="createdtime" column="CreatedTime"/>
         <result property="updatedtime" column="UpdatedTime"/>
         <result property="deleted" column="Deleted"/>
+        <result property="passportno" column="PassportNo"/>
+        <result property="passportname" column="PassportName"/>
+        <result property="expireat" column="ExpireAt"/>
+        <result property="familyname" column="FamilyName"/>
+        <result property="givenname" column="GivenName"/>
+        <result property="highestdegree" column="HighestDegree"/>
+        <result property="religion" column="Religion"/>
+        <result property="nationality" column="Nationality"/>
+        <result property="mothertongue" column="Mothertongue"/>
+        <result property="emigrantflag" column="EmigrantFlag"/>
+        <result property="birthdate" column="BirthDate"/>
+        <result property="birthplace" column="BirthPlace"/>
+        <result property="maritalstatus" column="MaritalStatus"/>
+        <result property="educationalexperience" column="EducationalExperience"/>
     </resultMap>
 
     <insert id="studyabroadapplicationBatchInsert" parameterType="java.util.List">
         insert into studyabroadapplication  (
-                   GUID,
-                   StudentGUID,
-                   SchoolGUID,
-                   CollegeGUID,
-                   ProfessionGUID,
-                   TaughtBy,
-                   StartYear,
-                   FundingSource,
-                   Degree,
-                   AdmissionSeason,
-                   English,
-                   Hsk,
-                   Ielts,
-                   Toefl,
-                   ReferenceBy,
-                   ReferenceTel,
-                   Finacial,
-                   Guarantorin,
-                   GuarantorinTel,
-                   Guardian,
-                   ValidPassport,
-                   GraduateCertificate,
-                   HighestAcademic,
-                   CollegeTranscript,
-                   JuniorCollegeDiploma,
-                   ChineseLanguageCertificate,
-                   MedicalReport,
-                   StudyPlan,
-                   StreetAddress,
-                   CityProvince,
-                   Country,
-                   CountryEmail,
-                   CountryPhone,
-                   CountryZipcode,
-                   ApplyEmail,
-                   ApplyPhone,
-                   ApplyAddress,
-                   ApplyZipcode,
-                   ReceiveName,
-                   ReceiveCity,
-                   ReceiveAddress,
-                   ReceivePhone,
-                   ReceiveCountry,
-                   ReceiverZipcode,
-                   ApplicationNode,
-                   Type,
-                   Status,
-                   AuditResult,
-                   CreatedTime,
-                   UpdatedTime,
-                   Deleted,
+                    GUID,
+                    StudentGUID,
+                    SchoolGUID,
+                    CollegeGUID,
+                    ProfessionGUID,
+                    PhotoID,
+                    TaughtBy,
+                    StartYear,
+                    FundingSource,
+                    Degree,
+                    AdmissionSeason,
+                    English,
+                    Hsk,
+                    Ielts,
+                    Toefl,
+                    ReferenceBy,
+                    ReferenceTel,
+                    Finacial,
+                    Guarantorin,
+                    GuarantorinTel,
+                    Guardian,
+                    ValidPassport,
+                    GraduateCertificate,
+                    HighestAcademic,
+                    CollegeTranscript,
+                    JuniorCollegeDiploma,
+                    ChineseLanguageCertificate,
+                    MedicalReport,
+                    StudyPlan,
+                    StreetAddress,
+                    CityProvince,
+                    Country,
+                    CountryEmail,
+                    CountryPhone,
+                    CountryZipcode,
+                    ApplyEmail,
+                    ApplyPhone,
+                    ApplyAddress,
+                    ApplyZipcode,
+                    ReceiveName,
+                    ReceiveCity,
+                    ReceiveAddress,
+                    ReceivePhone,
+                    ReceiveCountry,
+                    ReceiverZipcode,
+                    ApplicationNode,
+                    Type,
+                    Status,
+                    AuditResult,
+                    CreatedTime,
+                    UpdatedTime,
+                    Deleted,
+                    PassportNo,
+                    PassportName,
+                    ExpireAt,
+                    FamilyName,
+                    GivenName,
+                    HighestDegree,
+                    Religion,
+                    Nationality,
+                    Mothertongue,
+                    EmigrantFlag,
+                    BirthDate,
+                    BirthPlace,
+                    MaritalStatus,
+                    EducationalExperience
                 )
         values
         <foreach collection="list" item="item" separator=",">
@@ -120,6 +150,7 @@
                             #{item.schoolguid},
                             #{item.collegeguid},
                             #{item.professionguid},
+                            #{item.photoid},
                             #{item.taughtby},
                             #{item.startyear},
                             #{item.fundingsource},
@@ -166,9 +197,21 @@
                             #{item.createdtime},
                             #{item.updatedtime},
                             #{item.deleted},
+                            #{item.passportno},
+                            #{item.passportname},
+                            #{item.expireat},
+                            #{item.familyname},
+                            #{item.givenname},
+                            #{item.highestdegree},
+                            #{item.religion},
+                            #{item.nationality},
+                            #{item.mothertongue},
+                            #{item.emigrantflag},
+                            #{item.birthdate},
+                            #{item.birthplace},
+                            #{item.maritalstatus},
+                            #{item.educationalexperience}
                         )
         </foreach>
     </insert>
-
-
 </mapper>

@@ -9,7 +9,7 @@ import java.util.Date;
  * 
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2019-04-05 22:42:09
+ * @date 2019-04-06 12:41:19
  */
 public class ScholarshipapplicationEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -406,6 +406,46 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 * 审计结果
 	 */
 	private String auditresult;
+	/**
+	 * 护照号(为了与前端对应，将PassportNumber改为PasswordNumber)
+	 */
+	private String passportno;
+	/**
+	 * 护照姓名
+	 */
+	private String passportname;
+	/**
+	 * 护照到期时间
+	 */
+	private Date expireat;
+	/**
+	 * 最高学历
+	 */
+	private String highestdegree;
+	/**
+	 * 国籍
+	 */
+	private String nationality;
+	/**
+	 * 母语
+	 */
+	private String mothertongue;
+	/**
+	 * 是否从中国大陆或港澳台地区移民：0否，1是
+	 */
+	private Integer emigrantflag;
+	/**
+	 * 出生日期
+	 */
+	private Date birthdate;
+	/**
+	 * 出生地点
+	 */
+	private String birthplace;
+	/**
+	 * 教育程度
+	 */
+	private String educationalexperience;
 
 	/**
 	 * 设置：
@@ -1582,5 +1622,125 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 */
 	public String getAuditresult() {
 		return auditresult;
+	}
+	/**
+	 * 设置：护照号(为了与前端对应，将PassportNumber改为PasswordNumber)
+	 */
+	public void setPassportno(String passportno) {
+		this.passportno = passportno;
+	}
+	/**
+	 * 获取：护照号(为了与前端对应，将PassportNumber改为PasswordNumber)
+	 */
+	public String getPassportno() {
+		return passportno;
+	}
+	/**
+	 * 设置：护照姓名
+	 */
+	public void setPassportname(String passportname) {
+		this.passportname = passportname;
+	}
+	/**
+	 * 获取：护照姓名
+	 */
+	public String getPassportname() {
+		return passportname;
+	}
+	/**
+	 * 设置：护照到期时间
+	 */
+	public void setExpireat(Date expireat) {
+		this.expireat = expireat;
+	}
+	/**
+	 * 获取：护照到期时间
+	 */
+	public Date getExpireat() {
+		return expireat;
+	}
+	/**
+	 * 设置：最高学历
+	 */
+	public void setHighestdegree(String highestdegree) {
+		this.highestdegree = highestdegree;
+	}
+	/**
+	 * 获取：最高学历
+	 */
+	public String getHighestdegree() {
+		return highestdegree;
+	}
+	/**
+	 * 设置：国籍
+	 */
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+	/**
+	 * 获取：国籍
+	 */
+	public String getNationality() {
+		return nationality;
+	}
+	/**
+	 * 设置：母语
+	 */
+	public void setMothertongue(String mothertongue) {
+		this.mothertongue = mothertongue;
+	}
+	/**
+	 * 获取：母语
+	 */
+	public String getMothertongue() {
+		return mothertongue;
+	}
+	/**
+	 * 设置：是否从中国大陆或港澳台地区移民：0否，1是
+	 */
+	public void setEmigrantflag(Integer emigrantflag) {
+		this.emigrantflag = emigrantflag;
+	}
+	/**
+	 * 获取：是否从中国大陆或港澳台地区移民：0否，1是
+	 */
+	public Integer getEmigrantflag() {
+		return emigrantflag;
+	}
+	/**
+	 * 设置：出生日期
+	 */
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
+	/**
+	 * 获取：出生日期
+	 */
+	public Date getBirthdate() {
+		return birthdate;
+	}
+	/**
+	 * 设置：出生地点
+	 */
+	public void setBirthplace(String birthplace) {
+		this.birthplace = birthplace;
+	}
+	/**
+	 * 获取：出生地点
+	 */
+	public String getBirthplace() {
+		return birthplace;
+	}
+	/**
+	 * 设置：教育程度
+	 */
+	public void setEducationalexperience(String educationalexperience) {
+		this.educationalexperience = educationalexperience;
+	}
+	/**
+	 * 获取：教育程度
+	 */
+	public String getEducationalexperience() {
+		return educationalexperience;
 	}
 }
