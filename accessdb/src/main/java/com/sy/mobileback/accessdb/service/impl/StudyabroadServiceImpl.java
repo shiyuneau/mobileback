@@ -6,12 +6,16 @@ import com.sy.mobileback.accessdb.mapper.FamilyinfoDao;
 import com.sy.mobileback.accessdb.mapper.StudyabroadapplicationDao;
 import com.sy.mobileback.accessdb.mapper.WorkexpireDao;
 import com.sy.mobileback.accessdb.service.StudyabroadService;
+import com.sy.mobileback.common.enums.ApplicationStatusType;
 import com.sy.mobileback.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -20,6 +24,7 @@ import java.util.UUID;
  * @create 2019-04-06 14:29
  */
 
+@Transactional(rollbackFor = Exception.class)
 @Service
 public class StudyabroadServiceImpl implements StudyabroadService {
 
@@ -31,8 +36,10 @@ public class StudyabroadServiceImpl implements StudyabroadService {
     private FamilyinfoDao familyinfoDao;
     @Autowired
     private StudyabroadapplicationDao studyabroadapplicationDao;
+
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean studyabroadApply(String userid, StudyabroadapplicationEntity entity) {
+    public String studyabroadApply(String userid, StudyabroadapplicationEntity entity) {
         // 流程
         // 首先创建 申请表的 UUID  , 存入
         // 分别取出 educationList , workList , familyList  ， 分别创建 uuid，并把 申请的 uuid 和 学生ID 存入
@@ -73,9 +80,27 @@ public class StudyabroadServiceImpl implements StudyabroadService {
             familyinfoDao.familyinfoBatchInsert(familyList);
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
 
-        return true;
+        return applyUUID;
+    }
+
+    /**
+     * 根据用户ID　和申请ID 同时去删除一条数据，防止 用户和申请表不匹配的情况
+     * 取消的 状态就是 数据库中 status 的 值 为 4
+     * @param userid
+     * @param applyid
+     * @return
+     */
+    @Override
+    public boolean applyCancel(String userid, String applyid) {
+        //
+        Map<String,Object> map = new HashMap<>();
+        map.put("userid",userid);
+        map.put("applyid",applyid);
+        map.put("status",ApplicationStatusType.UserCancelApply.getType());
+
+        return studyabroadapplicationDao.applyCancel(map);
     }
 }

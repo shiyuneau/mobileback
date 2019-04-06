@@ -23,7 +23,7 @@ public class JsonResult extends HashMap<String, Object> {
      * 返回成功
      */
     public static JsonResult ok(String message) {
-        return ok(200, message);
+        return ok(1, message);
     }
 
     /**
@@ -47,7 +47,7 @@ public class JsonResult extends HashMap<String, Object> {
      * 返回失败
      */
     public static JsonResult error(String messag) {
-        return error(500, messag);
+        return error(-1, messag);
     }
 
     /**

@@ -234,7 +234,7 @@ public class StudyabroadapplicationEntity implements Serializable {
 	/**
 	 * 护照到期时间
 	 */
-	private Date expireat;
+	private String passportexpire;
 	/**
 	 * 护照姓
 	 */
@@ -929,18 +929,15 @@ public class StudyabroadapplicationEntity implements Serializable {
 	public String getPassportname() {
 		return passportname;
 	}
-	/**
-	 * 设置：护照到期时间
-	 */
-	public void setExpireat(Date expireat) {
-		this.expireat = expireat;
+
+	public String getPassportexpire() {
+		return passportexpire;
 	}
-	/**
-	 * 获取：护照到期时间
-	 */
-	public Date getExpireat() {
-		return expireat;
+
+	public void setPassportexpire(String passportexpire) {
+		this.passportexpire = passportexpire;
 	}
+
 	/**
 	 * 设置：护照姓
 	 */

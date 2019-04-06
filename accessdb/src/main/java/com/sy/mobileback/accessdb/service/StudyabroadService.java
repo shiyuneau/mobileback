@@ -14,5 +14,12 @@ public interface StudyabroadService {
      * @param entity
      * @return
      */
-    boolean studyabroadApply(String userid , StudyabroadapplicationEntity entity);
+    String studyabroadApply(String userid , StudyabroadapplicationEntity entity);
+
+    /**
+     * 根据applyid 删除 订单
+     * @param applyid
+     * @return
+     */
+    boolean applyCancel(String userid , String applyid);
 }

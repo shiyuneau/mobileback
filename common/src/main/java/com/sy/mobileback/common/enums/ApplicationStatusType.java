@@ -5,17 +5,27 @@ package com.sy.mobileback.common.enums;
  * @Description
  * @create 2019-04-06 11:26
  */
-public enum ApplicationType {
+public enum ApplicationStatusType {
     /**
-     * 留学申请
+     * 已提交申请
      */
-    STUDYABROAD(1),
+    HasApply(1),
     /**
-     * 奖学金申请
+     * 审批通过
      */
-    SCHOLORSHIP(2);
+    ApplySuccess(2),
 
-    private ApplicationType(Integer type) {
+    /**
+     * 审批被拒绝
+     */
+    ApplyFail(3),
+
+    /**
+     * 用户取消申请
+     */
+    UserCancelApply(4);
+
+    private ApplicationStatusType(Integer type) {
         this.type = type;
     }
 

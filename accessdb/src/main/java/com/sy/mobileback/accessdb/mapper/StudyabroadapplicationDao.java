@@ -3,6 +3,7 @@ package com.sy.mobileback.accessdb.mapper;
 import com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -13,5 +14,16 @@ import java.util.List;
  */
 public interface StudyabroadapplicationDao {
     void studyabroadapplicationBatchInsert(List<StudyabroadapplicationEntity> list);
+
+    /**
+     * 用户申请表插入
+     * @param entity
+     */
     void studyabroadapplicationInsert(StudyabroadapplicationEntity entity);
+
+    /**
+     * 用户取消申请
+     * @return
+     */
+    boolean applyCancel(Map<String,Object> map);
 }
