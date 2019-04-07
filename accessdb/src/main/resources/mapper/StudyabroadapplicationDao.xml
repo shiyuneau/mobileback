@@ -410,6 +410,7 @@
         ReceiverZipcode,
         ApplicationNode,
         Type,
+        status,
         AuditResult,
         CreatedTime,
         UpdatedTime,
