@@ -26,5 +26,5 @@ public interface StudentDao {
 
     String usernameExists(String username);
 
-    boolean passwordreset(@Param("email")String email , @Param("newPass")String newPass , @Param("updateTime") Timestamp updateTime);
+    boolean passwordreset(@Param("email") String email , @Param("newPass") String newPass , @Param("updateTime") Timestamp updateTime);
 }

@@ -159,7 +159,7 @@
     </select>
 
     <update id="passwordreset" >
-        update student set Mail = #{email} and Password = #{Password} and UpdatedTime = #{updateTime}
+        update student set Password = #{newPass} , UpdatedTime = #{updateTime} where  Mail = #{email}
     </update>
 
 

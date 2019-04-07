@@ -109,6 +109,25 @@ public class JwtUtils {
         }
     }
 
+
+    public static boolean studentTokenAndInuse(Claims claims) {
+        int useFlag = (Integer)claims.get("inuse");
+        int userFlag = (Integer)claims.get("userFlag");
+        if (useFlag == 1 && userFlag == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean managerTokenAndInuse(Claims claims) {
+        int useFlag = (Integer)claims.get("inuse");
+        int userFlag = (Integer)claims.get("userFlag");
+        if (useFlag == 1 && userFlag == 1) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * 解析token
      * @param authToken 授权头部信息

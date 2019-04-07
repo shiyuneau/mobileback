@@ -5,6 +5,7 @@ import com.sy.mobileback.accessdb.service.StudyabroadService;
 import com.sy.mobileback.common.utils.JsonResult;
 import com.sy.mobileback.common.utils.StringUtils;
 import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
+import com.sy.mobileback.framework.jwt.utils.JwtUtils;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,10 @@ public class StudyabroadController {
 
         Claims claims = (Claims)request.getAttribute("CLAIMS");
         String userId = (String)claims.get("userId");
+        boolean studentFlag = JwtUtils.studentTokenAndInuse(claims);
+        if (!studentFlag) {
+            return JsonResult.error("用户过期或不是学生账户");
+        }
 //        String userId = "bb47e847-85ed-4778-bba4-7b49ca915469";
         String applyID = studyabroadService.studyabroadApply(userId,entity);
         if (StringUtils.isNotBlank(applyID)) {
@@ -62,6 +67,10 @@ public class StudyabroadController {
             return JsonResult.error();
         }
         Claims claims = (Claims)request.getAttribute("CLAIMS");
+        boolean studentFlag = JwtUtils.studentTokenAndInuse(claims);
+        if (!studentFlag) {
+            return JsonResult.error("用户过期或不是学生账户");
+        }
         String userId = (String)claims.get("userId");
 //        String userId = "a470adfa-b643-40a7-a0ed-82d40813e029";
         boolean cancelFlag = studyabroadService.applyCancel(userId,applyid);

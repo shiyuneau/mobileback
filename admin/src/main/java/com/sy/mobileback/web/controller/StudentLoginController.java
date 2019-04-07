@@ -190,15 +190,22 @@ public class StudentLoginController {
             return JsonResult.error("请填写邮箱");
         }
         // TODO 是否需要验证邮箱的格式
-
+        String newPass = studentService.passwordreset(email);
+        if (StringUtils.isNotBlank(newPass)) {
+            JsonResult result = JsonResult.ok();
+            result.put("pass",newPass);
+            return result;
+        }
         return JsonResult.error();
     }
 
-    @JwtIgnore
+//    @JwtIgnore
     @PostMapping("/logout")
     @ResponseBody
-    public String logout() {
-        return "-1";
+    public JsonResult logout(HttpServletRequest request) {
+        Claims claims = (Claims)request.getAttribute("CLAIMS");
+        claims.put("inuse",0);
+        return JsonResult.ok("退出成功");
     }
 
 

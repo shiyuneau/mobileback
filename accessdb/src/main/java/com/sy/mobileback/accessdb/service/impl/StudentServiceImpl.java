@@ -71,16 +71,16 @@ public class StudentServiceImpl implements StudentService {
      * @return
      */
     @Override
-    public boolean passwordreset(String email) {
+    public String passwordreset(String email) {
         String newPass = getRandomPassword(8);
-        newPass = MD5Util.getMD5(newPass);
+        String md5Pass = MD5Util.getMD5(newPass);
         Timestamp updateTime = DateUtils.getDBTime();
-        boolean updateFlag = studentDao.passwordreset(email,newPass,updateTime);
+        boolean updateFlag = studentDao.passwordreset(email,md5Pass,updateTime);
         if (updateFlag) {
             // 发送邮件
-            return true;
+            return newPass;
         }
-        return false;
+        return null;
     }
 
     public static String getRandomPassword(int length) {
