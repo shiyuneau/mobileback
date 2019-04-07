@@ -19,7 +19,9 @@ public interface ScholarshipapplicationDao {
 
     void scholarshipapplicationInsert(ScholarshipapplicationEntity entity);
 
-    boolean applyCancel(Map<String, Object> map);
+    boolean applyExecute(Map<String, Object> map);
 
     List<ScholarshipapplicationEntity> applyList(String userId);
+
+    List<ScholarshipapplicationEntity> applySuccessList(Map<String, Object> map);
 }

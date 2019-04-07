@@ -13,6 +13,7 @@ import java.util.List;
 public interface ScholarshipApplicationService {
     /**
      * 奖学金申请
+     *
      * @param userId
      * @param entity
      * @return
@@ -21,6 +22,7 @@ public interface ScholarshipApplicationService {
 
     /**
      * 奖学金申请取消 根据applyrecordid取消申请
+     *
      * @param userId
      * @param applyrecordid
      * @return
@@ -29,9 +31,25 @@ public interface ScholarshipApplicationService {
 
     /**
      * 奖学金申请列表  根据用户id展示申请列表
+     *
      * @param userId
      * @return
      */
     List<ScholarshipapplicationEntity> scholarcshipApplyList(String userId);
 
+    /**
+     * 奖学金审核
+     *
+     * @param userId
+     * @param applyrecordid
+     * @return
+     */
+    boolean applyCheck(String userId, String applyrecordid);
+
+    /**
+     * 奖学金申请列表 需要传递 userId 参数
+     * @param userId
+     * @return
+     */
+    List<ScholarshipapplicationEntity> applySuccessList(String userId);
 }

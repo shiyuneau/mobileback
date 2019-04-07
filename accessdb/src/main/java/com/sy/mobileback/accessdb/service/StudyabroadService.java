@@ -31,4 +31,19 @@ public interface StudyabroadService {
      * @return
      */
     List<StudyabroadapplicationEntity> studentApplyList(String userid);
+
+    /**
+     * 审核留学申请  根据学生ID,申请ID 更改审核状态
+     * @param userId
+     * @param applyid
+     * @return
+     */
+    boolean applyCheck(String userId, String applyid);
+
+    /**
+     * 审核留学申请数据列表  根据学生id  查询审核成功列表
+     * @param userId
+     * @return
+     */
+    List<StudyabroadapplicationEntity> applySuccessList(String userId);
 }

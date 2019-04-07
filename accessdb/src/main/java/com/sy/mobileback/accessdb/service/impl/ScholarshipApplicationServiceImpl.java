@@ -11,6 +11,7 @@ import com.sy.mobileback.common.enums.ApplicationStatusType;
 import com.sy.mobileback.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
@@ -32,6 +33,7 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
     @Autowired
     private WorkexpireDao workexpireDao;
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String studyabroadApply(String userId, ScholarshipapplicationEntity entity) {
         String applyUUID = UUID.randomUUID().toString();
@@ -41,14 +43,14 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
         entity.setCreatedtime(dbTime);
         entity.setUpdatedtime(dbTime);
         List<EducationexpireEntity> educationList = entity.getEducationList();
-        educationList.forEach(list ->{
+        educationList.forEach(list -> {
             String eduID = UUID.randomUUID().toString();
             list.setStudentguid(userId);
             list.setScholarshipguid(applyUUID);
             list.setGuid(eduID);
         });
         List<WorkexpireEntity> workList = entity.getWorkList();
-        workList.forEach(List ->{
+        workList.forEach(List -> {
             String workID = UUID.randomUUID().toString();
             List.setGuid(workID);
             List.setScholarshipguid(applyUUID);
@@ -58,7 +60,7 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
             scholarshipapplicationDao.scholarshipapplicationInsert(entity);
             educationexpireDao.educationexpireBatchInsert(educationList);
             workexpireDao.workexpireBatchInsert(workList);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -67,6 +69,7 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
 
     /**
      * 根据用户id和申请id 取消申请 更改申请单状态,1待审批，2审批成功，3审批失败，4用户取消当前审批',
+     *
      * @param userId
      * @param applyrecordid
      * @return
@@ -74,10 +77,10 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
     @Override
     public boolean applyCancel(String userId, String applyrecordid) {
         Map<String, Object> map = new HashMap<>();
-        map.put("userid",userId);
-        map.put("applyrecordid",applyrecordid);
+        map.put("userid", userId);
+        map.put("applyrecordid", applyrecordid);
         map.put("status", ApplicationStatusType.UserCancelApply.getType());
-        return scholarshipapplicationDao.applyCancel(map);
+        return scholarshipapplicationDao.applyExecute(map);
     }
 
     @Override
@@ -85,20 +88,43 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
         //查询用户id下所有申请表
         List<ScholarshipapplicationEntity> entityList = scholarshipapplicationDao.applyList(userId);
         //根据申请id  查询申请表中 教育/工作经历
-        entityList.forEach(entity ->{
+        entityEach(entityList);
+        return entityList;
+    }
+
+    @Override
+    public boolean applyCheck(String userId, String applyrecordid) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("applyrecordid", applyrecordid);
+        map.put("status", ApplicationStatusType.ApplySuccess);
+        return scholarshipapplicationDao.applyExecute(map);
+    }
+
+    @Override
+    public List<ScholarshipapplicationEntity> applySuccessList(String userId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("status", ApplicationStatusType.ApplySuccess);
+        List<ScholarshipapplicationEntity> entityList = scholarshipapplicationDao.applySuccessList(map);
+        entityEach(entityList);
+        return entityList;
+    }
+
+    private void entityEach(List<ScholarshipapplicationEntity> entityList) {
+        entityList.forEach(entity -> {
             String applyGUID = entity.getGuid();
             //教育经历
             List<EducationexpireEntity> educationexpireEntities = educationexpireDao.eduListByScholarshipId(applyGUID);
             //工作经历
             List<WorkexpireEntity> workexpireEntities = workexpireDao.workexpireByScholarshipId(applyGUID);
-            if(educationexpireEntities != null){
+            if (educationexpireEntities != null) {
                 entity.setEducationList(educationexpireEntities);
             }
-            if(workexpireEntities != null){
+            if (workexpireEntities != null) {
                 entity.setWorkList(workexpireEntities);
             }
         });
-        return entityList;
     }
 
 }

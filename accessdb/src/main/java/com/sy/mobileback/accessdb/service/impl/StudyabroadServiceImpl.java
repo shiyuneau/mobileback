@@ -114,6 +114,11 @@ public class StudyabroadServiceImpl implements StudyabroadService {
         // 此处的方式是 遍历每一个apply，再根据 guid去数据库查找，
         // 另外一种实现 减少数据库查询，直接根据用户的id把所有的 信息取出来，直接在for循环去比较
         List<StudyabroadapplicationEntity> entityList = studyabroadapplicationDao.applyList(userid);
+        entityEach(entityList);
+        return entityList;
+    }
+
+    private void entityEach(List<StudyabroadapplicationEntity> entityList) {
         entityList.forEach(entity -> {
             String studyabroadGUID = entity.getGuid();
 //            String collegeID = entity.getCo
@@ -130,6 +135,24 @@ public class StudyabroadServiceImpl implements StudyabroadService {
                 entity.setFamilyList(familyList);
             }
         });
+    }
+
+    @Override
+    public boolean applyCheck(String userId, String applyid) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId",userId);
+        map.put("applyid",applyid);
+        map.put("status",ApplicationStatusType.ApplySuccess);
+        return studyabroadapplicationDao.applyCancel(map);
+    }
+
+    @Override
+    public List<StudyabroadapplicationEntity> applySuccessList(String userId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId",userId);
+        map.put("status",ApplicationStatusType.ApplySuccess.getType());
+        List<StudyabroadapplicationEntity> entityList = studyabroadapplicationDao.applySuccessList(map);
+        entityEach(entityList);
         return entityList;
     }
 }

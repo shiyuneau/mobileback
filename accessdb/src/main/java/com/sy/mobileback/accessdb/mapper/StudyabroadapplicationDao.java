@@ -33,4 +33,10 @@ public interface StudyabroadapplicationDao {
      * @return
      */
     List<StudyabroadapplicationEntity> applyList(String userid);
+    /**
+     * 审核留学申请数据列表  根据学生id  查询审核成功列表
+     * @return
+     */
+    List<StudyabroadapplicationEntity> applySuccessList(Map<String,Object> map);
+
 }
