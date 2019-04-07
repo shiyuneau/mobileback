@@ -28,7 +28,7 @@ public class StudyabroadapplicationEntity implements Serializable {
 	 */
 	private String school;
 	/**
-	 * 大学ID（原表数据，残留存）
+	 * 大学ID（原表数据，残留存） 此处接口中应该是 学校的 ID
 	 */
 	private String college;
 	/**

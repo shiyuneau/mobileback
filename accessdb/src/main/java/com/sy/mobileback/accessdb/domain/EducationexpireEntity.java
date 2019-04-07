@@ -48,6 +48,19 @@ public class EducationexpireEntity implements Serializable {
 	private String educationstudy;
 
 	/**
+	 * 所修专业
+	 */
+	private String educationfield;
+
+	public String getEducationfield() {
+		return educationfield;
+	}
+
+	public void setEducationfield(String educationfield) {
+		this.educationfield = educationfield;
+	}
+
+	/**
 	 * 设置：
 	 */
 	public void setGuid(String guid) {

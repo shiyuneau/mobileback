@@ -39,6 +39,10 @@ public class WorkexpireEntity implements Serializable {
 	 */
 	private String workto;
 	/**
+	 * 从事工作
+	 */
+	private String working;
+	/**
 	 * 单位名称
 	 */
 	private String workcompany;
@@ -83,6 +87,15 @@ public class WorkexpireEntity implements Serializable {
 	public String getStudyabroadguid() {
 		return studyabroadguid;
 	}
+
+	public String getWorking() {
+		return working;
+	}
+
+	public void setWorking(String working) {
+		this.working = working;
+	}
+
 	/**
 	 * 设置：奖学金
 	 */

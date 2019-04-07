@@ -10,6 +10,7 @@ import com.sy.mobileback.accessdb.service.StudentService;
 
 import java.sql.Timestamp;
 import java.util.Map;
+import java.util.Random;
 
 
 @Service("studentService")
@@ -62,6 +63,34 @@ public class StudentServiceImpl implements StudentService {
         } else {
             return true;
         }
+    }
+
+    /**
+     * 假设 邮箱是唯一的，根据邮箱去更新密码
+     * @param email
+     * @return
+     */
+    @Override
+    public boolean passwordreset(String email) {
+        String newPass = getRandomPassword(8);
+        newPass = MD5Util.getMD5(newPass);
+        Timestamp updateTime = DateUtils.getDBTime();
+        boolean updateFlag = studentDao.passwordreset(email,newPass,updateTime);
+        if (updateFlag) {
+            // 发送邮件
+            return true;
+        }
+        return false;
+    }
+
+    public static String getRandomPassword(int length) {
+        StringBuilder val = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            String str = String.valueOf(random.nextInt(10));
+            val.append(str);
+        }
+        return val.toString();
     }
 
 }

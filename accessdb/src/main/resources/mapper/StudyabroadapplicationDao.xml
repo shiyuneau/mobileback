@@ -242,7 +242,7 @@
         GraduateCertificate,
         HighestAcademic,
         CollegeTranscript,
-        JuniorCollegeDiploma,
+        Juniorcollegedipint,
         ChineseLanguageCertificate,
         MedicalReport,
         StudyPlan,
@@ -366,7 +366,7 @@
         GUID,
         StudentGUID,
         School,
-        (SELECT Name FROM `college` where GUID = College ) as College,
+        (SELECT Name FROM `college` where GUID = College ) as College,<!-- 此处的college应该是学校，应该从 school表找学校的name -->
         (SELECT Name FROM `profession` where GUID = Profession ) as Profession,
         PhotoID,
         TaughtBy,

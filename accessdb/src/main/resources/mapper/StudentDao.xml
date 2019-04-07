@@ -158,5 +158,9 @@
         select Guid from student where UserName = #{username}
     </select>
 
+    <update id="passwordreset" >
+        update student set Mail = #{email} and Password = #{Password} and UpdatedTime = #{updateTime}
+    </update>
+
 
 </mapper>

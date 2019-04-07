@@ -1,10 +1,9 @@
 package com.sy.mobileback.accessdb.mapper;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.sy.mobileback.accessdb.domain.StudentEntity;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
+import java.sql.Timestamp;
 import java.util.Map;
 
 /**
@@ -26,4 +25,6 @@ public interface StudentDao {
     boolean updateUser(Map<String,Object> person);
 
     String usernameExists(String username);
+
+    boolean passwordreset(@Param("email")String email , @Param("newPass")String newPass , @Param("updateTime") Timestamp updateTime);
 }

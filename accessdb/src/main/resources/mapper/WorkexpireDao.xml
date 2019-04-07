@@ -12,6 +12,7 @@
         <result property="workfrom" column="WorkFrom"/>
         <result property="workto" column="WorkTo"/>
         <result property="workcompany" column="WorkCompany"/>
+        <result property="working" column="Working"/>
         <result property="workposition" column="WorkPosition"/>
     </resultMap>
 
@@ -24,6 +25,7 @@
                    WorkFrom,
                    WorkTo,
                    WorkCompany,
+                   Working,
                    WorkPosition
                 )
         values
@@ -35,6 +37,7 @@
                             #{item.scholarshipguid},
                             #{item.workfrom},
                             #{item.workto},
+                            #{item.working},
                             #{item.workcompany},
                             #{item.workposition}
                         )

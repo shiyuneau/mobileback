@@ -56,6 +56,13 @@ public interface StudentService {
      */
     boolean usernameExists(String username);
 
+    /**
+     * 密码重置
+     * @param email
+     * @return
+     */
+    boolean passwordreset(String email);
+
 
 }
 

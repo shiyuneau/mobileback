@@ -1,5 +1,6 @@
 package com.sy.mobileback.web.controller;
 
+import com.alibaba.fastjson.JSONReader;
 import com.sy.mobileback.accessdb.domain.StudentEntity;
 import com.sy.mobileback.accessdb.service.StudentService;
 import com.sy.mobileback.common.utils.JsonResult;
@@ -168,6 +169,25 @@ public class StudentLoginController {
         } else {
             return "-1";
         }
+    }
+
+    /**
+     * 密码修改接口，接口的需求 是 直接输入 邮箱，向邮箱发送一个8位的密码，让用户用这个八位的密码登录
+     * 问题: 这里填写的邮箱是否和用户注册时的邮箱一至，学生表中的邮箱是否是唯一的，是否可以通过邮箱来确定一个唯一的一个用户
+     * 现用户登录是通过username用户名登录，不是邮箱，邮箱和用户的匹配关系需要确定
+     * @param email
+     * @return
+     */
+    @JwtIgnore
+    @PostMapping("/passwordreset")
+    @ResponseBody
+    public JsonResult passwordreset(@RequestParam("email") String email) {
+        if (StringUtils.isEmpty(email) || StringUtils.isBlank(email)) {
+            return JsonResult.error("请填写邮箱");
+        }
+        // TODO 是否需要验证邮箱的格式
+
+        return JsonResult.error();
     }
 
 

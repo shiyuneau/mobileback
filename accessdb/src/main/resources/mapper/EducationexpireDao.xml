@@ -13,6 +13,7 @@
         <result property="educationto" column="EducationTo"/>
         <result property="educationschool" column="EducationSchool"/>
         <result property="educationstudy" column="EducationStudy"/>
+        <result property="educationfield" column="EducationField"/>
     </resultMap>
 
     <insert id="educationexpireBatchInsert" parameterType="java.util.List">
@@ -24,7 +25,8 @@
                    EducationFrom,
                    EducationTo,
                    EducationSchool,
-                   EducationStudy
+                   EducationStudy,
+                   EducationField
                 )
         values
         <foreach collection="list" item="item" separator=",">
@@ -36,7 +38,8 @@
                             #{item.educationfrom},
                             #{item.educationto},
                             #{item.educationschool},
-                            #{item.educationstudy}
+                            #{item.educationstudy},
+                            #{item.educationfield}
                         )
         </foreach>
     </insert>
