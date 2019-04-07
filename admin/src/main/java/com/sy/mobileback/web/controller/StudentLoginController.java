@@ -57,7 +57,7 @@ public class StudentLoginController {
             JsonResult result = JsonResult.error("用户不存在");
             return result;
         }
-        String token = JwtUtils.createToken(guid + "", jwtParam);
+        String token = JwtUtils.createToken(guid + "", 0 , jwtParam);
         if (null==token) {
             // 生成token存在问题
             return JsonResult.error("token生成出错");
@@ -102,7 +102,7 @@ public class StudentLoginController {
         entity.setUsername(username);
         entity.setPassword(password);
         studentService.newUserInsert(entity);
-        String token = JwtUtils.createToken(guid + "", jwtParam);
+        String token = JwtUtils.createToken(guid + "",0, jwtParam);
         if (null==token) {
             // 生成token存在问题
             return "-1";
@@ -144,6 +144,10 @@ public class StudentLoginController {
 //        String oldusername = (String)person.get("oldusername");
         Claims claims = (Claims)request.getAttribute("CLAIMS");
         String userId = (String)claims.get("userId");
+        int tokenInUse = (Integer)claims.get("inuse");
+        if (tokenInUse != 1)  {
+            return "-1";
+        }
 //        // 先判断 oldusername和 token对应的用户名是否一直
 //        String orginUsername = studentService.usernameGet(userId);
 //        // 判断 orginUsername 和 oldusername 是否相同， 如果相同，则进行修改的语句
@@ -188,6 +192,13 @@ public class StudentLoginController {
         // TODO 是否需要验证邮箱的格式
 
         return JsonResult.error();
+    }
+
+    @JwtIgnore
+    @PostMapping("/logout")
+    @ResponseBody
+    public String logout() {
+        return "-1";
     }
 
 

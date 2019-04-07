@@ -60,8 +60,8 @@ public class JwtUtils {
      * @param jwtParam JWT加密所需信息
      * @return
      */
-    public static String createToken(String userId, JwtParam jwtParam) {
-        return createToken(userId, null, jwtParam);
+    public static String createToken(String userId,Integer userFlag , JwtParam jwtParam) {
+        return createToken(userId, userFlag,null, jwtParam);
     }
 
     /**
@@ -71,7 +71,7 @@ public class JwtUtils {
      * @param jwtParam JWT加密所需信息
      * @return
      */
-    public static String createToken(String userId, Map<String, Object> claim, JwtParam jwtParam) {
+    public static String createToken(String userId, Integer userFlag , Map<String, Object> claim, JwtParam jwtParam) {
         try {
             // 使用HS256加密算法
             SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
@@ -86,6 +86,8 @@ public class JwtUtils {
             // 添加构成JWT的参数
             JwtBuilder jwtBuilder = Jwts.builder().setHeaderParam("typ", "JWT")
                     .claim(JwtConstants.USER_ID_KEY, userId)
+                    .claim("inuse",1) // 0代表未使用，1代表正在使用
+                    .claim("userFlag",userFlag) // 0代表学生 , 1代表管理员
                     .addClaims(claim)
                     .setIssuer(jwtParam.getName())
                     .setIssuedAt(now)

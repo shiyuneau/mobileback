@@ -51,7 +51,7 @@ public class ManagerLoginController {
             JsonResult result = JsonResult.error("用户不存在");
             return result;
         }
-        String token = JwtUtils.createToken(guid + "", jwtParam);
+        String token = JwtUtils.createToken(guid + "", 1,jwtParam);
         if (null==token) {
             // 生成token存在问题
             return JsonResult.error("token生成出错");
