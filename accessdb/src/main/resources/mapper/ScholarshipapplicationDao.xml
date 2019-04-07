@@ -568,4 +568,7 @@
     <select id="applyList" resultType="com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity">
         select * from Scholarshipapplication where StudentGUID = #{userId}
     </select>
+    <select id="applySuccessList" resultType="com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity">
+        select * from Scholarshipapplication where StudentGUID = #{userId} and status = #{status}
+    </select>
 </mapper>
