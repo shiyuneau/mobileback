@@ -4,6 +4,7 @@ import com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -17,4 +18,8 @@ public interface ScholarshipapplicationDao {
     void scholarshipapplicationBatchInsert(List<ScholarshipapplicationEntity> list);
 
     void scholarshipapplicationInsert(ScholarshipapplicationEntity entity);
+
+    boolean applyCancel(Map<String, Object> map);
+
+    List<ScholarshipapplicationEntity> applyList(String userId);
 }

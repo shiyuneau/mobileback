@@ -15,4 +15,6 @@ public interface WorkexpireDao {
     void workexpireBatchInsert(List<WorkexpireEntity> list);
 
     List<WorkexpireEntity> workExpireList(String studyabroadGUID);
+
+    List<WorkexpireEntity> workexpireByScholarshipId(String applyGUID);
 }
