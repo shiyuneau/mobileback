@@ -57,5 +57,11 @@ public interface ArticleService  {
      * 获取 体验天津 数据
      */
     List<ArticleEntity> experienceTJNewsList();
+
+    /**
+     * 根据 搜索条件对 title进行模糊搜索
+     * @return
+     */
+    List<ArticleEntity> hotnewSearch(String content);
 }
 

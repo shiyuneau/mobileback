@@ -59,4 +59,9 @@ public class ArticleServiceImpl implements ArticleService {
     public List<ArticleEntity> experienceTJNewsList() {
         return articleDao.experienceTJNewsList();
     }
+
+    @Override
+    public List<ArticleEntity> hotnewSearch(String content) {
+        return articleDao.hotnewSearch(content);
+    }
 }

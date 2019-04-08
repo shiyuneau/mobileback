@@ -29,4 +29,11 @@ public interface ArticleDao {
 
     List<ArticleEntity> experienceTJNewsList();
 
+    /**
+     * 根据content 对 title进行模糊搜索
+     * @param content
+     * @return
+     */
+    List<ArticleEntity> hotnewSearch(String content);
+
 }

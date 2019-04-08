@@ -47,12 +47,16 @@ public class HotNewsController {
 
     /**
      * 新闻热点文章搜索（搜索类型 校友或文章）
-     * @param type 搜索类型 1 校友 ，2 文章
+//     * @param type 搜索类型 1 校友 ，2 文章
      * @param content 搜索内容
      * @return
      */
-    public ArticleEntity hotnewsSearch(@RequestParam("type") String type , @RequestParam("content") String content) {
-        return null;
+    @JwtIgnore
+    @ResponseBody
+    @RequestMapping("/hotnewsSearch")
+    // @RequestParam("type") String type ,
+    public List<ArticleEntity> hotnewsSearch( @RequestParam("content") String content) {
+        return articleService.hotnewSearch(content);
     }
 
 }

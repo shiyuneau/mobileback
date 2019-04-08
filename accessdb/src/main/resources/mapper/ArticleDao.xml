@@ -53,6 +53,10 @@
       SELECT art.GUID ,art.Title, art.Content  FROM  article art where art.GUID = #{id};
     </select>
 
+    <select id="hotnewSearch" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
+        SELECT art.GUID , art.Title, art.CreatedTime,art.Brief  FROM `articlecategory` category , article art where category.Type = 7 and art.CategoryGUID = category.GUID and art.Title like CONCAT(CONCAT('%', #{content}), '%');
+    </select>
+
 
 
 
