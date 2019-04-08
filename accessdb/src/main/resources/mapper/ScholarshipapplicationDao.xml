@@ -569,6 +569,8 @@
         select * from Scholarshipapplication where StudentGUID = #{userId}
     </select>
     <select id="applySuccessList" resultType="com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity">
-        select * from Scholarshipapplication where StudentGUID = #{userId} and status = #{status}
+        select   apply.* from  scholarshipapplication apply
+        left JOIN school sch on sch.GUID = apply.recominstitutions
+        left JOIN manager man on sch.ManagerGUID =man.GUID where man.guid = #{managerGUID} and apply.status = #{status}
     </select>
 </mapper>

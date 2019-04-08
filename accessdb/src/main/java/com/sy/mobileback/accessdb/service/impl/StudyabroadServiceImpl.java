@@ -147,9 +147,9 @@ public class StudyabroadServiceImpl implements StudyabroadService {
     }
 
     @Override
-    public List<StudyabroadapplicationEntity> applySuccessList(String userId) {
+    public List<StudyabroadapplicationEntity> applySuccessList(String managerGUID) {
         Map<String, Object> map = new HashMap<>();
-        map.put("userId",userId);
+        map.put("managerGUID",managerGUID);
         map.put("status",ApplicationStatusType.ApplySuccess.getType());
         List<StudyabroadapplicationEntity> entityList = studyabroadapplicationDao.applySuccessList(map);
         entityEach(entityList);

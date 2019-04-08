@@ -4,6 +4,7 @@ import com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity;
 import com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity;
 import com.sy.mobileback.accessdb.service.ManagerService;
 import com.sy.mobileback.accessdb.service.ScholarshipApplicationService;
+import com.sy.mobileback.accessdb.service.SchoolService;
 import com.sy.mobileback.accessdb.service.StudyabroadService;
 import com.sy.mobileback.common.utils.JsonResult;
 import com.sy.mobileback.common.utils.MD5Util;
@@ -42,6 +43,8 @@ public class ManagerLoginController {
     private ScholarshipApplicationService scholarshipApplicationService;
     @Autowired
     private StudyabroadService studyabroadService;
+    @Autowired
+    private SchoolService schoolService;
 
     /**
      * 管理员登录接口，需要传递 username password 两个参数
@@ -78,22 +81,22 @@ public class ManagerLoginController {
         return result;
     }
     /**
-     * 留学申请列表 需要传递 userId 参数
+     * 留学申请列表 需要传递 管理员id 参数
      *
      * @param request
      * @return
      */
     @ResponseBody
     @GetMapping("/studyabroadapplycheck")
-    public List<StudyabroadapplicationEntity> StudyabroadApplyCheck(HttpServletRequest request, HttpServletResponse response) {
+    public List<StudyabroadapplicationEntity> StudyabroadApplyCheck( HttpServletRequest request, HttpServletResponse response) {
         Claims claims = (Claims)request.getAttribute("CLAIMS");
-        String userId = (String)claims.get("userId");
+        String managerGUID = (String)claims.get("userId");
         //String userId = "bb47e847-85ed-4778-bba4-7b49ca915469";
         boolean falg = JwtUtils.managerTokenAndInuse(claims);
         if(!falg){
             return null;
         }
-        return studyabroadService.applySuccessList(userId);
+        return studyabroadService.applySuccessList(managerGUID);
     }
     /**
      * 留学审核 传参 applyid 申请ID
@@ -130,13 +133,13 @@ public class ManagerLoginController {
     @GetMapping("/scholarshipapplycheck")
     public List<ScholarshipapplicationEntity> scholarcshipApplyCheck(HttpServletRequest request, HttpServletResponse response) {
         Claims claims = (Claims)request.getAttribute("CLAIMS");
-        String userId = (String)claims.get("userId");
+        String managerGUID = (String)claims.get("userId");
         //String userId = "bb47e847-85ed-4778-bba4-7b49ca915469";
         boolean falg = JwtUtils.managerTokenAndInuse(claims);
         if(!falg){
             return null;
         }
-        return scholarshipApplicationService.applySuccessList(userId);
+        return scholarshipApplicationService.applySuccessList(managerGUID);
     }
 
     /**

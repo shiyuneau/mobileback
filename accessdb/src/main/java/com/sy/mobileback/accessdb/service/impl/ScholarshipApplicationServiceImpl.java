@@ -102,10 +102,10 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
     }
 
     @Override
-    public List<ScholarshipapplicationEntity> applySuccessList(String userId) {
+    public List<ScholarshipapplicationEntity> applySuccessList(String managerGUID) {
         Map<String, Object> map = new HashMap<>();
-        map.put("userId", userId);
-        map.put("status", ApplicationStatusType.ApplySuccess);
+        map.put("managerGUID", managerGUID);
+        map.put("status", ApplicationStatusType.ApplySuccess.getType());
         List<ScholarshipapplicationEntity> entityList = scholarshipapplicationDao.applySuccessList(map);
         entityEach(entityList);
         return entityList;

@@ -47,9 +47,9 @@ public interface ScholarshipApplicationService {
     boolean applyCheck(String userId, String applyrecordid);
 
     /**
-     * 奖学金申请列表 需要传递 userId 参数
-     * @param userId
+     * 奖学金申请列表 需要传递 schoolGUID 参数
+     * @param managerGUID
      * @return
      */
-    List<ScholarshipapplicationEntity> applySuccessList(String userId);
+    List<ScholarshipapplicationEntity> applySuccessList(String managerGUID);
 }

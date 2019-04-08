@@ -38,4 +38,7 @@
         <if test="#{academicSystem}!=null"> and pro.AcademicSystem = #{academicSystem}</if>
         <if test="#{professionName}!=null"> and pro.`Name` like CONCAT(CONCAT('%', #{professionName}), '%') </if>
     </select>
+    <select id="schoolByManagerguid" resultType="java.lang.String">
+        select GUID from school where managerguid = #{managerGUID}
+    </select>
 </mapper>

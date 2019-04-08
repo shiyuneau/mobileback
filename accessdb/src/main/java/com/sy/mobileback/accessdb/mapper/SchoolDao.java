@@ -1,7 +1,6 @@
 package com.sy.mobileback.accessdb.mapper;
 
 import com.sy.mobileback.accessdb.domain.SchoolEntity;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.sy.mobileback.accessdb.domain.SchoolSearchResultEntity;
 
 import java.util.List;
@@ -24,4 +23,10 @@ public interface SchoolDao {
 	 * @return
 	 */
 	List<SchoolSearchResultEntity> schoolSearch(Map<String,Object> map);
+    /**
+     * 根据学校id  返回学校id
+     * @param userId
+     * @return
+     */
+    List<String> schoolByManagerguid(String userId);
 }
