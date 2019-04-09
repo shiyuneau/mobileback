@@ -1,6 +1,5 @@
 package com.sy.mobileback.web.controller;
 
-import com.alibaba.fastjson.JSONReader;
 import com.sy.mobileback.accessdb.domain.StudentEntity;
 import com.sy.mobileback.accessdb.service.StudentService;
 import com.sy.mobileback.common.utils.JsonResult;
@@ -11,9 +10,12 @@ import com.sy.mobileback.framework.jwt.config.JwtParam;
 import com.sy.mobileback.framework.jwt.utils.JwtUtils;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -182,7 +184,6 @@ public class StudentLoginController {
      * @param email
      * @return
      */
-    @JwtIgnore
     @PostMapping("/passwordreset")
     @ResponseBody
     public JsonResult passwordreset(@RequestParam("email") String email) {

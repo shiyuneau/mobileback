@@ -39,4 +39,10 @@ public interface StudyabroadapplicationDao {
      */
     List<StudyabroadapplicationEntity> applySuccessList(Map<String,Object> map);
 
+    /**
+     * 留学申请审核
+     * @param map
+     * @return
+     */
+    boolean applyCheck(Map<String, Object> map);
 }

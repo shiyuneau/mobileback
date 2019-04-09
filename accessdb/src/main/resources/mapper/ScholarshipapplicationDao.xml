@@ -565,6 +565,9 @@
     <update id="applyExecute" parameterType="map">
         update Scholarshipapplication set Status = #{status} where GUID =#{applyrecordid} and StudentGUID = #{userid}
     </update>
+    <update id="applyCheck" parameterType="map">
+        update Scholarshipapplication set Status = #{status} where GUID =#{applyrecordid}
+    </update>
     <select id="applyList" resultType="com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity">
         select * from Scholarshipapplication where StudentGUID = #{userId}
     </select>

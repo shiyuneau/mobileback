@@ -356,7 +356,9 @@
     <update id="applyCancel" parameterType="map">
         update studyabroadapplication set Status = #{status} where GUID = #{applyid} and StudentGUID = #{userid}
     </update>
-
+    <update id="applyCheck" parameterType="map">
+        update studyabroadapplication set status = #{status} where GUID = #{applyid}
+    </update>
     <!--<select id="applyListBefore" resultType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity">-->
         <!--select * from studyabroadapplication where StudentGUID = #{userid}-->
     <!--</select>-->

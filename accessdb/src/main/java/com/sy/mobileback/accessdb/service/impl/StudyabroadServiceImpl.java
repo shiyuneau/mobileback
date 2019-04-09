@@ -140,10 +140,9 @@ public class StudyabroadServiceImpl implements StudyabroadService {
     @Override
     public boolean applyCheck(String userId, String applyid) {
         Map<String, Object> map = new HashMap<>();
-        map.put("userId",userId);
         map.put("applyid",applyid);
-        map.put("status",ApplicationStatusType.ApplySuccess);
-        return studyabroadapplicationDao.applyCancel(map);
+        map.put("status",ApplicationStatusType.ApplySuccess.getType());
+        return studyabroadapplicationDao.applyCheck(map);
     }
 
     @Override

@@ -95,10 +95,9 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
     @Override
     public boolean applyCheck(String userId, String applyrecordid) {
         Map<String, Object> map = new HashMap<>();
-        map.put("userId", userId);
         map.put("applyrecordid", applyrecordid);
-        map.put("status", ApplicationStatusType.ApplySuccess);
-        return scholarshipapplicationDao.applyExecute(map);
+        map.put("status", ApplicationStatusType.ApplySuccess.getType());
+        return scholarshipapplicationDao.applyCheck(map);
     }
 
     @Override

@@ -24,4 +24,6 @@ public interface ScholarshipapplicationDao {
     List<ScholarshipapplicationEntity> applyList(String userId);
 
     List<ScholarshipapplicationEntity> applySuccessList(Map<String, Object> map);
+
+    boolean applyCheck(Map<String, Object> map);
 }
