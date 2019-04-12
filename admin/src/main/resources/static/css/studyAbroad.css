@@ -101,4 +101,137 @@
 	float: right;
     padding-right: 12px;
 }
+/*消息列表*/
+#sa_list .news-list{
+	border-bottom: 1px solid #ddd;
+}
+#sa_list .news-list .news-list-title{
+	width: 100%;
+	padding: 15px 0;
+	line-height: 20px;
+	font-size: 14px;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#sa_list .news-list .news-list-date{
+	width: 100%;
+	padding: 15px 0;
+	line-height: 20px;
+	font-size: 14px;
+	text-align: right;
+}
+/*详情*/
+#sa_detail{
+	position: relative;
+}
+#sa_detail .bg-blue{
+	background-color: #3CAAEF;
+}
+#sa_detail .bg-orange{
+	background-color: #f76f35;
+}
+#sa_detail .bg-green{
+	background-color: #50c9a9;
+}
+#sa_detail .bg-yellow{
+	background-color: #f0be5a;
+}
+#sa_detail #sa_typee{
+	position: fixed;
+    top: 0;
+	left: 0;
+    width: 100%;
+    height: 40px;
+	margin: 0 -14px;
+    line-height: 40px;
+    font-size: 16px;
+    text-align: center;
+    font-family: Arial;
+    color: #fff;
+}
+#sa_detail #sa_line{
+    position: fixed;
+    top: 40px;
+	left: 0;
+    width: 100%;
+    height: 4px;
+    padding: 8px 0 10px;
+    margin: 0 -14px;
+    background-color: #f2f2f2;
+}
+#sa_detail #sa_line1{
+    height: 4px;
+    background-color: #3caaef;
+}
+#sa_detail #sa_detail_div{
+	margin-top: 72px;
+}
+#sa_detail #sa_detail_title{
+    text-align: center;
+	font-weight: 600;
+}
+#sa_detail #sa_detail_date{
+    padding-top: 4px;
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+}
+
+/*详情*/
+#sa_detail{
+	position: relative;
+}
+#sa_detail .bg-blue{
+	background-color: #3CAAEF;
+}
+#sa_detail .bg-orange{
+	background-color: #f76f35;
+}
+#sa_detail .bg-green{
+	background-color: #50c9a9;
+}
+#sa_detail .bg-yellow{
+	background-color: #f0be5a;
+}
+#sa_detail #sa_typee{
+	position: fixed;
+    top: 0;
+	left: 0;
+    width: 100%;
+    height: 40px;
+	margin: 0 -14px;
+    line-height: 40px;
+    font-size: 16px;
+    text-align: center;
+    font-family: Arial;
+    color: #fff;
+}
+#sa_detail #sa_line{
+    position: fixed;
+    top: 40px;
+	left: 0;
+    width: 100%;
+    height: 4px;
+    padding: 8px 0 10px;
+    margin: 0 -14px;
+    background-color: #f2f2f2;
+}
+#sa_detail #sa_line1{
+    height: 4px;
+    background-color: #3caaef;
+}
+#sa_detail #sa_detail_div{
+	margin-top: 72px;
+}
+#sa_detail #sa_detail_title{
+    text-align: center;
+	font-weight: 600;
+}
+#sa_detail #sa_detail_date{
+    padding-top: 4px;
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+}
 
