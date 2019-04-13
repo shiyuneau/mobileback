@@ -34,6 +34,11 @@ $(function(){
 			url = "/article/exeperienceTJ/details";
 			sa_bg = "bg-yellow";
 			sa_typee = "体验天津";
+		}else if(type==5 || type=="5"){
+			//体验天津
+			url = "/article/lifeassistant/details";
+			sa_bg = "bg-yellow";
+			sa_typee = "生活助手";
 		}else{
 			alert(false)
 			return;

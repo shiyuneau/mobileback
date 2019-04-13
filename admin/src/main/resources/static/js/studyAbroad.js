@@ -64,14 +64,27 @@ $(function(){
 		sa_list1_ele.append(sa_list1_str);
 	})
 	
+	//生活助手
+	$.getJSON("/article/lifeassistant/news","",function(data){
+		var sa_list1_ele = $("#sa_list5");
+		var sa_list1_str = "";
+		$.each(data,function(index,value){
+			sa_list1_str += ''
+				+'<li class="mylist-item" data-type="5" data-id="'+value.guid+'">'
+				+'	<div class="mylist-title">'+value.title+'</div>'
+				+'	<div class="mylist-date">'+value.createdtime+'</div>'
+				+'</li>';
+		})
+		sa_list1_ele.empty();
+		sa_list1_ele.append(sa_list1_str);
+	})
 	// 处理
 		// 消息标题点击
 		$("#studyAbroad").on("click",".tag",function(ele){
-			var id = $(this).attr("data-id");
 			var type = $(this).attr("data-type");
 			//跳转页面
-			if(id){
-				window.location.href = 'sa_list.html?id='+id+'&flag='+type;;
+			if(type){
+				window.location.href = 'sa_list.html?type='+type;;
 			}else{
 				console.log("html页面设置的id有问题，请联系管理员");
 			}
