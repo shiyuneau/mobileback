@@ -14,7 +14,7 @@ $(function(){
 	// 初始化
 	function sa_list_init(){
 			//新闻列表
-			$.getJSON("/news/listPage",{'pageNum':pageNum,'pageSize':10},function(data){
+			$.getJSON("/API/news/listPage",{'pageNum':pageNum,'pageSize':10},function(data){
 				var sa_list1_ele = $("#sa_list");
 				var sa_list1_str = "";
 				if(data.code == 0){

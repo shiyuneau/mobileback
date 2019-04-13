@@ -16,27 +16,27 @@ $(function(){
 		var sa_bg = "bg-blue";
 		if(type==1 || type=="1"){
 			//为什么留学天津
-			url = "/article/studytianjin/details";
+			url = "/API/article/studytianjin/details";
 			sa_typee = "为什么留学天津";
 			sa_bg = "bg-blue";
 		}else if(type==2 || type=="2"){
 			//留学生活
-			url = "/article/overseaslife/details";
+			url = "/API/article/overseaslife/details";
 			sa_bg = "bg-orange";
 			sa_typee = "留学生活";
 		}else if(type==3 || type=="3"){
 			//校友活动
 			sa_typee = "校友活动";
-			url = "/article/alumin/details";
+			url = "/API/article/alumin/details";
 			sa_bg = "bg-green";
 		}else if(type==4 || type=="4"){
 			//体验天津
-			url = "/article/exeperienceTJ/details";
+			url = "/API/article/exeperienceTJ/details";
 			sa_bg = "bg-yellow";
 			sa_typee = "体验天津";
 		}else if(type==5 || type=="5"){
 			//体验天津
-			url = "/article/lifeassistant/details";
+			url = "/API/article/lifeassistant/details";
 			sa_bg = "bg-yellow";
 			sa_typee = "生活助手";
 		}else{

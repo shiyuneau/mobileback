@@ -14,7 +14,7 @@ $(function(){
 		var id = GetQueryString("type");
 		if(id==2 || id=="2"){
 			//留学生活
-			$.getJSON("/article/overseaslife/news","",function(data){
+			$.getJSON("/API/article/overseaslife/news","",function(data){
 				var sa_list1_ele = $("#sa_list");
 				var sa_list1_str = "";
 				$.each(data,function(index,value){
@@ -33,7 +33,7 @@ $(function(){
 			})
 		}else if(id==3 || id=="3"){
 			//校友活动
-			$.getJSON("/article/alumin/events","",function(data){
+			$.getJSON("/API/article/alumin/events","",function(data){
 				var sa_list1_ele = $("#sa_list");
 				var sa_list1_str = "";
 				$.each(data,function(index,value){
@@ -52,7 +52,7 @@ $(function(){
 			})
 		}else if(id==4 || id=="4"){
 			//体验天津
-			$.getJSON("/article/exeperienceTJ/news","",function(data){
+			$.getJSON("/API/article/exeperienceTJ/news","",function(data){
 				var sa_list1_ele = $("#sa_list");
 				var sa_list1_str = "";
 				$.each(data,function(index,value){
@@ -71,7 +71,7 @@ $(function(){
 			})
 		}else if(id==5 || id=="5"){
 			//体验天津
-			$.getJSON("/article/lifeassistant/news","",function(data){
+			$.getJSON("/API/article/lifeassistant/news","",function(data){
 				var sa_list1_ele = $("#sa_list");
 				var sa_list1_str = "";
 				$.each(data,function(index,value){
@@ -90,7 +90,7 @@ $(function(){
 			})
 		}else{
 			//为什么留学天津
-			$.getJSON("/article/studytianjin/news","",function(data){
+			$.getJSON("/API/article/studytianjin/news","",function(data){
 				var sa_list1_ele = $("#sa_list");
 				var sa_list1_str = "";
 				$.each(data,function(index,value){
