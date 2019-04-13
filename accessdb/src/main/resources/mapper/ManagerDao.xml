@@ -3,7 +3,7 @@
 
 <mapper namespace="com.sy.mobileback.accessdb.mapper.ManagerDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.sy.mobileback.accessdb.domain.ManagerEntity" id="managerMap">
         <result property="guid" column="GUID"/>
         <result property="username" column="UserName"/>
@@ -19,38 +19,66 @@
     </resultMap>
 
     <insert id="managerBatchInsert" parameterType="java.util.List">
-        insert into manager  (
-                    GUID,
-                    UserName,
-                    Password,
-                    Type,
-                    Status,
-                    Name,
-                    Mail,
-                    Mobile,
-                    LoginIP,
-                    LoginTime,
-                    Deleted
-                )
+        insert into manager (
+        GUID,
+        UserName,
+        Password,
+        Type,
+        Status,
+        Name,
+        Mail,
+        Mobile,
+        LoginIP,
+        LoginTime,
+        Deleted
+        )
         values
         <foreach collection="list" item="item" separator=",">
             (
-                            #{item.guid},
-                            #{item.username},
-                            #{item.password},
-                            #{item.type},
-                            #{item.status},
-                            #{item.name},
-                            #{item.mail},
-                            #{item.mobile},
-                            #{item.loginip},
-                            #{item.logintime},
-                            #{item.deleted}
-                        )
+            #{item.guid},
+            #{item.username},
+            #{item.password},
+            #{item.type},
+            #{item.status},
+            #{item.name},
+            #{item.mail},
+            #{item.mobile},
+            #{item.loginip},
+            #{item.logintime},
+            #{item.deleted}
+            )
         </foreach>
     </insert>
 
-    <select id="usernamePasswordMatch" resultType="java.lang.String">
-        select GUID from manager where UserName = #{username} and Password = #{password}
+    <insert id="newUserInsert" parameterType="com.sy.mobileback.accessdb.domain.ManagerEntity">
+        insert into manager (GUID,UserName,Password,Mail) values (#{guid},#{username},#{password},#{mail})
+    </insert>
+
+    <select id="userHasRegistry" resultType="java.lang.String">
+        select GUID from manager where Mail = #{email}
+    </select>
+
+    <update id="updateUser" parameterType="java.util.Map">
+        update manager
+        <set>
+            <if test="username != null and username != ''">
+                UserName = #{username},
+            </if>
+            <if test="password != null and password != ''">
+                Password = #{password},
+            </if>
+            <if test="email != null and email != ''">
+                Mail = #{email}
+            </if>
+        </set>
+        where GUID = #{userID}
+    </update>
+
+    <select id="usernameGet" resultType="java.lang.String">
+        select UserName from manager where GUID = #{userId}
+    </select>
+
+    <select id="usernamePasswordMatch" resultType="java.util.Map">
+        select GUID as guid , UserName as username , Password as password , Mail as email  from manager where Mail = #{username} and Password = #{password}
     </select>
 </mapper>

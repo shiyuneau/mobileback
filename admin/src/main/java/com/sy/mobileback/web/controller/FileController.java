@@ -89,7 +89,7 @@ public class FileController {
         Map<String,String> result = new HashMap<>();
         String filePath = fileService.getFilePath(fileid);
         if (StringUtils.isNotEmpty(filePath)) {
-            result.put("filepath",fileid);
+            result.put("filepath",filePath);
         }
         return result;
     }

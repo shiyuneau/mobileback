@@ -17,6 +17,14 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 
     @Override
     public List<AdvertisementEntity> advertisementList() {
-        return advertisementDao.advertisemengEntityList();
+        List<AdvertisementEntity> list = advertisementDao.advertisemengEntityList();
+        if (null!=list && list.size()>0) {
+            list.forEach(entity -> {
+                String image = entity.getImage();
+                String url = "http://lxtj.tmecglobal.org.cn/Images/upload/" + image;
+                entity.setImage(url);
+            });
+        }
+        return list;
     }
 }

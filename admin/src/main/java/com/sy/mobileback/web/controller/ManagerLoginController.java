@@ -64,7 +64,8 @@ public class ManagerLoginController {
         // TODO 需要对 username和passwod判空
         // 先判断 username是否存在，如果存在返回 -1
         password = MD5Util.getMD5(password);
-        String guid = managerService.userLogin(username, password);
+        Map<String,String> map = managerService.userLogin(username, password);
+        String guid = map.get("guid");
         if (null == guid) {
             // 没有对应用户
             JsonResult result = JsonResult.error("用户不存在");

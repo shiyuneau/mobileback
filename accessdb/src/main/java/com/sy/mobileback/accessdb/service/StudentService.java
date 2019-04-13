@@ -19,14 +19,14 @@ public interface StudentService {
      * @param password
      * @return
      */
-    String userLogin(String username ,String password);
+    Map<String,String> userLogin(String username ,String password);
 
     /**
      * 判断用户是否已经注册
-     * @param username
+     * @param email
      * @return
      */
-    String userExist(String username);
+    String userExist(String email);
 
     /**
      * 新学生插入

@@ -13,6 +13,9 @@ public class SchoolSearchResultEntity {
     private String professionName;
     private String professionGuid;
     private Integer academicSystem;
+    private Double amount;
+    private Integer degree;
+
     /**
      * y有无将奖学金字段，-1未知，0无，1有，默认为-1，预留，数据库中找不到对应的字段
      */
@@ -64,5 +67,21 @@ public class SchoolSearchResultEntity {
 
     public void setScholarship(Integer scholarship) {
         this.scholarship = scholarship;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public Integer getDegree() {
+        return degree;
+    }
+
+    public void setDegree(Integer degree) {
+        this.degree = degree;
     }
 }

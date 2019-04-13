@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.sy.mobileback.accessdb.service.StudentService;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -20,16 +21,20 @@ public class StudentServiceImpl implements StudentService {
     private StudentDao studentDao;
 
     @Override
-    public String userLogin(String username, String password) {
+    public Map<String,String> userLogin(String username, String password) {
 
-        String guid = studentDao.usernamePasswordMatch(username, password);
+        Map<String,String> resultMap = studentDao.usernamePasswordMatch(username, password);
 
-        return guid;
+        return resultMap;
     }
 
     @Override
-    public String userExist(String username) {
-        return studentDao.userHasRegistry(username);
+    public String userExist(String email) {
+        List<String> guidList = studentDao.userHasRegistry(email);
+        if (null!=guidList && guidList.size() > 0) {
+            return "-1";
+        }
+        return null;
     }
 
     @Override

@@ -82,6 +82,7 @@ public class TianjinEducationController {
 
     /**
      * 根据指定的参数查询学校，qx和奖学金预留 ，目前未找到数据库匹配，profession专业现在是按模糊匹配
+     *
      * @param schoolGuid
      * @param qx
      * @param profession
@@ -92,15 +93,28 @@ public class TianjinEducationController {
     @JwtIgnore
     @ResponseBody
     @GetMapping("/schoolsearch")
-    public List<SchoolSearchResultEntity> schoolSearch(@RequestParam("schoolid") String schoolGuid, @RequestParam("qx") String qx,
-                                                       @RequestParam("profession") String profession, @RequestParam("years") Integer years,
-                                                       @RequestParam("scholarship") String scholarship) {
-        Map<String,Object> map = new HashMap<>();
-        map.put("schoolGuid",schoolGuid);
-        map.put("qx",qx);
-        map.put("professionName",profession);
-        map.put("academicSystem",years);
-        map.put("scholarship",scholarship);
+    public List<SchoolSearchResultEntity> schoolSearch(@RequestParam(value = "schoolid", required = false) String schoolGuid, @RequestParam("qx") String qx,
+                                                       @RequestParam(value = "profession", required = false) String profession, @RequestParam("years") Integer years,
+                                                       @RequestParam("scholarship") String scholarship,@RequestParam("languageid") String languageid,@RequestParam("amount") String amount) {
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("schoolGuid", schoolGuid);
+        map.put("qx", qx);
+        map.put("professionName", profession);
+        if (-1!=years) {
+            map.put("academicSystem", years);
+        }
+        map.put("scholarship", scholarship);
+        map.put("languageid",languageid);
+        // 对学费得金额做拆分
+        map.put("amount",amount);
+        if (StringUtils.isNotEmpty(amount) && StringUtils.isNotBlank(amount)) {
+            String[] amounts = amount.split("-");
+            Double startAmount = Double.valueOf(amounts[0]);
+            Double endAmount = Double.valueOf(amounts[1]);
+            map.put("startAmount",startAmount);
+            map.put("endAmount",endAmount);
+        }
         return schoolService.schoolSearch(map);
     }
 

@@ -15,7 +15,8 @@ import java.sql.*;
 public class AccessConnectionUtils {
     private static final String dbURL = "jdbc:ucanaccess://" +
             "D:\\access\\JW.mdb";
-
+//            "E:\\jiaowei\\JW.mdb";
+//
     public static void main(String[] args) throws Exception {
         Connection connection = getConn();
         System.out.println(connection.getCatalog());

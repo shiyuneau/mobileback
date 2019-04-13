@@ -112,11 +112,11 @@
 
 
     <select id="userHasRegistry" resultType="java.lang.String">
-        select GUID from student where UserName = #{username}
+        select GUID from student where Mail = #{email}
     </select>
 
-    <select id="usernamePasswordMatch" resultType="java.lang.String">
-        select GUID from student where UserName = #{username} and Password = #{password}
+    <select id="usernamePasswordMatch" resultType="java.util.Map">
+        select GUID as guid , UserName as username , Password as password , Mail as email from student where Mail = #{username} and Password = #{password}
     </select>
 
     <insert id="newUserInsert" parameterType="com.sy.mobileback.accessdb.domain.StudentEntity">

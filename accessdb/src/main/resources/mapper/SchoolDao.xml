@@ -32,11 +32,18 @@
         sch.GUID as shoolGuid ,
         pro.`Name` as professionName ,
         pro.GUID as professionGuid ,
-        pro.AcademicSystem as academicSystem
-        FROM `school` sch left JOIN  college coll on sch.GUID = coll.SchoolGUID LEFT JOIN profession pro on pro.CollegeGUID = coll.GUID
-        where sch.GUID = #{schoolGuid}
-        <if test="#{academicSystem}!=null"> and pro.AcademicSystem = #{academicSystem}</if>
-        <if test="#{professionName}!=null"> and pro.`Name` like CONCAT(CONCAT('%', #{professionName}), '%') </if>
+        pro.AcademicSystem as academicSystem,
+        pro.Amount as amount,
+        pro.IsDegree as degree
+        FROM `school` sch left JOIN  college coll on sch.GUID = coll.SchoolGUID LEFT JOIN profession pro on pro.CollegeGUID = coll.GUID LEFT JOIN language lan on lan.GUID = pro.LanguageGUID
+        <where>
+            <if test="schoolGuid != null and schoolGuid != '' "> sch.GUID = #{schoolGuid}</if>
+            <if test="academicSystem != null and academicSystem != '' "> and pro.AcademicSystem &lt;= #{academicSystem}</if>
+            <if test="professionName !=null and professionName != ''"> and  pro.`Name` like CONCAT(CONCAT('%', #{professionName}), '%') </if>
+            <if test="languageid !=null and languageid != ''"> and lan.GUID = #{languageid}</if>
+            <if test="amount !=null and amount != ''"> and pro.Amount &gt;= #{startAmount} and pro.Amount &lt;= #{endAmount}</if>
+        </where>
+
     </select>
     <select id="schoolByManagerguid" resultType="java.lang.String">
         select GUID from school where managerguid = #{managerGUID}

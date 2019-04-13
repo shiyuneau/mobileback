@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -14,7 +15,20 @@ import java.util.List;
  * @date 2019-04-06 22:54:38
  */
 public interface ManagerDao {
+    void newUserInsert(ManagerEntity entity);
+
     void managerBatchInsert(List<ManagerEntity> list);
 
-    String usernamePasswordMatch(@Param("username")String username , @Param("password")String password);
+    List<String> userHasRegistry(String email);
+
+    boolean updateUser(Map<String,Object> person);
+
+    Map<String,String> usernamePasswordMatch(@Param("username")String username , @Param("password")String password);
+
+    /**
+     * 根据 userId 获取用户名称
+     * @param userId
+     * @return
+     */
+    String usernameGet(String userId);
 }
