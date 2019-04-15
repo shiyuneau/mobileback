@@ -1,0 +1,57 @@
+@charset "utf-8";
+
+#zwgk{
+	background-color: #f5f5f5;
+}
+#zwgk .zwgk-block{
+	position: relative;
+	margin-top: 10px;
+	padding-bottom: 16px;
+    border-radius: 4px;
+    box-shadow: 0 0 4px #f5f5f5;
+    background-color: #fff;
+}
+#zwgk .zwgk-block .zwgk-block-head{
+	padding: 20px 14px 8px;
+    font-size: 16px;
+    font-family: "苹方-简 中黑体";
+	color: #4A4A4A;
+}
+#zwgk .zwgk-block .zwgk-block-body{
+	text-align: center;
+}
+#zwgk .zwgk-block .zwgk-block-body a{
+	line-height: 32px;
+    font-size: 16px;
+    font-family: "苹方-简 常规体";
+	color: #5B5B5B;
+}
+#zwgk .zwgk-block .zwgk-block-body a:active{
+    text-decoration: none;
+}
+#zwgk .zwgk-block .zwgk-block-list{
+	float: left;
+    position: relative;
+	padding: 4px 30px;
+}
+#zwgk .zwgk-block .right-line:after{
+	content: '';
+    display: block;
+    position: absolute;
+    top: 17px;
+    right: 0;
+    width: 0;
+    height: 10px;
+    border-right: 1.2px solid #979797;
+}
+#zwgk .zwgk-block .right-arrow{
+	display: block;
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    width: 6px;
+    height: 6px;
+    border: 1px solid #999;
+    border-width: 1px 1px 0 0;
+    transform: rotate(45deg);
+}
