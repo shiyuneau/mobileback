@@ -11,7 +11,7 @@ $(function(){
 	function sa_detail_init(){
 		var id = GetQueryString("id");
 		var url = "";
-			url = "/govern/details?newsId="+id;
+			url = "/API/govern/details?newsId="+id;
 			
 		// 获取消息详情
 		$.ajax({

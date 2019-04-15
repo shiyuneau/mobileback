@@ -15,7 +15,7 @@ $(function(){
 	function sa_list_init(){
 		var governId = GetQueryString("governId")
 			//新闻列表
-			$.getJSON("/govern/news?governId="+governId,{'pageNum':pageNum,'pageSize':10},function(data){
+			$.getJSON("/API/govern/news?governId="+governId,{'pageNum':pageNum,'pageSize':10},function(data){
 				var sa_list1_ele = $("#sa_list");
 				var sa_list1_str = "";
 				if(data.length > 0){

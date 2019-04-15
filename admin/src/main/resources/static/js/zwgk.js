@@ -11,7 +11,7 @@ $(function(){
 	
 	// 初始化
 	function zwgk_init(){
-		$.getJSON("/govern/list",{},function(data){
+		$.getJSON("/API/govern/list",{},function(data){
 			var html = "";
 			$.each(data.children,function(index,value){
 				html = html+'<div class="zwgk-block">'
@@ -19,7 +19,7 @@ $(function(){
 					   +'		<img src="./images/zwgk_list.png" width="9" style="margin-right: 6px;">'
 					   +	value.com_Stye
 			   if(value.children.length == 0){
-				   html=html+'   <a href="" class="right-arrow"></a>'
+				   html=html+'   <a href="zwgklist.html?governId='+value.com_Id+'" class="right-arrow"></a>'
 			   }
 					
 				html=html+'	</div>'
@@ -28,7 +28,7 @@ $(function(){
 						   +'		<div class="row" style="margin-right:0;margin-left:0;">'
 						   $.each(value.children,function(i,v){
 							   html=html+'			<div class="zwgk-block-list">'
-							   		    +'				<a href="" class="right-line" data-id="'+v.com_Id+'">'+v.com_Stye+'</a>'
+							   		    +'				<a href="zwgklist.html?governId='+v.com_Id+'" class="right-line" data-id="'+v.com_Id+'">'+v.com_Stye+'</a>'
 							   		    +'			</div>'
 						   })
 						   html = html +'		</div>'
