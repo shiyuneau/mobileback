@@ -14,8 +14,8 @@ import java.sql.*;
 @Component
 public class AccessConnectionUtils {
     private static final String dbURL = "jdbc:ucanaccess://" +
-            "D:\\access\\JW.mdb";
-//            "E:\\jiaowei\\JW.mdb";
+//            "D:\\access\\JW.mdb";
+            "E:\\jiaowei\\JW.mdb";
 //
     public static void main(String[] args) throws Exception {
         Connection connection = getConn();

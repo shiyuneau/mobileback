@@ -5,6 +5,7 @@ import com.sy.mobileback.accessdb.domain.SchoolEntity;
 import com.sy.mobileback.accessdb.domain.SchoolSearchResultEntity;
 import com.sy.mobileback.accessdb.service.CollegeService;
 import com.sy.mobileback.accessdb.service.SchoolService;
+import com.sy.mobileback.common.utils.JsonResult;
 import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,14 @@ public class TianjinEducationController {
     @JwtIgnore
     @ResponseBody
     @RequestMapping("/colleges")
-    public List<SchoolEntity> collegesEntityList() {
-        return schoolService.schoolList();
+    public JsonResult collegesEntityList() {
+        try {
+            List<SchoolEntity> list = schoolService.schoolList();
+            return JsonResult.ok().put("rows",list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonResult.error();
     }
 
     /**
@@ -48,20 +55,34 @@ public class TianjinEducationController {
     @JwtIgnore
     @ResponseBody
     @RequestMapping("/details")
-    public String schoolOrCollegeDetails(@RequestParam("schoolGuid") String schoolGuid, @RequestParam("collegeGuid") String collegeGuid) {
-        String result = null;
+    public JsonResult schoolOrCollegeDetails(@RequestParam("schoolGuid") String schoolGuid, @RequestParam(value = "collegeGuid",required = false) String collegeGuid) {
+        JsonResult result = JsonResult.ok();
         if (StringUtils.isNotEmpty(schoolGuid) && StringUtils.isNotEmpty(collegeGuid)) {
             // 查找 collegeDao
-            CollegeEntity college = collegeService.collegeDetail(collegeGuid);
-            if (null != college) {
-                result = "{ schoolGuid:" + schoolGuid + ",collegeGuid:" + collegeGuid + ",introduction:" + college.getIntroduction() + "}";
+            try {
+                CollegeEntity college = collegeService.collegeDetail(collegeGuid);
+                if (null != college) {
+                    result.put("schoolGuid",schoolGuid);
+                    result.put("collegeGuid",collegeGuid);
+                    result.put("introduction",college.getIntroduction());
+
+//                result = "{ schoolGuid:" + schoolGuid + ",collegeGuid:" + collegeGuid + ",introduction:" + college.getIntroduction() + "}";
+                }
+            } catch (Exception e) {
+                return JsonResult.error();
             }
+
         }
         if (StringUtils.isEmpty(collegeGuid) && StringUtils.isNotEmpty(schoolGuid)) {
             // 查找 schoolDao
-            SchoolEntity school = schoolService.schoolDetail(schoolGuid);
-            if (null != school) {
-                result = "{ schoolGuid:" + schoolGuid + ",introduction:" + school.getIntroduction() + "}";
+            try {
+                SchoolEntity school = schoolService.schoolDetail(schoolGuid);
+                if (null != school) {
+                    result.put("schoolGuid",schoolGuid);
+                    result.put("introduction",school.getIntroduction());
+                }
+            } catch (Exception e) {
+                return JsonResult.error();
             }
         }
         return result;
