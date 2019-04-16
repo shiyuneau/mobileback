@@ -3,7 +3,7 @@
 
 <mapper namespace="com.sy.mobileback.accessdb.mapper.ArticleDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.sy.mobileback.accessdb.domain.ArticleEntity" id="articleMap">
         <result property="guid" column="GUID"/>
         <result property="managerguid" column="ManagerGUID"/>
@@ -20,44 +20,99 @@
         <result property="languageguid" column="LanguageGUID"/>
         <result property="icon" column="Icon"/>
     </resultMap>
-    
+
     <select id="aluminNewsList" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
         SELECT art.GUID , art.Title, art.CreatedTime  FROM `articlecategory` category , article art where category.Type = 3 and art.CategoryGUID = category.GUID;
+    </select>
+
+    <select id="aluminNewsListByPage" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity" parameterType="map">
+        SELECT art.GUID , art.Title, art.CreatedTime  FROM `articlecategory` category , article art where category.Type = 3 and art.CategoryGUID = category.GUID limit #{pageMin} , #{pageMax};
+    </select>
+
+    <select id="aluminNewsCount" resultType="java.lang.Integer">
+        select count(1) from `articlecategory` category , article art where category.Type = 3 and art.CategoryGUID = category.GUID;
     </select>
 
     <select id="aluminEventsList" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
         SELECT art.GUID , art.Title, art.CreatedTime  FROM `articlecategory` category , article art where category.Type = 7 and art.CategoryGUID = category.GUID;
     </select>
 
+    <select id="aluminEventsCount" resultType="java.lang.Integer">
+        select count(1) from `articlecategory` category , article art where category.Type = 7 and art.CategoryGUID = category.GUID;
+    </select>
+
+    <select id="aluminEventsListByPage" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity"
+            parameterType="map">
+        SELECT art.GUID , art.Title, art.CreatedTime  FROM `articlecategory` category , article art where category.Type = 7 and art.CategoryGUID = category.GUID limit #{pageMin} , #{pageMax};
+    </select>
+
     <select id="lifeAssistantNewsList" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
         SELECT art.GUID , art.Title, art.CreatedTime , art.Brief  FROM `articlecategory` category , article art where category.Type = 5 and art.CategoryGUID = category.GUID;
+    </select>
+
+    <select id="lifeAssistantNewsListByPage" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
+        SELECT art.GUID , art.Title, art.CreatedTime , art.Brief  FROM `articlecategory` category , article art where category.Type = 5 and art.CategoryGUID = category.GUID limit #{pageMin} , #{pageMax};
+    </select>
+
+    <select id="lifeAssistantNewsCount" resultType="java.lang.Integer">
+        select count(1) from `articlecategory` category , article art where category.Type = 5 and art.CategoryGUID = category.GUID;
     </select>
 
     <select id="overseasNewsList" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
         SELECT art.GUID , art.Title, art.CreatedTime , art.Brief  FROM `articlecategory` category , article art where category.Type = 3 and art.CategoryGUID = category.GUID;
     </select>
 
+    <select id="overseasNewsListByPage" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
+        SELECT art.GUID , art.Title, art.CreatedTime , art.Brief  FROM `articlecategory` category , article art where category.Type = 3 and art.CategoryGUID = category.GUID limit #{pageMin} , #{pageMax};
+    </select>
+
+    <select id="overseasNewsCount" resultType="java.lang.Integer">
+        select count(1) from `articlecategory` category , article art where category.Type = 3 and art.CategoryGUID = category.GUID;
+    </select>
+
     <select id="studytianjinNewsList" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
         SELECT art.GUID , art.Title, art.CreatedTime , art.Brief  FROM `articlecategory` category , article art where category.Type = 0 and category.Tag = 0 and art.CategoryGUID = category.GUID;
+    </select>
+
+    <select id="studytianjinNewsListByPage" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
+        SELECT art.GUID , art.Title, art.CreatedTime , art.Brief  FROM `articlecategory` category , article art where category.Type = 0 and category.Tag = 0 and art.CategoryGUID = category.GUID limit #{pageMin} , #{pageMax};
+    </select>
+
+    <select id="studytianjinNewsCount" resultType="java.lang.Integer">
+        select count(1) from `articlecategory` category , article art where category.Type = 0 and category.Tag = 0 and art.CategoryGUID = category.GUID;
     </select>
 
     <select id="experienceTJNewsList" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
         SELECT art.GUID , art.Title, art.CreatedTime , art.Brief  FROM `articlecategory` category , article art where category.Type = 4 and art.CategoryGUID = category.GUID;
     </select>
 
+    <select id="experienceTJNewsListByPage" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
+        SELECT art.GUID , art.Title, art.CreatedTime , art.Brief  FROM `articlecategory` category , article art where category.Type = 4 and art.CategoryGUID = category.GUID limit #{pageMin} , #{pageMax} ;
+    </select>
+
+    <select id="experienceTJNewsCount" resultType="java.lang.Integer">
+        select count(1) from `articlecategory` category , article art where category.Type = 4 and art.CategoryGUID = category.GUID;
+    </select>
+
     <select id="hotNewsList" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
         SELECT art.GUID , art.Title, art.CreatedTime,art.Brief  FROM `articlecategory` category , article art where category.Type = 7 and art.CategoryGUID = category.GUID;
     </select>
 
+    <select id="hotNewsListByPage" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
+        SELECT art.GUID , art.Title, art.CreatedTime,art.Brief  FROM `articlecategory` category , article art where category.Type = 7 and art.CategoryGUID = category.GUID limit #{pageMin} , #{pageMax};
+    </select>
+
+    <select id="hotNewsCount" resultType="java.lang.Integer">
+        select count(1) from `articlecategory` category , article art where category.Type = 7 and art.CategoryGUID = category.GUID;
+    </select>
+
     <select id="newsDetails" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
-      SELECT art.GUID ,art.Title, art.Content  FROM  article art where art.GUID = #{id};
+      SELECT art.GUID ,art.Title, art.Content ,art.CreatedTime FROM  article art where art.GUID = #{id};
     </select>
 
     <select id="hotnewSearch" resultType="com.sy.mobileback.accessdb.domain.ArticleEntity">
         SELECT art.GUID , art.Title, art.CreatedTime,art.Brief  FROM `articlecategory` category , article art where category.Type = 7 and art.CategoryGUID = category.GUID and art.Title like CONCAT(CONCAT('%', #{content}), '%');
     </select>
-
-
 
 
 </mapper>
