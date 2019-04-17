@@ -16,7 +16,7 @@ server:
   port: 80
   servlet:
     # 项目contextPath
-    context-path: /
+    context-path: /API/
   tomcat:
     # tomcat的URI编码
     uri-encoding: UTF-8
