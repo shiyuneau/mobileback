@@ -1,0 +1,90 @@
+@charset "utf-8";
+
+#education{
+	background-color: #fff;
+}
+#education a{
+	color: #000;
+}
+#education a:active{
+	text-decoration: none;
+}
+#education .education-title{
+	padding-top: 20px;
+    font-family: "苹方-简 中黑体";
+    font-size: 20px;
+    font-weight: 600;
+}
+#education .edblock{
+	position: relative;
+	margin-bottom: 15px;
+	padding: 8px 20px 2px 8px;
+    border-radius: 4px;
+	box-shadow: 0 0 4px #ddd;
+}
+#education .edblock .edblock-ico{
+	width: 30px;
+    height: 30px;
+	padding-top: 6px;
+    border-radius: 15px;
+	text-align: center;
+	color: #fff;
+	background-color: #eee;
+}
+#education .edblock .ico-blue{
+	background: -webkit-radial-gradient(#4087FF, #74BCFF); /* Safari 5.1 - 6.0 */
+	background: -o-radial-gradient(#4087FF, #74BCFF); /* Opera 11.6 - 12.0 */
+	background: -moz-radial-gradient(#4087FF, #74BCFF); /* Firefox 3.6 - 15 */
+	background: radial-gradient(#4087FF, #74BCFF); /* 标准的语法 */
+}
+#education .edblock .ico-orange{
+	background: -webkit-radial-gradient(#F79A1C, #FAD961); /* Safari 5.1 - 6.0 */
+	background: -o-radial-gradient(#F79A1C, #FAD961); /* Opera 11.6 - 12.0 */
+	background: -moz-radial-gradient(#F79A1C, #FAD961); /* Firefox 3.6 - 15 */
+	background: radial-gradient(#F79A1C, #FAD961); /* 标准的语法 */
+}
+#education .edblock .ico-purple{
+	background: -webkit-radial-gradient(#7573FF, #ADABFF); /* Safari 5.1 - 6.0 */
+	background: -o-radial-gradient(#7573FF, #ADABFF); /* Opera 11.6 - 12.0 */
+	background: -moz-radial-gradient(#7573FF, #ADABFF); /* Firefox 3.6 - 15 */
+	background: radial-gradient(#7573FF, #ADABFF); /* 标准的语法 */
+}
+#education .edblock .ico-green{
+	background: -webkit-radial-gradient(#53C425, #A2E925); /* Safari 5.1 - 6.0 */
+	background: -o-radial-gradient(#53C425, #A2E925); /* Opera 11.6 - 12.0 */
+	background: -moz-radial-gradient(#53C425, #A2E925); /* Firefox 3.6 - 15 */
+	background: radial-gradient(#53C425, #A2E925); /* 标准的语法 */
+}
+#education .edblock .edblock-title{
+	margin-top: 10px;
+	text-align: right;
+	font-size: 16px;
+	font-family: "苹方-简 常规体";
+}
+#education .edblock2{
+	position: relative;
+	width: 100%;
+	height: 100px;
+	margin-bottom: 15px;
+    border-radius: 4px;
+	box-shadow: 0 0 4px #ddd;
+}
+#education .edblock2-bg1{
+	background-image: url(../images/education/bg1.png);
+	background-size: 100% 100px;
+}
+#education .edblock2-bg2{
+	background-image: url(../images/education/bg2.png);
+	background-size: 100% 100px;
+}
+#education .edblock2 a{
+	position: absolute;
+    top: 28px;
+    left: 20px;
+	color: #000;
+	font-size: 16px;
+	font-family: "苹方-简 常规体";
+}
+#education .edblock2 a:active{
+	text-decoration: none;
+}

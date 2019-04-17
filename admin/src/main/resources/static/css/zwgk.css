@@ -20,6 +20,11 @@
 #zwgk .zwgk-block .zwgk-block-body{
 	text-align: center;
 }
+a{
+    font-size: 16px;
+    font-family: "苹方-简 常规体";
+	color: #5B5B5B;
+}
 #zwgk .zwgk-block .zwgk-block-body a{
 	line-height: 32px;
     font-size: 16px;

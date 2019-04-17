@@ -5,36 +5,30 @@
 
 $(function(){
 	// 初始化
-	zwgk_init();
+	// zwgk_init();
 	// 监听
 	// myHandel();
 	
 	// 初始化
 	function zwgk_init(){
-		$.getJSON("/API/govern/list",{},function(data){
+		$.getJSON("/govern/list",{},function(data){
 			var html = "";
 			$.each(data.children,function(index,value){
-				 if(value.children.length != 0){
-					html = html+'<div class="zwgk-block">'
-						   +'	<div class="zwgk-block-head">'
-						   +'		<img src="./images/zwgk_list.png" width="9" style="margin-right: 6px;">'
-						   +	value.com_Stye
-						   +'	</div>'
-				 }else{
-					 html = html+'<div class="zwgk-block">'
-					   +'	<a href="zwgklist.html?governId='+value.com_Id+'" ><div class="zwgk-block-head">'
+				html = html+'<div class="zwgk-block">'
+					   +'	<div class="zwgk-block-head">'
 					   +'		<img src="./images/zwgk_list.png" width="9" style="margin-right: 6px;">'
 					   +	value.com_Stye
-					   +'   <a href="zwgklist.html?governId='+value.com_Id+'" class="right-arrow"></a>'
-					   +'	</div></a>'
-				 }
+			   if(value.children.length == 0){
+				   html=html+'   <a href="" class="right-arrow"></a>'
+			   }
 					
+				html=html+'	</div>'
 			   if(value.children.length > 0){
 				   html=html+'	<div class="zwgk-block-body">'
 						   +'		<div class="row" style="margin-right:0;margin-left:0;">'
 						   $.each(value.children,function(i,v){
 							   html=html+'			<div class="zwgk-block-list">'
-							   		    +'				<a href="zwgklist.html?governId='+v.com_Id+'" class="right-line" data-id="'+v.com_Id+'">'+v.com_Stye+'</a>'
+							   		    +'				<a href="" class="right-line" data-id="'+v.com_Id+'">'+v.com_Stye+'</a>'
 							   		    +'			</div>'
 						   })
 						   html = html +'		</div>'
