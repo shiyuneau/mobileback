@@ -97,7 +97,7 @@ public class ManagerLoginController {
         if(!falg){
             return null;
         }
-        return studyabroadService.applySuccessList(managerGUID);
+        return studyabroadService.applyApplyedList(managerGUID);
     }
     /**
      * 留学审核 传参 applyid 申请ID
@@ -140,20 +140,20 @@ public class ManagerLoginController {
         if(!falg){
             return null;
         }
-        return scholarshipApplicationService.applySuccessList(managerGUID);
+        return scholarshipApplicationService.applyApplyedList(managerGUID);
     }
 
     /**
      * 奖学金审核 传参 applyrecordid 奖学金记录ID
      *
-     * @param applyrecordid
+     * @param applyid
      * @param request
      * @return
      */
     @ResponseBody
     @PostMapping("/scholarcshipcheck")
-    public JsonResult scholarcshipCheck(@RequestParam("applyrecordid") String applyrecordid, HttpServletRequest request) {
-        if (StringUtils.isEmpty(applyrecordid) || StringUtils.isBlank(applyrecordid)) {
+    public JsonResult scholarcshipCheck(@RequestParam("applyid") String applyid, HttpServletRequest request) {
+        if (StringUtils.isEmpty(applyid) || StringUtils.isBlank(applyid)) {
             return JsonResult.error();
         }
         Claims claims = (Claims) request.getAttribute("CLAIMS");
@@ -162,7 +162,7 @@ public class ManagerLoginController {
         if(!falg){
             return JsonResult.error("用户过期或不是管理账户");
         }
-        boolean result = scholarshipApplicationService.applyCheck(userId, applyrecordid);
+        boolean result = scholarshipApplicationService.applyCheck(userId, applyid);
         if (result) {
             return JsonResult.ok();
         }

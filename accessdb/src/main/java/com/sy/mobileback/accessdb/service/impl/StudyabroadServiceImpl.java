@@ -137,20 +137,34 @@ public class StudyabroadServiceImpl implements StudyabroadService {
         });
     }
 
+    /**
+     * 根据指定得 管理员id和申请ID，对申请进行 审核，审核状态为成功
+     * @param userId
+     * @param applyid
+     * @return
+     */
     @Override
     public boolean applyCheck(String userId, String applyid) {
+
         Map<String, Object> map = new HashMap<>();
         map.put("applyid",applyid);
         map.put("status",ApplicationStatusType.ApplySuccess.getType());
+        Timestamp updateTime = DateUtils.getDBTime();
+        map.put("updateTime",updateTime);
         return studyabroadapplicationDao.applyCheck(map);
     }
 
+    /**
+     * 返回带申请得申请列表
+     * @param managerGUID
+     * @return
+     */
     @Override
-    public List<StudyabroadapplicationEntity> applySuccessList(String managerGUID) {
+    public List<StudyabroadapplicationEntity> applyApplyedList(String managerGUID) {
         Map<String, Object> map = new HashMap<>();
         map.put("managerGUID",managerGUID);
-        map.put("status",ApplicationStatusType.ApplySuccess.getType());
-        List<StudyabroadapplicationEntity> entityList = studyabroadapplicationDao.applySuccessList(map);
+        map.put("status",ApplicationStatusType.HasApply.getType());
+        List<StudyabroadapplicationEntity> entityList = studyabroadapplicationDao.applyApplyedList(map);
         entityEach(entityList);
         return entityList;
     }

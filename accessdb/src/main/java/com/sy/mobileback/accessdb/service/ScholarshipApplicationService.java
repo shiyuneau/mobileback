@@ -51,5 +51,5 @@ public interface ScholarshipApplicationService {
      * @param managerGUID
      * @return
      */
-    List<ScholarshipapplicationEntity> applySuccessList(String managerGUID);
+    List<ScholarshipapplicationEntity> applyApplyedList(String managerGUID);
 }

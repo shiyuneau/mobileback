@@ -45,5 +45,5 @@ public interface StudyabroadService {
      * @param managerGUID
      * @return
      */
-    List<StudyabroadapplicationEntity> applySuccessList(String managerGUID);
+    List<StudyabroadapplicationEntity> applyApplyedList(String managerGUID);
 }

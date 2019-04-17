@@ -97,15 +97,17 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
         Map<String, Object> map = new HashMap<>();
         map.put("applyrecordid", applyrecordid);
         map.put("status", ApplicationStatusType.ApplySuccess.getType());
+        Timestamp updateTime = DateUtils.getDBTime();
+        map.put("updateTime",updateTime);
         return scholarshipapplicationDao.applyCheck(map);
     }
 
     @Override
-    public List<ScholarshipapplicationEntity> applySuccessList(String managerGUID) {
+    public List<ScholarshipapplicationEntity> applyApplyedList(String managerGUID) {
         Map<String, Object> map = new HashMap<>();
         map.put("managerGUID", managerGUID);
-        map.put("status", ApplicationStatusType.ApplySuccess.getType());
-        List<ScholarshipapplicationEntity> entityList = scholarshipapplicationDao.applySuccessList(map);
+        map.put("status", ApplicationStatusType.HasApply.getType());
+        List<ScholarshipapplicationEntity> entityList = scholarshipapplicationDao.applyApplyedList(map);
         entityEach(entityList);
         return entityList;
     }

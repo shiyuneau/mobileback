@@ -71,7 +71,12 @@ public class StudentLoginController {
             return JsonResult.error("用户不存在");
         }
         String guid = mapResult.get("guid");
-        String token = JwtUtils.createToken(guid + "", 0, jwtParam);
+        String token = "";
+        if ("0".equals(type)) {
+            token = JwtUtils.createToken(guid + "", 0, jwtParam);
+        }else if ("1".equals(type)) {
+            token = JwtUtils.createToken(guid + "", 1, jwtParam);
+        }
         if (null == token) {
             // 生成token存在问题
             return JsonResult.error("token生成出错");

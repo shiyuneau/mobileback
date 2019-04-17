@@ -357,7 +357,7 @@
         update studyabroadapplication set Status = #{status} where GUID = #{applyid} and StudentGUID = #{userid}
     </update>
     <update id="applyCheck" parameterType="map">
-        update studyabroadapplication set status = #{status} where GUID = #{applyid}
+        update studyabroadapplication set status = #{status} , UpdatedTime = #{updateTime}where GUID = #{applyid}
     </update>
     <!--<select id="applyListBefore" resultType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity">-->
         <!--select * from studyabroadapplication where StudentGUID = #{userid}-->
@@ -368,7 +368,7 @@
         GUID,
         StudentGUID,
         School,
-        (SELECT Name FROM `college` where GUID = College ) as College,<!-- 此处的college应该是学校，应该从 school表找学校的name -->
+        (SELECT Name FROM `school` where GUID = College ) as College,<!-- 此处的college应该是学校，应该从 school表找学校的name -->
         (SELECT Name FROM `profession` where GUID = Profession ) as Profession,
         PhotoID,
         TaughtBy,
@@ -434,12 +434,12 @@
         from studyabroadapplication where StudentGUID = #{userid}
     </select>
 
-    <select id="applySuccessList" resultType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity" >
+    <select id="applyApplyedList" resultType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity" >
         select
         app.GUID,
         app.StudentGUID,
         app.School,
-        (SELECT Name FROM `college` where GUID = College ) as College,<!-- 此处的college应该是学校，应该从 school表找学校的name -->
+        (SELECT Name FROM `school` where GUID = College ) as College,<!-- 此处的college应该是学校，应该从 school表找学校的name -->
         (SELECT Name FROM `profession` where GUID = Profession ) as Profession,
         app.PhotoID,
         app.TaughtBy,
@@ -504,9 +504,9 @@
         app.EducationalExperience
         from
             studyabroadapplication app
-            INNER JOIN school sch on sch.GUID =app.School
+            INNER JOIN school sch on sch.GUID =app.College
             INNER JOIN manager man on sch.ManagerGUID =man.GUID
-        where  app.status = #{status} and man. GUID = #{managerGUID}
+        where  app.status = #{status} and man.GUID = #{managerGUID}
     </select>
 
 </mapper>
