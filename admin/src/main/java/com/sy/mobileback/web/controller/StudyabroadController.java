@@ -2,6 +2,7 @@ package com.sy.mobileback.web.controller;
 
 import com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity;
 import com.sy.mobileback.accessdb.service.StudyabroadService;
+import com.sy.mobileback.common.constant.AccessConstants;
 import com.sy.mobileback.common.utils.JsonResult;
 import com.sy.mobileback.common.utils.StringUtils;
 import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;

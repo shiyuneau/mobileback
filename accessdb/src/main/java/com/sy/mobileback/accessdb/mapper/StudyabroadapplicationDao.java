@@ -45,4 +45,19 @@ public interface StudyabroadapplicationDao {
      * @return
      */
     boolean applyCheck(Map<String, Object> map);
+
+    /**
+     * 获取所有高校的申请单的状态
+     * @param managerGUID
+     * @return
+     */
+    List<Integer> allStatusByGUID(String managerGUID);
+
+    /**
+     * 返回留学生申请的总个数
+     * @return
+     */
+    Integer studyabroadApplyCount();
+
+    List<StudyabroadapplicationEntity> studyabroadApplyListByPage(Map<String,Integer> map);
 }

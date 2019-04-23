@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.DestinationcountryDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.DestinationcountryEntity" id="destinationcountryMap">
+        <result property="sort" column="Sort"/>
+        <result property="country" column="Country"/>
+        <result property="title" column="Title"/>
+        <result property="context" column="Context"/>
+        <result property="guid" column="GUID"/>
+    </resultMap>
+
+    <insert id="destinationcountryBatchInsert" parameterType="java.util.List">
+        insert into destinationcountry  (
+                    Sort,
+                    Country,
+                    Title,
+                    Context,
+                    GUID
+                )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+                            #{item.sort},
+                            #{item.country},
+                            #{item.title},
+                            #{item.context},
+                            #{item.guid}
+                        )
+        </foreach>
+    </insert>
+
+
+    <select id="destinationcountryList" resultType="com.sy.mobileback.accessdb.domain.DestinationcountryEntity">
+        select * from destinationcountry limit #{pageMin} , #{pageMax}
+    </select>
+
+    <select id="destinationcountryCount" resultType="int">
+        select count(1) from destinationcountry
+    </select>
+
+    <update id = "destinationcountryUpdate" parameterType="com.sy.mobileback.accessdb.domain.DestinationcountryEntity">
+        update destinationcountry set
+                  Sort = #{sort},
+                  Country = #{country},
+                  Title = #{title},
+                  Context = #{context},
+                  GUID = #{guid}
+            </update>
+</mapper>

@@ -70,6 +70,13 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>${mybatis.boot.version}</version>
         </dependency>
+        <!-- 支持 @ConfigurationProperties 注解 -->  
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+         
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatisplus-spring-boot-starter</artifactId>

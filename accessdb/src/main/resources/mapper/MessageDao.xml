@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.MessageDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.MessageEntity" id="messageMap">
+        <result property="guid" column="GUID"/>
+        <result property="studentguid" column="StudentGUID"/>
+        <result property="content" column="Content"/>
+        <result property="replyguid" column="ReplyGUID"/>
+        <result property="replycontent" column="ReplyContent"/>
+        <result property="createdtime" column="CreatedTime"/>
+        <result property="updatedtime" column="UpdatedTime"/>
+        <result property="deleted" column="Deleted"/>
+    </resultMap>
+
+    <insert id="messageBatchInsert" parameterType="java.util.List">
+        insert into message  (
+                    GUID,
+                    StudentGUID,
+                    Content,
+                    ReplyGUID,
+                    ReplyContent,
+                    CreatedTime,
+                    UpdatedTime,
+                    Deleted
+                )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+                            #{item.guid},
+                            #{item.studentguid},
+                            #{item.content},
+                            #{item.replyguid},
+                            #{item.replycontent},
+                            #{item.createdtime},
+                            #{item.updatedtime},
+                            #{item.deleted}
+                        )
+        </foreach>
+    </insert>
+
+
+    <select id="messageList" resultType="com.sy.mobileback.accessdb.domain.MessageEntity">
+        select * from message limit #{pageMin} , #{pageMax}
+    </select>
+
+    <update id = "messageUpdate" parameterType="com.sy.mobileback.accessdb.domain.MessageEntity">
+        update message set
+                  GUID = #{guid},
+                  StudentGUID = #{studentguid},
+                  Content = #{content},
+                  ReplyGUID = #{replyguid},
+                  ReplyContent = #{replycontent},
+                  CreatedTime = #{createdtime},
+                  UpdatedTime = #{updatedtime},
+                  Deleted = #{deleted}
+            </update>
+</mapper>

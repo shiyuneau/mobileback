@@ -227,7 +227,7 @@ public class ScholarshipapplicationEntity implements Serializable {
 	/**
 	 * 父亲职业 fatheroccupation
 	 */
-	private String fatheremploymnet;
+	private String fatheremployment;
 	/**
 	 * 父亲受教育程度
 	 */
@@ -458,6 +458,18 @@ public class ScholarshipapplicationEntity implements Serializable {
      * 出生国
      */
     private String birthcountry;
+	/**
+	 * 修改建议
+	 */
+	private String applyAdvice;
+
+	public String getApplyAdvice() {
+		return applyAdvice;
+	}
+
+	public void setApplyAdvice(String applyAdvice) {
+		this.applyAdvice = applyAdvice;
+	}
 
 	/**
 	 * 设置：
@@ -1083,18 +1095,15 @@ public class ScholarshipapplicationEntity implements Serializable {
 	public String getFathercountry() {
 		return fathercountry;
 	}
-	/**
-	 * 设置：父亲职业
-	 */
-	public void setFatheremploymnet(String fatheremploymnet) {
-		this.fatheremploymnet = fatheremploymnet;
+
+	public String getFatheremployment() {
+		return fatheremployment;
 	}
-	/**
-	 * 获取：父亲职业
-	 */
-	public String getFatheremploymnet() {
-		return fatheremploymnet;
+
+	public void setFatheremployment(String fatheremployment) {
+		this.fatheremployment = fatheremployment;
 	}
+
 	/**
 	 * 设置：父亲受教育程度
 	 */

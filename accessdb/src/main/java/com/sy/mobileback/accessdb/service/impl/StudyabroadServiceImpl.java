@@ -7,7 +7,9 @@ import com.sy.mobileback.accessdb.mapper.StudyabroadapplicationDao;
 import com.sy.mobileback.accessdb.mapper.WorkexpireDao;
 import com.sy.mobileback.accessdb.service.StudyabroadService;
 import com.sy.mobileback.common.enums.ApplicationStatusType;
+import com.sy.mobileback.common.page.PageUtils;
 import com.sy.mobileback.common.utils.DateUtils;
+import com.sy.mobileback.common.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -138,17 +140,21 @@ public class StudyabroadServiceImpl implements StudyabroadService {
     }
 
     /**
-     * 根据指定得 管理员id和申请ID，对申请进行 审核，审核状态为成功
+     * 根据指定得 管理员id和申请ID，对申请进行 审核 , appResultType 为1 ，代表审核成功， 为0 代表拒绝审批
      * @param userId
      * @param applyid
      * @return
      */
     @Override
-    public boolean applyCheck(String userId, String applyid) {
+    public boolean applyCheck(String userId, String applyid , int appResultType) {
 
         Map<String, Object> map = new HashMap<>();
         map.put("applyid",applyid);
-        map.put("status",ApplicationStatusType.ApplySuccess.getType());
+        if (appResultType==1) {
+            map.put("status", ApplicationStatusType.SCHOOLApplySuccess.getType());
+        } else if (appResultType==0){
+            map.put("status", ApplicationStatusType.SCHOOLApplyFail.getType());
+        }
         Timestamp updateTime = DateUtils.getDBTime();
         map.put("updateTime",updateTime);
         return studyabroadapplicationDao.applyCheck(map);
@@ -167,5 +173,60 @@ public class StudyabroadServiceImpl implements StudyabroadService {
         List<StudyabroadapplicationEntity> entityList = studyabroadapplicationDao.applyApplyedList(map);
         entityEach(entityList);
         return entityList;
+    }
+
+    /**
+     * 统计留学申请的审批情况
+     * @param userFlag
+     * @return
+     */
+    @Override
+    public JsonResult studyabroadApplyCount(int userFlag , String managerGUID) {
+        List<Integer> statusList = null;
+        try {
+            statusList = studyabroadapplicationDao.allStatusByGUID(managerGUID);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.error("后台错误");
+        }
+        if (null==statusList) {
+            return JsonResult.error("后台错误");
+        }
+        int applying = 0;
+        int applySuccess = 0;
+        int applyReject = 0;
+        if (statusList.size() >0) {
+            for (Integer status : statusList) {
+                if (status == 1) {
+                    applying++;
+                }
+                if (status == 2) {
+                    applySuccess++;
+                }
+                if (status == 3) {
+                    applyReject++;
+                }
+            }
+        }
+        JsonResult result = JsonResult.ok();
+        result.put("allApply",statusList.size());
+        result.put("applying",applying);
+        result.put("applySuccess",applySuccess);
+        result.put("applyReject",applyReject);
+        return result;
+    }
+
+    @Override
+    public JsonResult studyabroadApplyListByPage(int pageNum, int pageSize) {
+        // pageNum 第一页肯定是1 ，但limit 是从 0-10
+        try {
+            int total = studyabroadapplicationDao.studyabroadApplyCount();
+            Map<String, Integer> pageMap = PageUtils.pageCreate(pageNum, pageSize);
+            List<StudyabroadapplicationEntity> list = studyabroadapplicationDao.studyabroadApplyListByPage(pageMap);
+            return PageUtils.resultCreate(list, total);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonResult.error();
     }
 }

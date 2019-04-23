@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 public class SchoolSearchResultEntity {
     private String shoolGuid;
     private String schoolName;
+    private String schoolAddress;
     private String professionName;
     private String professionGuid;
     private Integer academicSystem;
@@ -83,5 +84,13 @@ public class SchoolSearchResultEntity {
 
     public void setDegree(Integer degree) {
         this.degree = degree;
+    }
+
+    public String getSchoolAddress() {
+        return schoolAddress;
+    }
+
+    public void setSchoolAddress(String schoolAddress) {
+        this.schoolAddress = schoolAddress;
     }
 }

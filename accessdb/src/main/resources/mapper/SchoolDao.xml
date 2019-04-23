@@ -30,6 +30,7 @@
         SELECT
         sch.`Name` as schoolName ,
         sch.GUID as shoolGuid ,
+        sch.Address as schoolAddress ,
         pro.`Name` as professionName ,
         pro.GUID as professionGuid ,
         pro.AcademicSystem as academicSystem,

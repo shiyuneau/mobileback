@@ -51,4 +51,17 @@
         select * from educationexpire where ScholarshipGUID = #{applyGUID}
     </select>
 
+    <update id="educationexpireBatchUpdate" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update educationexpire
+            set
+                EducationFrom = #{item.educationfrom},
+                EducationTo = #{item.educationto},
+                EducationSchool = #{item.educationschool},
+                EducationStudy = #{item.educationstudy},
+                EducationField = #{item.educationfield}
+            where GUID = #{item.guid}
+        </foreach>
+    </update>
+
 </mapper>

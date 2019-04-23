@@ -23,6 +23,15 @@ public class StudyabroadapplicationEntity implements Serializable {
 	 * 学生ID
 	 */
 	private String studentguid;
+
+	/**
+	 * 学生姓名
+	 */
+	private String studentName;
+	/**
+	 * 学院名称
+	 */
+	private String xyName;
 	/**
 	 * 学校ID(原表中有，留存)
 	 */
@@ -31,10 +40,44 @@ public class StudyabroadapplicationEntity implements Serializable {
 	 * 大学ID（原表数据，残留存） 此处接口中应该是 学校的 ID
 	 */
 	private String college;
+
+	/**
+	 * 大学名称
+	 */
+	private String collegeName;
+
+	/**
+	 * 大学地址
+	 */
+	private String collegeAddress;
+
+	/**
+	 * 学时
+	 */
+	private String studytime;
+	/**
+	 * 学费
+	 */
+	private Double money;
+
+	/**
+	 * 奖学金
+	 */
+	private String jxj;
+
+	/**
+	 * 学位证
+	 */
+	private String xwz;
+
 	/**
 	 * 专业ID
 	 */
 	private String profession;
+	/**
+	 * 专业名称
+	 */
+	private String professionName;
 	/**
 	 * 照片
 	 */
@@ -364,6 +407,55 @@ public class StudyabroadapplicationEntity implements Serializable {
 	public String getCollege() {
 		return college;
 	}
+
+	public String getCollegeName() {
+		return collegeName;
+	}
+
+	public void setCollegeName(String collegeName) {
+		this.collegeName = collegeName;
+	}
+
+	public String getCollegeAddress() {
+		return collegeAddress;
+	}
+
+	public void setCollegeAddress(String collegeAddress) {
+		this.collegeAddress = collegeAddress;
+	}
+
+	public String getStudytime() {
+		return studytime;
+	}
+
+	public void setStudytime(String studytime) {
+		this.studytime = studytime;
+	}
+
+	public Double getMoney() {
+		return money;
+	}
+
+	public void setMoney(Double money) {
+		this.money = money;
+	}
+
+	public String getJxj() {
+		return jxj;
+	}
+
+	public void setJxj(String jxj) {
+		this.jxj = jxj;
+	}
+
+	public String getXwz() {
+		return xwz;
+	}
+
+	public void setXwz(String xwz) {
+		this.xwz = xwz;
+	}
+
 	/**
 	 * 设置：专业ID
 	 */
@@ -845,6 +937,15 @@ public class StudyabroadapplicationEntity implements Serializable {
 	public String getApplicationnode() {
 		return applicationnode;
 	}
+
+	public String getProfessionName() {
+		return professionName;
+	}
+
+	public void setProfessionName(String professionName) {
+		this.professionName = professionName;
+	}
+
 	/**
 	 * 设置：类型
 	 */
@@ -1049,6 +1150,13 @@ public class StudyabroadapplicationEntity implements Serializable {
 		return birth;
 	}
 
+	public String getStudentName() {
+		return studentName;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
 
 	/**
 	 * 设置：教育程度
@@ -1061,5 +1169,13 @@ public class StudyabroadapplicationEntity implements Serializable {
 	 */
 	public String getEducationalexperience() {
 		return educationalexperience;
+	}
+
+	public String getXyName() {
+		return xyName;
+	}
+
+	public void setXyName(String xyName) {
+		this.xyName = xyName;
 	}
 }

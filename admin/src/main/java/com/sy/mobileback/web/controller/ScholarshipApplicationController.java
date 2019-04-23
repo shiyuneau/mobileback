@@ -4,6 +4,7 @@ import com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity;
 import com.sy.mobileback.accessdb.service.ScholarshipApplicationService;
 import com.sy.mobileback.common.utils.JsonResult;
 import com.sy.mobileback.common.utils.StringUtils;
+import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
 import com.sy.mobileback.framework.jwt.utils.JwtUtils;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +95,20 @@ public class ScholarshipApplicationController {
         String userId = (String) claims.get("userId");
         //String userId = "bb47e847-85ed-4778-bba4-7b49ca915469";
         return scholarshipApplicationService.scholarcshipApplyList(userId);
+    }
+
+    @ResponseBody
+    @PostMapping("/applyUpdate")
+    public JsonResult scholarshipApplyUpdate(@RequestBody ScholarshipapplicationEntity entity,HttpServletRequest request) {
+        Claims claims = (Claims) request.getAttribute("CLAIMS");
+        String userId = (String) claims.get("userId");
+
+        boolean updateResult = scholarshipApplicationService.sholarshipApplyUpdate(entity,userId);
+        if (updateResult) {
+            return JsonResult.ok(1,"更新成功，审批重新申请");
+        } else {
+            return JsonResult.ok(-1,"更新失败");
+        }
     }
 
 }

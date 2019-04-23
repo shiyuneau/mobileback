@@ -69,6 +69,13 @@
             <artifactId>ucanaccess</artifactId>
             <version>4.0.1</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.5</version>
+        </dependency>
     </dependencies>
 
 

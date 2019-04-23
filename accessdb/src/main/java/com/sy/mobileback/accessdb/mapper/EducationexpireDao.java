@@ -17,4 +17,6 @@ public interface EducationexpireDao {
     List<EducationexpireEntity> educationExpireList(String studyabroadGUID);
 
     List<EducationexpireEntity> eduListByScholarshipId(String applyGUID);
+
+    boolean educationexpireBatchUpdate(List<EducationexpireEntity> list);
 }

@@ -1,6 +1,7 @@
 package com.sy.mobileback.accessdb.service;
 
 import com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity;
+import com.sy.mobileback.common.utils.JsonResult;
 
 import java.util.List;
 
@@ -40,16 +41,33 @@ public interface ScholarshipApplicationService {
     /**
      * 奖学金审核
      *
-     * @param userId
+     * @param userFlag
      * @param applyrecordid
      * @return
      */
-    boolean applyCheck(String userId, String applyrecordid);
+    boolean applyCheck(int userFlag, String applyrecordid,int applyResultType , String applyAdvice);
 
     /**
      * 奖学金申请列表 需要传递 schoolGUID 参数
      * @param managerGUID
      * @return
      */
-    List<ScholarshipapplicationEntity> applyApplyedList(String managerGUID);
+    List<ScholarshipapplicationEntity> applyApplyedList(String managerGUID ,int userFlag);
+
+    /**
+     * 根据 新的 留学金申请单信息，更新新的申请，并把 status 更改为 1
+     * @param entity
+     * @param userid
+     * @return
+     */
+    boolean sholarshipApplyUpdate(ScholarshipapplicationEntity entity , String userid);
+
+    /**
+     * 根据userFlag判断用户是高校还是教委，分别统计对应的奖学金的申请情况
+     * @param userFlag
+     * @param userId
+     * @return
+     */
+    JsonResult scholarshipApplyCount(int userFlag , String userId);
+
 }

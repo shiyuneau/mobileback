@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.ResourceDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.ResourceEntity" id="resourceMap">
+        <result property="guid" column="GUID"/>
+        <result property="objectguid" column="ObjectGUID"/>
+        <result property="date" column="Date"/>
+        <result property="type" column="Type"/>
+        <result property="file" column="File"/>
+        <result property="name" column="Name"/>
+        <result property="title" column="Title"/>
+        <result property="hits" column="Hits"/>
+    </resultMap>
+
+    <insert id="resourceBatchInsert" parameterType="java.util.List">
+        insert into resource  (
+                    GUID,
+                    ObjectGUID,
+                    Date,
+                    Type,
+                    File,
+                    Name,
+                    Title,
+                    Hits
+                )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+                            #{item.guid},
+                            #{item.objectguid},
+                            #{item.date},
+                            #{item.type},
+                            #{item.file},
+                            #{item.name},
+                            #{item.title},
+                            #{item.hits}
+                        )
+        </foreach>
+    </insert>
+
+
+    <select id="resourceList" resultType="com.sy.mobileback.accessdb.domain.ResourceEntity">
+        select * from resource limit #{pageMin} , #{pageMax}
+    </select>
+
+    <update id = "resourceUpdate" parameterType="com.sy.mobileback.accessdb.domain.ResourceEntity">
+        update resource set
+                  GUID = #{guid},
+                  ObjectGUID = #{objectguid},
+                  Date = #{date},
+                  Type = #{type},
+                  File = #{file},
+                  Name = #{name},
+                  Title = #{title},
+                  Hits = #{hits}
+            </update>
+</mapper>

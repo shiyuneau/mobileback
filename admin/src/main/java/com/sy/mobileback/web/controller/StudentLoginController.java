@@ -1,6 +1,5 @@
 package com.sy.mobileback.web.controller;
 
-import com.alibaba.fastjson.JSONReader;
 import com.sy.mobileback.accessdb.domain.ManagerEntity;
 import com.sy.mobileback.accessdb.domain.StudentEntity;
 import com.sy.mobileback.accessdb.service.ManagerService;
@@ -13,10 +12,8 @@ import com.sy.mobileback.framework.jwt.config.JwtParam;
 import com.sy.mobileback.framework.jwt.utils.JwtUtils;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.spring.web.json.Json;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -62,10 +59,10 @@ public class StudentLoginController {
         password = MD5Util.getMD5(password);
         if ("0".equals(type)) {
             mapResult = studentService.userLogin(username, password);
-            certificate = "student";
-        } else if ("1".equals(type)) {
+
+        } else if ("1".equals(type) || "2".equals(type)) {
             mapResult = managerService.userLogin(username, password);
-            certificate = "manager";
+
         }
         if (null == mapResult) {
             return JsonResult.error("用户不存在");
@@ -73,9 +70,23 @@ public class StudentLoginController {
         String guid = mapResult.get("guid");
         String token = "";
         if ("0".equals(type)) {
+            /*
+            学生
+             */
             token = JwtUtils.createToken(guid + "", 0, jwtParam);
+            certificate = "student";
         }else if ("1".equals(type)) {
+            /*
+            高校管理者
+             */
             token = JwtUtils.createToken(guid + "", 1, jwtParam);
+            certificate = "schoolmanager";
+        } else if ("2".equals(type)) {
+            /*
+            教委管理者
+             */
+            token = JwtUtils.createToken(guid + "",2,jwtParam);
+            certificate = "admin";
         }
         if (null == token) {
             // 生成token存在问题
@@ -253,13 +264,19 @@ public class StudentLoginController {
             return JsonResult.error("请填写邮箱");
         }
         // TODO 是否需要验证邮箱的格式
-        String newPass = studentService.passwordreset(email);
-        if (StringUtils.isNotBlank(newPass)) {
+        // 先判断邮箱是否存在
+        // userExist 方法如果用户存在，则返回 -1 ，
+        String emailExists = studentService.userExist(email);
+        if (null == emailExists) {
+            return JsonResult.error("用户不存在");
+        }
+        boolean resetFlag = studentService.passwordreset(email);
+        if (resetFlag) {
             JsonResult result = JsonResult.ok();
-            result.put("pass", newPass);
+            result.put("msg", "密码更新成功，请检查邮箱");
             return result;
         }
-        return JsonResult.error();
+        return JsonResult.error("密码更新错误，请联系管理员");
     }
 
     //    @JwtIgnore

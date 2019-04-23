@@ -12,5 +12,37 @@
         <result property="deleted" column="Deleted"/>
     </resultMap>
 
+    <insert id="alumniBatchInsert" parameterType="java.util.List">
+        insert into alumni  (
+                    GUID,
+                    SchoolGUID,
+                    StudentGUID,
+                    IsStar,
+                    Deleted
+                )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+                            #{item.guid},
+                            #{item.schoolguid},
+                            #{item.studentguid},
+                            #{item.isstar},
+                            #{item.deleted}
+                        )
+        </foreach>
+    </insert>
 
+
+    <select id="alumniList" resultType="com.sy.mobileback.accessdb.domain.AlumniEntity">
+        select * from alumni limit #{pageMin} , #{pageMax}
+    </select>
+
+    <update id = "alumniUpdate" parameterType="com.sy.mobileback.accessdb.domain.AlumniEntity">
+        update alumni set
+                  GUID = #{guid},
+                  SchoolGUID = #{schoolguid},
+                  StudentGUID = #{studentguid},
+                  IsStar = #{isstar},
+                  Deleted = #{deleted}
+            </update>
 </mapper>

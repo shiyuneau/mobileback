@@ -6,24 +6,42 @@ package com.sy.mobileback.common.enums;
  * @create 2019-04-06 11:26
  */
 public enum ApplicationStatusType {
+
     /**
-     * 已提交申请
+     * 重新填写申请
+     */
+    ApplyRewrite(-1,"申请重新填写"),
+
+    /**
+     * 已提交申请，也代表 高校待审核
      */
     HasApply(1,"待审核"),
     /**
-     * 审批通过
+     * 高校审批通过，也代表教委待审核
      */
-    ApplySuccess(2,"审批通过"),
+    SCHOOLApplySuccess(2,"高校审批通过既高校待审核"),
 
     /**
-     * 审批被拒绝
+     * 高校拒绝审批
      */
-    ApplyFail(3,"拒绝审批"),
+    SCHOOLApplyFail(3,"高校拒绝审批"),
+    /**
 
     /**
      * 用户取消申请
      */
-    UserCancelApply(4,"用户取消审批");
+    UserCancelApply(4,"用户取消审批"),
+
+    /**
+     * 教委审批通过
+     */
+    JWApplySuccess(5,"教委审批通过"),
+
+    /**
+     * 教委拒绝审批
+     */
+    JWApplyFail(6,"教委拒绝审批");
+
 
     private ApplicationStatusType(Integer type , String name) {
         this.type = type;

@@ -71,6 +71,8 @@
         <result property="birthplace" column="BirthPlace"/>
         <result property="maritalstatus" column="MaritalStatus"/>
         <result property="educationalexperience" column="EducationalExperience"/>
+        <result property="jxj" column="Jxj"/>
+        <result property="xwz" column="Xwz"/>
     </resultMap>
 
     <insert id="studyabroadapplicationBatchInsert" parameterType="java.util.List">
@@ -281,7 +283,9 @@
         Birth,
         BirthPlace,
         MaritalStatus,
-        EducationalExperience
+        EducationalExperience,
+        Jxj,
+        Xwz
         )
         values
             (
@@ -349,7 +353,9 @@
             #{birth},
             #{birthplace},
             #{maritalstatus},
-            #{educationalexperience}
+            #{educationalexperience},
+            #{jxj},
+            #{xwz}
             )
     </insert>
 
@@ -368,8 +374,13 @@
         GUID,
         StudentGUID,
         School,
-        (SELECT Name FROM `school` where GUID = College ) as College,<!-- 此处的college应该是学校，应该从 school表找学校的name -->
-        (SELECT Name FROM `profession` where GUID = Profession ) as Profession,
+        College,
+        (SELECT Name FROM `school` where GUID = College ) as collegeName,<!-- 此处的college应该是学校，应该从 school表找学校的name -->
+        (select Address from school where GUID = College ) as collegeAddress,
+        Profession,<!--(SELECT Name FROM `profession` where GUID = Profession ) as Profession,-->
+        (SELECT Name FROM `profession` where GUID = Profession ) as professionName,
+        (SELECT AcademicSystem FROM `profession` where GUID = Profession ) as studytime,
+        (SELECT Amount FROM `profession` where GUID = Profession ) as money,
         PhotoID,
         TaughtBy,
         StartYear,
@@ -430,7 +441,9 @@
         Birth,
         BirthPlace,
         MaritalStatus,
-        EducationalExperience
+        EducationalExperience,
+        Jxj,
+        Xwz
         from studyabroadapplication where StudentGUID = #{userid}
     </select>
 
@@ -439,8 +452,13 @@
         app.GUID,
         app.StudentGUID,
         app.School,
-        (SELECT Name FROM `school` where GUID = College ) as College,<!-- 此处的college应该是学校，应该从 school表找学校的name -->
-        (SELECT Name FROM `profession` where GUID = Profession ) as Profession,
+        app.College,
+        (SELECT Name FROM `school` where GUID = College ) as collegeName,<!-- 此处的college应该是学校，应该从 school表找学校的name -->
+        (select Address from school where GUID = College ) as collegeAddress,
+        app.Profession,<!--(SELECT Name FROM `profession` where GUID = Profession ) as Profession,-->
+        (SELECT Name FROM `profession` where GUID = Profession ) as professionName,
+        (SELECT AcademicSystem FROM `profession` where GUID = Profession ) as studytime,
+        (SELECT Amount FROM `profession` where GUID = Profession ) as money,
         app.PhotoID,
         app.TaughtBy,
         app.StartYear,
@@ -501,12 +519,50 @@
         app.Birth,
         app.BirthPlace,
         app.MaritalStatus,
-        app.EducationalExperience
+        app.EducationalExperience,
+        app.Jxj,
+        app.Xwz
         from
             studyabroadapplication app
             INNER JOIN school sch on sch.GUID =app.College
             INNER JOIN manager man on sch.ManagerGUID =man.GUID
         where  app.status = #{status} and man.GUID = #{managerGUID}
+    </select>
+
+    <select id="studyabroadApplyCount" resultType="int">
+        select count(1) from studyabroadapplication
+    </select>
+
+
+    <select id="studyabroadApplyListByPage" resultType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity" >
+        select
+        app.GUID,
+        app.StudentGUID,
+        (select UserName from `student` where GUID = StudentGUID) as studentName,
+        app.School,
+        (select col.Name
+        from college col left join school sch on col.SchoolGUID = sch.GUID
+        left JOIN  profession pro on col.GUID = pro.CollegeGUID
+        where sch.GUID = app.College and pro.GUID = app.Profession) as xyName,
+        app.College,
+        (SELECT Name FROM `school` where GUID = College ) as collegeName,<!-- 此处的college应该是学校，应该从 school表找学校的name -->
+        (select Address from school where GUID = College ) as collegeAddress,
+        app.Profession,<!--(SELECT Name FROM `profession` where GUID = Profession ) as Profession,-->
+        (SELECT Name FROM `profession` where GUID = Profession ) as professionName,
+        (SELECT AcademicSystem FROM `profession` where GUID = Profession ) as studytime,
+        (SELECT Amount FROM `profession` where GUID = Profession ) as money,
+        app.Status
+        from
+        studyabroadapplication app
+        INNER JOIN school sch on sch.GUID =app.College
+        INNER JOIN manager man on sch.ManagerGUID =man.GUID limit #{pageMin} , #{pageMax}
+    </select>
+
+    <select id="allStatusByGUID" resultType="java.lang.Integer">
+        SELECT app.`Status` from
+            studyabroadapplication app
+            INNER JOIN school sch on sch.GUID =app.College
+            INNER JOIN manager man on sch.ManagerGUID =man.GUID where man.GUID = #{managerGUID}
     </select>
 
 </mapper>

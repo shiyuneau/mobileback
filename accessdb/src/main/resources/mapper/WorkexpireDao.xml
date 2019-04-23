@@ -51,4 +51,16 @@
         select * from workexpire where ScholarshipGUID = #{applyGUID}
     </select>
 
+    <update id="workexpireBatchUpdate" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update workexpire set
+                WorkFrom = #{item.workfrom},
+                WorkTo = #{item.workto},
+                WorkCompany = #{item.workcompany},
+                Working = #{item.working},
+                WorkPosition = #{item.workposition}
+            where GUID = #{item.guid}
+        </foreach>
+    </update>
+
 </mapper>

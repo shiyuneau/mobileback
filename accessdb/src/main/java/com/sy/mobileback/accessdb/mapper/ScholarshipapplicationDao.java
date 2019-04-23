@@ -26,4 +26,8 @@ public interface ScholarshipapplicationDao {
     List<ScholarshipapplicationEntity> applyApplyedList(Map<String, Object> map);
 
     boolean applyCheck(Map<String, Object> map);
+
+    boolean scholarshipapplicationUpdate(ScholarshipapplicationEntity entity);
+
+    List<Integer> allStatusByGUID(Map<String, Object> map);
 }

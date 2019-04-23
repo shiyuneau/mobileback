@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.PlanapplyDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.PlanapplyEntity" id="planapplyMap">
+        <result property="guid" column="GUID"/>
+        <result property="company" column="Company"/>
+        <result property="address" column="Address"/>
+        <result property="title" column="Title"/>
+        <result property="name" column="Name"/>
+        <result property="position" column="Position"/>
+        <result property="sex" column="Sex"/>
+        <result property="level" column="Level"/>
+        <result property="birth" column="Birth"/>
+        <result property="nation" column="Nation"/>
+        <result property="tel" column="Tel"/>
+        <result property="mobile" column="Mobile"/>
+        <result property="fax" column="Fax"/>
+        <result property="email" column="Email"/>
+        <result property="isno" column="Isno"/>
+        <result property="lianxiren" column="Lianxiren"/>
+        <result property="lianxirenmobile" column="LianxirenMobile"/>
+        <result property="necessity" column="Necessity"/>
+    </resultMap>
+
+    <insert id="planapplyBatchInsert" parameterType="java.util.List">
+        insert into planapply  (
+                    GUID,
+                    Company,
+                    Address,
+                    Title,
+                    Name,
+                    Position,
+                    Sex,
+                    Level,
+                    Birth,
+                    Nation,
+                    Tel,
+                    Mobile,
+                    Fax,
+                    Email,
+                    Isno,
+                    Lianxiren,
+                    LianxirenMobile,
+                    Necessity
+                )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+                            #{item.guid},
+                            #{item.company},
+                            #{item.address},
+                            #{item.title},
+                            #{item.name},
+                            #{item.position},
+                            #{item.sex},
+                            #{item.level},
+                            #{item.birth},
+                            #{item.nation},
+                            #{item.tel},
+                            #{item.mobile},
+                            #{item.fax},
+                            #{item.email},
+                            #{item.isno},
+                            #{item.lianxiren},
+                            #{item.lianxirenmobile},
+                            #{item.necessity}
+                        )
+        </foreach>
+    </insert>
+
+
+
+    <select id="planapplyList" resultType="com.sy.mobileback.accessdb.domain.PlanapplyEntity">
+        select * from planapply limit #{pageMin} , #{pageMax}
+    </select>
+
+    <select id="planapplyCount" resultType="int">
+        select count(1) from planapply
+    </select>
+
+    <update id = "planapplyUpdate" parameterType="com.sy.mobileback.accessdb.domain.PlanapplyEntity">
+        update planapply set
+                  GUID = #{guid},
+                  Company = #{company},
+                  Address = #{address},
+                  Title = #{title},
+                  Name = #{name},
+                  Position = #{position},
+                  Sex = #{sex},
+                  Level = #{level},
+                  Birth = #{birth},
+                  Nation = #{nation},
+                  Tel = #{tel},
+                  Mobile = #{mobile},
+                  Fax = #{fax},
+                  Email = #{email},
+                  Isno = #{isno},
+                  Lianxiren = #{lianxiren},
+                  LianxirenMobile = #{lianxirenmobile},
+                  Necessity = #{necessity}
+            </update>
+</mapper>

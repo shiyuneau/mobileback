@@ -3,10 +3,13 @@ package com.sy.mobileback.accessdb.service.impl;
 import com.sy.mobileback.accessdb.domain.StudentEntity;
 import com.sy.mobileback.accessdb.mapper.StudentDao;
 import com.sy.mobileback.common.utils.DateUtils;
+import com.sy.mobileback.common.utils.EmailUtils;
 import com.sy.mobileback.common.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sy.mobileback.accessdb.service.StudentService;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -14,11 +17,15 @@ import java.util.Map;
 import java.util.Random;
 
 
+@Transactional
 @Service("studentService")
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private StudentDao studentDao;
+
+    @Autowired
+    private EmailUtils emailEntity;
 
     @Override
     public Map<String,String> userLogin(String username, String password) {
@@ -75,17 +82,24 @@ public class StudentServiceImpl implements StudentService {
      * @param email
      * @return
      */
+    @Transactional
     @Override
-    public String passwordreset(String email) {
-        String newPass = getRandomPassword(8);
-        String md5Pass = MD5Util.getMD5(newPass);
-        Timestamp updateTime = DateUtils.getDBTime();
-        boolean updateFlag = studentDao.passwordreset(email,md5Pass,updateTime);
-        if (updateFlag) {
-            // 发送邮件
-            return newPass;
+    public boolean passwordreset(String email) {
+        try {
+            String newPass = getRandomPassword(8);
+            String md5Pass = MD5Util.getMD5(newPass);
+            Timestamp updateTime = DateUtils.getDBTime();
+            boolean updateFlag = studentDao.passwordreset(email, md5Pass, updateTime);
+            if (updateFlag) {
+                // 发送邮件
+                emailEntity.passwordSendEmail(email, newPass);
+                return true;
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
-        return null;
+        return false;
     }
 
     public static String getRandomPassword(int length) {

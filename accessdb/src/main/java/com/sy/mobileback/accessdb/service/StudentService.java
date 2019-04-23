@@ -61,7 +61,7 @@ public interface StudentService {
      * @param email
      * @return
      */
-    String passwordreset(String email);
+    boolean passwordreset(String email);
 
 
 }

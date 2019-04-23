@@ -9,6 +9,7 @@ import com.sy.mobileback.accessdb.mapper.WorkexpireDao;
 import com.sy.mobileback.accessdb.service.ScholarshipApplicationService;
 import com.sy.mobileback.common.enums.ApplicationStatusType;
 import com.sy.mobileback.common.utils.DateUtils;
+import com.sy.mobileback.common.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -92,24 +93,151 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
         return entityList;
     }
 
+    /**
+     * 根据指定得 管理员id和申请ID，对申请进行 审核 , appResultType 为1 ，代表审核成功， 为0 代表拒绝审批
+     * @param userFlag
+     * @param applyrecordid
+     * @return
+     */
     @Override
-    public boolean applyCheck(String userId, String applyrecordid) {
+    public boolean applyCheck(int userFlag, String applyrecordid , int applyResultType , String applyAdvice) {
         Map<String, Object> map = new HashMap<>();
         map.put("applyrecordid", applyrecordid);
-        map.put("status", ApplicationStatusType.ApplySuccess.getType());
+        if (userFlag == 1) {
+            // 高校管理员
+            if (applyResultType == 0) {
+                map.put("status", ApplicationStatusType.SCHOOLApplyFail.getType());
+            }
+            if (applyResultType == 1) {
+                map.put("status", ApplicationStatusType.SCHOOLApplySuccess.getType());
+            }
+            if (applyResultType == -1) {
+                map.put("status", ApplicationStatusType.ApplyRewrite.getType());
+            }
+        } else if (userFlag == 2) {
+            // 教委人员
+            if (applyResultType == 0 ) {
+                map.put("status", ApplicationStatusType.JWApplyFail.getType());
+                map.put("applyAdvice",applyAdvice);
+            }
+            if (applyResultType == 1) {
+                map.put("status", ApplicationStatusType.JWApplySuccess.getType());
+            }
+        }
         Timestamp updateTime = DateUtils.getDBTime();
         map.put("updateTime",updateTime);
         return scholarshipapplicationDao.applyCheck(map);
     }
 
+    /**
+     * 返回待审核的数据，其中 userFlag 为 1 ，返回高校待审核 列表
+     * userFlag 为 2 ，返回 教委带审核列表
+     * @param managerGUID
+     * @param userFlag
+     * @return
+     */
     @Override
-    public List<ScholarshipapplicationEntity> applyApplyedList(String managerGUID) {
+    public List<ScholarshipapplicationEntity> applyApplyedList(String managerGUID,int userFlag) {
         Map<String, Object> map = new HashMap<>();
         map.put("managerGUID", managerGUID);
-        map.put("status", ApplicationStatusType.HasApply.getType());
+        if (userFlag == 1) {
+            map.put("status", ApplicationStatusType.HasApply.getType());
+            map.put("userFlag",1);
+            // 还要返回教委审核不通过的
+            map.put("jwbhstatus",ApplicationStatusType.JWApplyFail.getType());
+        } else if (userFlag == 2) {
+            map.put("status", ApplicationStatusType.SCHOOLApplySuccess.getType());
+            map.put("userFlag",2);
+        }
         List<ScholarshipapplicationEntity> entityList = scholarshipapplicationDao.applyApplyedList(map);
         entityEach(entityList);
         return entityList;
+    }
+
+    /**
+     * 更新奖学金的申请信息
+     * @param entity
+     * @param userid
+     * @return
+     */
+    @Override
+    public boolean sholarshipApplyUpdate(ScholarshipapplicationEntity entity, String userid) {
+        Timestamp dbTime = DateUtils.getDBTime();
+        entity.setUpdatedtime(dbTime);
+        entity.setStatus(1);
+        List<EducationexpireEntity> educationList = entity.getEducationList();
+        List<WorkexpireEntity> workList = entity.getWorkList();
+        try {
+            scholarshipapplicationDao.scholarshipapplicationUpdate(entity);
+            educationexpireDao.educationexpireBatchUpdate(educationList);
+            workexpireDao.workexpireBatchUpdate(workList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 返回奖学金 申请单的统计数量 ， 如果是教委，不传递 userId
+     * @param userFlag
+     * @param userId
+     * @return
+     */
+    @Override
+    public JsonResult scholarshipApplyCount(int userFlag, String userId) {
+        List<Integer> statusList = null;
+        Map<String, Object> map = new HashMap<>();
+        if (userFlag == 1) {
+            map.put("managerGUID", userId);
+        }
+        try {
+            statusList = scholarshipapplicationDao.allStatusByGUID(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.error("后台错误");
+        }
+        if (null==statusList) {
+            return JsonResult.error("后台错误");
+        }
+        int applying = 0;
+        int applySuccess = 0;
+        int applyReject = 0;
+        if (userFlag == 1) {
+            // 对于高校，待审核的 为status=1的
+            // 已经批准 为 status=2，status=5，status=6
+            // 高校驳回的 为 status = 3 ， status = -1
+            for (Integer status : statusList) {
+                if (status == 1) {
+                    applying++;
+                }
+                if (status == 2 || status == 5 || status == 6) {
+                    applySuccess++;
+                }
+                if (status == 3 || status == -1) {
+                    applyReject++;
+                }
+            }
+        } else if (userFlag == 2) {
+            for (Integer status : statusList) {
+                if (status == 2) {
+                    applying++;
+                }
+                if (status == 5) {
+                    applySuccess++;
+                }
+                if (status == 6) {
+                    applyReject++;
+                }
+            }
+        }
+        int applyTotal = applying + applySuccess + applyReject;
+        JsonResult result = JsonResult.ok();
+        result.put("allApply",applyTotal);
+        result.put("applying",applying);
+        result.put("applySuccess",applySuccess);
+        result.put("applyReject",applyReject);
+        return result;
     }
 
     private void entityEach(List<ScholarshipapplicationEntity> entityList) {

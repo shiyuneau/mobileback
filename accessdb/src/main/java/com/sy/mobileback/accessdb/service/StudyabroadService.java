@@ -1,6 +1,7 @@
 package com.sy.mobileback.accessdb.service;
 
 import com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity;
+import com.sy.mobileback.common.utils.JsonResult;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public interface StudyabroadService {
      * @param applyid
      * @return
      */
-    boolean applyCheck(String userId, String applyid);
+    boolean applyCheck(String userId, String applyid,int appResultType);
 
     /**
      * 审核留学申请数据列表  根据学校id  查询审核成功列表
@@ -46,4 +47,13 @@ public interface StudyabroadService {
      * @return
      */
     List<StudyabroadapplicationEntity> applyApplyedList(String managerGUID);
+
+    /**
+     * 对申请留学的申请单进行统计
+     * @param userFlag
+     * @return
+     */
+    JsonResult studyabroadApplyCount(int userFlag , String managerGUID);
+
+    JsonResult studyabroadApplyListByPage(int pageNum  , int pageSize);
 }

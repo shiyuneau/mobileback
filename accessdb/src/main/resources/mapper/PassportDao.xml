@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.PassportDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.PassportEntity" id="passportMap">
+        <result property="guid" column="GUID"/>
+        <result property="name" column="Name"/>
+        <result property="passportid" column="PassPortID"/>
+        <result property="begindate" column="BeginDate"/>
+        <result property="enddate" column="EndDate"/>
+        <result property="sex" column="Sex"/>
+        <result property="birth" column="Birth"/>
+        <result property="company" column="Company"/>
+        <result property="position" column="Position"/>
+    </resultMap>
+
+    <insert id="passportBatchInsert" parameterType="java.util.List">
+        insert into passport  (
+                    GUID,
+                    Name,
+                    PassPortID,
+                    BeginDate,
+                    EndDate,
+                    Sex,
+                    Birth,
+                    Company,
+                    Position
+                )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+                            #{item.guid},
+                            #{item.name},
+                            #{item.passportid},
+                            #{item.begindate},
+                            #{item.enddate},
+                            #{item.sex},
+                            #{item.birth},
+                            #{item.company},
+                            #{item.position}
+                        )
+        </foreach>
+    </insert>
+
+
+    <select id="passportList" resultType="com.sy.mobileback.accessdb.domain.PassportEntity">
+        select * from passport where Name like CONCAT(CONCAT('%', #{searchName}), '%') limit #{pageMin} , #{pageMax}
+    </select>
+
+    <select id="passportSearchCount" resultType="int">
+        select count(1) from passport where Name like CONCAT(CONCAT('%', #{searchName}), '%')
+    </select>
+
+    <update id = "passportUpdate" parameterType="com.sy.mobileback.accessdb.domain.PassportEntity">
+        update passport set
+                  GUID = #{guid},
+                  Name = #{name},
+                  PassPortID = #{passportid},
+                  BeginDate = #{begindate},
+                  EndDate = #{enddate},
+                  Sex = #{sex},
+                  Birth = #{birth},
+                  Company = #{company},
+                  Position = #{position}
+            </update>
+</mapper>

@@ -1,5 +1,6 @@
 package com.sy.mobileback.web.controller;
 
+import com.fasterxml.jackson.databind.annotation.JsonTypeResolver;
 import com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity;
 import com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity;
 import com.sy.mobileback.accessdb.service.ManagerService;
@@ -64,7 +65,7 @@ public class ManagerLoginController {
         // TODO 需要对 username和passwod判空
         // 先判断 username是否存在，如果存在返回 -1
         password = MD5Util.getMD5(password);
-        Map<String,String> map = managerService.userLogin(username, password);
+        Map<String, String> map = managerService.userLogin(username, password);
         String guid = map.get("guid");
         if (null == guid) {
             // 没有对应用户
@@ -81,6 +82,7 @@ public class ManagerLoginController {
         result.put("certificate", "manager");
         return result;
     }
+
     /**
      * 留学申请列表 需要传递 管理员id 参数
      *
@@ -89,16 +91,17 @@ public class ManagerLoginController {
      */
     @ResponseBody
     @GetMapping("/studyabroadapplycheck")
-    public List<StudyabroadapplicationEntity> StudyabroadApplyCheck( HttpServletRequest request, HttpServletResponse response) {
-        Claims claims = (Claims)request.getAttribute("CLAIMS");
-        String managerGUID = (String)claims.get("userId");
+    public List<StudyabroadapplicationEntity> StudyabroadApplyCheck(HttpServletRequest request, HttpServletResponse response) {
+        Claims claims = (Claims) request.getAttribute("CLAIMS");
+        String managerGUID = (String) claims.get("userId");
         //String userId = "bb47e847-85ed-4778-bba4-7b49ca915469";
         boolean falg = JwtUtils.managerTokenAndInuse(claims);
-        if(!falg){
+        if (!falg) {
             return null;
         }
         return studyabroadService.applyApplyedList(managerGUID);
     }
+
     /**
      * 留学审核 传参 applyid 申请ID
      *
@@ -108,24 +111,29 @@ public class ManagerLoginController {
      */
     @ResponseBody
     @PostMapping("/studyabroadcheck")
-    public JsonResult studyabroadcheck(@RequestParam("applyid") String applyid, HttpServletRequest request) {
+    public JsonResult studyabroadcheck(@RequestParam("applyid") String applyid, @RequestParam("applyResultType") int appResultType, @RequestParam(value = "applyAdvice", required = false) String applyAdvice, HttpServletRequest request) {
         if (StringUtils.isEmpty(applyid) || StringUtils.isBlank(applyid)) {
             return JsonResult.error();
         }
         Claims claims = (Claims) request.getAttribute("CLAIMS");
         String userId = (String) claims.get("userId");
         boolean falg = JwtUtils.managerTokenAndInuse(claims);
-        if(!falg){
+        if (!falg) {
             return JsonResult.error("用户过期或不是管理账户");
         }
-        boolean result = studyabroadService.applyCheck(userId, applyid);
+        boolean result = studyabroadService.applyCheck(userId, applyid, appResultType);
         if (result) {
             return JsonResult.ok();
         }
         return JsonResult.error();
     }
+
+
     /**
      * 奖学金申请列表 需要传递 userId 参数
+     * 申请列表里面，需要根据 高校和 教委 不同用户，返回不同的 列表
+     * 如果是高校，则返回 status为1 (待审批) 和 status = 6 (教委驳回) 的列表
+     * 如果是教委，则返回 status为2 的列表，status 为 2,代表高校审批通过，但教委未审批
      *
      * @param request
      * @return
@@ -133,14 +141,24 @@ public class ManagerLoginController {
     @ResponseBody
     @GetMapping("/scholarshipapplycheck")
     public List<ScholarshipapplicationEntity> scholarcshipApplyCheck(HttpServletRequest request, HttpServletResponse response) {
-        Claims claims = (Claims)request.getAttribute("CLAIMS");
-        String managerGUID = (String)claims.get("userId");
+        Claims claims = (Claims) request.getAttribute("CLAIMS");
+        String managerGUID = (String) claims.get("userId");
         //String userId = "bb47e847-85ed-4778-bba4-7b49ca915469";
         boolean falg = JwtUtils.managerTokenAndInuse(claims);
-        if(!falg){
+        if (!falg) {
             return null;
         }
-        return scholarshipApplicationService.applyApplyedList(managerGUID);
+        // 开始获取是高校管理员还是 教委管理员
+        List<ScholarshipapplicationEntity> entities = null;
+        int userFlag = (Integer) claims.get("userFlag");
+        if (userFlag == 1) {
+            // 当前为高校管理员
+            entities = scholarshipApplicationService.applyApplyedList(managerGUID, userFlag);
+        } else if (userFlag == 2) {
+            // 当前为 教委管理者
+            entities = scholarshipApplicationService.applyApplyedList(managerGUID, userFlag);
+        }
+        return entities;
     }
 
     /**
@@ -152,21 +170,58 @@ public class ManagerLoginController {
      */
     @ResponseBody
     @PostMapping("/scholarcshipcheck")
-    public JsonResult scholarcshipCheck(@RequestParam("applyid") String applyid, HttpServletRequest request) {
+    public JsonResult scholarcshipCheck(@RequestParam("applyid") String applyid, @RequestParam("applyResultType") int applyResultType, @RequestParam(value = "applyAdvice",required = false) String applyAdvice, HttpServletRequest request) {
         if (StringUtils.isEmpty(applyid) || StringUtils.isBlank(applyid)) {
             return JsonResult.error();
         }
         Claims claims = (Claims) request.getAttribute("CLAIMS");
         String userId = (String) claims.get("userId");
         boolean falg = JwtUtils.managerTokenAndInuse(claims);
-        if(!falg){
+        if (!falg) {
             return JsonResult.error("用户过期或不是管理账户");
         }
-        boolean result = scholarshipApplicationService.applyCheck(userId, applyid);
+        boolean result = false;
+        int userFlag = (Integer) claims.get("userFlag");
+        result = scholarshipApplicationService.applyCheck(userFlag, applyid, applyResultType, applyAdvice);
         if (result) {
             return JsonResult.ok();
         }
         return JsonResult.error();
     }
 
+
+    /**
+     * 留学申请数量统计
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/studyabroadApplyCount")
+    public JsonResult studyabroadApplyCount(HttpServletRequest request) {
+
+        Claims claims = (Claims) request.getAttribute("CLAIMS");
+        String userId = (String) claims.get("userId");
+        boolean falg = JwtUtils.managerTokenAndInuse(claims);
+        if (!falg) {
+            return JsonResult.error("用户过期或不是管理账户");
+        }
+        int userFlag = (Integer) claims.get("userFlag");
+        return studyabroadService.studyabroadApplyCount(userFlag,userId);
+    }
+
+    /**
+     * 奖学金申请数量统计
+     */
+    @ResponseBody
+    @GetMapping("/scholarshipApplyCount")
+    public JsonResult scholarshipApplyCount(HttpServletRequest request) {
+        Claims claims = (Claims) request.getAttribute("CLAIMS");
+        String userId = (String) claims.get("userId");
+        boolean falg = JwtUtils.managerTokenAndInuse(claims);
+        if (!falg) {
+            return JsonResult.error("用户过期或不是管理账户");
+        }
+        int userFlag = (Integer) claims.get("userFlag");
+        return scholarshipApplicationService.scholarshipApplyCount(userFlag,userId);
+    }
 }

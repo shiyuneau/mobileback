@@ -33,10 +33,12 @@ public class JwtUtils {
     private static final String AUTHORIZATION_HEADER_PREFIX = "TJEDU ";
 
     // 构造私有
-    private JwtUtils() {}
+    private JwtUtils() {
+    }
 
     /**
      * 获取原始token信息
+     *
      * @param authorizationHeader 授权头部信息
      * @return
      */
@@ -46,6 +48,7 @@ public class JwtUtils {
 
     /**
      * 获取授权头部信息
+     *
      * @param rawToken token信息
      * @return
      */
@@ -55,6 +58,7 @@ public class JwtUtils {
 
     /**
      * 校验授权头部信息格式合法性
+     *
      * @param authorizationHeader 授权头部信息
      * @return
      */
@@ -64,22 +68,24 @@ public class JwtUtils {
 
     /**
      * 生成token, 只在用户登录成功以后调用
-     * @param userId 用户id
+     *
+     * @param userId   用户id
      * @param jwtParam JWT加密所需信息
      * @return
      */
-    public static String createToken(String userId,Integer userFlag , JwtParam jwtParam) {
-        return createToken(userId, userFlag,null, jwtParam);
+    public static String createToken(String userId, Integer userFlag, JwtParam jwtParam) {
+        return createToken(userId, userFlag, null, jwtParam);
     }
 
     /**
      * 生成token, 只在用户登录成功以后调用
-     * @param userId 用户id
-     * @param claim 声明
+     *
+     * @param userId   用户id
+     * @param claim    声明
      * @param jwtParam JWT加密所需信息
      * @return
      */
-    public static String createToken(String userId, Integer userFlag , Map<String, Object> claim, JwtParam jwtParam) {
+    public static String createToken(String userId, Integer userFlag, Map<String, Object> claim, JwtParam jwtParam) {
         try {
             // 使用HS256加密算法
             SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
@@ -94,8 +100,8 @@ public class JwtUtils {
             // 添加构成JWT的参数
             JwtBuilder jwtBuilder = Jwts.builder().setHeaderParam("typ", "JWT")
                     .claim(JwtConstants.USER_ID_KEY, userId)
-                    .claim("inuse",1) // 0代表未使用，1代表正在使用
-                    .claim("userFlag",userFlag) // 0代表学生 , 1代表管理员
+                    .claim("inuse", 1) // 0代表未使用，1代表正在使用
+                    .claim("userFlag", userFlag) // 0代表学生 , 1代表管理员
                     .addClaims(claim)
                     .setIssuer(jwtParam.getName())
                     .setIssuedAt(now)
@@ -119,8 +125,8 @@ public class JwtUtils {
 
 
     public static boolean studentTokenAndInuse(Claims claims) {
-        int useFlag = (Integer)claims.get("inuse");
-        int userFlag = (Integer)claims.get("userFlag");
+        int useFlag = (Integer) claims.get("inuse");
+        int userFlag = (Integer) claims.get("userFlag");
         if (useFlag == 1 && userFlag == 0) {
             return true;
         }
@@ -128,9 +134,9 @@ public class JwtUtils {
     }
 
     public static boolean managerTokenAndInuse(Claims claims) {
-        int useFlag = (Integer)claims.get("inuse");
-        int userFlag = (Integer)claims.get("userFlag");
-        if (useFlag == 1 && userFlag == 1) {
+        int useFlag = (Integer) claims.get("inuse");
+        int userFlag = (Integer) claims.get("userFlag");
+        if (useFlag == 1 && (userFlag == 1 || userFlag == 2)) {
             return true;
         }
         return false;
@@ -138,36 +144,48 @@ public class JwtUtils {
 
     /**
      * 解析token
-     * @param authToken 授权头部信息
+     *
+     * @param authToken    授权头部信息
      * @param base64Secret base64加密密钥
      * @return
      */
-    public static Claims parseToken(HttpServletResponse response,String authToken, String base64Secret) {
-        try{
+    public static Claims parseToken(HttpServletResponse response, String authToken, String base64Secret) {
+        try {
             Claims claims = Jwts.parser()
                     .setSigningKey(DatatypeConverter.parseBase64Binary(base64Secret))
                     .parseClaimsJws(authToken).getBody();
             return claims;
         } catch (SignatureException se) {
-            // TODO 这里自行抛出异常
-            printJson(response,500,"===== 密钥不匹配 =====");
+            printJson(response, 500, "===== 密钥不匹配 =====");
             log.error("===== 密钥不匹配 =====", se);
         } catch (ExpiredJwtException ejw) {
             // TODO 这里自行抛出异常
-            printJson(response,500,"===== token过期，请重新登陆 =====");
+            printJson(response, 500, "===== token过期，请重新登陆 =====");
             log.error("===== token过期 =====", ejw);
-        } catch (Exception e){
+        } catch (Exception e) {
             // TODO 这里自行抛出异常
-            printJson(response,500,"===== token解析异常 =====");
+            printJson(response, 500, "===== token解析异常 =====");
             log.error("===== token解析异常 =====", e);
         }
         return null;
     }
 
-    public static void printJson(HttpServletResponse response, int code , String msg) {
-        ResponseResult responseResult = new ResponseResult(code,msg);
-        String content = JSONObject.toJSONString(responseResult.toString());
-        printContent(response, content);
+    public static void printJson(HttpServletResponse response, int code, String msg) {
+        response.setContentType("application/json");
+        response.setHeader("Cache-Control", "no-store");
+        response.setCharacterEncoding("UTF-8");
+        JSONObject res = new JSONObject();
+        res.put("msg", msg);
+        res.put("code", code);
+        try {
+            PrintWriter out = response.getWriter();
+            out = response.getWriter();
+            out.append(res.toString());
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
