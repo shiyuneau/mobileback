@@ -7,7 +7,8 @@ mobileback:
   # 版权年份
   copyrightYear: 2019
   # 文件上传路径
-  profile: D:/data/mobileback/
+#  profile: D:/data/mobileback/
+  profile: E:/ProgramCenter/data/mobileback/
   # 获取ip地址开关
   addressEnabled: true
 
@@ -16,7 +17,7 @@ server:
   port: 80
   servlet:
     # 项目contextPath
-    context-path: /API/
+    context-path: /
   tomcat:
     # tomcat的URI编码
     uri-encoding: UTF-8
@@ -90,7 +91,7 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
-# 代码生成
+# 代码生成emailSMTPHost
 gen:
   # 作者
   author: ruoyi,shiyu
@@ -100,3 +101,14 @@ gen:
   autoRemovePre: true
   # 表前缀(类名不会包含表前缀)
   tablePrefix: sys_
+
+
+mailbox:
+  emailProtocolName: smtp
+  emailSMTPHost: smtp.qq.com
+  # 邮箱号码
+  number: 1296721480@qq.com
+  authorizedCode: ujgzngkmjvguhjag
+  subject: 天津教育国际交流:密码修改
+  officalWebsite: http://lxtj.tmecglobal.org.cn/
+  nickName: 天津留学教育平台
