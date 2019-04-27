@@ -55,4 +55,8 @@
                         )
         </foreach>
     </insert>
+
+    <select id="professioninfoByMangerGUID" resultType="com.sy.mobileback.accessdb.domain.ProfessionEntity">
+        select *,(select lan.Name from `language` lan where lan.GUID = pro.LanguageGUID) as languageName from profession pro where pro.ManagerGUID = #{managerGUID}
+    </select>
 </mapper>

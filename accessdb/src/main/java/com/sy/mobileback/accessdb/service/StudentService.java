@@ -19,7 +19,7 @@ public interface StudentService {
      * @param password
      * @return
      */
-    Map<String,String> userLogin(String username ,String password);
+    Map<String,Object> userLogin(String username ,String password);
 
     /**
      * 判断用户是否已经注册

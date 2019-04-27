@@ -2,6 +2,7 @@ package com.sy.mobileback.web.controller;
 
 import com.sy.mobileback.accessdb.domain.ManagerEntity;
 import com.sy.mobileback.accessdb.domain.StudentEntity;
+import com.sy.mobileback.accessdb.service.AlumniService;
 import com.sy.mobileback.accessdb.service.ManagerService;
 import com.sy.mobileback.accessdb.service.StudentService;
 import com.sy.mobileback.common.utils.JsonResult;
@@ -32,6 +33,8 @@ public class StudentLoginController {
     private StudentService studentService;
     @Autowired
     private ManagerService managerService;
+    @Autowired
+    private AlumniService alumniService;
 
     @Autowired
     private JwtParam jwtParam;
@@ -55,7 +58,7 @@ public class StudentLoginController {
         // TODO 需要对 username和passwod判空
         // 先判断 username是否存在，如果存在返回 -1
         String certificate = null;
-        Map<String, String> mapResult = null;
+        Map<String, Object> mapResult = null;
         password = MD5Util.getMD5(password);
         if ("0".equals(type)) {
             mapResult = studentService.userLogin(username, password);
@@ -67,7 +70,7 @@ public class StudentLoginController {
         if (null == mapResult) {
             return JsonResult.error("用户不存在");
         }
-        String guid = mapResult.get("guid");
+        String guid = mapResult.get("guid").toString();
         String token = "";
         if ("0".equals(type)) {
             /*
@@ -286,6 +289,16 @@ public class StudentLoginController {
         Claims claims = (Claims) request.getAttribute("CLAIMS");
         claims.put("inuse", 0);
         return JsonResult.ok("退出成功");
+    }
+
+    @JwtIgnore
+    @GetMapping("/alumnisearch")
+    @ResponseBody
+    public JsonResult alumniSearch(@RequestParam("username") String username) {
+        if (org.apache.commons.lang3.StringUtils.isBlank(username)) {
+            return JsonResult.error("搜索姓名不能为空");
+        }
+        return alumniService.alumniSearchByName(username);
     }
 
 

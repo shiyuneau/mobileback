@@ -30,4 +30,6 @@ public interface ScholarshipapplicationDao {
     boolean scholarshipapplicationUpdate(ScholarshipapplicationEntity entity);
 
     List<Integer> allStatusByGUID(Map<String, Object> map);
+
+    Integer applyCountByStudentGUID(String userid);
 }

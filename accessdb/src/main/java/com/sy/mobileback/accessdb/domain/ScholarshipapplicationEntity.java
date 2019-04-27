@@ -257,6 +257,36 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 * 推荐院校
 	 */
 	private String recominstitutions;
+
+	/**
+	 * 大学名称
+	 */
+	private String collegeName;
+
+	/**
+	 * 大学地址
+	 */
+	private String collegeAddress;
+
+	/**
+	 * 学时
+	 */
+	private String studytime;
+	/**
+	 * 学费
+	 */
+	private Double money;
+
+	/**
+	 * 奖学金
+	 */
+	private String jxj;
+
+	/**
+	 * 学位证
+	 */
+	private String xwz;
+
 	/**
 	 * 联系人电话
 	 */
@@ -277,6 +307,21 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 * 申报专业
 	 */
 	private String decprofession;
+
+	/**
+	 * 专业名称
+	 */
+	private String professionName;
+
+	/**
+	 * 其他附件
+	 */
+	private String otherdoc;
+
+	/**
+	 * 其他附件备注
+	 */
+	private String otherbz;
 	/**
 	 * 奖学金申请照片id
 	 */
@@ -1782,4 +1827,76 @@ public class ScholarshipapplicationEntity implements Serializable {
     public void setBirthcountry(String birthcountry) {
         this.birthcountry = birthcountry;
     }
+
+	public String getCollegeName() {
+		return collegeName;
+	}
+
+	public void setCollegeName(String collegeName) {
+		this.collegeName = collegeName;
+	}
+
+	public String getCollegeAddress() {
+		return collegeAddress;
+	}
+
+	public void setCollegeAddress(String collegeAddress) {
+		this.collegeAddress = collegeAddress;
+	}
+
+	public String getStudytime() {
+		return studytime;
+	}
+
+	public void setStudytime(String studytime) {
+		this.studytime = studytime;
+	}
+
+	public Double getMoney() {
+		return money;
+	}
+
+	public void setMoney(Double money) {
+		this.money = money;
+	}
+
+	public String getJxj() {
+		return jxj;
+	}
+
+	public void setJxj(String jxj) {
+		this.jxj = jxj;
+	}
+
+	public String getXwz() {
+		return xwz;
+	}
+
+	public void setXwz(String xwz) {
+		this.xwz = xwz;
+	}
+
+	public String getProfessionName() {
+		return professionName;
+	}
+
+	public void setProfessionName(String professionName) {
+		this.professionName = professionName;
+	}
+
+	public String getOtherdoc() {
+		return otherdoc;
+	}
+
+	public void setOtherdoc(String otherdoc) {
+		this.otherdoc = otherdoc;
+	}
+
+	public String getOtherbz() {
+		return otherbz;
+	}
+
+	public void setOtherbz(String otherbz) {
+		this.otherbz = otherbz;
+	}
 }

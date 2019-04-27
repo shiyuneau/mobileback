@@ -25,4 +25,8 @@
         SELECT GUID,SchoolGUID,Introduction FROM `college` where GUID = #{collegeGuid}
     </select>
 
+    <select id="collegeinfoByMangerGUID" resultType="com.sy.mobileback.accessdb.domain.CollegeEntity">
+        select *,(select lan.Name from `language` lan where lan.GUID = col.LanguageGUID) as languageName from college col where col.ManagerGUID = #{managerGUID}
+    </select>
+
 </mapper>

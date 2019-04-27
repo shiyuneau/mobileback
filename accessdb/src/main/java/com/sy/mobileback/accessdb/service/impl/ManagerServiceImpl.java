@@ -33,8 +33,8 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public Map<String,String> userLogin(String username, String password) {
-        Map<String,String> result = managerDao.usernamePasswordMatch(username, password);
+    public Map<String,Object> userLogin(String username, String password) {
+        Map<String,Object> result = managerDao.usernamePasswordMatch(username, password);
 
         return result;
     }

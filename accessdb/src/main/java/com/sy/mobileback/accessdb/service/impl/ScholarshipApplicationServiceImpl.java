@@ -240,6 +240,11 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
         return result;
     }
 
+    @Override
+    public Integer applyCountByStudentGUID(String userid) {
+        return scholarshipapplicationDao.applyCountByStudentGUID(userid);
+    }
+
     private void entityEach(List<ScholarshipapplicationEntity> entityList) {
         entityList.forEach(entity -> {
             String applyGUID = entity.getGuid();

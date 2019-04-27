@@ -56,4 +56,11 @@ public interface StudyabroadService {
     JsonResult studyabroadApplyCount(int userFlag , String managerGUID);
 
     JsonResult studyabroadApplyListByPage(int pageNum  , int pageSize);
+
+    /**
+     * 根据学生id返回学生申请得申请单个数
+     * @param userid
+     * @return
+     */
+    Integer applyCountByStudentGUID(String userid);
 }

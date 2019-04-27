@@ -14,4 +14,11 @@ import java.util.List;
  */
 public interface ProfessionDao {
     void professionBatchInsert(List<ProfessionEntity> list);
+
+    /**
+     * 根据高校管理员ID获取专业的具体信息
+     * @param managerGUID
+     * @return
+     */
+    List<ProfessionEntity> professioninfoByMangerGUID(String managerGUID);
 }

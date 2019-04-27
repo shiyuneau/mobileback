@@ -49,4 +49,8 @@
     <select id="schoolByManagerguid" resultType="java.lang.String">
         select GUID from school where managerguid = #{managerGUID}
     </select>
+
+    <select id="schoolListByManager" resultType="com.sy.mobileback.accessdb.domain.SchoolEntity">
+        select sch.GUID , sch.Introduction ,sch.icon from school sch left join manager man on sch.ManagerGUID = man.GUID where man.GUID = #{mangerGUID}
+    </select>
 </mapper>

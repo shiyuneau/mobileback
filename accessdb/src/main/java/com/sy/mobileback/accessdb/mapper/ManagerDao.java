@@ -23,7 +23,7 @@ public interface ManagerDao {
 
     boolean updateUser(Map<String,Object> person);
 
-    Map<String,String> usernamePasswordMatch(@Param("username")String username , @Param("password")String password);
+    Map<String,Object> usernamePasswordMatch(@Param("username")String username , @Param("password")String password);
 
     /**
      * 根据 userId 获取用户名称

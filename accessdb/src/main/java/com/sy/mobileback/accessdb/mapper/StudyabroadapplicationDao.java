@@ -60,4 +60,11 @@ public interface StudyabroadapplicationDao {
     Integer studyabroadApplyCount();
 
     List<StudyabroadapplicationEntity> studyabroadApplyListByPage(Map<String,Integer> map);
+
+    /**
+     * 根据学生ID返回申请单得个数
+     * @param userid
+     * @return
+     */
+    Integer applyCountByStudentGUID(String userid);
 }

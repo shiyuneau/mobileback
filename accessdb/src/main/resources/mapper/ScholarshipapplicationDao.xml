@@ -114,6 +114,10 @@
         <result property="marriage" column="Marriage"/>
         <result property="birthcountry" column="Birthcountry"/>
         <result property="applyAdvice" column="ApplyAdvice"/>
+        <result property="jxj" column="Jxj"/>
+        <result property="xwz" column="Xwz"/>
+        <result property="otherdoc" column="Otherdoc"/>
+        <result property="otherbz" column="Otherbz"/>
     </resultMap>
 
     <insert id="scholarshipapplicationBatchInsert" parameterType="java.util.List">
@@ -194,7 +198,7 @@
         studyend,
         needstudyChinese,
         needstudyChinesetime,
-        needstudyChineseother,
+        other,
         otherplan,
         otherpublished,
         scholarship,
@@ -419,7 +423,7 @@
                     studyend,
                     needstudyChinese,
                     needstudyChinesetime,
-                    needstudyChineseother,
+                    other,
                     otherplan,
                     otherpublished,
                     scholarship,
@@ -450,7 +454,11 @@
                     EducationalExperience,
                     Sex,
                     Marriage,
-                    Birthcountry
+                    Birthcountry,
+                    Jxj,
+                    Xwz,
+                    Otherdoc,
+                    Otherbz
                 )
         values(
                             #{guid},
@@ -559,129 +567,148 @@
                             #{educationalexperience},
                             #{sex},
                             #{marriage},
-                            #{birthcountry}
+                            #{birthcountry},
+                            #{jxj},
+                            #{xwz},
+                            #{otherdoc},
+                            #{otherbz}
         )
     </insert>
     <update id="applyExecute" parameterType="map">
         update Scholarshipapplication set Status = #{status} where GUID =#{applyrecordid} and StudentGUID = #{userid}
     </update>
+
+    <select id="applyCountByStudentGUID" resultType="int">
+        select count(1) from Scholarshipapplication where StudentGUID = #{userid}
+    </select>
+
     <update id="applyCheck" parameterType="map">
         update Scholarshipapplication set Status = #{status} , UpdatedTime = #{updateTime}
         <if test="applyAdvice !=null and applyAdvice !=''">, ApplyAdvice = #{applyAdvice}</if>
         where GUID =#{applyrecordid}
     </update>
     <select id="applyList" resultType="com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity">
-        select  GUID,
-                    StudentGUID,
-                    ScholarshipGUID,
-                    Scholarship,
-                    Title,
-                    Content,
-                    Status,
-                    CreatedTime,
-                    UpdatedTime,
-                    Deleted,
-                    FamilyName,
-                    GivenName,
-                    NationalityGUID,
-                    Birth,
-                    BirthCountryGUID,
-                    City,
-                    MaritalStatus,
-                    NativeLanguage,
-                    Religion,
-                    AddressCountryGUID,
-                    Presentaddress,
-                    Tel,
-                    Passport,
-                    EducationSchool,
-                    EducationProfessional,
-                    Certificates,
-                    EmploymentRecord,
-                    Chinese,
-                    English,
-                    ChineseScore,
-                    OtherLanguage,
-                    WorkedInChina,
-                    StudentType,
-                    ApllySchool,
-                    ApllyProfessional,
-                    StudyPlan,
-                    GraduationPlan,
-                    Production,
-                    ScholarshipApplied,
-                    Organization,
-                    ContactName,
-                    ContactTel,
-                    ContactFax,
-                    ContactAddress,
-                    Email,
-                    SpouseName,
-                    SpouseAge,
-                    SpouseCountry,
-                    SpouseEmployment,
-                    SpouseEducation,
-                    FatherName,
-                    FatherAge,
-                    FatherCountry,
-                    FatherEmployment,
-                    FatherEducation,
-                    MotherName,
-                    MotherAge,
-                    MotherCountry,
-                    MotherEmployment,
-                    MotherEducation,
-                    (SELECT Name FROM `school` where GUID = recominstitutions ) as recominstitutions,
-                    phone,
-                    project,
-                    scholarshipType,
-                    level,
-                    decprofession,
-                    photoid,
-                    fax,
-                    premanentaddres,
-                    hsk,
-                    canstudy,
-                    subject,
-                    educationchina,
-                    studystart,
-                    studyend,
-                    needstudyChinese,
-                    needstudyChinesetime,
-                    needstudyChineseother,
-                    otherplan,
-                    otherpublished,
-                    scholarshiprecommend,
-                    studiedorwork,
-                    institutionoremployer,
-                    starttimechina,
-                    endtimechina,
-                    recom1,
-                    recom2,
-                    notice,
-                    schoolreport,
-                    diploma,
-                    diplomatype,
-                    examination,
-                    planchina,
-                    article,
-                    Otherannex,
-                    Type,
-                    AuditResult,
-                    PassportNo,
-                    PassportName,
-                    ExpireAt,
-                    HighestDegree,
-                    Nationality,
-                    Mothertongue,
-                    EmigrantFlag,
-                    BirthPlace,
-                    EducationalExperience,
-                    Sex,
-                    Marriage,
-                    Birthcountry,
-                    ApplyAdvice
-            from Scholarshipapplication where StudentGUID = #{userId}
+        select GUID,
+        StudentGUID,
+        ScholarshipGUID,
+        Scholarship,
+        Title,
+        Content,
+        Status,
+        CreatedTime,
+        UpdatedTime,
+        Deleted,
+        FamilyName,
+        GivenName,
+        NationalityGUID,
+        Birth,
+        BirthCountryGUID,
+        City,
+        MaritalStatus,
+        NativeLanguage,
+        Religion,
+        AddressCountryGUID,
+        Presentaddress,
+        Tel,
+        Passport,
+        EducationSchool,
+        EducationProfessional,
+        Certificates,
+        EmploymentRecord,
+        Chinese,
+        English,
+        ChineseScore,
+        OtherLanguage,
+        WorkedInChina,
+        StudentType,
+        ApllySchool,
+        ApllyProfessional,
+        StudyPlan,
+        GraduationPlan,
+        Production,
+        ScholarshipApplied,
+        Organization,
+        ContactName,
+        ContactTel,
+        ContactFax,
+        ContactAddress,
+        Email,
+        SpouseName,
+        SpouseAge,
+        SpouseCountry,
+        SpouseEmployment,
+        SpouseEducation,
+        FatherName,
+        FatherAge,
+        FatherCountry,
+        FatherEmployment,
+        FatherEducation,
+        MotherName,
+        MotherAge,
+        MotherCountry,
+        MotherEmployment,
+        MotherEducation,
+        recominstitutions,
+        (SELECT Name FROM `school` where GUID = recominstitutions ) as
+        collegeName,<!-- 此处的college应该是学校，应该从 school表找学校的name -->
+        (select Address from school where GUID = recominstitutions ) as collegeAddress,
+        (SELECT Name FROM `profession` where GUID = decprofession ) as professionName,
+        (SELECT AcademicSystem FROM `profession` where GUID = decprofession ) as studytime,
+        (SELECT Amount FROM `profession` where GUID = decprofession ) as money,
+        phone,
+        project,
+        scholarshipType,
+        level,
+        decprofession,
+        photoid,
+        fax,
+        premanentaddres,
+        hsk,
+        canstudy,
+        subject,
+        educationchina,
+        studystart,
+        studyend,
+        needstudyChinese,
+        needstudyChinesetime,
+        other,
+        otherplan,
+        otherpublished,
+        scholarshiprecommend,
+        studiedorwork,
+        institutionoremployer,
+        starttimechina,
+        endtimechina,
+        recom1,
+        recom2,
+        notice,
+        schoolreport,
+        diploma,
+        diplomatype,
+        examination,
+        planchina,
+        article,
+        Otherannex,
+        Type,
+        AuditResult,
+        PassportNo,
+        PassportName,
+        ExpireAt,
+        HighestDegree,
+        (select Name from country where GUID = Nationality) as Nationality,
+        Mothertongue,
+        EmigrantFlag,
+        BirthPlace,
+        EducationalExperience,
+        Sex,
+        Marriage,
+        Birthcountry,
+        ApplyAdvice,
+        Jxj,
+        Xwz,
+        Otherdoc,
+        Otherbz
+        from Scholarshipapplication where StudentGUID = #{userId}
     </select>
     <select id="applyApplyedList" resultType="com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity">
         select
@@ -745,7 +772,13 @@
         apply.MotherEmployment,
         apply.MotherEducation,
         apply.Scholarship,
-        (SELECT Name FROM `school` where GUID = recominstitutions ) as recominstitutions,
+        apply.recominstitutions,
+        (SELECT Name FROM `school` where GUID = apply.recominstitutions ) as
+        collegeName,<!-- 此处的college应该是学校，应该从 school表找学校的name -->
+        (select Address from school where GUID =  apply.recominstitutions ) as collegeAddress,
+        (SELECT Name FROM `profession` where GUID = apply.decprofession ) as professionName,
+        (SELECT AcademicSystem FROM `profession` where GUID = apply.decprofession ) as studytime,
+        (SELECT Amount FROM `profession` where GUID = apply.decprofession ) as money,
         apply.phone,
         apply.project,
         apply.scholarshipType,
@@ -762,7 +795,7 @@
         apply.studyend,
         apply.needstudyChinese,
         apply.needstudyChinesetime,
-        apply.needstudyChineseother,
+        apply.other,
         apply.otherplan,
         apply.otherpublished,
         apply.scholarshiprecommend,
@@ -786,7 +819,7 @@
         apply.PassportName,
         apply.ExpireAt,
         apply.HighestDegree,
-        apply.Nationality,
+        (select Name from country where GUID = apply.Nationality) as Nationality,
         apply.Mothertongue,
         apply.EmigrantFlag,
         apply.BirthPlace,
@@ -794,7 +827,11 @@
         apply.Sex,
         apply.Marriage,
         apply.Birthcountry,
-        apply.ApplyAdvice
+        apply.ApplyAdvice,
+        apply.Jxj,
+        apply.Xwz,
+        apply.Otherdoc,
+        apply.Otherbz
         from scholarshipapplication apply
         left JOIN school sch on sch.GUID = apply.recominstitutions
         left JOIN manager man on sch.ManagerGUID = man.GUID where apply.status = #{status}
@@ -802,7 +839,8 @@
         <if test="jwbhstatus !=null and jwbhstatus !=''">or apply.status = #{jwbhstatus}</if>
     </select>
 
-    <update id="scholarshipapplicationUpdate" parameterType="com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity">
+    <update id="scholarshipapplicationUpdate"
+            parameterType="com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity">
   update scholarshipapplication set
                   StudentGUID = #{studentguid},
                   recominstitutions = #{recominstitutions},
@@ -872,7 +910,11 @@
                   examination = #{examination},
                   planchina = #{planchina},
                   article = #{article},
-                  Status = #{status}
+                  Status = #{status},
+                  Jxj = #{jxj},
+                  Xwz = #{xwz},
+                  Otherdoc = #{otherdoc},
+                  Otherbz = #{otherbz}
 
                   where GUID = #{guid}
     </update>
@@ -882,9 +924,9 @@
         from scholarshipapplication apply
         left JOIN school sch on sch.GUID = apply.recominstitutions
         left JOIN manager man on sch.ManagerGUID = man.GUID
-            <where>
-                <if test="managerGUID!=null and managerGUID != ''"> man.GUID = #{managerGUID} </if>
-            </where>
+        <where>
+            <if test="managerGUID!=null and managerGUID != ''">man.GUID = #{managerGUID}</if>
+        </where>
     </select>
 
 </mapper>

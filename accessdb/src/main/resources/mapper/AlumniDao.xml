@@ -3,41 +3,60 @@
 
 <mapper namespace="com.sy.mobileback.accessdb.mapper.AlumniDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.sy.mobileback.accessdb.domain.AlumniEntity" id="alumniMap">
         <result property="guid" column="GUID"/>
         <result property="schoolguid" column="SchoolGUID"/>
+        <result property="professionguid" column="ProfessionGUID"/>
         <result property="studentguid" column="StudentGUID"/>
         <result property="isstar" column="IsStar"/>
         <result property="deleted" column="Deleted"/>
     </resultMap>
 
     <insert id="alumniBatchInsert" parameterType="java.util.List">
-        insert into alumni  (
-                    GUID,
-                    SchoolGUID,
-                    StudentGUID,
-                    IsStar,
-                    Deleted
-                )
+        insert into alumni (
+        GUID,
+        SchoolGUID,
+        StudentGUID,
+        IsStar,
+        Deleted
+        )
         values
         <foreach collection="list" item="item" separator=",">
             (
-                            #{item.guid},
-                            #{item.schoolguid},
-                            #{item.studentguid},
-                            #{item.isstar},
-                            #{item.deleted}
-                        )
+            #{item.guid},
+            #{item.schoolguid},
+            #{item.studentguid},
+            #{item.isstar},
+            #{item.deleted}
+            )
         </foreach>
     </insert>
 
-
-    <select id="alumniList" resultType="com.sy.mobileback.accessdb.domain.AlumniEntity">
-        select * from alumni limit #{pageMin} , #{pageMax}
+    <select id="aluminCount" resultType="java.lang.Integer">
+        select count(1) from alumni alu LEFT JOIN school sch on alu.SchoolGUID = sch.GUID where sch.ManagerGUID = #{userid}
     </select>
 
-    <update id = "alumniUpdate" parameterType="com.sy.mobileback.accessdb.domain.AlumniEntity">
+
+    <select id="alumniList" resultType="com.sy.mobileback.accessdb.domain.AlumniEntity">
+select alu.guid,
+		sch.Name  as aluminSchoolName,
+		(select pro.Name from profession pro where alu.ProfessionGUID = pro.GUID) as professionName,
+	stu.UserName as aluminName,
+	stu.`Status` as status ,
+	stu.Mail as mail,
+	stu.Introduction as introduction,
+	edu.Name as education
+from alumni alu left join student stu on alu.StudentGUID = stu.GUID
+LEFT JOIN school sch on alu.SchoolGUID = sch.GUID
+left JOIN education edu on stu.EducationGUID = edu.GUID  where sch.ManagerGUID = #{userid} limit #{pageMin} , #{pageMax}
+    </select>
+
+    <select id="alumniSearchByName" resultType="com.sy.mobileback.accessdb.domain.AlumniEntity">
+        select alu.GUID,stu.`UserName` as aluminName from alumni alu LEFT JOIN student stu on alu.StudentGUID = stu.GUID where stu.`UserName` like CONCAT(CONCAT('%', #{username}), '%')
+    </select>
+
+    <update id="alumniUpdate" parameterType="com.sy.mobileback.accessdb.domain.AlumniEntity">
         update alumni set
                   GUID = #{guid},
                   SchoolGUID = #{schoolguid},
@@ -45,4 +64,5 @@
                   IsStar = #{isstar},
                   Deleted = #{deleted}
             </update>
+
 </mapper>

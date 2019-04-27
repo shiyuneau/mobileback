@@ -16,4 +16,6 @@ public interface CollegeDao {
 	List<CollegeEntity> collegeList();
 
     CollegeEntity collegeDetail(String collegeGuid);
+
+    List<CollegeEntity> collegeinfoByMangerGUID(String managerGUID);
 }

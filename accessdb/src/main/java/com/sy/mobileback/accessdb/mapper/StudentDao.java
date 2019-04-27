@@ -17,7 +17,7 @@ import java.util.Map;
 public interface StudentDao {
     List<String> userHasRegistry(String email);
 
-    Map<String,String> usernamePasswordMatch(@Param("username") String username , @Param("password") String password);
+    Map<String,Object> usernamePasswordMatch(@Param("username") String username , @Param("password") String password);
 
     void newUserInsert(StudentEntity entity);
 

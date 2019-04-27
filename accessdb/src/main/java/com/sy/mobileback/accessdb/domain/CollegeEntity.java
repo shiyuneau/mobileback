@@ -56,6 +56,19 @@ public class CollegeEntity implements Serializable {
 	private Integer deleted;
 
 	/**
+	 * 语言名称
+	 */
+	private String languageName;
+
+	public String getLanguageName() {
+		return languageName;
+	}
+
+	public void setLanguageName(String languageName) {
+		this.languageName = languageName;
+	}
+
+	/**
 	 * 设置：
 	 */
 	public void setGuid(String guid) {

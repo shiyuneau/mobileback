@@ -22,6 +22,8 @@ public class AlumniEntity implements Serializable {
 	 * 
 	 */
 	private String schoolguid;
+
+	private String professionguid;
 	/**
 	 * 
 	 */
@@ -34,6 +36,107 @@ public class AlumniEntity implements Serializable {
 	 * 
 	 */
 	private Integer deleted;
+
+	/**
+	 * 姓名
+	 */
+	private String aluminName;
+
+	/**
+	 * 学校名称
+	 */
+	private String aluminSchoolName;
+
+	/**
+	 * 专业名称
+	 */
+	private String professionName;
+
+	/**
+	 * 学历
+	 */
+	private String education;
+
+	/**
+	 * 状态
+	 */
+	private String status;
+
+	/**
+	 * 邮箱
+	 */
+	private String mail;
+
+	/**
+	 * 个人介绍
+	 */
+	private String introduction;
+
+
+
+	public String getProfessionguid() {
+		return professionguid;
+	}
+
+	public void setProfessionguid(String professionguid) {
+		this.professionguid = professionguid;
+	}
+
+	public String getProfessionName() {
+		return professionName;
+	}
+
+	public void setProfessionName(String professionName) {
+		this.professionName = professionName;
+	}
+
+	public String getEducation() {
+		return education;
+	}
+
+	public void setEducation(String education) {
+		this.education = education;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
+
+	public String getAluminName() {
+		return aluminName;
+	}
+
+	public void setAluminName(String aluminName) {
+		this.aluminName = aluminName;
+	}
+
+	public String getAluminSchoolName() {
+		return aluminSchoolName;
+	}
+
+	public void setAluminSchoolName(String aluminSchoolName) {
+		this.aluminSchoolName = aluminSchoolName;
+	}
 
 	/**
 	 * 设置：

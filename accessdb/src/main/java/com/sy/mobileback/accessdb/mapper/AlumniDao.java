@@ -4,6 +4,7 @@ import com.sy.mobileback.accessdb.domain.AlumniEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -15,5 +16,13 @@ import java.util.List;
 public interface AlumniDao {
     void alumniBatchInsert(List<AlumniEntity> list);
     boolean alumniUpdate(AlumniEntity entity);
-    List<AlumniEntity> alumniList();
+    List<AlumniEntity> alumniList(Map<String,Object> map);
+
+    List<AlumniEntity> alumniSearchByName(String username);
+
+    /**
+     * 学校得总数
+     * @return
+     */
+    Integer aluminCount(String userid);
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.*;
 import javax.mail.internet.AddressException;
@@ -53,6 +54,7 @@ public class EmailUtils {
         return new EmailUtils();
     }
 
+    @Transactional
     public boolean passwordSendEmail(String emailSendTo, String password) {
 
         Properties props = new Properties();

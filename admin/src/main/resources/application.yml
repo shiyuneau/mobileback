@@ -105,10 +105,10 @@ gen:
 
 mailbox:
   emailProtocolName: smtp
-  emailSMTPHost: smtp.qq.com
+  emailSMTPHost: smtp.163.com
   # 邮箱号码
-  number: 1296721480@qq.com
-  authorizedCode: ujgzngkmjvguhjag
+  number: tjguojiaozhongxin@163.com
+  authorizedCode: tjgjzx2019
   subject: 天津教育国际交流:密码修改
   officalWebsite: http://lxtj.tmecglobal.org.cn/
   nickName: 天津留学教育平台

@@ -70,4 +70,11 @@ public interface ScholarshipApplicationService {
      */
     JsonResult scholarshipApplyCount(int userFlag , String userId);
 
+    /**
+     * 根据学生ID返回申请单得个数
+     * @param userid
+     * @return
+     */
+    Integer applyCountByStudentGUID(String userid);
+
 }

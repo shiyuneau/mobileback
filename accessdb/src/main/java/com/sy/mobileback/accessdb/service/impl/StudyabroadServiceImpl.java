@@ -175,6 +175,11 @@ public class StudyabroadServiceImpl implements StudyabroadService {
         return entityList;
     }
 
+    @Override
+    public Integer applyCountByStudentGUID(String userid) {
+        return studyabroadapplicationDao.applyCountByStudentGUID(userid);
+    }
+
     /**
      * 统计留学申请的审批情况
      * @param userFlag

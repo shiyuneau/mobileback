@@ -19,7 +19,7 @@ public interface ManagerService {
      */
     String userExist(String email);
 
-    Map<String,String> userLogin(String username, String password);
+    Map<String,Object> userLogin(String username, String password);
 
     /**
      * 插入新的manager对象

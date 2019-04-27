@@ -2,6 +2,8 @@ package com.sy.mobileback.accessdb.service.impl;
 
 import com.sy.mobileback.accessdb.domain.StudentEntity;
 import com.sy.mobileback.accessdb.mapper.StudentDao;
+import com.sy.mobileback.accessdb.service.ScholarshipApplicationService;
+import com.sy.mobileback.accessdb.service.StudyabroadService;
 import com.sy.mobileback.common.utils.DateUtils;
 import com.sy.mobileback.common.utils.EmailUtils;
 import com.sy.mobileback.common.utils.MD5Util;
@@ -27,11 +29,32 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private EmailUtils emailEntity;
 
+    @Autowired
+    private StudyabroadService studyabroadService;
+
+    @Autowired
+    private ScholarshipApplicationService scholarshipApplicationService;
+
     @Override
-    public Map<String,String> userLogin(String username, String password) {
+    public Map<String,Object> userLogin(String username, String password) {
 
-        Map<String,String> resultMap = studentDao.usernamePasswordMatch(username, password);
+        Map<String,Object> resultMap = studentDao.usernamePasswordMatch(username, password);
 
+        if (null!=resultMap && resultMap.containsKey("guid")) {
+            int applyStatus = 0 ;
+            //获取学生得申请情况
+            String userid = resultMap.get("guid").toString();
+            int studyaboardCount = studyabroadService.applyCountByStudentGUID(userid);
+            int scholarshipCount = scholarshipApplicationService.applyCountByStudentGUID(userid);
+            if (studyaboardCount >=1 && scholarshipCount == 0) {
+                applyStatus = 1;
+            }else if (studyaboardCount==0 && scholarshipCount >=1) {
+                applyStatus = 2;
+            }else if (studyaboardCount >= 1 && scholarshipCount >= 1) {
+                applyStatus = 3;
+            }
+            resultMap.put("applyStatus",applyStatus);
+        }
         return resultMap;
     }
 

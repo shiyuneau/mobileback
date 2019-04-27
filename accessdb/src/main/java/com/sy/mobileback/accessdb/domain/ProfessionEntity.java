@@ -30,6 +30,16 @@ public class ProfessionEntity implements Serializable {
 	 * 
 	 */
 	private String languageguid;
+	private String languageName;
+
+	public String getLanguageName() {
+		return languageName;
+	}
+
+	public void setLanguageName(String languageName) {
+		this.languageName = languageName;
+	}
+
 	/**
 	 * 
 	 */

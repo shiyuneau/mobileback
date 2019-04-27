@@ -3,7 +3,7 @@
 
 <mapper namespace="com.sy.mobileback.accessdb.mapper.StudyabroadapplicationDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity" id="studyabroadapplicationMap">
         <result property="guid" column="GUID"/>
         <result property="studentguid" column="StudentGUID"/>
@@ -76,74 +76,74 @@
     </resultMap>
 
     <insert id="studyabroadapplicationBatchInsert" parameterType="java.util.List">
-        insert into studyabroadapplication  (
-                    GUID,
-                    StudentGUID,
-                    School,
-                    College,
-                    Profession,
-                    PhotoID,
-                    TaughtBy,
-                    StartYear,
-                    FundingSource,
-                    Degree,
-                    AdmissionSeason,
-                    English,
-                    Hsk,
-                    Ielts,
-                    Toefl,
-                    ReferenceBy,
-                    ReferenceTel,
-                    Finacial,
-                    Guarantorin,
-                    GuarantorinTel,
-                    Guardian,
-                    ValidPassport,
-                    GraduateCertificate,
-                    HighestAcademic,
-                    CollegeTranscript,
-                    JuniorCollegeDiploma,
-                    ChineseLanguageCertificate,
-                    MedicalReport,
-                    StudyPlan,
-                    StreetAddress,
-                    CityProvince,
-                    Country,
-                    CountryEmail,
-                    CountryPhone,
-                    CountryZipcode,
-                    ApplyEmail,
-                    ApplyPhone,
-                    ApplyAddress,
-                    ApplyZipcode,
-                    ReceiveName,
-                    ReceiveCity,
-                    ReceiveAddress,
-                    ReceivePhone,
-                    ReceiveCountry,
-                    ReceiverZipcode,
-                    ApplicationNode,
-                    Type,
-                    Status,
-                    AuditResult,
-                    CreatedTime,
-                    UpdatedTime,
-                    Deleted,
-                    PassportNo,
-                    PassportName,
-                    ExpireAt,
-                    FamilyName,
-                    GivenName,
-                    HighestDegree,
-                    Religion,
-                    Nationality,
-                    Mothertongue,
-                    EmigrantFlag,
-                    BirthDate,
-                    BirthPlace,
-                    MaritalStatus,
-                    EducationalExperience
-                )
+        insert into studyabroadapplication (
+        GUID,
+        StudentGUID,
+        School,
+        College,
+        Profession,
+        PhotoID,
+        TaughtBy,
+        StartYear,
+        FundingSource,
+        Degree,
+        AdmissionSeason,
+        English,
+        Hsk,
+        Ielts,
+        Toefl,
+        ReferenceBy,
+        ReferenceTel,
+        Finacial,
+        Guarantorin,
+        GuarantorinTel,
+        Guardian,
+        ValidPassport,
+        GraduateCertificate,
+        HighestAcademic,
+        CollegeTranscript,
+        JuniorCollegeDiploma,
+        ChineseLanguageCertificate,
+        MedicalReport,
+        StudyPlan,
+        StreetAddress,
+        CityProvince,
+        Country,
+        CountryEmail,
+        CountryPhone,
+        CountryZipcode,
+        ApplyEmail,
+        ApplyPhone,
+        ApplyAddress,
+        ApplyZipcode,
+        ReceiveName,
+        ReceiveCity,
+        ReceiveAddress,
+        ReceivePhone,
+        ReceiveCountry,
+        ReceiverZipcode,
+        ApplicationNode,
+        Type,
+        Status,
+        AuditResult,
+        CreatedTime,
+        UpdatedTime,
+        Deleted,
+        PassportNo,
+        PassportName,
+        ExpireAt,
+        FamilyName,
+        GivenName,
+        HighestDegree,
+        Religion,
+        Nationality,
+        Mothertongue,
+        EmigrantFlag,
+        BirthDate,
+        BirthPlace,
+        MaritalStatus,
+        EducationalExperience
+        )
         values
         <foreach collection="list" item="item" separator=",">
             (
@@ -217,7 +217,8 @@
         </foreach>
     </insert>
 
-    <insert id="studyabroadapplicationInsert" parameterType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity">
+    <insert id="studyabroadapplicationInsert"
+            parameterType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity">
         insert into studyabroadapplication  (
         GUID,
         StudentGUID,
@@ -362,14 +363,18 @@
     <update id="applyCancel" parameterType="map">
         update studyabroadapplication set Status = #{status} where GUID = #{applyid} and StudentGUID = #{userid}
     </update>
+
+    <select id="applyCountByStudentGUID" resultType="int">
+        select count(1) from studyabroadapplication where StudentGUID = #{userid}
+    </select>
     <update id="applyCheck" parameterType="map">
         update studyabroadapplication set status = #{status} , UpdatedTime = #{updateTime}where GUID = #{applyid}
     </update>
     <!--<select id="applyListBefore" resultType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity">-->
-        <!--select * from studyabroadapplication where StudentGUID = #{userid}-->
+    <!--select * from studyabroadapplication where StudentGUID = #{userid}-->
     <!--</select>-->
 
-    <select id="applyList" resultType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity" >
+    <select id="applyList" resultType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity">
         select
         GUID,
         StudentGUID,
@@ -435,7 +440,7 @@
         GivenName,
         HighestDegree,
         Religion,
-        Nationality,
+        (select Name from country where GUID = Nationality) as Nationality,
         Mothertongue,
         EmigrantFrom,
         Birth,
@@ -447,7 +452,7 @@
         from studyabroadapplication where StudentGUID = #{userid}
     </select>
 
-    <select id="applyApplyedList" resultType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity" >
+    <select id="applyApplyedList" resultType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity">
         select
         app.GUID,
         app.StudentGUID,
@@ -513,7 +518,7 @@
         app.GivenName,
         app.HighestDegree,
         app.Religion,
-        app.Nationality,
+        (select Name from country where GUID = app.Nationality) as Nationality,
         app.Mothertongue,
         app.EmigrantFrom,
         app.Birth,
@@ -523,10 +528,10 @@
         app.Jxj,
         app.Xwz
         from
-            studyabroadapplication app
-            INNER JOIN school sch on sch.GUID =app.College
-            INNER JOIN manager man on sch.ManagerGUID =man.GUID
-        where  app.status = #{status} and man.GUID = #{managerGUID}
+        studyabroadapplication app
+        INNER JOIN school sch on sch.GUID =app.College
+        INNER JOIN manager man on sch.ManagerGUID =man.GUID
+        where app.status = #{status} and man.GUID = #{managerGUID}
     </select>
 
     <select id="studyabroadApplyCount" resultType="int">
@@ -534,7 +539,7 @@
     </select>
 
 
-    <select id="studyabroadApplyListByPage" resultType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity" >
+    <select id="studyabroadApplyListByPage" resultType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity">
         select
         app.GUID,
         app.StudentGUID,
@@ -542,7 +547,7 @@
         app.School,
         (select col.Name
         from college col left join school sch on col.SchoolGUID = sch.GUID
-        left JOIN  profession pro on col.GUID = pro.CollegeGUID
+        left JOIN profession pro on col.GUID = pro.CollegeGUID
         where sch.GUID = app.College and pro.GUID = app.Profession) as xyName,
         app.College,
         (SELECT Name FROM `school` where GUID = College ) as collegeName,<!-- 此处的college应该是学校，应该从 school表找学校的name -->

@@ -24,9 +24,11 @@ public interface SchoolDao {
 	 */
 	List<SchoolSearchResultEntity> schoolSearch(Map<String,Object> map);
     /**
-     * 根据学校id  返回学校id
+     * 根据管理员id  返回学校id
      * @param userId
      * @return
      */
     List<String> schoolByManagerguid(String userId);
+
+    List<SchoolEntity> schoolListByManager(String mangerGUID);
 }
