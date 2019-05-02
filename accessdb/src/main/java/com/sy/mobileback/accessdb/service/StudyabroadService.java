@@ -63,4 +63,18 @@ public interface StudyabroadService {
      * @return
      */
     Integer applyCountByStudentGUID(String userid);
+
+    /**
+     * 根据 type 的不同，分别 按 国籍、专业、学校统计学生数量
+     * @param type
+     * @return
+     */
+    JsonResult studyaboardAnalysis(Integer type);
+
+    /**
+     * 根据 学校的 不同，返回当年的该学校 成功审批的offer
+     * @param managerGUID
+     * @return
+     */
+    JsonResult studyOfferByYear(String managerGUID);
 }

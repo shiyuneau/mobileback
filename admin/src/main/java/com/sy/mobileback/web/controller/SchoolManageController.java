@@ -2,6 +2,7 @@ package com.sy.mobileback.web.controller;
 
 import com.sy.mobileback.accessdb.service.AlumniService;
 import com.sy.mobileback.accessdb.service.SchoolService;
+import com.sy.mobileback.common.annotation.Log;
 import com.sy.mobileback.common.constant.AccessConstants;
 import com.sy.mobileback.common.utils.JsonResult;
 import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
@@ -29,6 +30,7 @@ public class SchoolManageController {
     @Autowired
     private SchoolService schoolService;
 
+    @Log(title = "校友录列表")
     @GetMapping("/xyl/alumnilist")
     @ResponseBody
     public JsonResult alumniList(@RequestParam(value = "pageNum", required = false) Integer pageNum, @RequestParam(value = "pageSize", required = false) Integer pageSize , HttpServletRequest request) {
@@ -54,6 +56,7 @@ public class SchoolManageController {
      * @param request
      * @return
      */
+    @Log(title = "学校信息")
     @GetMapping("/schinfo/schoolintro")
     @ResponseBody
     public JsonResult schoolIntroduction(HttpServletRequest request) {

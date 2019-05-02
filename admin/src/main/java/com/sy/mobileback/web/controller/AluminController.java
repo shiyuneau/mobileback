@@ -3,6 +3,7 @@ package com.sy.mobileback.web.controller;
 import com.sy.mobileback.accessdb.domain.AluminNews;
 import com.sy.mobileback.accessdb.domain.ArticleEntity;
 import com.sy.mobileback.accessdb.service.ArticleService;
+import com.sy.mobileback.common.annotation.Log;
 import com.sy.mobileback.common.constant.AccessConstants;
 import com.sy.mobileback.common.utils.JsonResult;
 import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
@@ -30,6 +31,7 @@ public class AluminController {
      * 获取校友新闻列表
      * @return
      */
+    @Log
     @JwtIgnore
     @ResponseBody
     @RequestMapping("/news")

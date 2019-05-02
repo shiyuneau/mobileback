@@ -7,6 +7,7 @@ import com.sy.mobileback.accessdb.service.ManagerService;
 import com.sy.mobileback.accessdb.service.ScholarshipApplicationService;
 import com.sy.mobileback.accessdb.service.SchoolService;
 import com.sy.mobileback.accessdb.service.StudyabroadService;
+import com.sy.mobileback.common.annotation.Log;
 import com.sy.mobileback.common.utils.JsonResult;
 import com.sy.mobileback.common.utils.MD5Util;
 import com.sy.mobileback.common.utils.StringUtils;
@@ -14,6 +15,7 @@ import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
 import com.sy.mobileback.framework.jwt.config.JwtParam;
 import com.sy.mobileback.framework.jwt.utils.JwtUtils;
 import io.jsonwebtoken.Claims;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import springfox.documentation.spring.web.json.Json;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -53,6 +56,7 @@ public class ManagerLoginController {
      * @param person
      * @return
      */
+    @Log(title="管理员登录")
     @JwtIgnore
     @PostMapping("/login")
     @ResponseBody
@@ -84,31 +88,13 @@ public class ManagerLoginController {
     }
 
     /**
-     * 留学申请列表 需要传递 管理员id 参数
-     *
-     * @param request
-     * @return
-     */
-    @ResponseBody
-    @GetMapping("/studyabroadapplycheck")
-    public List<StudyabroadapplicationEntity> StudyabroadApplyCheck(HttpServletRequest request, HttpServletResponse response) {
-        Claims claims = (Claims) request.getAttribute("CLAIMS");
-        String managerGUID = (String) claims.get("userId");
-        //String userId = "bb47e847-85ed-4778-bba4-7b49ca915469";
-        boolean falg = JwtUtils.managerTokenAndInuse(claims);
-        if (!falg) {
-            return null;
-        }
-        return studyabroadService.applyApplyedList(managerGUID);
-    }
-
-    /**
      * 留学审核 传参 applyid 申请ID
      *
      * @param applyid
      * @param request
      * @return
      */
+    @Log(title = "教委或高校审核留学申请")
     @ResponseBody
     @PostMapping("/studyabroadcheck")
     public JsonResult studyabroadcheck(@RequestParam("applyid") String applyid, @RequestParam("applyResultType") int appResultType, @RequestParam(value = "applyAdvice", required = false) String applyAdvice, HttpServletRequest request) {
@@ -128,6 +114,26 @@ public class ManagerLoginController {
         return JsonResult.error();
     }
 
+    @Log(title="教委或学校留学申请的申请列表")
+    /**
+     * 留学申请列表 需要传递 管理员id 参数
+     *
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/studyabroadapplycheck")
+    public List<StudyabroadapplicationEntity> StudyabroadApplyCheck(HttpServletRequest request, HttpServletResponse response) {
+        Claims claims = (Claims) request.getAttribute("CLAIMS");
+        String managerGUID = (String) claims.get("userId");
+        //String userId = "bb47e847-85ed-4778-bba4-7b49ca915469";
+        boolean falg = JwtUtils.managerTokenAndInuse(claims);
+        if (!falg) {
+            return null;
+        }
+        return studyabroadService.applyApplyedList(managerGUID);
+    }
+
 
     /**
      * 奖学金申请列表 需要传递 userId 参数
@@ -138,6 +144,7 @@ public class ManagerLoginController {
      * @param request
      * @return
      */
+    @Log(title = "管理员奖学金列表")
     @ResponseBody
     @GetMapping("/scholarshipapplycheck")
     public List<ScholarshipapplicationEntity> scholarcshipApplyCheck(HttpServletRequest request, HttpServletResponse response) {
@@ -168,6 +175,7 @@ public class ManagerLoginController {
      * @param request
      * @return
      */
+    @Log(title = "奖学金审核")
     @ResponseBody
     @PostMapping("/scholarcshipcheck")
     public JsonResult scholarcshipCheck(@RequestParam("applyid") String applyid, @RequestParam("applyResultType") int applyResultType, @RequestParam(value = "applyAdvice",required = false) String applyAdvice, HttpServletRequest request) {
@@ -195,6 +203,7 @@ public class ManagerLoginController {
      * @param request
      * @return
      */
+    @Log(title = "留学申请数量统计")
     @ResponseBody
     @GetMapping("/studyabroadApplyCount")
     public JsonResult studyabroadApplyCount(HttpServletRequest request) {
@@ -212,6 +221,7 @@ public class ManagerLoginController {
     /**
      * 奖学金申请数量统计
      */
+    @Log(title = "奖学金数量统计")
     @ResponseBody
     @GetMapping("/scholarshipApplyCount")
     public JsonResult scholarshipApplyCount(HttpServletRequest request) {
@@ -223,5 +233,66 @@ public class ManagerLoginController {
         }
         int userFlag = (Integer) claims.get("userFlag");
         return scholarshipApplicationService.scholarshipApplyCount(userFlag,userId);
+    }
+
+    /**
+     * 根据不同的类型，对留学申请做不同的统计
+     * @param request
+     * @param type
+     * @return
+     */
+    @Log(title = "留学申请数量统计")
+    @ResponseBody
+    @GetMapping("/studyaboardanalysis")
+    public JsonResult studyaboardAnalysis(HttpServletRequest request,@RequestParam("type") Integer type){
+        Claims claims = (Claims) request.getAttribute("CLAIMS");
+        String userId = (String) claims.get("userId");
+        int userFlag = (Integer) claims.get("userFlag");
+        if (userFlag!=2) {
+            return JsonResult.error("请使用教委用户登录");
+        }
+        if (null == type) {
+            return JsonResult.error("请输入正确的type");
+        }
+        return studyabroadService.studyaboardAnalysis(type);
+    }
+
+    /**
+     * 根据不同的类型，对留学申请做不同的统计
+     * @param request
+     * @param type
+     * @return
+     */
+    @Log(title="奖学金数量统计")
+    @ResponseBody
+    @GetMapping("/scholarshipanalysis")
+    public JsonResult scholarshipanalysis(HttpServletRequest request,@RequestParam("type") Integer type){
+        Claims claims = (Claims) request.getAttribute("CLAIMS");
+        String userId = (String) claims.get("userId");
+        int userFlag = (Integer) claims.get("userFlag");
+        if (userFlag!=2) {
+            return JsonResult.error("请使用教委用户登录");
+        }
+        if (null == type) {
+            return JsonResult.error("请输入正确的type");
+        }
+        return scholarshipApplicationService.scholarshipAnalysis(type);
+    }
+
+    /**
+     * 针对留学申请的 年度offer 接口
+     *
+     */
+    @Log(title="留学年度offer")
+    @ResponseBody
+    @GetMapping("/studyapplyOfferYear")
+    public JsonResult studyapplyOfferByYear(HttpServletRequest request) {
+        Claims claims = (Claims) request.getAttribute("CLAIMS");
+        String userId = (String) claims.get("userId");
+        int userFlag = (Integer) claims.get("userFlag");
+        if (userFlag!=1) {
+            return JsonResult.error("请使用高校用户登录");
+        }
+        return studyabroadService.studyOfferByYear(userId);
     }
 }

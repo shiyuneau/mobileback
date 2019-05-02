@@ -579,7 +579,7 @@
     </update>
 
     <select id="applyCountByStudentGUID" resultType="int">
-        select count(1) from Scholarshipapplication where StudentGUID = #{userid}
+        select count(1) from Scholarshipapplication where StudentGUID = #{userid} and Status != 4
     </select>
 
     <update id="applyCheck" parameterType="map">
@@ -775,7 +775,7 @@
         apply.recominstitutions,
         (SELECT Name FROM `school` where GUID = apply.recominstitutions ) as
         collegeName,<!-- 此处的college应该是学校，应该从 school表找学校的name -->
-        (select Address from school where GUID =  apply.recominstitutions ) as collegeAddress,
+        (select Address from school where GUID = apply.recominstitutions ) as collegeAddress,
         (SELECT Name FROM `profession` where GUID = apply.decprofession ) as professionName,
         (SELECT AcademicSystem FROM `profession` where GUID = apply.decprofession ) as studytime,
         (SELECT Amount FROM `profession` where GUID = apply.decprofession ) as money,
@@ -923,10 +923,29 @@
         SELECT apply.`Status`
         from scholarshipapplication apply
         left JOIN school sch on sch.GUID = apply.recominstitutions
-        left JOIN manager man on sch.ManagerGUID = man.GUID
-        <where>
-            <if test="managerGUID!=null and managerGUID != ''">man.GUID = #{managerGUID}</if>
-        </where>
+        left JOIN manager man on sch.ManagerGUID = man.GUID where apply.Status != 4
+        <if test="managerGUID!=null and managerGUID != ''">and man.GUID = #{managerGUID}</if>
     </select>
+
+
+    <select id="countByNationality" resultType="com.sy.mobileback.accessdb.domain.AnalysisEntity">
+        select (select Name from country con where con.GUID = Nationality) as name ,count(Nationality) as count
+from scholarshipapplication where  YEAR(CreatedTime) = YEAR(NOW()) and `Status` = 5 GROUP BY Nationality;
+    </select>
+
+    <select id="countBySchool" resultType="com.sy.mobileback.accessdb.domain.AnalysisEntity">
+        select (select Name from School con where con.GUID = recominstitutions) as name ,count(recominstitutions) as count
+from scholarshipapplication where  YEAR(CreatedTime) = YEAR(NOW()) and `Status` = 5 GROUP BY recominstitutions;
+    </select>
+
+    <select id="countByProfession" resultType="com.sy.mobileback.accessdb.domain.AnalysisEntity">
+        select (select Name from Profession con where con.GUID = decprofession) as name ,count(decprofession) as count
+from scholarshipapplication where  YEAR(CreatedTime) = YEAR(NOW()) and `Status` = 5 GROUP BY Profession;
+    </select>
+
+    <select id="scholarshipApplySuccessCount" resultType="int">
+        select count(1) from scholarshipapplication where `Status` = 5
+    </select>
+
 
 </mapper>

@@ -8,7 +8,7 @@ mobileback:
   copyrightYear: 2019
   # 文件上传路径
 #  profile: D:/data/mobileback/
-  profile: E:/ProgramCenter/data/mobileback/
+  profile: E:/Host/TMEC/ROOT/Images/upload/
   # 获取ip地址开关
   addressEnabled: true
 

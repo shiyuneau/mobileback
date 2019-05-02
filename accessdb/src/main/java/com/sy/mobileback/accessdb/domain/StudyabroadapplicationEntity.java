@@ -99,6 +99,10 @@ public class StudyabroadapplicationEntity implements Serializable {
 	 */
 	private String degree;
 	/**
+	 *
+	 */
+	private String sex;
+	/**
 	 * 入学季节
 	 */
 	private String admissionseason;
@@ -406,6 +410,14 @@ public class StudyabroadapplicationEntity implements Serializable {
 	 */
 	public String getCollege() {
 		return college;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
 	public String getCollegeName() {

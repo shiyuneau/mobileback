@@ -1,5 +1,6 @@
 package com.sy.mobileback.accessdb.service.impl;
 
+import com.sy.mobileback.accessdb.domain.AnalysisEntity;
 import com.sy.mobileback.accessdb.domain.EducationexpireEntity;
 import com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity;
 import com.sy.mobileback.accessdb.domain.WorkexpireEntity;
@@ -10,10 +11,13 @@ import com.sy.mobileback.accessdb.service.ScholarshipApplicationService;
 import com.sy.mobileback.common.enums.ApplicationStatusType;
 import com.sy.mobileback.common.utils.DateUtils;
 import com.sy.mobileback.common.utils.JsonResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +31,8 @@ import java.util.UUID;
  */
 @Service("scholarshipApplicationService")
 public class ScholarshipApplicationServiceImpl implements ScholarshipApplicationService {
+
+    static Logger logger = LoggerFactory.getLogger(ScholarshipApplicationServiceImpl.class);
     @Autowired
     private ScholarshipapplicationDao scholarshipapplicationDao;
     @Autowired
@@ -208,6 +214,10 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
             // 已经批准 为 status=2，status=5，status=6
             // 高校驳回的 为 status = 3 ， status = -1
             for (Integer status : statusList) {
+                if (null==status) {
+                    logger.error("scholarshipApplyCount方法返回的数据中有 null值");
+                    return JsonResult.error("后台信息错误，status不能为null");
+                }
                 if (status == 1) {
                     applying++;
                 }
@@ -243,6 +253,40 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
     @Override
     public Integer applyCountByStudentGUID(String userid) {
         return scholarshipapplicationDao.applyCountByStudentGUID(userid);
+    }
+
+
+    @Override
+    public JsonResult scholarshipAnalysis(Integer type) {
+        List<AnalysisEntity> analysisList = null;
+        try {
+            int applySuccessed = scholarshipapplicationDao.scholarshipApplySuccessCount();
+
+            if (type == 1) {
+                analysisList = scholarshipapplicationDao.countByNationality();
+            } else if (type == 2) {
+                analysisList = scholarshipapplicationDao.countBySchool();
+            } else if (type == 3) {
+                analysisList = scholarshipapplicationDao.countByProfession();
+            }
+            if (null == analysisList || applySuccessed == 0) {
+                return JsonResult.ok().put("msg", "查询成功，但暂无审批成功的申请单");
+            }
+            for (AnalysisEntity entity : analysisList) {
+                float count = entity.getCount();
+
+                float percent = count / applySuccessed;
+                BigDecimal b = new BigDecimal(percent);
+                percent = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+                entity.setPercent(percent);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.error("后台查询出错");
+        }
+        JsonResult result = JsonResult.ok();
+        result.put("rows", analysisList);
+        return result;
     }
 
     private void entityEach(List<ScholarshipapplicationEntity> entityList) {
