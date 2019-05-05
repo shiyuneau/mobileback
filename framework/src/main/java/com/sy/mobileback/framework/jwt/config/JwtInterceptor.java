@@ -60,6 +60,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         // 校验头格式校验
         if (!JwtUtils.validate(authHeader)) {
             // TODO 这里自行抛出异常
+            JwtUtils.printJson(response,10002,"===== token格式异常 =====");
             log.info("===== token格式异常 =====");
             return false;
         }
@@ -68,6 +69,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         final String authToken = JwtUtils.getRawToken(authHeader);
         Claims claims = JwtUtils.parseToken(response,authToken, jwtParam.getBase64Secret());
         if (claims == null) {
+            JwtUtils.printJson(response,10003,"===== token解析异常 =====");
             log.info("===== token解析异常 =====");
             return false;
         }

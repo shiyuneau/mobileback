@@ -13,6 +13,7 @@
         <module>admin</module>
         <module>generator</module>
         <module>accessdb</module>
+        <module>system</module>
     </modules>
 
     <name>mobileBack</name>

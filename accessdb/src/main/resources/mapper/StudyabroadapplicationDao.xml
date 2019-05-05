@@ -73,6 +73,7 @@
         <result property="educationalexperience" column="EducationalExperience"/>
         <result property="jxj" column="Jxj"/>
         <result property="xwz" column="Xwz"/>
+        <result property="sex" column="Sex"/>
     </resultMap>
 
     <insert id="studyabroadapplicationBatchInsert" parameterType="java.util.List">
@@ -286,7 +287,8 @@
         MaritalStatus,
         EducationalExperience,
         Jxj,
-        Xwz
+        Xwz,
+        Sex
         )
         values
             (
@@ -356,7 +358,8 @@
             #{maritalstatus},
             #{educationalexperience},
             #{jxj},
-            #{xwz}
+            #{xwz},
+            #{sex}
             )
     </insert>
 
@@ -365,7 +368,7 @@
     </update>
 
     <select id="applyCountByStudentGUID" resultType="int">
-        select count(1) from studyabroadapplication where StudentGUID = #{userid}
+        select count(1) from studyabroadapplication where StudentGUID = #{userid} and Status != 4
     </select>
     <update id="applyCheck" parameterType="map">
         update studyabroadapplication set status = #{status} , UpdatedTime = #{updateTime}where GUID = #{applyid}
@@ -448,7 +451,8 @@
         MaritalStatus,
         EducationalExperience,
         Jxj,
-        Xwz
+        Xwz,
+        Sex
         from studyabroadapplication where StudentGUID = #{userid}
     </select>
 
@@ -526,7 +530,8 @@
         app.MaritalStatus,
         app.EducationalExperience,
         app.Jxj,
-        app.Xwz
+        app.Xwz,
+        app.Sex
         from
         studyabroadapplication app
         INNER JOIN school sch on sch.GUID =app.College
@@ -567,7 +572,109 @@
         SELECT app.`Status` from
             studyabroadapplication app
             INNER JOIN school sch on sch.GUID =app.College
-            INNER JOIN manager man on sch.ManagerGUID =man.GUID where man.GUID = #{managerGUID}
+            INNER JOIN manager man on sch.ManagerGUID =man.GUID where man.GUID = #{managerGUID} and app.Status != 4
+    </select>
+    
+    <select id="countByNationality" resultType="com.sy.mobileback.accessdb.domain.AnalysisEntity">
+        select (select Name from country con where con.GUID = Nationality) as name ,count(Nationality) as count
+from studyabroadapplication where  YEAR(CreatedTime) = YEAR(NOW()) and `Status` = 2 GROUP BY Nationality;
+    </select>
+
+    <select id="countBySchool" resultType="com.sy.mobileback.accessdb.domain.AnalysisEntity">
+        select (select Name from School con where con.GUID = College) as name ,count(College) as count
+from studyabroadapplication where  YEAR(CreatedTime) = YEAR(NOW()) and `Status` = 2 GROUP BY College;
+    </select>
+
+    <select id="countByProfession" resultType="com.sy.mobileback.accessdb.domain.AnalysisEntity">
+        select (select Name from Profession con where con.GUID = Profession) as name ,count(Profession) as count
+from studyabroadapplication where  YEAR(CreatedTime) = YEAR(NOW()) and `Status` = 2 GROUP BY Profession;
+    </select>
+
+    <select id="studyabroadApplySuccessCount" resultType="int">
+        select count(1) from studyabroadapplication where `Status` = 2
+    </select>
+
+    <select id="studyOfferByYear" resultType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity">
+        select
+        app.GUID,
+        app.StudentGUID,
+        app.School,
+        app.College,
+        (SELECT Name FROM `school` where GUID = College ) as collegeName,<!-- 此处的college应该是学校，应该从 school表找学校的name -->
+        (select Address from school where GUID = College ) as collegeAddress,
+        app.Profession,<!--(SELECT Name FROM `profession` where GUID = Profession ) as Profession,-->
+        (SELECT Name FROM `profession` where GUID = Profession ) as professionName,
+        (SELECT AcademicSystem FROM `profession` where GUID = Profession ) as studytime,
+        (SELECT Amount FROM `profession` where GUID = Profession ) as money,
+        app.PhotoID,
+        app.TaughtBy,
+        app.StartYear,
+        app.FundingSource,
+        app.Degree,
+        app.AdmissionSeason,
+        app.English,
+        app.Hsk,
+        app.Ielts,
+        app.Toefl,
+        app.ReferenceBy,
+        app.ReferenceTel,
+        app.Finacial,
+        app.Guarantorin,
+        app.GuarantorinTel,
+        app.Guardian,
+        app.ValidPassport,
+        app.GraduateCertificate,
+        app.HighestAcademic,
+        app.CollegeTranscript,
+        app.Juniorcollegedipint,
+        app.ChineseLanguageCertificate,
+        app.MedicalReport,
+        app.StudyPlan,
+        app.StreetAddress,
+        app.CityProvince,
+        app.Country,
+        app.CountryEmail,
+        app.CountryPhone,
+        app.CountryZipcode,
+        app.ApplyEmail,
+        app.ApplyPhone,
+        app.ApplyAddress,
+        app.ApplyZipcode,
+        app.ReceiverName,
+        app.ReceiverCity,
+        app.ReceiverAddress,
+        app.ReceiverPhone,
+        app.ReceiverCountry,
+        app.ReceiverZipcode,
+        app.ApplicationNode,
+        app.Type,
+        app.status,
+        app.AuditResult,
+        app.CreatedTime,
+        app.UpdatedTime,
+        app.Deleted,
+        app.PassportCode,
+        app.PassportName,
+        app.PassportExpire,
+        app.FamilyName,
+        app.GivenName,
+        app.HighestDegree,
+        app.Religion,
+        (select Name from country where GUID = app.Nationality) as Nationality,
+        app.Mothertongue,
+        app.EmigrantFrom,
+        app.Birth,
+        app.BirthPlace,
+        app.MaritalStatus,
+        app.EducationalExperience,
+        app.Jxj,
+        app.Xwz,
+        app.Sex
+        from
+        studyabroadapplication app
+        INNER JOIN school sch on sch.GUID =app.College
+        INNER JOIN manager man on sch.ManagerGUID =man.GUID
+        where app.Status = 2 and man.GUID = #{managerGUID} and YEAR(app.CreatedTime) = YEAR(NOW())
     </select>
 
 </mapper>

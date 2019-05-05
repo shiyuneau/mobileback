@@ -2,6 +2,7 @@ package com.sy.mobileback.web.controller;
 
 import com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity;
 import com.sy.mobileback.accessdb.service.StudyabroadService;
+import com.sy.mobileback.common.annotation.Log;
 import com.sy.mobileback.common.constant.AccessConstants;
 import com.sy.mobileback.common.utils.JsonResult;
 import com.sy.mobileback.common.utils.StringUtils;
@@ -34,6 +35,7 @@ public class StudyabroadController {
      * @param request
      * @return
      */
+    @Log(title = "用户留学申请")
     @PostMapping("/apply")
     @ResponseBody
     public JsonResult studyabroadApply(@RequestBody StudyabroadapplicationEntity entity , HttpServletRequest request) {
@@ -61,6 +63,7 @@ public class StudyabroadController {
      * @param request
      * @return
      */
+    @Log(title="用户取消留学申请")
     @GetMapping("/applycancel")
     @ResponseBody
     public JsonResult studyabroadApplyCancel(@RequestParam("applyid") String applyid , HttpServletRequest request) {
@@ -84,6 +87,7 @@ public class StudyabroadController {
     /**
      * 学生的申请列表，暂时都是 status 为1 的，未审核的
      */
+    @Log(title = "用户申请列表")
 //    @JwtIgnore
     @GetMapping("/applylist")
     @ResponseBody

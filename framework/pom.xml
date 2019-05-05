@@ -72,6 +72,12 @@
             <version>1.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.sy.mobileback</groupId>
+            <artifactId>system</artifactId>
+            <version>1.0</version>
+        </dependency>
+
         <!-- 代码生成-->
         <dependency>
             <groupId>com.sy.mobileback</groupId>

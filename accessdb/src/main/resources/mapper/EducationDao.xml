@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sy.mobileback.accessdb.mapper.EducationDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.sy.mobileback.accessdb.domain.EducationEntity" id="educationMap">
+        <result property="guid" column="GUID"/>
+        <result property="name" column="Name"/>
+        <result property="languageguid" column="LanguageGUID"/>
+        <result property="order" column="Order"/>
+        <result property="deleted" column="Deleted"/>
+    </resultMap>
+
+    <insert id="educationBatchInsert" parameterType="java.util.List">
+        insert into education  (
+                    GUID,
+                    Name,
+                    LanguageGUID,
+                    Order,
+                    Deleted,
+                )
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+                            #{item.guid},
+                            #{item.name},
+                            #{item.languageguid},
+                            #{item.order},
+                            #{item.deleted},
+                        )
+        </foreach>
+    </insert>
+
+
+    <select id="educationList" resultType="com.sy.mobileback.accessdb.domain.EducationEntity">
+        select * from education
+    </select>
+
+    <update id = "educationUpdate" parameterType="com.sy.mobileback.accessdb.domain.EducationEntity">
+        update education set
+                  GUID = #{guid},
+                  Name = #{name},
+                  LanguageGUID = #{languageguid},
+                  Order = #{order},
+                  Deleted = #{deleted},
+            </update>
+</mapper>

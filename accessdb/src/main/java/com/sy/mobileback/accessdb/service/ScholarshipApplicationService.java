@@ -77,4 +77,11 @@ public interface ScholarshipApplicationService {
      */
     Integer applyCountByStudentGUID(String userid);
 
+    /**
+     * 按照国籍和学校列出比例
+     * @param type
+     * @return
+     */
+    JsonResult scholarshipAnalysis(Integer type);
+
 }

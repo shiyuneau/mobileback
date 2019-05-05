@@ -1,5 +1,6 @@
 package com.sy.mobileback.accessdb.mapper;
 
+import com.sy.mobileback.accessdb.domain.AnalysisEntity;
 import com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity;
 import org.springframework.stereotype.Repository;
 
@@ -32,4 +33,28 @@ public interface ScholarshipapplicationDao {
     List<Integer> allStatusByGUID(Map<String, Object> map);
 
     Integer applyCountByStudentGUID(String userid);
+
+    /**
+     * 按国籍获取申请单得数量
+     * @return
+     */
+    List<AnalysisEntity> countByNationality();
+
+    /**
+     * 按国籍获取申请单得数量
+     * @return
+     */
+    List<AnalysisEntity> countBySchool();
+
+    /**
+     * 按国籍获取申请单得数量
+     * @return
+     */
+    List<AnalysisEntity> countByProfession();
+
+    /**
+     * 奖学金申请审批成功的个数
+     * @return
+     */
+    Integer scholarshipApplySuccessCount();
 }

@@ -5,6 +5,7 @@ import com.sy.mobileback.accessdb.domain.StudentEntity;
 import com.sy.mobileback.accessdb.service.AlumniService;
 import com.sy.mobileback.accessdb.service.ManagerService;
 import com.sy.mobileback.accessdb.service.StudentService;
+import com.sy.mobileback.common.annotation.Log;
 import com.sy.mobileback.common.utils.JsonResult;
 import com.sy.mobileback.common.utils.MD5Util;
 import com.sy.mobileback.common.utils.StringUtils;
@@ -45,6 +46,7 @@ public class StudentLoginController {
      * @param person
      * @return
      */
+    @Log(title = "登录")
     @JwtIgnore
     @PostMapping("/login")
     @ResponseBody
@@ -109,6 +111,7 @@ public class StudentLoginController {
      * @param person
      * @return
      */
+    @Log(title = "注册")
     @JwtIgnore
     @PostMapping("/registry")
     @ResponseBody
@@ -192,6 +195,7 @@ public class StudentLoginController {
      * @param request
      * @return
      */
+    @Log(title = "信息修改")
     @PostMapping("/userinforeset")
     @ResponseBody
     public JsonResult resetPassword(@RequestBody Map<String, Object> person, HttpServletRequest request) {
@@ -259,6 +263,7 @@ public class StudentLoginController {
      * @param email
      * @return
      */
+    @Log(title = "密码修改")
     @JwtIgnore
     @PostMapping("/passwordreset")
     @ResponseBody
@@ -291,6 +296,7 @@ public class StudentLoginController {
         return JsonResult.ok("退出成功");
     }
 
+    @Log(title = "校友搜索")
     @JwtIgnore
     @GetMapping("/alumnisearch")
     @ResponseBody

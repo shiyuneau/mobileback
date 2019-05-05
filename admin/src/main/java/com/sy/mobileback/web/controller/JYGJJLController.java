@@ -4,6 +4,7 @@ import com.sy.mobileback.accessdb.service.DestinationCountryService;
 import com.sy.mobileback.accessdb.service.PassportService;
 import com.sy.mobileback.accessdb.service.PlanapplyService;
 import com.sy.mobileback.accessdb.service.StudyabroadService;
+import com.sy.mobileback.common.annotation.Log;
 import com.sy.mobileback.common.constant.AccessConstants;
 import com.sy.mobileback.common.utils.JsonResult;
 import io.jsonwebtoken.Claims;
@@ -42,6 +43,7 @@ public class JYGJJLController {
      * @param pageSize
      * @return
      */
+    @Log(title = "公派留学考察列表")
     @ResponseBody
     @RequestMapping("/planApplyList")
     public JsonResult planApplyList(@RequestParam(value = "pageNum",required = false) Integer pageNum, @RequestParam(value = "pageSize",required = false) Integer pageSize , HttpServletRequest request) {
@@ -68,6 +70,7 @@ public class JYGJJLController {
      * @param pageSize
      * @return
      */
+    @Log(title = "留学申请列表")
     @GetMapping("/applyListByPage")
     @ResponseBody
     public JsonResult applyListByPage(@RequestParam(value = "pageNum",required = false) Integer pageNum, @RequestParam(value = "pageSize",required = false) Integer pageSize ,  HttpServletRequest request) {
@@ -94,6 +97,7 @@ public class JYGJJLController {
      * @param pageSize
      * @return
      */
+    @Log(title = "目的国培训")
     @GetMapping("/destinationCountry")
     @ResponseBody
     public JsonResult destinationCountryList(@RequestParam(value = "pageNum",required = false) Integer pageNum, @RequestParam(value = "pageSize",required = false) Integer pageSize , HttpServletRequest request) {
@@ -114,6 +118,7 @@ public class JYGJJLController {
         return destinationCountryService.destinationCountryList(pageNum,pageSize);
     }
 
+    @Log(title = "护照查询")
     @GetMapping("/passportSearch")
     @ResponseBody
     public JsonResult passportSearch(@RequestParam("searchName") String searchName ,@RequestParam(value = "pageNum",required = false) Integer pageNum, @RequestParam(value = "pageSize",required = false) Integer pageSize , HttpServletRequest request) {

@@ -1,5 +1,6 @@
 package com.sy.mobileback.accessdb.mapper;
 
+import com.sy.mobileback.accessdb.domain.AnalysisEntity;
 import com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity;
 
 import java.util.List;
@@ -67,4 +68,33 @@ public interface StudyabroadapplicationDao {
      * @return
      */
     Integer applyCountByStudentGUID(String userid);
+
+    /**
+     * 按国籍获取申请单得数量
+     * @return
+     */
+    List<AnalysisEntity> countByNationality();
+
+    /**
+     * 按国籍获取申请单得数量
+     * @return
+     */
+    List<AnalysisEntity> countBySchool();
+
+    /**
+     * 按国籍获取申请单得数量
+     * @return
+     */
+    List<AnalysisEntity> countByProfession();
+
+    /**
+     * 留学申请审批成功的个数
+     * @return
+     */
+    Integer studyabroadApplySuccessCount();
+
+    /**
+     * 按照 年份，返回所有审批成功的信息
+     */
+    List<StudyabroadapplicationEntity> studyOfferByYear(String managerGUID);
 }

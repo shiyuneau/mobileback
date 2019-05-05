@@ -2,6 +2,7 @@ package com.sy.mobileback.web.controller;
 
 import com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity;
 import com.sy.mobileback.accessdb.service.ScholarshipApplicationService;
+import com.sy.mobileback.common.annotation.Log;
 import com.sy.mobileback.common.utils.JsonResult;
 import com.sy.mobileback.common.utils.StringUtils;
 import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
@@ -35,6 +36,7 @@ public class ScholarshipApplicationController {
     /**
      * 奖学金申请
      */
+    @Log(title = "用户奖学金申请")
     @ResponseBody
     @PostMapping("/apply")
     public JsonResult scholarshipApply(@RequestBody ScholarshipapplicationEntity entity, HttpServletRequest request) {
@@ -61,6 +63,7 @@ public class ScholarshipApplicationController {
      * @param request
      * @return
      */
+    @Log(title = "用户奖学金取消")
     @ResponseBody
     @GetMapping("/applycancel")
     public JsonResult scholarcshipApplyCancel(@RequestParam("applyrecordid") String applyrecordid, HttpServletRequest request) {
@@ -88,6 +91,7 @@ public class ScholarshipApplicationController {
      * @param request
      * @return
      */
+    @Log(title = "奖学金申请列表")
     @ResponseBody
     @GetMapping("/applylist")
     public List<ScholarshipapplicationEntity> scholarcshipApplyList(HttpServletRequest request) {
@@ -97,6 +101,7 @@ public class ScholarshipApplicationController {
         return scholarshipApplicationService.scholarcshipApplyList(userId);
     }
 
+    @Log(title = "奖学金更新")
     @ResponseBody
     @PostMapping("/applyUpdate")
     public JsonResult scholarshipApplyUpdate(@RequestBody ScholarshipapplicationEntity entity,HttpServletRequest request) {
