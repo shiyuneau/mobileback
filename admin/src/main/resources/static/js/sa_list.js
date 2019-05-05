@@ -17,7 +17,7 @@ $(function(){
 			$.getJSON("/API/article/overseaslife/news","",function(data){
 				var sa_list1_ele = $("#sa_list");
 				var sa_list1_str = "";
-				$.each(data,function(index,value){
+				$.each(data.rows,function(index,value){
 					sa_list1_str += ''
 						+'<div class="row news-list" data-type="2" data-id="'+value.guid+'">'
 						+'	<div class="col-md-8 col-sm-8 col-xs-8">'
@@ -36,7 +36,7 @@ $(function(){
 			$.getJSON("/API/article/alumin/events","",function(data){
 				var sa_list1_ele = $("#sa_list");
 				var sa_list1_str = "";
-				$.each(data,function(index,value){
+				$.each(data.rows,function(index,value){
 					sa_list1_str += ''
 						+'<div class="row news-list" data-type="3" data-id="'+value.guid+'">'
 						+'	<div class="col-md-8 col-sm-8 col-xs-8">'
@@ -55,7 +55,7 @@ $(function(){
 			$.getJSON("/API/article/exeperienceTJ/news","",function(data){
 				var sa_list1_ele = $("#sa_list");
 				var sa_list1_str = "";
-				$.each(data,function(index,value){
+				$.each(data.rows,function(index,value){
 					sa_list1_str += ''
 						+'<div class="row news-list" data-type="4" data-id="'+value.guid+'">'
 						+'	<div class="col-md-8 col-sm-8 col-xs-8">'
@@ -74,7 +74,7 @@ $(function(){
 			$.getJSON("/API/article/lifeassistant/news","",function(data){
 				var sa_list1_ele = $("#sa_list");
 				var sa_list1_str = "";
-				$.each(data,function(index,value){
+				$.each(data.rows,function(index,value){
 					sa_list1_str += ''
 						+'<div class="row news-list" data-type="5" data-id="'+value.guid+'">'
 						+'	<div class="col-md-8 col-sm-8 col-xs-8">'
@@ -93,7 +93,7 @@ $(function(){
 			$.getJSON("/API/article/studytianjin/news","",function(data){
 				var sa_list1_ele = $("#sa_list");
 				var sa_list1_str = "";
-				$.each(data,function(index,value){
+				$.each(data.rows,function(index,value){
 					sa_list1_str += ''
 						+'<div class="row news-list" data-type="1" data-id="'+value.guid+'">'
 						+'	<div class="col-md-8 col-sm-8 col-xs-8">'
