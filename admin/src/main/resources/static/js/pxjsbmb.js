@@ -15,16 +15,15 @@ $(function(){
 		var html = ''
 		$.ajax({
 		    type: "GET",
-		    url: "/API/jwgjjl/planApplyList",
+		    url: "/API/jwgjjl/applyListByPage",
 		    success: function(data) {
 		    	$.each(data.rows,function(index,value){
 					html = html+'<div class="zwgk-block">'
 						   +'	<div class="zwgk-block-head">'
-						   +'		<div>学校：'+value.company+'</div>'
-						   +'		<div>学院：'+value.company+'</div>'
-						   +'		<div>专业：'+value.company+'</div>'
-						   +'		<div>学生：'+value.company+'</div>'
-						   +'		<div>状态：'+value.company+'</div>'
+						   +'		<div>学校：'+value.collegeName+'</div>'
+						   +'		<div>学院：'+value.xyName+'</div>'
+						   +'		<div>专业：'+value.professionName+'</div>'
+						   +'		<div>学生：'+value.studentName+'</div>'
 						   +'	</div>'
 		    },
 		    beforeSend: function(xhr) {
