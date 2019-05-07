@@ -25,11 +25,12 @@ $(function(){
 						   +'		<div>专业：'+value.professionName+'</div>'
 						   +'		<div>学生：'+value.studentName+'</div>'
 						   +'	</div>'
+		    	}
+			    $("#zwgk").html(html)
 		    },
 		    beforeSend: function(xhr) {
 		        xhr.setRequestHeader("Authorization", "TJEDU "+token);
 		    }
-		    $("#zwgk").html(html)
 		});
 			
 	}

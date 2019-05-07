@@ -24,11 +24,12 @@ $(function(){
 						   +'		<div>主&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;体：'+value.title+'</div>'
 						   +'		<div>培训内容：'+value.context+'</div>'
 						   +'	</div>'
+		    	}
+			    $("#zwgk").html(html)
 		    },
 		    beforeSend: function(xhr) {
 		        xhr.setRequestHeader("Authorization", "TJEDU "+token);
 		    }
-		    $("#zwgk").html(html)
 		});
 			
 	}

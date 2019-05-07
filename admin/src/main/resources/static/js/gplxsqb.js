@@ -28,11 +28,12 @@ $(function(){
 						   +'		<div>具体联系人：'+value.lianxiren+'</div>'
 						   +'		<div>电话/座机：'+value.lianxirenmobile+'</div>'
 						   +'	</div>'
+		    	}
+			    $("#zwgk").html(html)
 		    },
 		    beforeSend: function(xhr) {
 		        xhr.setRequestHeader("Authorization", "TJEDU "+token);
 		    }
-		    $("#zwgk").html(html)
 		});
 			
 	}
