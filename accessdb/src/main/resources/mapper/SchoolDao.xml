@@ -36,7 +36,7 @@
         pro.AcademicSystem as academicSystem,
         pro.Amount as amount,
         pro.IsDegree as degree
-        FROM `school` sch left JOIN  college coll on sch.GUID = coll.SchoolGUID LEFT JOIN profession pro on pro.CollegeGUID = coll.GUID LEFT JOIN language lan on lan.GUID = pro.LanguageGUID
+        FROM `school` sch JOIN  college coll on sch.GUID = coll.SchoolGUID JOIN profession pro on pro.CollegeGUID = coll.GUID JOIN language lan on lan.GUID = pro.LanguageGUID
         <where>
             <if test="schoolGuid != null and schoolGuid != '' "> sch.GUID = #{schoolGuid}</if>
             <if test="academicSystem != null and academicSystem != '' "> and pro.AcademicSystem &lt;= #{academicSystem}</if>

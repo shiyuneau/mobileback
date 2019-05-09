@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 
 /**
@@ -69,7 +70,7 @@ public class FileController {
 //        String userid = "bb47e847-85ed-4778-bba4-7b49ca915469";
         String path = FileConfig.getProfile();
         String originalFileName = file.getOriginalFilename();
-        String fileName = userid + "_" + originalFileName;
+        String fileName = UUID.randomUUID().toString() + "_" + originalFileName;
         path = path + fileName;
         String authToken = (String) request.getAttribute("token");
         String fileID = fileService.fileUpload(path, originalFileName, userid, type);

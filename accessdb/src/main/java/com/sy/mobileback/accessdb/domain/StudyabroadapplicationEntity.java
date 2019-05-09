@@ -327,9 +327,55 @@ public class StudyabroadapplicationEntity implements Serializable {
 	 */
 	private String educationalexperience;
 
+	private String selffamily;//家庭成员
+	private String selfname;//姓名
+	private String selfphone;//电话
+	private String selfemail;//邮箱
+	private String selfwork;//工作单位
+
 	private List<FamilyinfoEntity> familyList;
 	private List<EducationexpireEntity> educationList;
 	private List<WorkexpireEntity> workList;
+
+	public String getSelffamily() {
+		return selffamily;
+	}
+
+	public void setSelffamily(String selffamily) {
+		this.selffamily = selffamily;
+	}
+
+	public String getSelfname() {
+		return selfname;
+	}
+
+	public void setSelfname(String selfname) {
+		this.selfname = selfname;
+	}
+
+	public String getSelfphone() {
+		return selfphone;
+	}
+
+	public void setSelfphone(String selfphone) {
+		this.selfphone = selfphone;
+	}
+
+	public String getSelfemail() {
+		return selfemail;
+	}
+
+	public void setSelfemail(String selfemail) {
+		this.selfemail = selfemail;
+	}
+
+	public String getSelfwork() {
+		return selfwork;
+	}
+
+	public void setSelfwork(String selfwork) {
+		this.selfwork = selfwork;
+	}
 
 	public String getBirthplace() {
 		return birthplace;

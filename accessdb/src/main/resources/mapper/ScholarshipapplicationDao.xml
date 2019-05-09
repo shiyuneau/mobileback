@@ -79,8 +79,8 @@
         <result property="educationchina" column="educationchina"/>
         <result property="studystart" column="studystart"/>
         <result property="studyend" column="studyend"/>
-        <result property="needstudychinese" column="needstudyChinese"/>
-        <result property="needstudychinesetime" column="needstudyChinesetime"/>
+        <result property="needstudychinese" column="needstudychinese"/>
+        <result property="needstudychinesetime" column="needstudychinesetime"/>
         <result property="other" column="other"/>
         <result property="otherplan" column="otherplan"/>
         <result property="otherpublished" column="otherpublished"/>
@@ -118,6 +118,7 @@
         <result property="xwz" column="Xwz"/>
         <result property="otherdoc" column="Otherdoc"/>
         <result property="otherbz" column="Otherbz"/>
+        <result property="num" column="Num"/>
     </resultMap>
 
     <insert id="scholarshipapplicationBatchInsert" parameterType="java.util.List">
@@ -196,8 +197,8 @@
         educationchina,
         studystart,
         studyend,
-        needstudyChinese,
-        needstudyChinesetime,
+        needstudychinese,
+        needstudychinesetime,
         other,
         otherplan,
         otherpublished,
@@ -229,7 +230,8 @@
         EducationalExperience,
         Sex,
         Marriage,
-        Birthcountry
+        Birthcountry,
+        Num
         )
         values
         <foreach collection="list" item="item" separator=",">
@@ -341,7 +343,8 @@
             #{item.educationalexperience},
             #{item.sex},
             #{item.marriage},
-            #{item.birthcountry}
+            #{item.birthcountry},
+            #{item.num}
             )
         </foreach>
     </insert>
@@ -421,8 +424,8 @@
                     educationchina,
                     studystart,
                     studyend,
-                    needstudyChinese,
-                    needstudyChinesetime,
+                    needstudychinese,
+                    needstudychinesetime,
                     other,
                     otherplan,
                     otherpublished,
@@ -458,7 +461,8 @@
                     Jxj,
                     Xwz,
                     Otherdoc,
-                    Otherbz
+                    Otherbz,
+                    Num
                 )
         values(
                             #{guid},
@@ -571,7 +575,8 @@
                             #{jxj},
                             #{xwz},
                             #{otherdoc},
-                            #{otherbz}
+                            #{otherbz},
+                            #{num}
         )
     </insert>
     <update id="applyExecute" parameterType="map">
@@ -603,7 +608,7 @@
         NationalityGUID,
         Birth,
         BirthCountryGUID,
-        City,
+        City as birthcity,
         MaritalStatus,
         NativeLanguage,
         Religion,
@@ -669,8 +674,8 @@
         educationchina,
         studystart,
         studyend,
-        needstudyChinese,
-        needstudyChinesetime,
+        needstudychinese,
+        needstudychinesetime,
         other,
         otherplan,
         otherpublished,
@@ -707,8 +712,9 @@
         Jxj,
         Xwz,
         Otherdoc,
-        Otherbz
-        from Scholarshipapplication where StudentGUID = #{userId}
+        Otherbz,
+        Num
+        from Scholarshipapplication where StudentGUID = #{userId} order by CreatedTime asc
     </select>
     <select id="applyApplyedList" resultType="com.sy.mobileback.accessdb.domain.ScholarshipapplicationEntity">
         select
@@ -726,7 +732,7 @@
         apply.NationalityGUID,
         apply.Birth,
         apply.BirthCountryGUID,
-        apply.City,
+        apply.City as birthcity,
         apply.MaritalStatus,
         apply.NativeLanguage,
         apply.Religion,
@@ -793,8 +799,8 @@
         apply.educationchina,
         apply.studystart,
         apply.studyend,
-        apply.needstudyChinese,
-        apply.needstudyChinesetime,
+        apply.needstudychinese,
+        apply.needstudychinesetime,
         apply.other,
         apply.otherplan,
         apply.otherpublished,
@@ -831,12 +837,14 @@
         apply.Jxj,
         apply.Xwz,
         apply.Otherdoc,
-        apply.Otherbz
+        apply.Otherbz,
+        apply.Num
         from scholarshipapplication apply
         left JOIN school sch on sch.GUID = apply.recominstitutions
         left JOIN manager man on sch.ManagerGUID = man.GUID where apply.status = #{status}
         <if test="userFlag == 1">and man.guid = #{managerGUID}</if>
         <if test="jwbhstatus !=null and jwbhstatus !=''">or apply.status = #{jwbhstatus}</if>
+        order by apply.CreatedTime asc
     </select>
 
     <update id="scholarshipapplicationUpdate"
@@ -878,8 +886,8 @@
                   educationchina = #{educationchina},
                   studystart = #{studystart},
                   studyend = #{studyend},
-                  needstudyChinese = #{needstudychinese},
-                  needstudyChinesetime = #{needstudychinesetime},
+                  needstudychinese = #{needstudychinese},
+                  needstudychinesetime = #{needstudychinesetime},
 
                   otherplan = #{otherplan},
                   otherpublished = #{otherpublished},
@@ -914,7 +922,8 @@
                   Jxj = #{jxj},
                   Xwz = #{xwz},
                   Otherdoc = #{otherdoc},
-                  Otherbz = #{otherbz}
+                  Otherbz = #{otherbz},
+                  Num = #{num}
 
                   where GUID = #{guid}
     </update>
