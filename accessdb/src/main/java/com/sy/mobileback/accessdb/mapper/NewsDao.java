@@ -109,6 +109,43 @@ public class NewsDao {
         return linkList;
     }
 
+    /**
+     * 根据 id 返回  办事流程中 对应子菜单的  新闻 简略信息
+     * @param pageNum
+     * @param id
+     * @return
+     */
+    public List<NewsPage> selectBslcListByPage(int pageNum,String id) {
+        int readedCount = AccessConstants.PAGE_SIZE*(pageNum-1);
+        String sql;
+        if (readedCount ==0) {
+            sql = "SELECT  top " + AccessConstants.PAGE_SIZE + " N_Id , N_Title , N_Date from News where N_Comstye = ? order by N_Id";
+        } else {
+            sql ="SELECT  top " + AccessConstants.PAGE_SIZE + " N_Id , N_Title , N_Date from News where N_Comstye = ? and  (N_Id > (select MAX(N_Id) from ( select top "+ readedCount +" N_Id from News where N_Comstye = 107 order by N_Id) as T)) order by N_Id ";
+        }
+        List<NewsPage> linkList = new ArrayList<>();
+        try {
+            List<Object> paramList = new ArrayList<>();
+            paramList.add(id);
+            List<Map<String, Object>> list = AccessDBOperateUtils.select(accessConn, sql, paramList);
+            if (null!=list && list.size()>0) {
+                for (Map<String, Object> mapInfo : list) {
+                    NewsPage news = new NewsPage();
+                    for (Map.Entry<String, Object> entry : mapInfo.entrySet()) {
+                        ReflectUtils.invokeSetter(news, entry.getKey(), entry.getValue());
+                    }
+                    // 设置时间的格式
+                    String[] dateArr = news.getN_Date().split(" ");
+                    news.setN_Date(dateArr[0]);
+                    linkList.add(news);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return linkList;
+    }
+
 
     /**
      * 根据ID 返回新闻的详细信息
@@ -118,7 +155,30 @@ public class NewsDao {
     public NewsContent selectNewsById(String id) {
         NewsContent newsContent = new NewsContent();
         try {
-            String sql = "select N_Id , N_Title, N_Content from News where N_Id = ? and N_Comstye = 107";
+            String sql = "select N_Id , N_Title, N_Content ,N_Date from News where N_Id = ? and N_Comstye = 107";
+            List<Object> paramList = new ArrayList<>();
+            paramList.add(id);
+            List<Map<String, Object>> list = AccessDBOperateUtils.select(accessConn, sql, paramList);
+            for (Map<String, Object> mapInfo : list) {
+                for (Map.Entry<String, Object> entry : mapInfo.entrySet()) {
+                    ReflectUtils.invokeSetter(newsContent, entry.getKey(), entry.getValue());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return newsContent;
+    }
+
+    /**
+     * 根据ID 返回新闻的详细信息
+     * @param id
+     * @return
+     */
+    public NewsContent selectById(String id) {
+        NewsContent newsContent = new NewsContent();
+        try {
+            String sql = "select N_Id , N_Title, N_Content ,N_Date from News where N_Id = ?";
             List<Object> paramList = new ArrayList<>();
             paramList.add(id);
             List<Map<String, Object>> list = AccessDBOperateUtils.select(accessConn, sql, paramList);

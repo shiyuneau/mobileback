@@ -1,14 +1,12 @@
 package com.sy.mobileback.accessdb.domain;
 
 
-import com.sy.mobileback.common.base.BaseEntity;
-
 /**
  * @author shiyu
  * @Description
  * @create 2019-02-26 10:48
  */
-public class AccessLink extends BaseEntity {
+public class AccessLink {
 
     private String L_Id;
     private String L_Title;
