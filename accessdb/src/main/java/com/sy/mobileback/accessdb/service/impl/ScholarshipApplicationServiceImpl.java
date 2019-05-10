@@ -210,21 +210,21 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
         int applySuccess = 0;
         int applyReject = 0;
         if (userFlag == 1) {
-            // 对于高校，待审核的 为status=1的
-            // 已经批准 为 status=2，status=5，status=6
+            // 对于高校，待审核的 为status=1的 ，status=6
+            // 已经批准 为 status=2，status=5
             // 高校驳回的 为 status = 3 ， status = -1
             for (Integer status : statusList) {
                 if (null==status) {
                     logger.error("scholarshipApplyCount方法返回的数据中有 null值");
                     return JsonResult.error("后台信息错误，status不能为null");
                 }
-                if (status == 1) {
+                if (status == 1 || status == 6) {
                     applying++;
                 }
-                if (status == 2 || status == 5 || status == 6) {
+                if (status == 2 || status == 5 ) {
                     applySuccess++;
                 }
-                if (status == 3 || status == -1) {
+                if (status == 3 || status == -1 ) {
                     applyReject++;
                 }
             }
@@ -236,7 +236,8 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
                 if (status == 5) {
                     applySuccess++;
                 }
-                if (status == 6) {
+                // 教委拒绝的审批单应为 直接驳回的，重新填写的，教委驳回并且高校也驳回的(这种情况都是3，还没有办法处理)
+                if (status == 6 || status == -1 ) {
                     applyReject++;
                 }
             }

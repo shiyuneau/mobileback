@@ -1,6 +1,7 @@
 package com.sy.mobileback.accessdb.service;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.sy.mobileback.accessdb.domain.AccessLink;
 import com.sy.mobileback.accessdb.domain.LinkEntity;
 
 import java.util.List;
@@ -20,6 +21,12 @@ public interface LinkService{
      * @return
      */
     List<LinkEntity> links();
+
+    /**
+     * 返回所有access数据库中的 天津各高校链接
+     * @return
+     */
+    List<AccessLink> accessLinks();
 
 }
 

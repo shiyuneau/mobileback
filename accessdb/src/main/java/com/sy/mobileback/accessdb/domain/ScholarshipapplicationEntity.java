@@ -508,6 +508,16 @@ public class ScholarshipapplicationEntity implements Serializable {
 	 */
 	private String applyAdvice;
 
+	private String num;
+
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
+	}
+
 	public String getApplyAdvice() {
 		return applyAdvice;
 	}

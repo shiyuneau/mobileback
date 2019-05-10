@@ -74,6 +74,11 @@
         <result property="jxj" column="Jxj"/>
         <result property="xwz" column="Xwz"/>
         <result property="sex" column="Sex"/>
+        <result property="selffamily" column="Selffamily"/>
+        <result property="selfname" column="Selfname"/>
+        <result property="selfphone" column="Selfphone"/>
+        <result property="selfemail" column="Selfemail"/>
+        <result property="selfwork" column="Selfwork"/>
     </resultMap>
 
     <insert id="studyabroadapplicationBatchInsert" parameterType="java.util.List">
@@ -288,7 +293,12 @@
         EducationalExperience,
         Jxj,
         Xwz,
-        Sex
+        Sex,
+        Selffamily,
+        Selfname,
+        Selfphone,
+        Selfemail,
+        Selfwork
         )
         values
             (
@@ -359,7 +369,12 @@
             #{educationalexperience},
             #{jxj},
             #{xwz},
-            #{sex}
+            #{sex},
+            #{selffamily},
+            #{selfname},
+            #{selfphone},
+            #{selfemail},
+            #{selfwork}
             )
     </insert>
 
@@ -452,8 +467,13 @@
         EducationalExperience,
         Jxj,
         Xwz,
-        Sex
-        from studyabroadapplication where StudentGUID = #{userid}
+        Sex,
+        Selffamily,
+        Selfname,
+        Selfphone,
+        Selfemail,
+        Selfwork
+        from studyabroadapplication where StudentGUID = #{userid} order by CreatedTime asc
     </select>
 
     <select id="applyApplyedList" resultType="com.sy.mobileback.accessdb.domain.StudyabroadapplicationEntity">
@@ -531,12 +551,17 @@
         app.EducationalExperience,
         app.Jxj,
         app.Xwz,
-        app.Sex
+        app.Sex,
+        app.Selffamily,
+        app.Selfname,
+        app.Selfphone,
+        app.Selfemail,
+        app.Selfwork
         from
         studyabroadapplication app
         INNER JOIN school sch on sch.GUID =app.College
         INNER JOIN manager man on sch.ManagerGUID =man.GUID
-        where app.status = #{status} and man.GUID = #{managerGUID}
+        where app.status = #{status} and man.GUID = #{managerGUID} order by app.CreatedTime asc
     </select>
 
     <select id="studyabroadApplyCount" resultType="int">
@@ -564,8 +589,8 @@
         app.Status
         from
         studyabroadapplication app
-        INNER JOIN school sch on sch.GUID =app.College
-        INNER JOIN manager man on sch.ManagerGUID =man.GUID limit #{pageMin} , #{pageMax}
+        INNER JOIN school sch on sch.GUID =app.College where app.status != 4 limit #{pageMin} , #{pageMax}
+--         INNER JOIN manager man on sch.ManagerGUID =man.GUID
     </select>
 
     <select id="allStatusByGUID" resultType="java.lang.Integer">
@@ -669,7 +694,12 @@ from studyabroadapplication where  YEAR(CreatedTime) = YEAR(NOW()) and `Status` 
         app.EducationalExperience,
         app.Jxj,
         app.Xwz,
-        app.Sex
+        app.Sex,
+        app.Selffamily,
+        app.Selfname,
+        app.Selfphone,
+        app.Selfemail,
+        app.Selfwork
         from
         studyabroadapplication app
         INNER JOIN school sch on sch.GUID =app.College

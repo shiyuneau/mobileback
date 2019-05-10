@@ -1,5 +1,6 @@
 package com.sy.mobileback.web.controller;
 
+import com.sy.mobileback.accessdb.domain.AccessLink;
 import com.sy.mobileback.accessdb.domain.LinkEntity;
 import com.sy.mobileback.accessdb.service.LinkService;
 import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
@@ -31,5 +32,16 @@ public class TJSchoolLinkController {
     @RequestMapping("/links")
     public List<LinkEntity> links() {
         return linkService.links();
+    }
+
+    /**
+     * 获取 天津市 各 高校网站
+     * @return
+     */
+    @JwtIgnore
+    @ResponseBody
+    @RequestMapping("/accesslinks")
+    public List<AccessLink> accessLinks() {
+        return linkService.accessLinks();
     }
 }

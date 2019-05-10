@@ -94,7 +94,7 @@ public class FileServiceImpl implements FileService {
         String filepath = uploadfileDao.getFilePath(fileid);
         int index = filepath.lastIndexOf("/");
         String name = filepath.substring(index + 1, filepath.length());
-        name = "http://lxtj.tmecglobal.org.cn/Images/upload/" + name;
+        name = "http://lxtj.tmecglobal.org.cn/API/" + name;
         return name;
     }
 }

@@ -17,6 +17,19 @@ public class NewsContent {
      */
     private String N_Content;
 
+    /**
+     * 时间
+     */
+    private String N_Date;
+
+    public String getN_Date() {
+        return N_Date;
+    }
+
+    public void setN_Date(String n_Date) {
+        N_Date = n_Date;
+    }
+
     public String getN_Id() {
         return N_Id;
     }

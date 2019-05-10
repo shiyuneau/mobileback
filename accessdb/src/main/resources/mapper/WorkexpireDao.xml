@@ -37,8 +37,8 @@
                             #{item.scholarshipguid},
                             #{item.workfrom},
                             #{item.workto},
-                            #{item.working},
                             #{item.workcompany},
+                            #{item.working},
                             #{item.workposition}
                         )
         </foreach>
