@@ -1,0 +1,79 @@
+@charset "utf-8";
+
+#passportSearch{
+	
+}
+#passportSearch #ps_sTitle{
+	position: relative;
+    height: 53px;
+    margin-top: 20px;
+    padding: 2px;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 0 2px #ddd;
+}
+#passportSearch .fa{
+	margin-top: 10px;
+    margin-left: 10px;
+    font-size: 28px;
+    color: #666;
+}
+#passportSearch #ps_sVlvue{
+	position: absolute;
+    top: 8px;
+    left: 52px;
+    width: 60%;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    font-size: 16px;
+    outline: 0;
+}
+#passportSearch #ps_sBtn{
+	position: absolute;
+    right: 4px;
+    top: 4px;
+    padding: 10px 24px;
+    font-size: 16px;
+    color: #fff;
+    background-color: orange;
+}
+#passportSearch .ps_showCtrl{
+	display: none;
+}
+#passportSearch #ps_sResult{
+	position: relative;
+}
+#passportSearch .ps_box{
+	position: relative;
+	margin-bottom: 20px;
+	padding: 10px 20px;
+    border-radius: 4px;
+	font-size: 16px;
+	font-weight: 600;
+    background-color: #fff;
+    box-shadow: 0 0 2px #ddd;
+}
+#passportSearch .ps_box .row{
+	margin-bottom: 4px;
+}
+#passportSearch .ps_box .ps_box-item{
+	height: 32px;
+	line-height: 32px;
+}
+#passportSearch .ps_box .ps_box-title{
+	display: inline-block;
+	height: 100%;
+	width: 80px;
+	text-align: justify;
+	vertical-align: top;
+}
+#passportSearch .ps_box .ps_box-title:after {
+	display: inline-block;
+	width: 100%;
+	content: '';
+	height: 0;
+}
+#passportSearch .ps_box .ps_box-value{
+	padding-right: 10px;
+}
