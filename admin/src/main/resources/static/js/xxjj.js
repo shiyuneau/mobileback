@@ -11,7 +11,7 @@ $(function(){
 	function sa_detail_init(){
 		var id = GetQueryString("schoolGuid");
 		var url = "";
-			url = "/API//tjeducation/details?schoolGuid="+id+"&collegeGuid=";
+			url = "/API/tjeducation/details?schoolGuid="+id+"&collegeGuid=";
 			
 		// 获取消息详情
 		$.ajax({

@@ -17,7 +17,6 @@ $(function(){
 			$.getJSON("/API/notice/listPage",{'pageNum':pageNum,'pageSize':20},function(data){
 				var sa_list1_ele = $("#sa_list");
 				var sa_list1_str = "";
-				if(data.code == 0){
 					$.each(data.rows,function(index,value){
 						sa_list1_str += ''
 							+'<div class="row news-list" data-id="'+value.n_Id+'">'
@@ -31,7 +30,6 @@ $(function(){
 					})
 					sa_list1_ele.empty();
 					sa_list1_ele.append(sa_list1_str);
-				}
 			})
 		}
 	

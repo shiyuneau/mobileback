@@ -17,7 +17,6 @@ $(function(){
 			$.getJSON("/API/tjschools/accesslinks",{'type':3},function(data){
 				var sa_list1_ele = $("#zwgk");
 				var sa_list1_str = "";
-				if(data.code == 0){
 					$.each(data,function(index,value){
 						sa_list1_str += ''
 							+'<div class="zwgk-block">'
@@ -29,7 +28,6 @@ $(function(){
 					})
 					sa_list1_ele.empty();
 					sa_list1_ele.append(sa_list1_str);
-				}
 			})
 		}
 	
