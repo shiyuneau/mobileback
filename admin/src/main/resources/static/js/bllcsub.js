@@ -25,7 +25,7 @@ $(function(){
 							+'		<div class="news-list-title">'+value.n_Title+'</div>'
 							+'	</div>'
 							+'	<div class="col-md-4 col-sm-4 col-xs-4" style="padding:0px;">'
-							+'		<div class="news-list-date">'+n_Date+'</div>'
+							+'		<div class="news-list-date">'+value.n_Date+'</div>'
 							+'	</div>'
 							+'</div>';
 					})
