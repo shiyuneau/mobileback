@@ -22,7 +22,7 @@ $(function(){
 							+'<div class="zwgk-block">'
 							+'	<div class="zwgk-block-head">'
 							+		data.l_Title
-							+'		<a href="'+l_Link+'" class="right-arrow"></a>'
+							+'		<a href="'+data.l_Link+'" class="right-arrow"></a>'
 							+'	</div>'
 							+'</div>'
 					})
