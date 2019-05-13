@@ -9,10 +9,9 @@ $(function(){
 	
 	// 初始化
 	function sa_detail_init(){
-		var schoolGuid = GetQueryString("schoolGuid");
-		var collegeGuid = GetQueryString("collegeGuid");
+		var token = GetQueryString("token");
 		var url = "";
-			url = "/API/tjeducation/details?schoolGuid="+schoolGuid+"&collegeGuid="+collegeGuid;
+			url = "/API/schoolmanage/schinfo/collegeinfo";
 			
 		// 获取消息详情
 		$.ajax({
@@ -23,9 +22,12 @@ $(function(){
 			},
 			dataType: 'json',
 			success: function(resp){
-				$("#sa_detail_title").empty().html("学院简介");
-				$("#sa_detail_content").empty().html(resp.introduction);
+				$("#sa_detail_title").empty().html(resp.entity[0].name);
+				$("#sa_detail_content").empty().html(resp.entity[0].introduction);
 			},
+		    beforeSend: function(xhr) {
+		        xhr.setRequestHeader("Authorization", "TJEDU "+token);
+		    },
 			error: function(err){
 				console.log(err);
 			}

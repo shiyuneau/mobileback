@@ -11,7 +11,7 @@ $(function(){
 	function sa_detail_init(){
 		var id = GetQueryString("schoolGuid");
 		var url = "";
-			url = "/API/tjeducation/details?schoolGuid="+id+"&collegeGuid=";
+			url = "/API/schoolmanage/schinfo/schoolintro";
 			
 		// 获取消息详情
 		$.ajax({
@@ -23,8 +23,11 @@ $(function(){
 			dataType: 'json',
 			success: function(resp){
 				$("#sa_detail_title").empty().html("学校简介");
-				$("#sa_detail_content").empty().html(resp.introduction);
+				$("#sa_detail_content").empty().html(resp.entity.introduction);
 			},
+		    beforeSend: function(xhr) {
+		        xhr.setRequestHeader("Authorization", "TJEDU "+token);
+		    },
 			error: function(err){
 				console.log(err);
 			}
