@@ -40,7 +40,7 @@ $(function(){
 				var id = $(this).attr("data-id");
 				//跳转页面
 				if(id){
-					window.location.href = 'newsdetail.html?id='+id;
+					window.location.href = 'noticedetail.html?id='+id;
 				}else{
 					console.log("没有消息的id，请联系管理员");
 				}
