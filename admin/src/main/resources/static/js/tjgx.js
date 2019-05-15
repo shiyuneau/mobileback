@@ -14,7 +14,7 @@ $(function(){
 	// 初始化
 	function sa_list_init(){
 			//新闻列表
-			$.getJSON("/API/tjschools/accesslinks",{'type':3},function(data){
+			$.getJSON("/API/tjschools/accesslinks",{'type':2},function(data){
 				var sa_list1_ele = $("#zwgk");
 				var sa_list1_str = "";
 					$.each(data,function(index,value){

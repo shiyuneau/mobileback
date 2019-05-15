@@ -18,7 +18,7 @@ $(function(){
 			$.getJSON("/API//tjdeuglobal/bslc/listPage",{"pageNum":1,"id":id},function(data){
 				var sa_list1_ele = $("#sa_list");
 				var sa_list1_str = "";
-					$.each(data,function(index,value){
+					$.each(data.rows,function(index,value){
 						sa_list1_str += ''
 							+'<div class="row news-list" data-id="'+value.n_Id+'">'
 							+'	<div class="col-md-8 col-sm-8 col-xs-8" >'
@@ -41,7 +41,7 @@ $(function(){
 				var id = $(this).attr("data-id");
 				//跳转页面
 				if(id){
-					window.location.href = 'bllcsubdetail.html?id='+id;
+					window.location.href = 'bllcsubdetail.html?id='+id+'&subid='+GetQueryString("id");
 				}else{
 					console.log("没有消息的id，请联系管理员");
 				}

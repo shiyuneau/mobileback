@@ -10,6 +10,8 @@ $(function(){
 	// 初始化
 	function sa_detail_init(){
 		var id = GetQueryString("id");
+		var subid = GetQueryString("subid");
+		$("#reback").attr("href","bllcsub.html?id="+subid);
 		var url = "";
 			url = "/API//tjdeuglobal/bslc/searchId/"+id;
 			

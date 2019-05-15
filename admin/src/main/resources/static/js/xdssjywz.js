@@ -19,12 +19,12 @@ $(function(){
 				var sa_list1_str = "";
 					$.each(data,function(index,value){
 						sa_list1_str += ''
-							+'<div class="zwgk-block">'
+							+'<a href="'+value.l_Link+'"><div class="zwgk-block">'
 							+'	<div class="zwgk-block-head">'
-							+		data.l_Title
-							+'		<a href="'+data.l_Link+'" class="right-arrow"></a>'
+							+		value.l_Title
+							+'		<a href="'+value.l_Link+'" class="right-arrow"></a>'
 							+'	</div>'
-							+'</div>'
+							+'</div></a>'
 					})
 					sa_list1_ele.empty();
 					sa_list1_ele.append(sa_list1_str);
