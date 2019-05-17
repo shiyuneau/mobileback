@@ -21,11 +21,12 @@ public class AccessLinkDao {
     @Autowired
     private Connection accessConn;
 
-    public List<AccessLink> selectAllLinks() {
+    public List<AccessLink> selectAllLinks(int type) {
         List<AccessLink> linkList = new ArrayList<>();
         try {
-            String sql = "select * from Link";
+            String sql = "select * from Link where L_Lidro = ?";
             List<Object> paramList = new ArrayList<>();
+            paramList.add(type);
             List<Map<String, Object>> list = AccessDBOperateUtils.select(accessConn, sql, paramList);
             for (Map<String, Object> mapInfo : list) {
                 AccessLink link = new AccessLink();

@@ -26,7 +26,7 @@ public interface LinkService{
      * 返回所有access数据库中的 天津各高校链接
      * @return
      */
-    List<AccessLink> accessLinks();
+    List<AccessLink> accessLinks(int type);
 
 }
 

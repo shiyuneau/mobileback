@@ -3,7 +3,7 @@
 
 <mapper namespace="com.sy.mobileback.accessdb.mapper.EducationexpireDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.sy.mobileback.accessdb.domain.EducationexpireEntity" id="educationexpireMap">
         <result property="guid" column="GUID"/>
         <result property="studentguid" column="StudentGUID"/>
@@ -14,52 +14,55 @@
         <result property="educationschool" column="EducationSchool"/>
         <result property="educationstudy" column="EducationStudy"/>
         <result property="educationfield" column="EducationField"/>
+        <result property="order" column="Order"/>
     </resultMap>
 
     <insert id="educationexpireBatchInsert" parameterType="java.util.List">
-        insert into educationexpire  (
-                   GUID,
-                   StudentGUID,
-                   StudyabroadGUID,
-                   ScholarshipGUID,
-                   EducationFrom,
-                   EducationTo,
-                   EducationSchool,
-                   EducationStudy,
-                   EducationField
-                )
+        insert into educationexpire (
+        GUID,
+        StudentGUID,
+        StudyabroadGUID,
+        ScholarshipGUID,
+        EducationFrom,
+        EducationTo,
+        EducationSchool,
+        EducationStudy,
+        EducationField,
+        `Order`
+        )
         values
         <foreach collection="list" item="item" separator=",">
             (
-                            #{item.guid},
-                            #{item.studentguid},
-                            #{item.studyabroadguid},
-                            #{item.scholarshipguid},
-                            #{item.educationfrom},
-                            #{item.educationto},
-                            #{item.educationschool},
-                            #{item.educationstudy},
-                            #{item.educationfield}
-                        )
+            #{item.guid},
+            #{item.studentguid},
+            #{item.studyabroadguid},
+            #{item.scholarshipguid},
+            #{item.educationfrom},
+            #{item.educationto},
+            #{item.educationschool},
+            #{item.educationstudy},
+            #{item.educationfield},
+            #{item.order}
+            )
         </foreach>
     </insert>
 
     <select id="educationExpireList" resultType="com.sy.mobileback.accessdb.domain.EducationexpireEntity">
-        select * from educationexpire where StudyabroadGUID = #{studyabroadGUID}
+        select * from educationexpire where StudyabroadGUID = #{studyabroadGUID} order by `Order`
     </select>
     <select id="eduListByScholarshipId" resultType="com.sy.mobileback.accessdb.domain.EducationexpireEntity">
-        select * from educationexpire where ScholarshipGUID = #{applyGUID}
+        select * from educationexpire where ScholarshipGUID = #{applyGUID} order by `Order`
     </select>
 
     <update id="educationexpireBatchUpdate" parameterType="java.util.List">
         <foreach collection="list" item="item" index="index" open="" close="" separator=";">
             update educationexpire
             set
-                EducationFrom = #{item.educationfrom},
-                EducationTo = #{item.educationto},
-                EducationSchool = #{item.educationschool},
-                EducationStudy = #{item.educationstudy},
-                EducationField = #{item.educationfield}
+            EducationFrom = #{item.educationfrom},
+            EducationTo = #{item.educationto},
+            EducationSchool = #{item.educationschool},
+            EducationStudy = #{item.educationstudy},
+            EducationField = #{item.educationfield}
             where GUID = #{item.guid}
         </foreach>
     </update>

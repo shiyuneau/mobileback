@@ -27,7 +27,7 @@ public class LinkServiceImpl implements LinkService {
     }
 
     @Override
-    public List<AccessLink> accessLinks() {
-        return accessLinkDao.selectAllLinks();
+    public List<AccessLink> accessLinks(int type) {
+        return accessLinkDao.selectAllLinks(type);
     }
 }

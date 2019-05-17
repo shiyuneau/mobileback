@@ -50,19 +50,23 @@ public class ScholarshipApplicationServiceImpl implements ScholarshipApplication
         entity.setCreatedtime(dbTime);
         entity.setUpdatedtime(dbTime);
         List<EducationexpireEntity> educationList = entity.getEducationList();
-        educationList.forEach(list -> {
+        int eduorder = 1;
+        for(EducationexpireEntity list:educationList){
             String eduID = UUID.randomUUID().toString();
             list.setStudentguid(userId);
             list.setScholarshipguid(applyUUID);
             list.setGuid(eduID);
-        });
+            list.setOrder(eduorder++);
+        }
         List<WorkexpireEntity> workList = entity.getWorkList();
-        workList.forEach(List -> {
+        int workorder = 1;
+        for(WorkexpireEntity work:workList){
             String workID = UUID.randomUUID().toString();
-            List.setGuid(workID);
-            List.setScholarshipguid(applyUUID);
-            List.setStudentguid(userId);
-        });
+            work.setGuid(workID);
+            work.setScholarshipguid(applyUUID);
+            work.setStudentguid(userId);
+            work.setOrder(workorder++);
+        }
         try {
             scholarshipapplicationDao.scholarshipapplicationInsert(entity);
             educationexpireDao.educationexpireBatchInsert(educationList);
