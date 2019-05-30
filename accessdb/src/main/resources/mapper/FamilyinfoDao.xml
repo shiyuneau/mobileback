@@ -3,7 +3,7 @@
 
 <mapper namespace="com.sy.mobileback.accessdb.mapper.FamilyinfoDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.sy.mobileback.accessdb.domain.FamilyinfoEntity" id="familyinfoMap">
         <result property="guid" column="GUID"/>
         <result property="studentguid" column="StudentGUID"/>
@@ -16,42 +16,45 @@
         <result property="familyemail" column="FamilyEmail"/>
         <result property="familyworkplace" column="FamilyWorkplace"/>
         <result property="familycontace" column="FamilyContace"/>
+        <result property="order" column="Order"/>
     </resultMap>
 
     <insert id="familyinfoBatchInsert" parameterType="java.util.List">
-        insert into familyinfo  (
-                   GUID,
-                   StudentGUID,
-                   StudyabroadGUID,
-                   ScholarshipGUID,
-                   FamilyName,
-                   FamilyAge,
-                   FamilyPosition,
-                   FamilyPhone,
-                   FamilyEmail,
-                   FamilyWorkplace,
-                   FamilyContace
-                )
+        insert into familyinfo (
+        GUID,
+        StudentGUID,
+        StudyabroadGUID,
+        ScholarshipGUID,
+        FamilyName,
+        FamilyAge,
+        FamilyPosition,
+        FamilyPhone,
+        FamilyEmail,
+        FamilyWorkplace,
+        FamilyContace,
+        `Order`
+        )
         values
         <foreach collection="list" item="item" separator=",">
             (
-                            #{item.guid},
-                            #{item.studentguid},
-                            #{item.studyabroadguid},
-                            #{item.scholarshipguid},
-                            #{item.familyname},
-                            #{item.familyage},
-                            #{item.familyposition},
-                            #{item.familyphone},
-                            #{item.familyemail},
-                            #{item.familyworkplace},
-                            #{item.familycontace}
-                        )
+            #{item.guid},
+            #{item.studentguid},
+            #{item.studyabroadguid},
+            #{item.scholarshipguid},
+            #{item.familyname},
+            #{item.familyage},
+            #{item.familyposition},
+            #{item.familyphone},
+            #{item.familyemail},
+            #{item.familyworkplace},
+            #{item.familycontace},
+            #{item.order}
+            )
         </foreach>
     </insert>
 
     <select id="familyList" resultType="com.sy.mobileback.accessdb.domain.FamilyinfoEntity">
-        select * from familyinfo where StudyabroadGUID = #{studyabroadGUID}
+        select * from familyinfo where StudyabroadGUID = #{studyabroadGUID} order by `Order`
     </select>
 
 

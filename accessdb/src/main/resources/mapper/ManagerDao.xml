@@ -79,6 +79,15 @@
     </select>
 
     <select id="usernamePasswordMatch" resultType="java.util.Map">
-        select GUID as guid , UserName as username , Password as password , Mail as email  from manager where Mail = #{username} and Password = #{password}
+select man.GUID as guid , man.Name as username , man.Password as password , man.Mail as email , (select sch.Name
+ FROM school sch
+ WHERE sch.ManagerGUID = man.GUID
+ LIMIT 1) as schoolname , (select sch.GUID
+ FROM school sch
+
+ WHERE sch.ManagerGUID = man.GUID
+ LIMIT 1) as schoolguid
+ FROM manager man
+ WHERE man.Mail = #{username} and man.Password = #{password}
     </select>
 </mapper>

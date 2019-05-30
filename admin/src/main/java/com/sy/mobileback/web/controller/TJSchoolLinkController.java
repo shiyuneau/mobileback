@@ -7,6 +7,7 @@ import com.sy.mobileback.framework.jwt.annotations.JwtIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class TJSchoolLinkController {
     @JwtIgnore
     @ResponseBody
     @RequestMapping("/accesslinks")
-    public List<AccessLink> accessLinks() {
-        return linkService.accessLinks();
+    public List<AccessLink> accessLinks(@RequestParam("type") int type) {
+        return linkService.accessLinks(type);
     }
 }

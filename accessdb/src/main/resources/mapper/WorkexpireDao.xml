@@ -14,6 +14,7 @@
         <result property="workcompany" column="WorkCompany"/>
         <result property="working" column="Working"/>
         <result property="workposition" column="WorkPosition"/>
+        <result property="order" column="Order"/>
     </resultMap>
 
     <insert id="workexpireBatchInsert" parameterType="java.util.List">
@@ -26,7 +27,8 @@
                    WorkTo,
                    WorkCompany,
                    Working,
-                   WorkPosition
+                   WorkPosition,
+                   `Order`
                 )
         values
         <foreach collection="list" item="item" separator=",">
@@ -39,16 +41,17 @@
                             #{item.workto},
                             #{item.workcompany},
                             #{item.working},
-                            #{item.workposition}
+                            #{item.workposition},
+                            #{item.order}
                         )
         </foreach>
     </insert>
 
     <select id="workExpireList" resultType="com.sy.mobileback.accessdb.domain.WorkexpireEntity">
-        select * from workexpire where StudyabroadGUID = #{studyabroadGUID}
+        select * from workexpire where StudyabroadGUID = #{studyabroadGUID} order by `Order`
     </select>
     <select id="workexpireByScholarshipId" resultType="com.sy.mobileback.accessdb.domain.WorkexpireEntity">
-        select * from workexpire where ScholarshipGUID = #{applyGUID}
+        select * from workexpire where ScholarshipGUID = #{applyGUID} order by `Order`
     </select>
 
     <update id="workexpireBatchUpdate" parameterType="java.util.List">

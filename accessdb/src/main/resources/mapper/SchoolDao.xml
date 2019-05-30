@@ -51,6 +51,6 @@
     </select>
 
     <select id="schoolListByManager" resultType="com.sy.mobileback.accessdb.domain.SchoolEntity">
-        select sch.GUID , sch.Introduction ,sch.icon from school sch left join manager man on sch.ManagerGUID = man.GUID where man.GUID = #{mangerGUID}
+        select sch.GUID , sch.Introduction ,sch.icon ,sch.Name,sch.Address from school sch left join manager man on sch.ManagerGUID = man.GUID where man.GUID = #{mangerGUID}
     </select>
 </mapper>

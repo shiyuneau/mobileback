@@ -52,6 +52,19 @@ public class EducationexpireEntity implements Serializable {
 	 */
 	private String educationfield;
 
+	/**
+	 * 入库顺序
+	 */
+	private int order;
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
 	public String getEducationfield() {
 		return educationfield;
 	}

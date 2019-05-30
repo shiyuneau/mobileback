@@ -60,6 +60,19 @@ public class FamilyinfoEntity implements Serializable {
 	private String familycontace;
 
 	/**
+	 * 入库顺序
+	 */
+	private int order;
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
+	/**
 	 * 设置：
 	 */
 	public void setGuid(String guid) {

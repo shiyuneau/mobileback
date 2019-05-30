@@ -51,28 +51,34 @@ public class StudyabroadServiceImpl implements StudyabroadService {
         entity.setUpdatedtime(time);
 
         List<EducationexpireEntity> educationList = entity.getEducationList();
-        educationList.forEach(education -> {
+        int eduorder = 1;
+        for(EducationexpireEntity education :educationList){
             String eduID = UUID.randomUUID().toString();
             education.setStudentguid(userid);
             education.setStudyabroadguid(applyUUID);
             education.setGuid(eduID);
-        });
+            education.setOrder(eduorder++);
+        }
 
         List<WorkexpireEntity> workList = entity.getWorkList();
-        workList.forEach(work -> {
+        int workorder = 1;
+        for(WorkexpireEntity work:workList){
             String workID = UUID.randomUUID().toString();
             work.setStudentguid(userid);
             work.setStudyabroadguid(applyUUID);
             work.setGuid(workID);
-        });
+            work.setOrder(workorder++);
+        }
 
         List<FamilyinfoEntity> familyList = entity.getFamilyList();
-        familyList.forEach(family -> {
+        int familyorder = 1;
+        for(FamilyinfoEntity family:familyList){
             String familyID = UUID.randomUUID().toString();
             family.setStudentguid(userid);
             family.setStudyabroadguid(applyUUID);
             family.setGuid(familyID);
-        });
+            family.setOrder(familyorder++);
+        }
         try {
             studyabroadapplicationDao.studyabroadapplicationInsert(entity);
             educationexpireDao.educationexpireBatchInsert(educationList);
