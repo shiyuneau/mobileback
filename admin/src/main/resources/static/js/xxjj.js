@@ -9,7 +9,7 @@ $(function(){
 	
 	// 初始化
 	function sa_detail_init(){
-		var id = GetQueryString("schoolGuid");
+		var token = GetQueryString("token");
 		var url = "";
 			url = "/API/schoolmanage/schinfo/schoolintro";
 			
