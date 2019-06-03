@@ -10,15 +10,14 @@ $(function(){
 	// 初始化
 	function sa_detail_init(){
 		var token = GetQueryString("token");
-		var url = "";
-			url = "/API/schoolmanage/schinfo/schoolintro";
+		var url =  "/API/schoolmanage/schinfo/schoolintro";
 			
 		// 获取消息详情
 		$.ajax({
 			url: url,
 			type: 'GET',
 			data: {
-				
+				   
 			},
 			dataType: 'json',
 			success: function(resp){
