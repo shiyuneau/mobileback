@@ -50,7 +50,7 @@ $(function(){
 						+'</div>';
 					}
 					ps_sResult_ele.empty();
-					ps_sResult_ele.append(ps_sResult_str);
+					ps_sResult_ele.html(ps_sResult_str);
 				}else{
 					$("#ps_sResult").html('<div class="ps_box">没有任何结果"</div>');
 				}
