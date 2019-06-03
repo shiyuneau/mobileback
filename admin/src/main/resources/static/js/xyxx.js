@@ -25,10 +25,10 @@ $(function(){
 			},
 			dataType: 'json',
 			success: function(resp){
-				if(resp.rows && resp.rows.length>0){
+				if(resp.entity && resp.entity.length>0){
 					var ps_sResult_ele = $("#ps_sResult");
 					var ps_sResult_str = "";
-					for(var i=0;i<resp.rows.length;i++){
+					for(var i=0;i<resp.entity.length;i++){
 						ps_sResult_str += ''
 						+'<div class="ps_box">'
 						+'	<div class="ps_box-item">'
@@ -37,7 +37,7 @@ $(function(){
 						+'	</div>'
 						+'	<div class="ps_box-item">'
 						+'		<span class="ps_box-title">简介</span>：'
-						+'		<span class="ps_box-value">'+resp.rows[i].introduction+'</span>'
+						+'		<span class="ps_box-value">'+resp.entity[i].introduction+'</span>'
 						+'	</div>'
 						+'</div>';
 					}
