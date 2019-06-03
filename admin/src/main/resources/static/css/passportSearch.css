@@ -34,7 +34,7 @@
     right: 4px;
     top: 4px;
     padding: 10px 24px;
-    font-size: 16px;
+    font-size: 12px;
     color: #fff;
     background-color: orange;
 }
@@ -49,8 +49,7 @@
 	margin-bottom: 20px;
 	padding: 10px 20px;
     border-radius: 4px;
-	font-size: 16px;
-	font-weight: 600;
+	font-size: 12px;
     background-color: #fff;
     box-shadow: 0 0 2px #ddd;
 }
@@ -58,7 +57,7 @@
 	margin-bottom: 4px;
 }
 #passportSearch .ps_box .ps_box-item{
-	line-height: 32px;
+	line-height: 16px;
 }
 #passportSearch .ps_box .ps_box-title{
 	display: inline-block;

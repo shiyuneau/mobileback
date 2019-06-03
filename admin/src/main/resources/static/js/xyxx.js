@@ -33,7 +33,7 @@ $(function(){
 						ps_sResult_str += ''
 						+'<div class="ps_box">'
 						+'	<div class="ps_box-item">'
-						+'		<span class="ps_box-title">学院名称：</span>：'
+						+'		<span class="ps_box-title">学院名称</span>：'
 						+'		<span class="ps_box-value">'+resp.entity[i].name+'</span>'
 						+'	</div>'
 						+'	<div class="ps_box-item">'
