@@ -28,6 +28,7 @@ $(function(){
 				if(resp.entity && resp.entity.length>0){
 					var ps_sResult_ele = $("#ps_sResult");
 					var ps_sResult_str = "";
+					$(".ps_showCtrl").show();
 					for(var i=0;i<resp.entity.length;i++){
 						ps_sResult_str += ''
 						+'<div class="ps_box">'
@@ -41,7 +42,6 @@ $(function(){
 						+'	</div>'
 						+'</div>';
 					}
-					ps_sResult_ele.empty();
 					ps_sResult_ele.html(ps_sResult_str);
 				}else{
 					$("#ps_sResult").html('<div class="ps_box">没有任何结果"</div>');
