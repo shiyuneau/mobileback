@@ -19,7 +19,7 @@ $(function(){
 		var token=GetQueryString("token")
 		// 获取查询的信息
 		$.ajax({
-			url: '/API/schoolmanage/schinfo/collegeinfo',
+			url: '/API/schoolmanage/schinfo/professioninfo',
 			type: 'GET',
 			data: {
 			},
@@ -32,8 +32,16 @@ $(function(){
 						ps_sResult_str += ''
 						+'<div class="ps_box">'
 						+'	<div class="ps_box-item">'
-						+'		<span class="ps_box-title">学院名称：</span>：'
+						+'		<span class="ps_box-title">专业名称：</span>：'
 						+'		<span class="ps_box-value">'+resp.entity[i].name+'</span>'
+						+'	</div>'
+						+'	<div class="ps_box-item">'
+						+'		<span class="ps_box-title">学制：</span>：'
+						+'		<span class="ps_box-value">'+resp.entity[i].academicsystem+'年</span>'
+						+'	</div>'
+						+'	<div class="ps_box-item">'
+						+'		<span class="ps_box-title">学费：</span>：'
+						+'		<span class="ps_box-value">'+resp.entity[i].amount+'元(RMB)</span>'
 						+'	</div>'
 						+'	<div class="ps_box-item">'
 						+'		<span class="ps_box-title">简介</span>：'

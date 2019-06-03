@@ -22,7 +22,6 @@ $(function(){
 			},
 			dataType: 'json',
 			success: function(resp){
-				$("#sa_detail_title").empty().html("学校简介");
 				$("#sa_detail_content").empty().html(resp.entity.introduction);
 			},
 		    beforeSend: function(xhr) {
